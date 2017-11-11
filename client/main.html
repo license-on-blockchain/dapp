@@ -1,0 +1,28 @@
+<head>
+    <title>LOB-Dapp</title>
+</head>
+
+<body>
+<header class="dapp-header">
+    <nav>
+        <ul>
+            <li>
+                <a href="/licenses" class="{{ activeIfCurrentRoute 'licenses' }}">
+                    <i class="icon-arrow-down3"></i>
+                    <span>Licenses</span>
+                </a>
+                <a href="/send"  class="{{ activeIfCurrentRoute 'send' }}">
+                    <i class="icon-arrow-up2"></i>
+                    <span>Send</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+{{> Router}}
+
+<!-- footer -->
+<footer class="dapp-footer">
+    © 2017 LOB, Alex Hoppen
+</footer>
+</body>

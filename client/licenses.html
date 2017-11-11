@@ -1,0 +1,25 @@
+<template name="licenses">
+    <div class="dapp-flex-content">
+        <main class="dapp-content">
+            <table class="dapp-zebra">
+                <tbody>
+                {{#each licenses}}
+                    {{> licenseRow}}
+                {{/each}}
+                </tbody>
+            </table>
+        </main>
+    </div>
+</template>
+
+<template name="licenseRow">
+    <tr>
+        {{#if revoked}}
+            <td><strong><del>{{description}}</del></strong></td>
+            <td><del>{{balance}}</del></td>
+        {{else}}
+            <td><strong>{{description}}</strong></td>
+            <td>{{balance}}</td>
+        {{/if}}
+    </tr>
+</template>
