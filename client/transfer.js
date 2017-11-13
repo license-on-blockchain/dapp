@@ -5,7 +5,7 @@ import {handleUnknownEthereumError} from "../lib/ErrorHandling";
 const selectedSenderAccount = new ReactiveVar();
 const estimatedGasConsumption = new ReactiveVar(0);
 
-Template.send.onCreated(function() {
+Template.transfer.onCreated(function() {
     EthAccounts.init();
     EthBlocks.init();
 
@@ -82,7 +82,7 @@ Template.send.onCreated(function() {
     selectedSenderAccount.set(EthAccounts.findOne().address);
 });
 
-Template.send.helpers({
+Template.transfer.helpers({
     myAccounts: EthAccounts.find().fetch(),
     issuances() {
         return Object.values(lob.allWatchedIssuances.get()).filter((obj) => obj.balance.getKey(selectedSenderAccount.get()) > 0);
@@ -95,7 +95,7 @@ Template.send.helpers({
     }
 });
 
-Template.send.events({
+Template.transfer.events({
     'change select[name=sender]'(event) {
         selectedSenderAccount.set(event.currentTarget.value);
     },

@@ -8,7 +8,7 @@ Router.route('/', function () {
 });
 
 Router.route('/licenses');
-Router.route('/send');
+Router.route('/transfer');
 
 Template.body.helpers({
     activeIfCurrentRoute(name) {
