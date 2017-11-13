@@ -134,8 +134,8 @@ Template.transfer.events({
 
         // TODO: Allow multiple license contracts here
         lob.transferLicense(licenseContract, issuanceID, sender, recipient, amount, gasPrice, () => {
-            // TODO: Show success message
-            console.log("Success");
+            // TODO: i18n
+            GlobalNotification.success('Transaction successfully submitted');
         });
     }
 });

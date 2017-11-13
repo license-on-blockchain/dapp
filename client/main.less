@@ -33,3 +33,19 @@ select {
 h4 {
   text-transform: uppercase;
 }
+
+.global-notifications {
+  position: fixed;
+  bottom: @defaultPaddingVertical*2;
+  right: @defaultPaddingVertical*2;
+  font-weight: 400;
+
+  .global-notification {
+    &.success {
+      background-color: @colorGreen;
+      h1 {
+        color: white;
+      }
+    }
+  }
+}
