@@ -4,3 +4,32 @@
   height: 45px;
   color: white;
 }
+
+.dapp-error {
+  transition: none !important;
+}
+
+.dapp-content {
+  max-width: none;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+form#form-transfer {
+  input, select, .dapp-address-input, .dapp-select-gas-price {
+    width: 100%;
+    height: @gridHeight*2;
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+h4 {
+  text-transform: uppercase;
+}

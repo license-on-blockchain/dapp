@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import { lob } from "../lib/LOB";
 
 import './main.html';
 
@@ -20,4 +20,9 @@ Template.body.helpers({
         }
         return currentRoute === name ? 'active' : '';
     },
+});
+
+Template.body.onCreated(function() {
+    // TODO: Add all license contract created by root contracts and watch for new license contracts
+    lob.watchLicenseContract("0xfD8F3a53e8445c19155d1E4d044C0A77EE6AEbef");
 });
