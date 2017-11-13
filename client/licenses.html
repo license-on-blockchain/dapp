@@ -17,9 +17,11 @@
         {{#if revoked}}
             <td><strong><del>{{description}}</del></strong></td>
             <td><del>{{balance}}</del></td>
+            <td><a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> Transfer</a></td>
         {{else}}
             <td><strong>{{description}}</strong></td>
             <td>{{balance}}</td>
+            <td><a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> Transfer</a></td>
         {{/if}}
     </tr>
 </template>

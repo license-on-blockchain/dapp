@@ -9,12 +9,24 @@ Router.route('/', function () {
 
 Router.route('/licenses');
 Router.route('/transfer');
+Router.route('/transfer/from/:from/licenseContract/:licenseContract/issuance/:issuance', function () {
+    this.render('transfer', {
+        data: {
+            licenseContract: this.params.licenseContract,
+            issuanceID: this.params.issuance,
+            from: this.params.from
+        }
+    });
+});
 
 Template.body.helpers({
     activeIfCurrentRoute(name) {
         let currentRoute;
         if (Router.current()) {
             currentRoute = Router.current().route.getName();
+            if (currentRoute.indexOf('.') !== -1) {
+                currentRoute = currentRoute.substring(0, currentRoute.indexOf('.'));
+            }
         } else {
             currentRoute = 'licenses';
         }

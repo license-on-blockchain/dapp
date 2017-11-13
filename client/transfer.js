@@ -9,13 +9,20 @@ Template.transfer.onCreated(function() {
     EthAccounts.init();
     EthBlocks.init();
 
+    if (this.data && this.data.from) {
+        selectedSenderAccount.set(this.data.from);
+    } else {
+        // TODO: Does this always pick the first account?
+        selectedSenderAccount.set(EthAccounts.findOne().address);
+    }
+
     this.getValues = function() {
         const sender = TemplateVar.getFrom(this.find('[name=sender]'), 'value');
-        const issuanceID = this.find('[name=issuance]').value;
+        const [issuanceID, licenseContract] = this.find('[name=issuance]').value.split("|");
         const recipient = TemplateVar.getFrom(this.find('[name=recipient]'), 'value');
         const amount = this.find('[name=amount]').value;
         const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
-        return {sender, issuanceID, recipient, amount, gasPrice};
+        return {sender, issuanceID, licenseContract, recipient, amount, gasPrice};
     };
 
     this.resetErrors = function() {
@@ -77,15 +84,27 @@ Template.transfer.onCreated(function() {
 
         return !hasError;
     };
-
-    // TODO: Does this always pick the first account?
-    selectedSenderAccount.set(EthAccounts.findOne().address);
 });
 
 Template.transfer.helpers({
     myAccounts: EthAccounts.find().fetch(),
     issuances() {
-        return Object.values(lob.allWatchedIssuances.get()).filter((obj) => obj.balance.getKey(selectedSenderAccount.get()) > 0);
+        let selectedLicenseContract = undefined;
+        let selectedIssuanceID = undefined;
+        if (Template.instance().data) {
+            selectedLicenseContract = Template.instance().data.licenseContract;
+            if (selectedLicenseContract) {
+                selectedLicenseContract = selectedLicenseContract.toLowerCase();
+            }
+            selectedIssuanceID = Template.instance().data.issuanceID;
+        }
+
+        return Object.values(lob.allWatchedIssuances.get()).filter((obj) => {
+            return obj.balance.getKey(selectedSenderAccount.get()) > 0;
+        }).map((obj) => {
+            obj.selected = (obj.licenseContract.toLowerCase() == selectedLicenseContract && obj.issuanceID == selectedIssuanceID);
+            return obj;
+        });
     },
     gasPrice() {
         return EthBlocks.latest.gasPrice
@@ -111,10 +130,11 @@ Template.transfer.events({
             return;
         }
 
-        const {sender, issuanceID, recipient, amount, gasPrice} = Template.instance().getValues();
+        const {sender, issuanceID, licenseContract, recipient, amount, gasPrice} = Template.instance().getValues();
 
         // TODO: Allow multiple license contracts here
-        lob.transferLicense("0xfD8F3a53e8445c19155d1E4d044C0A77EE6AEbef", issuanceID, sender, recipient, amount, gasPrice, () => {
+        lob.transferLicense(licenseContract, issuanceID, sender, recipient, amount, gasPrice, () => {
+            // TODO: Show success message
             console.log("Success");
         });
     }
@@ -123,5 +143,8 @@ Template.transfer.events({
 Template.issuanceOption.helpers({
     balance() {
         return this.balance.getKey(selectedSenderAccount.get());
+    },
+    preselected() {
+        return this.selected ? 'selected' : '';
     }
 });
