@@ -2,7 +2,10 @@ import { lob } from "../lib/LOB.js";
 
 Template.licenses.helpers({
     licenses() {
-        return Object.values(lob.allWatchedIssuances.get());
+        return Object.values(lob.allWatchedIssuances.get()).filter((obj) => !obj.revoked.get());
+    },
+    revokedLicenses() {
+        return Object.values(lob.allWatchedIssuances.get()).filter((obj) => obj.revoked.get());
     }
 });
 

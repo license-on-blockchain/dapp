@@ -100,7 +100,7 @@ Template.transfer.helpers({
         }
 
         return Object.values(lob.allWatchedIssuances.get()).filter((obj) => {
-            return obj.balance.getKey(selectedSenderAccount.get()) > 0;
+            return obj.balance.getKey(selectedSenderAccount.get()) > 0 && !obj.revoked.get();
         }).map((obj) => {
             obj.selected = (obj.licenseContract.toLowerCase() == selectedLicenseContract && obj.issuanceID == selectedIssuanceID);
             return obj;
@@ -135,7 +135,10 @@ Template.transfer.events({
         // TODO: Allow multiple license contracts here
         lob.transferLicense(licenseContract, issuanceID, sender, recipient, amount, gasPrice, () => {
             // TODO: i18n
-            GlobalNotification.success('Transaction successfully submitted');
+            GlobalNotification.success({
+                content: 'Transaction successfully submitted',
+                duration: 4
+            });
         });
     }
 });

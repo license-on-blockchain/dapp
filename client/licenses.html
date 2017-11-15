@@ -1,6 +1,7 @@
 <template name="licenses">
     <div class="dapp-flex-content">
         <main class="dapp-content">
+            <h1><strong>Licenses</strong></h1>
             <table class="dapp-zebra">
                 <tbody>
                 {{#each licenses}}
@@ -8,19 +9,27 @@
                 {{/each}}
                 </tbody>
             </table>
+            {{#if revokedLicenses}}
+                <h2>Revoked licenses</h2>
+                <table class="dapp-zebra">
+                    <tbody>
+                    {{#each revokedLicenses}}
+                        {{> licenseRow}}
+                    {{/each}}
+                    </tbody>
+                </table>
+            {{/if}}
         </main>
     </div>
 </template>
 
 <template name="licenseRow">
     <tr>
+        <td><strong>{{description}}</strong></td>
+        <td>{{balance}}</td>
         {{#if revoked}}
-            <td><strong><del>{{description}}</del></strong></td>
-            <td><del>{{balance}}</del></td>
-            <td><a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> Transfer</a></td>
+            <td></td>
         {{else}}
-            <td><strong>{{description}}</strong></td>
-            <td>{{balance}}</td>
             <td><a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> Transfer</a></td>
         {{/if}}
     </tr>
