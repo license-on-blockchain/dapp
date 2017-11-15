@@ -14,7 +14,24 @@ Router.route('/transfer/from/:from/licenseContract/:licenseContract/issuance/:is
         data: {
             licenseContract: this.params.licenseContract,
             issuanceID: this.params.issuance,
-            from: this.params.from
+            from: this.params.from,
+        }
+    });
+});
+Router.route('/destroy', function () {
+    this.render('transfer', {
+        data: {
+            destroy: true
+        }
+    });
+});
+Router.route('/destroy/from/:from/licenseContract/:licenseContract/issuance/:issuance', function () {
+    this.render('transfer', {
+        data: {
+            licenseContract: this.params.licenseContract,
+            issuanceID: this.params.issuance,
+            from: this.params.from,
+            destroy: true
         }
     });
 });

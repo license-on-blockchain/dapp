@@ -19,7 +19,12 @@ Template.transfer.onCreated(function() {
     this.getValues = function() {
         const sender = TemplateVar.getFrom(this.find('[name=sender]'), 'value');
         const [issuanceID, licenseContract] = this.find('[name=issuance]').value.split("|");
-        const recipient = TemplateVar.getFrom(this.find('[name=recipient]'), 'value');
+        let recipient;
+        if (this.data.destroy) {
+            recipient = "0x0000000000000000000000000000000000000000";
+        } else {
+            recipient = TemplateVar.getFrom(this.find('[name=recipient]'), 'value');
+        }
         const amount = this.find('[name=amount]').value;
         const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
         return {sender, issuanceID, licenseContract, recipient, amount, gasPrice};
