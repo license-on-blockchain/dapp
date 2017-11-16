@@ -32,5 +32,17 @@
         {{else}}
             <td><a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> Transfer</a></td>
         {{/if}}
+        <td><a class="showCertificate" href="#"><i class="icon-docs"></i> Certificate</a></td>
     </tr>
+</template>
+
+<template name="licenseCertificate">
+    <p class="certificateText">
+        {{#each certificateText}}
+            {{this}}<br>
+        {{/each}}
+    </p>
+    <div class="dapp-modal-buttons">
+        <button class="dapp-primary-button hideModal">OK</button>
+    </div>
 </template>
