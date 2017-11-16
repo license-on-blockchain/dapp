@@ -46,7 +46,7 @@ Template.transfer.onCreated(function() {
 
         this.resetErrors();
 
-        const {sender, issuanceID, recipient, amount} = this.getValues();
+        const {sender, issuanceID, licenseContract, recipient, amount} = this.getValues();
         selectedSenderAccount.set(sender);
         let hasError = false;
 
@@ -76,7 +76,7 @@ Template.transfer.onCreated(function() {
             hasError = true;
         }
 
-        if (amount > lob.allWatchedIssuances.getKey(issuanceID).balance.getKey(sender).toNumber()) {
+        if (amount > lob.allWatchedIssuances.getKey([licenseContract, issuanceID]).balance.getKey(sender).toNumber()) {
             this.$('[name=amount]').addClass('dapp-error');
             hasError = true;
         }
