@@ -53,5 +53,5 @@ Template.body.helpers({
 
 Template.body.onCreated(function() {
     // TODO: Add all license contract created by root contracts and watch for new license contracts
-    lob.watchLicenseContract("0xfD8F3a53e8445c19155d1E4d044C0A77EE6AEbef");
+    lob.watchLicenseContract("0x1187478417CE9CD5cdF2b5686E9783d004786E25");
 });
