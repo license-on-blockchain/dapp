@@ -9,18 +9,11 @@ Template.transfer.onCreated(function() {
     EthAccounts.init();
     EthBlocks.init();
 
-    if (this.data && this.data.from) {
-        selectedSenderAccount.set(this.data.from);
-    } else {
-        // TODO: Does this always pick the first account?
-        selectedSenderAccount.set(EthAccounts.findOne().address);
-    }
-
     this.getValues = function() {
         const sender = TemplateVar.getFrom(this.find('[name=sender]'), 'value');
         const [issuanceID, licenseContract] = this.find('[name=issuance]').value.split("|");
         let recipient;
-        if (this.data.destroy) {
+        if (this.data && this.data.destroy) {
             recipient = "0x0000000000000000000000000000000000000000";
         } else {
             recipient = TemplateVar.getFrom(this.find('[name=recipient]'), 'value');
@@ -54,6 +47,7 @@ Template.transfer.onCreated(function() {
         this.resetErrors();
 
         const {sender, issuanceID, recipient, amount} = this.getValues();
+        selectedSenderAccount.set(sender);
         let hasError = false;
 
         if (!web3.isAddress(sender)) {
@@ -89,10 +83,15 @@ Template.transfer.onCreated(function() {
 
         return !hasError;
     };
+
+    // Trigger a form update after everything has been created to set `selectedSenderAccount`
+    setTimeout(() => this.onFormUpdate(), 0);
 });
 
 Template.transfer.helpers({
-    myAccounts: EthAccounts.find().fetch(),
+    myAccounts() {
+        return EthAccounts.find().fetch();
+    },
     issuances() {
         let selectedLicenseContract = undefined;
         let selectedIssuanceID = undefined;
@@ -120,9 +119,6 @@ Template.transfer.helpers({
 });
 
 Template.transfer.events({
-    'change select[name=sender]'(event) {
-        selectedSenderAccount.set(event.currentTarget.value);
-    },
     'keyup, change input'() {
         Template.instance().onFormUpdate();
     },
@@ -137,7 +133,6 @@ Template.transfer.events({
 
         const {sender, issuanceID, licenseContract, recipient, amount, gasPrice} = Template.instance().getValues();
 
-        // TODO: Allow multiple license contracts here
         lob.transferLicense(licenseContract, issuanceID, sender, recipient, amount, gasPrice, () => {
             // TODO: i18n
             GlobalNotification.success({
