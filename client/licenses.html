@@ -33,6 +33,7 @@
             <td><a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> Transfer</a></td>
         {{/if}}
         <td><a class="showCertificate" href="#"><i class="icon-docs"></i> Certificate</a></td>
+        <td><a class="showHistory" href="#"><i class="icon-graph"></i> History</a></td>
     </tr>
 </template>
 
@@ -42,6 +43,13 @@
             {{this}}<br>
         {{/each}}
     </p>
+    <div class="dapp-modal-buttons">
+        <button class="dapp-primary-button hideModal">OK</button>
+    </div>
+</template>
+
+<template name="licenseHistory">
+    <canvas id="graphContainer"></canvas>
     <div class="dapp-modal-buttons">
         <button class="dapp-primary-button hideModal">OK</button>
     </div>

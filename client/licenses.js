@@ -1,4 +1,7 @@
 import { lob } from "../lib/LOB.js";
+import { drawLicenseHistory } from '../lib/licenseHistory';
+import { promisify } from "../lib/utils";
+import { handleUnknownEthereumError } from "../lib/ErrorHandling";
 
 Template.licenses.helpers({
     licenses() {
@@ -33,12 +36,22 @@ Template.licenseRow.events({
                 licenseContract: Template.instance().data.licenseContract,
                 issuanceID: Template.instance().data.issuanceID,
             },
-            class: 'certificateModal'
+            class: 'wideModal'
+        });
+    },
+    'click a.showHistory'() {
+        EthElements.Modal.show({
+            template: 'licenseHistory',
+            data: {
+                licenseContract: Template.instance().data.licenseContract,
+                issuanceID: Template.instance().data.issuanceID,
+            },
+            class: 'wideModal'
         });
     }
 });
 
-Template.licenseCertificate.onCreated(async function() {
+Template.licenseCertificate.onCreated(function() {
     // TODO: i18n
     this.certificateText = new ReactiveVar("Loading…");
     lob.getCertificateText(Template.instance().data.licenseContract, (error, value) => {
@@ -54,6 +67,26 @@ Template.licenseCertificate.helpers({
 });
 
 Template.licenseCertificate.events({
+    'click button.hideModal'() {
+        EthElements.Modal.hide();
+    }
+});
+
+Template.licenseHistory.onRendered(function() {
+    const canvas = Template.instance().find('#graphContainer');
+    const licenseContract = lob.getLicenseContract(this.data.licenseContract);
+    const issuerNameP = promisify(licenseContract.issuerName);
+    const transfersP = promisify((cb) => licenseContract.Transfer({issuanceID: this.data.issuanceID}, {fromBlock: 0}).get(cb));
+    Promise.all([issuerNameP, transfersP])
+        .then(([issuerName, transfers]) => {
+            drawLicenseHistory(canvas, transfers, issuerName);
+        })
+        .catch((error) => {
+            handleUnknownEthereumError(error);
+        });
+});
+
+Template.licenseHistory.events({
     'click button.hideModal'() {
         EthElements.Modal.hide();
     }
