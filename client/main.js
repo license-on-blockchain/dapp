@@ -8,6 +8,8 @@ Router.route('/', function () {
 });
 
 Router.route('/licenses');
+
+// Transfer
 Router.route('/transfer');
 Router.route('/transfer/from/:from/licenseContract/:licenseContract/issuance/:issuance', function () {
     this.render('transfer', {
@@ -18,6 +20,8 @@ Router.route('/transfer/from/:from/licenseContract/:licenseContract/issuance/:is
         }
     });
 });
+
+// Destroy
 Router.route('/destroy', function () {
     this.render('transfer', {
         data: {
@@ -32,6 +36,25 @@ Router.route('/destroy/from/:from/licenseContract/:licenseContract/issuance/:iss
             issuanceID: this.params.issuance,
             from: this.params.from,
             destroy: true
+        }
+    });
+});
+
+// Transfer and allow reclaim
+Router.route('/transferreclaim', function () {
+    this.render('transfer', {
+        data: {
+            allowReclaim: true
+        }
+    });
+});
+Router.route('/transferreclaim/from/:from/licenseContract/:licenseContract/issuance/:issuance', function () {
+    this.render('transfer', {
+        data: {
+            licenseContract: this.params.licenseContract,
+            issuanceID: this.params.issuance,
+            from: this.params.from,
+            allowReclaim: true
         }
     });
 });

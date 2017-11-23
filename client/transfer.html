@@ -5,6 +5,8 @@
                 <h1>
                     {{#if destroy}}
                         <strong>Destroy</strong> licenses
+                    {{else if allowReclaim}}
+                        <strong>Transfer</strong> licenses and allow <strong>reclaim</strong>
                     {{else}}
                         <strong>Transfer</strong> licenses
                     {{/if}}
@@ -48,13 +50,15 @@
                 <button class="dapp-block-button" id="transfer">
                     {{#if destroy}}
                         Destroy
+                    {{else if allowReclaim}}
+                        Transfer and allow reclaim
                     {{else}}
                         Transfer
                     {{/if}}
                 </button>
-                {{#unless destroy}}
+                {{#unless destroy}}{{#unless allowReclaim}}
                     <p>If you wish to destroy a license click <a href="/destroy">here</a>.</p>
-                {{/unless}}
+                {{/unless}}{{/unless}}
             </form>
         </main>
     </div>

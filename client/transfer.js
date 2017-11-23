@@ -28,12 +28,19 @@ Template.transfer.onCreated(function() {
     };
 
     this.onFormUpdate = function() {
-        const {sender, issuanceID, recipient, amount} = this.getValues();
+        const {sender, issuanceID, recipient, amount, licenseContract} = this.getValues();
 
-        lob.estimateGasTransferLicense("0xfD8F3a53e8445c19155d1E4d044C0A77EE6AEbef", issuanceID, sender, recipient, amount, (error, value) => {
-            if (error) { handleUnknownEthereumError(error); return; }
-            estimatedGasConsumption.set(value);
-        });
+        if (this.data && this.data.allowReclaim) {
+            lob.estimateGasTransferLicenseAndAllowReclaim(licenseContract, issuanceID, sender, recipient, amount, (error, value) => {
+                if (error) { handleUnknownEthereumError(error); return; }
+                estimatedGasConsumption.set(value);
+            });
+        } else {
+            lob.estimateGasTransferLicense(licenseContract, issuanceID, sender, recipient, amount, (error, value) => {
+                if (error) { handleUnknownEthereumError(error); return; }
+                estimatedGasConsumption.set(value);
+            });
+        }
 
         // Validate after the DOM has updated, because changes to one input may affect the values of other inputs
         setTimeout(() => {
@@ -133,13 +140,23 @@ Template.transfer.events({
 
         const {sender, issuanceID, licenseContract, recipient, amount, gasPrice} = Template.instance().getValues();
 
-        lob.transferLicense(licenseContract, issuanceID, sender, recipient, amount, gasPrice, () => {
-            // TODO: i18n
-            GlobalNotification.success({
-                content: 'Transaction successfully submitted',
-                duration: 4
+        if (Template.instance().data && Template.instance().data.allowReclaim) {
+            lob.transferLicenseAndAllowReclaim(licenseContract, issuanceID, sender, recipient, amount, gasPrice, () => {
+                // TODO: i18n
+                GlobalNotification.success({
+                    content: 'Transaction successfully submitted',
+                    duration: 4
+                });
             });
-        });
+        } else {
+            lob.transferLicense(licenseContract, issuanceID, sender, recipient, amount, gasPrice, () => {
+                // TODO: i18n
+                GlobalNotification.success({
+                    content: 'Transaction successfully submitted',
+                    duration: 4
+                });
+            });
+        }
     }
 });
 
