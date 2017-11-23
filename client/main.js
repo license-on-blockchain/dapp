@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { lob } from "../lib/LOB";
 
 import './main.html';
+import { Settings } from "../lib/Settings";
 
 Router.route('/', function () {
     this.render('licenses');
@@ -59,6 +60,10 @@ Router.route('/transferreclaim/from/:from/licenseContract/:licenseContract/issua
     });
 });
 
+
+Router.route('/settings');
+
+
 Template.body.helpers({
     activeIfCurrentRoute(name) {
         let currentRoute;
@@ -72,6 +77,9 @@ Template.body.helpers({
         }
         return currentRoute === name ? 'active' : '';
     },
+    enableInstallation() {
+        return Settings.enableInstallation().get();
+    }
 });
 
 Template.body.onCreated(function() {

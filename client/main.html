@@ -11,13 +11,26 @@
                     <i class="icon-docs"></i>
                     <span>Licenses</span>
                 </a>
+            </li>
+            <li>
                 <a href="/transfer" class="{{ activeIfCurrentRoute 'transfer' }}">
                     <i class="icon-arrow-up"></i>
                     <span>Transfer</span>
                 </a>
-                <a href="/transferreclaim" class="{{ activeIfCurrentRoute 'transferreclaim' }}">
-                    <i class="icon-arrow-down"></i>
-                    <span>Install</span>
+            </li>
+            {{#if enableInstallation}}
+                <li>
+                    <a href="/transferreclaim" class="{{ activeIfCurrentRoute 'transferreclaim' }}">
+                        <i class="icon-arrow-down"></i>
+                        <span>Install</span>
+                    </a>
+                </li>
+            {{/if}}
+            <li class="dapp-flex-item"></li>
+            <li>
+                <a href="/settings" class="{{ activeIfCurrentRoute 'settings' }}">
+                    <i class="icon-settings"></i>
+                    <span>Settings</span>
                 </a>
             </li>
         </ul>

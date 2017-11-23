@@ -16,7 +16,7 @@
 }
 
 form#form-transfer {
-  input, select, .dapp-address-input, .dapp-select-gas-price {
+  input[type=text], input[type=number], select, .dapp-address-input, .dapp-select-gas-price {
     width: 100%;
     height: @gridHeight*2;
   }
@@ -60,4 +60,10 @@ p.certificateText {
 
 #graphContainer {
   width: 100%;
+}
+
+.dapp-header {
+  .dapp-flex-item {
+    flex: 1 0;
+  }
 }
