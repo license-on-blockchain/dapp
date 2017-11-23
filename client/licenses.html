@@ -26,13 +26,20 @@
 <template name="licenseRow">
     <tr>
         <td><strong>{{description}}</strong></td>
-        <td>{{balance}}</td>
+        <td>
+            <span title="Licenses owned by you">{{balance}}</span>
+            {{#if reclaimableBalance}}
+                <span title="Licenses given to you that may be reclaimed by the original owner">
+                (+{{reclaimableBalance}})
+                </span>
+            {{/if}}
+        </td>
         {{#if revoked}}
             <td></td>
         {{else}}
             <td><a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> Transfer</a></td>
         {{/if}}
-        <td><a class="showCertificate" href="#"><i class="icon-docs"></i> Certificate</a></td>
+        <td><a class="showCertificate" href="#"><i class="icon-doc"></i> Certificate</a></td>
         <td><a class="showHistory" href="#"><i class="icon-graph"></i> History</a></td>
     </tr>
 </template>

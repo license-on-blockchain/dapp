@@ -21,7 +21,12 @@ Template.licenseRow.helpers({
     },
     balance() {
         // Compute total balance
-        return Object.values(this.balance.get()).reduce((a, b) => a.plus(b), new BigNumber(0)).toString();
+        const balance = Object.values(this.balance.get()).reduce((a, b) => a.plus(b), new BigNumber(0)).toString();
+        const reclaimableBalance = Object.values(this.reclaimableBalance.get()).reduce((a, b) => a.plus(b), new BigNumber(0)).toString();
+        return balance - reclaimableBalance;
+    },
+    reclaimableBalance() {
+        return Object.values(this.reclaimableBalance.get()).reduce((a, b) => a.plus(b), new BigNumber(0)).toNumber();
     },
     maxBalanceAddress() {
         return Object.entries(this.balance.get()).reduce(([lhsAddress, lhsBalance], [rhsAddress, rhsBalance]) => lhsBalance.comparedTo(rhsBalance) < 0 ? [rhsAddress, rhsBalance] : [lhsAddress, lhsBalance])[0];
