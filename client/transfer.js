@@ -76,7 +76,7 @@ Template.transfer.onCreated(function() {
             hasError = true;
         }
 
-        if (amount > lob.allWatchedIssuances.getKey([licenseContract, issuanceID]).balance.getKey(sender).toNumber()) {
+        if (amount > lob.allWatchedIssuances.getKey([licenseContract, issuanceID]).properBalance(sender).toNumber()) {
             this.$('[name=amount]').addClass('dapp-error');
             hasError = true;
         }
@@ -104,7 +104,7 @@ Template.transfer.helpers({
         }
 
         return Object.values(lob.allWatchedIssuances.get()).filter((obj) => {
-            return obj.balance.getKey(selectedSenderAccount.get()) > 0 && !obj.revoked.get();
+            return obj.properBalance(selectedSenderAccount.get()).toNumber() > 0 && !obj.revoked.get();
         }).map((obj) => {
             obj.selected = (obj.licenseContract.toLowerCase() == selectedLicenseContract && obj.issuanceID == selectedIssuanceID);
             return obj;
@@ -145,7 +145,7 @@ Template.transfer.events({
 
 Template.issuanceOption.helpers({
     balance() {
-        return this.balance.getKey(selectedSenderAccount.get());
+        return this.properBalance(selectedSenderAccount.get());
     },
     preselected() {
         return this.selected ? 'selected' : '';

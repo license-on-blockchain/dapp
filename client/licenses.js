@@ -20,7 +20,7 @@ Template.licenseRow.helpers({
         return this.revoked.get();
     },
     balance() {
-        // Compute total balance
+        // Compute total proper balance
         const balance = Object.values(this.balance.get()).reduce((a, b) => a.plus(b), new BigNumber(0)).toString();
         const reclaimableBalance = Object.values(this.reclaimableBalance.get()).reduce((a, b) => a.plus(b), new BigNumber(0)).toString();
         return balance - reclaimableBalance;
@@ -29,6 +29,7 @@ Template.licenseRow.helpers({
         return Object.values(this.reclaimableBalance.get()).reduce((a, b) => a.plus(b), new BigNumber(0)).toNumber();
     },
     maxBalanceAddress() {
+        // TODO: Deduct reclaimable balance
         return Object.entries(this.balance.get()).reduce(([lhsAddress, lhsBalance], [rhsAddress, rhsBalance]) => lhsBalance.comparedTo(rhsBalance) < 0 ? [rhsAddress, rhsBalance] : [lhsAddress, lhsBalance])[0];
     }
 });
