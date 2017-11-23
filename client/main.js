@@ -39,7 +39,7 @@ Router.route('/destroy/from/:from/licenseContract/:licenseContract/issuance/:iss
 Template.body.helpers({
     activeIfCurrentRoute(name) {
         let currentRoute;
-        if (Router.current()) {
+        if (Router.current() && Router.current().route.getName()) {
             currentRoute = Router.current().route.getName();
             if (currentRoute.indexOf('.') !== -1) {
                 currentRoute = currentRoute.substring(0, currentRoute.indexOf('.'));
