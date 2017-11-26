@@ -134,22 +134,28 @@ Template.licenseCertificate.helpers({
         return Template.instance().data.issuanceID;
     },
     originalOwner() {
-        return Template.instance().issuance.get().originalOwner;
+        const issuance = Template.instance().issuance.get();
+        return issuance ? issuance.originalOwner : "";
     },
     auditTime() {
-        return dateFormat(new Date(Template.instance().issuance.get().auditTime.toNumber() * 1000));
+        const issuance = Template.instance().issuance.get();
+        return issuance ? dateFormat(new Date(Template.instance().issuance.get().auditTime.toNumber() * 1000)) : "";
     },
     originalSupply() {
-        return Template.instance().issuance.get().originalSupply;
+        const issuance = Template.instance().issuance.get();
+        return issuance ? issuance.originalSupply : "";
     },
     licenseDescription() {
-        return Template.instance().issuance.get().description;
+        const issuance = Template.instance().issuance.get();
+        return issuance ? issuance.description : "";
     },
     licenseCode() {
-        return Template.instance().issuance.get().code;
+        const issuance = Template.instance().issuance.get();
+        return issuance ? issuance.code : "";
     },
     auditRemark() {
-        return Template.instance().issuance.get().auditRemark;
+        const issuance = Template.instance().issuance.get();
+        return issuance ? issuance.auditRemark : "";
     },
     transferDescription() {
         return Template.instance().transferDescription.get();
