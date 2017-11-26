@@ -45,11 +45,46 @@
 </template>
 
 <template name="licenseCertificate">
-    <p class="certificateText">
-        {{#each certificateText}}
-            {{this}}<br>
-        {{/each}}
-    </p>
+    <div  class="certificateText">
+        <p>
+            {{#each certificateText}}
+                {{this}}<br>
+            {{/each}}
+        </p>
+
+        <p><i>Diese Erklärung wurde mit SSL-Zertifikat {{sslCertificate}} unterzeichnet.</i></p>
+        <hr>
+        <p>
+            Soft&Cloud hat unter diesem LOB-License-Contract folgende Software-Lizenz bescheinigt:
+        </p>
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td>Lizenztyp</td><td><strong>{{licenseDescription}}</strong></td>
+            </tr>
+            <tr>
+                <td>Lizenzcode</td><td><strong>{{licenseCode}}</strong></td>
+            </tr>
+            <tr>
+                <td>Anzahl</td><td><strong>{{originalSupply}}</strong></td>
+            </tr>
+            <tr>
+                <td>Zeitpunkt der Bescheinigung</td><td><strong>{{auditTime}}</strong></td>
+            </tr>
+            <tr>
+                <td>Empfänger der Bescheinigung</td><td><strong>{{originalOwner}}</strong></td>
+            </tr>
+            <tr>
+                <td>Bescheinigungs-ID</td><td><strong>{{issuanceID}}</strong></td>
+            </tr>
+            </tbody>
+        </table>
+        {{#if auditRemark}}
+            <p><i>Vermerk aus dem Lizenzaudit:</i> {{auditRemark}}</p>
+        {{/if}}
+        <hr>
+        <p>{{transferDescription}}</p>
+    </div>
     <div class="dapp-modal-buttons">
         <button class="dapp-primary-button hideModal">OK</button>
     </div>

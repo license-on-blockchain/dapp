@@ -2,6 +2,7 @@ import { lob } from "../lib/LOB.js";
 import { drawLicenseHistory } from '../lib/licenseHistory';
 import { promisify } from "../lib/utils";
 import { handleUnknownEthereumError } from "../lib/ErrorHandling";
+import { Issuance } from "../lib/Issuance";
 
 Template.licenses.helpers({
     licenses() {
@@ -57,11 +58,67 @@ Template.licenseRow.events({
     }
 });
 
+function transferDescription(transfers) {
+    // TODO: i18n
+    switch (transfers.length) {
+        case 1:
+            return "Die Lizenzen wurden noch nicht weiter übertragen.";
+            break;
+        case 2:
+            const recipient = transfers[1].args.to + ((web3.eth.accounts.indexOf(transfers[1].args.to) !== -1) ? " (Ihre Adresse)" : "");
+            if (transfers[0].args.amount === transfers[1].args.amount) {
+                return "Die Lizenzen wurden vollständig an " + recipient + " übertragen.";
+            } else {
+                return transfers[1].args.amount + " Lizenzen wurden an " + recipient + " übertragen.";
+            }
+        default:
+            const snapshots = lob.computeBalanceSnapshots(transfers);
+            const latestSnapshot = snapshots[snapshots.length - 1];
+            let userBalance = 0;
+            for (const address of Object.keys(latestSnapshot)) {
+                if (web3.eth.accounts.indexOf(address) !== -1) {
+                    userBalance += latestSnapshot[address];
+                }
+            }
+            if (userBalance === transfers[0].args.amount) {
+                return "Die Lizenzen wurden Ihnen vollständig, aber (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.";
+            } else if (userBalance === 0) {
+                return "Sie besizten aktuell keine Lizenzen dieser Bescheinigung.";
+            } else {
+                return userBalance + " Lizenzen wurden Ihnen (möglicherweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.";
+            }
+    }
+}
+
+function dateFormat(date) {
+    return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+}
+
 Template.licenseCertificate.onCreated(function() {
+    const licenseContractAddress = Template.instance().data.licenseContract;
+    const issuanceID = Template.instance().data.issuanceID;
+
     // TODO: i18n
     this.certificateText = new ReactiveVar("Loading…");
-    lob.getCertificateText(Template.instance().data.licenseContract, (error, value) => {
+    lob.getCertificateText(licenseContractAddress, (error, value) => {
+        if (error) { handleUnknownEthereumError(error); return; }
         this.certificateText.set(value);
+    });
+    this.issuance = new ReactiveVar();
+    lob.getIssuance(licenseContractAddress, issuanceID, (error, value) => {
+        if (error) { handleUnknownEthereumError(error); return; }
+        this.issuance.set(value);
+    });
+    this.sslCertificate = new ReactiveVar();
+    lob.getIssuerCertificate(licenseContractAddress, (error, value) => {
+        if (error) { handleUnknownEthereumError(error); return; }
+        this.sslCertificate.set(value);
+    });
+
+    this.transferDescription = new ReactiveVar();
+    lob.getLicenseTransfers(licenseContractAddress, issuanceID, (error, transfers) => {
+        if (error) { handleUnknownEthereumError(error); return; }
+        this.transferDescription.set(transferDescription((transfers)));
     });
 });
 
@@ -69,6 +126,33 @@ Template.licenseCertificate.helpers({
     certificateText() {
         // Split text on newlines to insert <br> for newlines in the template an retain safe substrings
         return Template.instance().certificateText.get().split('\n');
+    },
+    sslCertificate() {
+        return Template.instance().sslCertificate.get();
+    },
+    issuanceID() {
+        return Template.instance().data.issuanceID;
+    },
+    originalOwner() {
+        return Template.instance().issuance.get().originalOwner;
+    },
+    auditTime() {
+        return dateFormat(new Date(Template.instance().issuance.get().auditTime.toNumber() * 1000));
+    },
+    originalSupply() {
+        return Template.instance().issuance.get().originalSupply;
+    },
+    licenseDescription() {
+        return Template.instance().issuance.get().description;
+    },
+    licenseCode() {
+        return Template.instance().issuance.get().code;
+    },
+    auditRemark() {
+        return Template.instance().issuance.get().auditRemark;
+    },
+    transferDescription() {
+        return Template.instance().transferDescription.get();
     }
 });
 
@@ -80,12 +164,16 @@ Template.licenseCertificate.events({
 
 Template.licenseHistory.onRendered(function() {
     const canvas = Template.instance().find('#graphContainer');
+    const licenseContractAddress = this.data.licenseContract;
+    const issuanceID = this.data.issuanceID;
     const licenseContract = lob.getLicenseContract(this.data.licenseContract);
     const issuerNameP = promisify(licenseContract.issuerName);
-    const transfersP = promisify((cb) => licenseContract.Transfer({issuanceID: this.data.issuanceID}, {fromBlock: 0}).get(cb));
-    Promise.all([issuerNameP, transfersP])
-        .then(([issuerName, transfers]) => {
-            drawLicenseHistory(canvas, transfers, issuerName);
+    const issuanceP = promisify(cb => licenseContract.issuances(issuanceID, cb));
+    const transfersP = promisify((cb) => lob.getLicenseTransfers(licenseContractAddress, issuanceID, cb));
+    Promise.all([issuerNameP, transfersP, issuanceP])
+        .then(([issuerName, transfers, issuance]) => {
+            issuance = new Issuance(issuance);
+            drawLicenseHistory(canvas, transfers, issuerName, issuance.originalOwner);
         })
         .catch((error) => {
             handleUnknownEthereumError(error);

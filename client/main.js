@@ -83,5 +83,5 @@ Template.body.helpers({
 });
 
 Template.body.onCreated(function() {
-    lob.watchRootContract("0x031e389769aD14770A9556e5e67b0d76633c3bf3");
+    lob.watchRootContract("0x2ad8b02cDBc7d6E5838ED13EDc81149F589cE945");
 });
