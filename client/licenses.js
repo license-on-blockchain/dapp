@@ -6,7 +6,19 @@ import { Issuance } from "../lib/Issuance";
 
 Template.licenses.helpers({
     licenses() {
-        return Object.values(lob.allWatchedIssuances.get()).filter((obj) => obj.revoked && !obj.revoked.get());
+        return Object.values(lob.allWatchedIssuances.get()).filter((obj) => obj.revoked && !obj.revoked.get()).sort((lhs, rhs) => {
+            if (lhs.description && rhs.description) {
+                if (lhs.description < rhs.description) {
+                    return -1;
+                } else if (lhs.description > rhs.description) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
+        });
     },
     revokedLicenses() {
         return Object.values(lob.allWatchedIssuances.get()).filter((obj) => obj.revoked && obj.revoked.get());
