@@ -1,6 +1,7 @@
 import { EthAccounts } from 'meteor/ethereum:accounts';
 import { lob } from "../lib/LOB";
-import {handleUnknownEthereumError} from "../lib/ErrorHandling";
+import { IssuanceLocation } from "../lib/IssuanceLocation";
+import { handleUnknownEthereumError } from "../lib/ErrorHandling";
 
 const selectedSenderAccount = new ReactiveVar();
 const estimatedGasConsumption = new ReactiveVar(0);
@@ -12,6 +13,7 @@ Template.transfer.onCreated(function() {
     this.getValues = function() {
         const sender = TemplateVar.getFrom(this.find('[name=sender]'), 'value');
         const [issuanceID, licenseContract] = this.find('[name=issuance]').value.split("|");
+        const issuanceLocation = new IssuanceLocation(licenseContract, issuanceID);
         let recipient;
         if (this.data && this.data.destroy) {
             recipient = "0x0000000000000000000000000000000000000000";
@@ -20,7 +22,7 @@ Template.transfer.onCreated(function() {
         }
         const amount = this.find('[name=amount]').value;
         const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
-        return {sender, issuanceID, licenseContract, recipient, amount, gasPrice};
+        return {sender, issuanceID, licenseContract, recipient, amount, gasPrice, issuanceLocation};
     };
 
     this.resetErrors = function() {
@@ -28,15 +30,15 @@ Template.transfer.onCreated(function() {
     };
 
     this.onFormUpdate = function() {
-        const {sender, issuanceID, recipient, amount, licenseContract} = this.getValues();
+        const {sender, recipient, amount, issuanceLocation} = this.getValues();
 
         if (this.data && this.data.allowReclaim) {
-            lob.estimateGasTransferLicenseAndAllowReclaim(licenseContract, issuanceID, sender, recipient, amount, (error, value) => {
+            lob.estimateGasTransferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, (error, value) => {
                 if (error) { handleUnknownEthereumError(error); return; }
                 estimatedGasConsumption.set(value);
             });
         } else {
-            lob.estimateGasTransferLicense(licenseContract, issuanceID, sender, recipient, amount, (error, value) => {
+            lob.estimateGasTransferLicense(issuanceLocation, sender, recipient, amount, (error, value) => {
                 if (error) { handleUnknownEthereumError(error); return; }
                 estimatedGasConsumption.set(value);
             });
@@ -53,7 +55,7 @@ Template.transfer.onCreated(function() {
 
         this.resetErrors();
 
-        const {sender, issuanceID, licenseContract, recipient, amount} = this.getValues();
+        const {sender, issuanceID, issuanceLocation, recipient, amount} = this.getValues();
         selectedSenderAccount.set(sender);
         let hasError = false;
 
@@ -83,7 +85,7 @@ Template.transfer.onCreated(function() {
             hasError = true;
         }
 
-        if (amount > lob.allWatchedIssuances.getKey([licenseContract, issuanceID]).properBalance(sender).toNumber()) {
+        if (amount > lob.getBalances(issuanceLocation).getOwnedBalance(sender).toNumber()) {
             this.$('[name=amount]').addClass('dapp-error');
             hasError = true;
         }
@@ -107,15 +109,18 @@ Template.transfer.helpers({
             if (selectedLicenseContract) {
                 selectedLicenseContract = selectedLicenseContract.toLowerCase();
             }
-            selectedIssuanceID = Template.instance().data.issuanceID;
+            selectedIssuanceID = Number(Template.instance().data.issuanceID);
         }
 
-        return Object.values(lob.allWatchedIssuances.get()).filter((obj) => {
-            return obj.properBalance(selectedSenderAccount.get()).toNumber() > 0 && !obj.revoked.get();
-        }).map((obj) => {
-            obj.selected = (obj.licenseContract.toLowerCase() == selectedLicenseContract && obj.issuanceID == selectedIssuanceID);
-            return obj;
-        });
+        return lob.getRelevantIssuanceLocations(selectedSenderAccount.get())
+            .map((issuanceLocation) => {
+                return {
+                    issuanceLocation,
+                    metadata: lob.getIssuanceMetadata(issuanceLocation),
+                    balance: lob.getBalances(issuanceLocation),
+                    selected: (issuanceLocation.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceLocation.issuanceID === selectedIssuanceID),
+                }
+            });
     },
     gasPrice() {
         return EthBlocks.latest.gasPrice
@@ -138,10 +143,10 @@ Template.transfer.events({
             return;
         }
 
-        const {sender, issuanceID, licenseContract, recipient, amount, gasPrice} = Template.instance().getValues();
+        const {sender, issuanceLocation, recipient, amount, gasPrice} = Template.instance().getValues();
 
         if (Template.instance().data && Template.instance().data.allowReclaim) {
-            lob.transferLicenseAndAllowReclaim(licenseContract, issuanceID, sender, recipient, amount, gasPrice, () => {
+            lob.transferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, gasPrice, () => {
                 // TODO: i18n
                 GlobalNotification.success({
                     content: 'Transaction successfully submitted',
@@ -149,7 +154,7 @@ Template.transfer.events({
                 });
             });
         } else {
-            lob.transferLicense(licenseContract, issuanceID, sender, recipient, amount, gasPrice, () => {
+            lob.transferLicense(issuanceLocation, sender, recipient, amount, gasPrice, () => {
                 // TODO: i18n
                 GlobalNotification.success({
                     content: 'Transaction successfully submitted',
@@ -161,10 +166,19 @@ Template.transfer.events({
 });
 
 Template.issuanceOption.helpers({
-    balance() {
-        return this.properBalance(selectedSenderAccount.get());
+    issuanceID() {
+        return this.issuanceLocation.issuanceID;
+    },
+    licenseContract() {
+        return this.issuanceLocation.licenseContractAddress;
     },
     preselected() {
         return this.selected ? 'selected' : '';
-    }
+    },
+    description() {
+        return this.metadata.description.get();
+    },
+    balance() {
+        return this.balance.getOwnedBalance(selectedSenderAccount.get());
+    },
 });
