@@ -120,7 +120,8 @@ Template.transfer.helpers({
                     balance: lob.getBalances(issuanceLocation),
                     selected: (issuanceLocation.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceLocation.issuanceID === selectedIssuanceID),
                 }
-            });
+            })
+            .filter((obj) => obj.balance.getOwnedBalance(selectedSenderAccount.get()) > 0);
     },
     gasPrice() {
         return EthBlocks.latest.gasPrice
