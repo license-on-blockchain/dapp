@@ -13,7 +13,7 @@ Template.transfer.onCreated(function() {
     this.getValues = function() {
         const sender = TemplateVar.getFrom(this.find('[name=sender]'), 'value');
         const [issuanceID, licenseContract] = this.find('[name=issuance]').value.split("|");
-        const issuanceLocation = new IssuanceLocation(licenseContract, issuanceID);
+        const issuanceLocation = IssuanceLocation.fromComponents(licenseContract, issuanceID);
         let recipient;
         if (this.data && this.data.destroy) {
             recipient = "0x0000000000000000000000000000000000000000";
@@ -124,7 +124,7 @@ Template.transfer.helpers({
             .filter((obj) => obj.balance.getOwnedBalance(selectedSenderAccount.get()) > 0);
     },
     gasPrice() {
-        return EthBlocks.latest.gasPrice
+        return EthBlocks.latest.gasPrice;
     },
     gasEstimate() {
         return estimatedGasConsumption.get();
@@ -147,7 +147,8 @@ Template.transfer.events({
         const {sender, issuanceLocation, recipient, amount, gasPrice} = Template.instance().getValues();
 
         if (Template.instance().data && Template.instance().data.allowReclaim) {
-            lob.transferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, gasPrice, () => {
+            lob.transferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, gasPrice, (error) => {
+                if (error) { handleUnknownEthereumError(error); return; }
                 // TODO: i18n
                 GlobalNotification.success({
                     content: 'Transaction successfully submitted',
@@ -155,7 +156,8 @@ Template.transfer.events({
                 });
             });
         } else {
-            lob.transferLicense(issuanceLocation, sender, recipient, amount, gasPrice, () => {
+            lob.transferLicense(issuanceLocation, sender, recipient, amount, gasPrice, (error) => {
+                if (error) { handleUnknownEthereumError(error); return; }
                 // TODO: i18n
                 GlobalNotification.success({
                     content: 'Transaction successfully submitted',

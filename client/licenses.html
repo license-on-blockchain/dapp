@@ -28,9 +28,9 @@
         <td><strong>{{description}}</strong></td>
         <td>
             <span title="Licenses owned by you">{{balance}}</span>
-            {{#if reclaimableBalance}}
+            {{#if borrowedBalance}}
                 <span title="Licenses given to you that may be reclaimed by the original owner">
-                (+{{reclaimableBalance}})
+                (+{{borrowedBalance}})
                 </span>
             {{/if}}
         </td>

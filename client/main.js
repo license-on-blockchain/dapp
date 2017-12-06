@@ -60,7 +60,10 @@ Router.route('/transferreclaim/from/:from/licenseContract/:licenseContract/issua
     });
 });
 
+// Reclaim
+Router.route('/reclaim');
 
+// Settings
 Router.route('/settings');
 
 
@@ -83,5 +86,5 @@ Template.body.helpers({
 });
 
 Template.body.onCreated(function() {
-    lob.watchRootContract("0x2ad8b02cDBc7d6E5838ED13EDc81149F589cE945");
+    lob.watchRootContract("0x1ce71cEe61f4090b020CD920FD4546dC7ad18e1F");
 });

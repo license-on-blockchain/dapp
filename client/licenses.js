@@ -50,8 +50,8 @@ Template.licenseRow.helpers({
     balance() {
         return this.balance.getOwnedBalance(lob.accounts.get()).toNumber();
     },
-    reclaimableBalance() {
-        return this.balance.getReclaimableBalance(lob.accounts.get()).toNumber();
+    borrowedBalance() {
+        return this.balance.getBorrowedBalance(lob.accounts.get()).toNumber();
     },
     maxBalanceAddress() {
         return this.balance.getAllOwnedBalances(lob.accounts.get()).reduce(([lhsAddress, lhsBalance], [rhsAddress, rhsBalance]) => {
