@@ -1,6 +1,7 @@
 import { lob } from "../lib/LOB.js";
 import { drawLicenseHistory } from '../lib/licenseHistory';
 import { handleUnknownEthereumError } from "../lib/ErrorHandling";
+import { CertificateChain } from "../lib/CertificateChain";
 
 function getLicenseRows(revoked) {
     return lob.getRelevantIssuanceLocations(lob.accounts.get())
@@ -147,6 +148,15 @@ Template.licenseCertificate.onCreated(function() {
         if (error) { handleUnknownEthereumError(error); return; }
         this.transferDescription.set(transferDescription(transfers));
     });
+
+    this.certificateChain = new ReactiveVar(undefined);
+    Tracker.autorun(() => {
+        if (this.issuance.sslCertificate.get().length > 2) {
+            this.certificateChain.set(new CertificateChain(this.issuance.sslCertificate.get()))
+        } else {
+            this.certificateChain.set(undefined);
+        }
+    });
 });
 
 Template.licenseCertificate.helpers({
@@ -180,6 +190,25 @@ Template.licenseCertificate.helpers({
     },
     transferDescription() {
         return Template.instance().transferDescription.get();
+    },
+    certificateValid() {
+        const certificateChain = Template.instance().certificateChain.get();
+        return certificateChain ? "" + certificateChain.verifyCertificateChain() : "";
+    },
+    signatureValid() {
+        const certificateText = Template.instance().certificateText.get();
+        const signature = Template.instance().issuance.signature.get();
+        const certificateChain = Template.instance().certificateChain.get();
+
+        return certificateChain ? "" + certificateChain.verifySignature(certificateText, signature) : "";
+    },
+    leafCertificateCommonName() {
+        const certificateChain = Template.instance().certificateChain.get();
+        return certificateChain ? certificateChain.getLeafCertificateCommonName() : "–";
+    },
+    rootCertificateCommonName() {
+        const certificateChain = Template.instance().certificateChain.get();
+        return certificateChain ? certificateChain.getRootCertificateCommonName() : "–";
     }
 });
 

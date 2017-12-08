@@ -79,6 +79,24 @@
             </tr>
             </tbody>
         </table>
+
+        <h4>Zertifikatinformationen:</h4>
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td>Zertifikat gültig</td><td><strong>{{certificateValid}}</strong></td>
+            </tr>
+            <tr>
+                <td>Signatur gültig</td><td><strong>{{signatureValid}}</strong></td>
+            </tr>
+            <tr>
+                <td>Zertifikat ausgestellt für</td><td><strong>{{leafCertificateCommonName}}</strong></td>
+            </tr>
+            <tr>
+                <td>Zertifikataussteller</td><td><strong>{{rootCertificateCommonName}}</strong></td>
+            </tr>
+            </tbody>
+        </table>
         {{#if auditRemark}}
             <p><i>Vermerk aus dem Lizenzaudit:</i> {{auditRemark}}</p>
         {{/if}}
