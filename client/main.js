@@ -68,6 +68,10 @@ Router.route('/settings');
 
 Router.route('/createlicensecontract');
 
+Router.route('/licensecontracts', function() {
+    this.render('managedLicenseContractList');
+});
+
 
 Template.body.helpers({
     activeIfCurrentRoute(name) {

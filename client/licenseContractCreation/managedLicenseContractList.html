@@ -1,0 +1,23 @@
+<template name="managedLicenseContractList">
+    <div class="dapp-flex-content">
+        <main class="dapp-content">
+            <h1><strong>License contracts</strong> managed by you</h1>
+            <table class="dapp-zebra">
+                <tbody>
+                {{#each licenseContracts}}
+                    {{> licenseContractRow}}
+                {{/each}}
+                </tbody>
+            </table>
+            <a href="/createlicensecontract">Create new license contract</a>
+        </main>
+    </div>
+</template>
+
+<template name="licenseContractRow">
+    <tr>
+        <td>
+            <strong>{{address}}</strong>
+        </td>
+    </tr>
+</template>
