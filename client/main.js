@@ -75,7 +75,15 @@ Router.route('/licensecontracts', function() {
 });
 
 Router.route('/licensecontracts/sign', function () {
-    this.render('signlicensecontract');
+    this.render('signLicenseContract');
+});
+
+Router.route('/licensecontracts/sign/:licenseContractAddress', function () {
+    this.render('signLicenseContract', {
+        data: {
+            licenseContractAddress: this.params.licenseContractAddress
+        }
+    });
 });
 
 

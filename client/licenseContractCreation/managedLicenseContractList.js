@@ -9,5 +9,8 @@ Template.managedLicenseContractList.helpers({
 Template.licenseContractRow.helpers({
     address() {
         return this.address;
+    },
+    showSignButton() {
+        return !this.signature.get();
     }
 });

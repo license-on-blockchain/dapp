@@ -19,5 +19,10 @@
         <td>
             <strong>{{address}}</strong>
         </td>
+        <td>
+            {{#if showSignButton}}
+                <a href="/licensecontracts/sign/{{address}}"><i class="icon-pencil"></i> Sign</a>
+            {{/if}}
+        </td>
     </tr>
 </template>

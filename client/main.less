@@ -15,7 +15,7 @@
   padding-right: 80px;
 }
 
-form#form-transfer, form#form-createLicenseContract {
+form#form-transfer, form#form-createLicenseContract, form#form-signLicenseContract {
   input[type=text], input[type=number], select, .dapp-address-input, .dapp-select-gas-price, textarea {
     width: 100%;
     height: @gridHeight*2;
@@ -72,4 +72,9 @@ h4 {
   .dapp-flex-item {
     flex: 1 0;
   }
+}
+
+.lob-error-message {
+  color: @colorError;
+  font-weight: normal;
 }
