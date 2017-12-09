@@ -3,7 +3,7 @@ import { CertificateChain } from "../../lib/CertificateChain";
 import { lob } from "../../lib/LOB";
 import { rootContractAddresses } from "../../lib/RootContracts";
 
-Template.createlicensecontract.onCreated(function() {
+Template.createLicenseContract.onCreated(function() {
     EthAccounts.init();
 
     this.getValues = function() {
@@ -74,14 +74,14 @@ Template.createlicensecontract.onCreated(function() {
     }
 });
 
-Template.createlicensecontract.helpers({
+Template.createLicenseContract.helpers({
     myAccounts() {
         return EthAccounts.find().fetch();
     },
     rootContracts: rootContractAddresses
 });
 
-Template.createlicensecontract.events({
+Template.createLicenseContract.events({
     'keyup, change input'() {
         Template.instance().onFormUpdate();
     },

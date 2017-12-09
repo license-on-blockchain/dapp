@@ -66,10 +66,16 @@ Router.route('/reclaim');
 // Settings
 Router.route('/settings');
 
-Router.route('/createlicensecontract');
+Router.route('/licensecontracts/create', function() {
+    this.render('createLicenseContract');
+});
 
 Router.route('/licensecontracts', function() {
     this.render('managedLicenseContractList');
+});
+
+Router.route('/licensecontracts/sign', function () {
+    this.render('signlicensecontract');
 });
 
 
