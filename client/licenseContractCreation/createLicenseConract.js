@@ -30,8 +30,8 @@ Template.createLicenseContract.onCreated(function() {
     };
 
     this.validate = function(errorOnEmpty = false) {
-        const validateField = function(fieldName, validation, onlyWhenEmpty) {
-            const enableValidation = errorOnEmpty || !onlyWhenEmpty;
+        const validateField = function(fieldName, validation, isEmptyCheck) {
+            const enableValidation = errorOnEmpty || !isEmptyCheck;
             if (!validation && enableValidation) {
                 this.$('[name=' + fieldName + ']').addClass('dapp-error');
                 return true;
