@@ -1,6 +1,7 @@
 import { EthAccounts } from 'meteor/ethereum:accounts';
 import { CertificateChain } from "../../lib/CertificateChain";
 import { lob } from "../../lib/LOB";
+import { hexToBytes } from "../../lib/utils";
 import { rootContractAddresses } from "../../lib/RootContracts";
 
 Template.createLicenseContract.onCreated(function() {
@@ -12,7 +13,7 @@ Template.createLicenseContract.onCreated(function() {
         const issuerName = this.find('[name=issuerName]').value;
         const liability = this.find('[name=liability]').value;
         const safekeepingPeriod = this.find('[name=safekeepingPeriod]').value;
-        const certificate = this.find('[name=sslCertificate]').value;
+        const certificate = hexToBytes(this.find('[name=sslCertificate]').value);
 
         return {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate};
     };
@@ -63,7 +64,6 @@ Template.createLicenseContract.onCreated(function() {
             try {
                 chain = new CertificateChain(certificate);
             } catch (error) {
-                console.log(error);
                 chain = null;
             }
 
@@ -91,7 +91,9 @@ Template.createLicenseContract.events({
     'click button#submit'(event) {
         event.preventDefault();
 
-        Template.instance().validate(true);
+        if (!Template.instance().validate(true)) {
+            return;
+        }
 
         const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate} = Template.instance().getValues();
 

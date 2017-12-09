@@ -149,12 +149,15 @@ Template.licenseCertificate.onCreated(function() {
         this.transferDescription.set(transferDescription(transfers));
     });
 
-    this.certificateChain = new ReactiveVar(undefined);
+    this.certificateChain = new ReactiveVar(null);
     Tracker.autorun(() => {
-        if (this.issuance.sslCertificate.get().length > 2) {
-            this.certificateChain.set(new CertificateChain(this.issuance.sslCertificate.get()))
-        } else {
-            this.certificateChain.set(undefined);
+        const sslCertificate = this.issuance.sslCertificate.get();
+        if (sslCertificate) {
+            try {
+                this.certificateChain.set(new CertificateChain(sslCertificate))
+            } catch (error) {
+                this.certificateChain.set(null);
+            }
         }
     });
 });
@@ -193,14 +196,16 @@ Template.licenseCertificate.helpers({
     },
     certificateValid() {
         const certificateChain = Template.instance().certificateChain.get();
-        return certificateChain ? "" + certificateChain.verifyCertificateChain() : "";
+        // TODO: i18n
+        return certificateChain ? "" + certificateChain.verifyCertificateChain() : "false";
     },
     signatureValid() {
         const certificateText = Template.instance().certificateText.get();
         const signature = Template.instance().issuance.signature.get();
         const certificateChain = Template.instance().certificateChain.get();
 
-        return certificateChain ? "" + certificateChain.verifySignature(certificateText, signature) : "";
+        // TODO: i18n
+        return certificateChain ? "" + certificateChain.verifySignature(certificateText, signature) : "false";
     },
     leafCertificateCommonName() {
         const certificateChain = Template.instance().certificateChain.get();
