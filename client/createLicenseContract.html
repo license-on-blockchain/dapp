@@ -1,0 +1,55 @@
+<template name="createlicensecontract">
+    <div class="dapp-flex-content">
+        <main class="dapp-content">
+            <h1><strong>Register</strong> as license issuer</h1>
+            <form id="form-createLicenseContract">
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>Root contract</h4>
+                        <select name="rootContract">
+                            {{#each rootContracts}}
+                                {{> rootContractOption}}
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>Issuer address</h4>
+                        {{> dapp_selectAccount accounts=myAccounts class="issuerAddress" name="issuerAddress"}}
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>Issuer name</h4>
+                        <input type="text" name="issuerName">
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>Haftung</h4>
+                        <textarea name="liability"></textarea>
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>Safekeeping period (years)</h4>
+                        <input type="number" name="safekeepingPeriod">
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-12 mobile-full">
+                        <h4>SSL-Certificate (PKCS#12 encoded as Hex)</h4>
+                        <textarea name="sslCertificate"></textarea>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <hr>
+                <button class="dapp-block-button" id="submit">Create license contract</button>
+            </form>
+        </main>
+    </div>
+</template>
+
+<template name="rootContractOption">
+    <option value="{{this}}">{{this}}</option>
+</template>

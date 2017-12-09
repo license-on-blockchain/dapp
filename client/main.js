@@ -1,8 +1,8 @@
 import { Template } from 'meteor/templating';
 import { lob } from "../lib/LOB";
-
-import './main.html';
 import { Settings } from "../lib/Settings";
+import { rootContractAddresses } from "../lib/RootContracts";
+import './main.html';
 
 Router.route('/', function () {
     this.render('licenses');
@@ -66,6 +66,8 @@ Router.route('/reclaim');
 // Settings
 Router.route('/settings');
 
+Router.route('/createlicensecontract');
+
 
 Template.body.helpers({
     activeIfCurrentRoute(name) {
@@ -86,5 +88,7 @@ Template.body.helpers({
 });
 
 Template.body.onCreated(function() {
-    lob.watchRootContract("0x1ce71cEe61f4090b020CD920FD4546dC7ad18e1F");
+    for (const rootContractAddress of rootContractAddresses) {
+        lob.watchRootContract(rootContractAddress);
+    }
 });

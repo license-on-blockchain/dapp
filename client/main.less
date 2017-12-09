@@ -15,10 +15,13 @@
   padding-right: 80px;
 }
 
-form#form-transfer {
-  input[type=text], input[type=number], select, .dapp-address-input, .dapp-select-gas-price {
+form#form-transfer, form#form-createLicenseContract {
+  input[type=text], input[type=number], select, .dapp-address-input, .dapp-select-gas-price, textarea {
     width: 100%;
     height: @gridHeight*2;
+  }
+  textarea {
+    height: @gridHeight*4;
   }
 }
 
