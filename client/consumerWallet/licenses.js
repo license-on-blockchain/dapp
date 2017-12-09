@@ -1,7 +1,7 @@
-import { lob } from "../lib/LOB.js";
-import { drawLicenseHistory } from '../lib/licenseHistory';
-import { handleUnknownEthereumError } from "../lib/ErrorHandling";
-import { CertificateChain } from "../lib/CertificateChain";
+import { lob } from "../../lib/LOB.js";
+import { drawLicenseHistory } from '../../lib/licenseHistory';
+import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
+import { CertificateChain } from "../../lib/CertificateChain";
 
 function getLicenseRows(revoked) {
     return lob.getRelevantIssuanceLocations(lob.accounts.get())

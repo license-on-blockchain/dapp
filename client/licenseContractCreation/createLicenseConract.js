@@ -1,7 +1,7 @@
 import { EthAccounts } from 'meteor/ethereum:accounts';
-import { CertificateChain } from "../lib/CertificateChain";
-import { lob } from "../lib/LOB";
-import { rootContractAddresses } from "../lib/RootContracts";
+import { CertificateChain } from "../../lib/CertificateChain";
+import { lob } from "../../lib/LOB";
+import { rootContractAddresses } from "../../lib/RootContracts";
 
 Template.createlicensecontract.onCreated(function() {
     EthAccounts.init();

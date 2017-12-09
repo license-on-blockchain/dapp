@@ -1,6 +1,6 @@
-import { lob } from "../lib/LOB";
-import { IssuanceLocation } from "../lib/IssuanceLocation";
-import { handleUnknownEthereumError } from "../lib/ErrorHandling";
+import { lob } from "../../lib/LOB";
+import { IssuanceLocation } from "../../lib/IssuanceLocation";
+import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
 
 const reclaimOrigins = new ReactiveVar([]);
 const selectedReclaimer = new ReactiveVar(undefined);

@@ -1,7 +1,7 @@
 import { EthAccounts } from 'meteor/ethereum:accounts';
-import { lob } from "../lib/LOB";
-import { IssuanceLocation } from "../lib/IssuanceLocation";
-import { handleUnknownEthereumError } from "../lib/ErrorHandling";
+import { lob } from "../../lib/LOB";
+import { IssuanceLocation } from "../../lib/IssuanceLocation";
+import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
 
 const selectedSenderAccount = new ReactiveVar();
 const estimatedGasConsumption = new ReactiveVar(0);
