@@ -9,6 +9,7 @@
                     <div class="col col-6 mobile-full">
                         <h4>To</h4>
                         {{> dapp_selectAccount accounts=myAccounts class="reclaimer" name="reclaimer"}}
+                        <div class="lob-error-message" data-for="reclaimer"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>From</h4>
@@ -17,6 +18,7 @@
                                 {{> reclaimOriginOption}}
                             {{/each}}
                         </select>
+                        <div class="lob-error-message" data-for="from"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>
@@ -24,15 +26,16 @@
                     <div class="col col-6 mobile-full">
                         <h4>License</h4>
                         <select name="issuance" title="License to reclaim">
-                            <option value="">–</option>
                             {{#each issuances}}
                                 {{> reclaimIssuanceOption}}
                             {{/each}}
                         </select>
+                        <div class="lob-error-message" data-for="issuance"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>Amount</h4>
                         <input name="amount" type="number" title="Number of licenses to transfer">
+                        <div class="lob-error-message" data-for="amount"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>

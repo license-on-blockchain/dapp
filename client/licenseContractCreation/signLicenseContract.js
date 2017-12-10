@@ -2,6 +2,8 @@ import forge from 'node-forge';
 import { lob } from "../../lib/LOB";
 import { CertificateChain } from "../../lib/CertificateChain";
 import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
+import { resetErrors, validateField } from "../../lib/FormHelpers";
+import { NotificationCenter } from "../../lib/NotificationCenter";
 
 /**
  * Depending on the chosen signing method, either compute the signature or use the passed manual signature. Should the
@@ -46,11 +48,117 @@ function computeSignature(signingMethod, manualSignature, privateKey, certificat
  * @param {CertificateChain} certificateChain The certificate chain to verify the signature
  */
 function verifySignature(signature, certificateText, certificateChain) {
-    if (!certificateChain.verifySignature(certificateText, signature)) {
-        // TODO: i18n
-        throw 'Signature is not valid';
+    return certificateChain.verifySignature(certificateText, signature);
+}
+
+function getValues() {
+    const licenseContractAddress = this.find('[name=licenseContract]').value;
+    let signMethod = null;
+    if (this.find('[name=signMethod]:checked')) {
+        signMethod = this.find('[name=signMethod]:checked').value;
     }
-    return true;
+    let manualSignature = null;
+    if (this.find('[name=manualSignature]')) {
+        manualSignature = this.find('[name=manualSignature]').value;
+    }
+    let privateKey = null;
+    if (this.find('[name=privateKey]')) {
+        privateKey = this.find('[name=privateKey]').value;
+    }
+
+    let gasPrice = 0;
+    if (this.find('.dapp-select-gas-price')) {
+        gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
+    }
+
+    return {licenseContractAddress, signMethod, manualSignature, privateKey, gasPrice};
+}
+
+function onFormUpdate() {
+    const {licenseContractAddress, signMethod, manualSignature, privateKey, certificateText} = this.getValues();
+
+    // Determine which text field (signature or private key) to show
+    switch (signMethod) {
+        case 'manual':
+            this.manualSigning.set(true);
+            break;
+        case 'privateKey':
+            this.manualSigning.set(false);
+            break;
+        case null:
+            return;
+        default:
+            console.error("Unknown signing method: " + signMethod);
+            return;
+    }
+
+    // Update the selected license contract
+    const licenseContracts = this.licenseContracts.get();
+    // Fetch the LicenseContract object with this address
+    const selectedLicenseContract = licenseContracts.filter((licenseContract) => licenseContract.address === licenseContractAddress)[0];
+    this.selectedLicenseContract.set(selectedLicenseContract);
+
+    try {
+        const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
+        lob.estimateGasSignLicenseContract(licenseContractAddress, signature, selectedLicenseContract.issuerAddress, (error, gasConsumpution) => {
+            if (error) { handleUnknownEthereumError(error); return; }
+            this.estimatedGasConsumption.set(gasConsumpution);
+        });
+    } catch (error) {
+        this.estimatedGasConsumption.set(0);
+    }
+
+    // Validate after the DOM has updated, because changes to one input may affect the values of other inputs
+    setTimeout(() => this.validate(), 0);
+}
+
+function validate(errorOnEmpty = false) {
+    this.resetErrors();
+
+    let noErrors = true;
+
+    let {manualSignature, privateKey, signMethod} = this.getValues();
+
+    let fieldToValidate;
+    // Verify that manual signature or private key has been entered
+    switch (signMethod) {
+        case 'manual':
+            fieldToValidate = 'manualSignature';
+            // TODO: i18n
+            noErrors &= validateField('manualSignature', manualSignature, errorOnEmpty, "Signature must not be empty");
+            break;
+        case 'privateKey':
+            fieldToValidate = 'privateKey';
+            // TODO: i18n
+            noErrors &= validateField('privateKey', privateKey, errorOnEmpty, "Private key must not be empty");
+            break;
+        default:
+            console.error("Unknown signing method: " + signMethod);
+            return;
+    }
+
+    // If something has been entered, verify the signature
+    if (manualSignature || privateKey) {
+        // Only perform signature validation if private key / manual signature are present
+
+        const sslCertificate = this.selectedLicenseContract.get().sslCertificate.get();
+        const certificateText = this.selectedLicenseContract.get().certificateText.get();
+
+        if (sslCertificate && certificateText) {
+            // TODO: i18n
+            noErrors &= validateField(fieldToValidate, () => {
+                const certificateChain = new CertificateChain(sslCertificate);
+                const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
+                return verifySignature(signature, certificateText, certificateChain);
+            }, true, "Signature is not valid");
+        } else {
+            // TODO: i18n
+            noErrors &= validateField('manualSignature', false, errorOnEmpty, "Data necessary to verify the signature not loaded from the blockchain yet. Please wait a moment and try again.");
+            noErrors &= validateField('privateKey', false, errorOnEmpty, "Data necessary to generate the signature not loaded from the blockchain yet. Please wait a moment and try again.");
+        }
+    }
+
+    return noErrors;
 }
 
 Template.signLicenseContract.onCreated(function() {
@@ -61,136 +169,10 @@ Template.signLicenseContract.onCreated(function() {
     this.estimatedGasConsumption = new ReactiveVar(0);
     this.licenseContracts = new ReactiveVar([]);
 
-    this.getValues = function() {
-        const licenseContractAddress = this.find('[name=licenseContract]').value;
-        let signMethod = null;
-        if (this.find('[name=signMethod]:checked')) {
-            signMethod = this.find('[name=signMethod]:checked').value;
-        }
-        let manualSignature = null;
-        if (this.find('[name=manualSignature]')) {
-            manualSignature = this.find('[name=manualSignature]').value;
-        }
-        let privateKey = null;
-        if (this.find('[name=privateKey]')) {
-            privateKey = this.find('[name=privateKey]').value;
-        }
-
-        let gasPrice = 0;
-        if (this.find('.dapp-select-gas-price')) {
-            gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
-        }
-
-        return {licenseContractAddress, signMethod, manualSignature, privateKey, gasPrice};
-    };
-
-    this.resetErrors = function() {
-        this.$('.dapp-error').removeClass('dapp-error');
-        this.$('.lob-error-message').html("");
-    };
-
-    this.onFormUpdate = function() {
-        const {licenseContractAddress, signMethod, manualSignature, privateKey, certificateText} = this.getValues();
-
-        // Determine which text field (signature or private key) to show
-        switch (signMethod) {
-            case 'manual':
-                this.manualSigning.set(true);
-                break;
-            case 'privateKey':
-                this.manualSigning.set(false);
-                break;
-            case null:
-                return;
-            default:
-                console.error("Unknown signing method: " + signMethod);
-                return;
-        }
-
-        // Update the selected license contract
-        const licenseContracts = this.licenseContracts.get();
-        // Fetch the LicenseContract object with this address
-        const selectedLicenseContract = licenseContracts.filter((licenseContract) => licenseContract.address === licenseContractAddress)[0];
-        this.selectedLicenseContract.set(selectedLicenseContract);
-
-        try {
-            const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
-            lob.estimateGasSignLicenseContract(licenseContractAddress, signature, selectedLicenseContract.issuerAddress, (error, gasConsumpution) => {
-                if (error) { handleUnknownEthereumError(error); return; }
-                this.estimatedGasConsumption.set(gasConsumpution);
-            });
-        } catch (error) {
-            this.estimatedGasConsumption.set(0);
-        }
-
-        // Validate after the DOM has updated, because changes to one input may affect the values of other inputs
-        setTimeout(() => {
-            this.validate();
-        }, 0);
-    };
-
-    this.validate = function(errorOnEmpty = false) {
-        const validateField = function(fieldName, validation, isEmptyCheck, errorMessage) {
-            const enableValidation = errorOnEmpty || !isEmptyCheck;
-            if (!validation && enableValidation) {
-                this.$('[name=' + fieldName + ']').addClass('dapp-error');
-                this.$('.lob-error-message[data-for=' + fieldName + ']').html(errorMessage);
-                return true;
-            } else {
-                return false;
-            }
-        };
-
-        this.resetErrors();
-
-        let hasErrors = false;
-
-        let {manualSignature, privateKey, signMethod} = this.getValues();
-
-        switch (signMethod) {
-            case 'manual':
-                // TODO: i18n
-                hasErrors |= validateField('manualSignature', manualSignature, true, "Signature must not be empty");
-                break;
-            case 'privateKey':
-                // TODO: i18n
-                hasErrors |= validateField('privateKey', privateKey, true, "Private key must not be empty");
-                break;
-            default:
-                console.error("Unknown signing method: " + signMethod);
-                return;
-        }
-
-
-        if (manualSignature || privateKey) {
-            // Only perform signature validation if private key / manual signature are present
-
-            const sslCertificate = this.selectedLicenseContract.get().sslCertificate.get();
-            const certificateText = this.selectedLicenseContract.get().certificateText.get();
-
-            if (sslCertificate && certificateText) {
-                try {
-                    const certificateChain = new CertificateChain(sslCertificate);
-                    const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
-                    verifySignature(signature, certificateText, certificateChain);
-                } catch (error) {
-                    // TODO: i18n: Localise error messages
-                    validateField('manualSignature', false, false, error);
-                    validateField('privateKey', false, false, error);
-                    hasErrors = true;
-                }
-            } else {
-                if (errorOnEmpty) {
-                    // TODO: i18n: Localise error messages
-                    validateField('manualSignature', false, false, "Data necessary to verify the signature not loaded from the blockchain yet. Please wait a moment and try again.");
-                    validateField('privateKey', false, false, error, "Data necessary to generate the signature not loaded from the blockchain yet. Please wait a moment and try again.");
-                    hasErrors = true;
-                }
-            }
-        }
-
-        return !hasErrors;
-    };
+    this.getValues = getValues;
+    this.resetErrors = resetErrors;
+    this.onFormUpdate = onFormUpdate;
+    this.validate = validate;
 });
 
 Template.signLicenseContract.onRendered(function() {
@@ -199,9 +181,7 @@ Template.signLicenseContract.onRendered(function() {
         // Don't show license contracts that are already signed
         // licenseContracts = licenseContracts.filter((licenseContract) => !licenseContract.signature.get());
         this.licenseContracts.set(licenseContracts);
-        setTimeout(() => {
-            this.onFormUpdate();
-        }, 0);
+        setTimeout(() => this.onFormUpdate, 0);
     });
 
     this.onFormUpdate();
@@ -216,8 +196,7 @@ Template.signLicenseContract.helpers({
         if (preselectedLicenseContract) {
             preselectedLicenseContract = preselectedLicenseContract.toLowerCase();
         }
-        return Template.instance().licenseContracts.get()
-            .map((licenseContract) => {
+        return Template.instance().licenseContracts.get().map((licenseContract) => {
             return {
                 licenseContract,
                 selected: licenseContract.address.toLowerCase() === preselectedLicenseContract
@@ -267,18 +246,10 @@ Template.signLicenseContract.events({
 
         lob.signLicenseContract(licenseContractAddress, binSignature, from, gasPrice, (error) => {
             if (error) {
-                // TODO: i18n: Localise error message
-                GlobalNotification.error({
-                    content: error,
-                    duration: 4
-                });
+                NotificationCenter.showError(error);
                 return;
             }
-            // TODO: i18n
-            GlobalNotification.success({
-                content: 'Transaction successfully submitted',
-                duration: 4
-            });
+            NotificationCenter.showTransactionSubmitted();
         })
     }
 });

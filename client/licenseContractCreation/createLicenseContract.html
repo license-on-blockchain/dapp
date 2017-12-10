@@ -18,10 +18,12 @@
                     <div class="col col-6 mobile-full">
                         <h4>Issuer address</h4>
                         {{> dapp_selectAccount accounts=myAccounts class="issuerAddress" name="issuerAddress"}}
+                        <div class="lob-error-message" data-for="issuerAddress"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>Issuer name</h4>
                         <input type="text" name="issuerName">
+                        <div class="lob-error-message" data-for="issuerName"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>
@@ -29,10 +31,12 @@
                     <div class="col col-6 mobile-full">
                         <h4>Haftung</h4>
                         <textarea name="liability"></textarea>
+                        <div class="lob-error-message" data-for="liability"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>Safekeeping period (years)</h4>
                         <input type="number" name="safekeepingPeriod">
+                        <div class="lob-error-message" data-for="safekeepingPeriod"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>
@@ -40,6 +44,7 @@
                     <div class="col col-12 mobile-full">
                         <h4>SSL-Certificate (PKCS#12 encoded as Hex)</h4>
                         <textarea name="sslCertificate"></textarea>
+                        <div class="lob-error-message" data-for="sslCertificate"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>

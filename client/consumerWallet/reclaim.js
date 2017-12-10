@@ -1,34 +1,82 @@
 import { lob } from "../../lib/LOB";
 import { IssuanceLocation } from "../../lib/IssuanceLocation";
 import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
+import { resetErrors, validateField } from "../../lib/FormHelpers";
 
-const reclaimOrigins = new ReactiveVar([]);
-const selectedReclaimer = new ReactiveVar(undefined);
-const selectedIssuanceLocation = new ReactiveVar(undefined);
-const estimatedGasConsumption = new ReactiveVar(0);
+function getValues() {
+    const reclaimer = TemplateVar.getFrom(this.find('[name=reclaimer]'), 'value');
+    const from = this.find('[name=from]').value;
+    const issuanceLocation = IssuanceLocation.fromString(this.find('[name=issuance]').value);
+    const amount = this.find('[name=amount]').value;
+    const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
+    return {reclaimer, from, issuanceLocation, amount, gasPrice};
+}
+
+function onFormUpdate() {
+    const {issuanceLocation, reclaimer, from, amount} = this.getValues();
+    this.selectedReclaimer.set(reclaimer);
+    this.selectedIssuanceLocation.set(issuanceLocation);
+
+    if (issuanceLocation) {
+        lob.estimateGasReclaim(issuanceLocation, reclaimer, from, amount, (error, gasEstimate) => {
+            this.estimatedGasConsumption.set(gasEstimate);
+        });
+    }
+
+    // Validate after the DOM has updated, because changes to one input may affect the values of other inputs
+    setTimeout(() => this.validate(), 0);
+}
+
+function validate(errorOnEmpty = false) {
+    this.resetErrors();
+
+    const {reclaimer, issuanceLocation, from, amount} = this.getValues();
+    let noErrors = true;
+
+    // TODO: Check that private key exists for from account
+    // TODO: i18n
+    noErrors &= validateField('reclaimer', web3.isAddress(reclaimer), true);
+    noErrors &= validateField('issuance', issuanceLocation, errorOnEmpty, "You need to select a license to reclaim");
+    noErrors &= validateField('from', web3.isAddress(from), errorOnEmpty && from, "This is not a valid ethereum address");
+    noErrors &= validateField('amount', amount, errorOnEmpty, "You need to specify how many licenses to reclaim");
+    noErrors &= validateField('amount', amount <= lob.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from).get(), amount, "You can only reclaim " + lob.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from).get() + " licenses from the selected account");
+    noErrors &= validateField('amount', amount > 0, amount, "You need to reclaim at least one license");
+
+    return noErrors;
+}
 
 Template.reclaim.onCreated(function() {
     EthAccounts.init();
 
-    this.getValues = function() {
-        const reclaimer = TemplateVar.getFrom(this.find('[name=reclaimer]'), 'value');
-        const from = this.find('[name=from]').value;
-        const issuanceLocation = IssuanceLocation.fromString(this.find('[name=issuance]').value);
-        const amount = this.find('[name=amount]').value;
-        const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
-        return {reclaimer, from, issuanceLocation, amount, gasPrice};
-    };
+    this.resetErrors = resetErrors;
+    this.getValues = getValues;
+    this.onFormUpdate = onFormUpdate;
+    this.validate = validate;
 
+    this.reclaimOrigins = new ReactiveVar([]);
+    this.selectedReclaimer = new ReactiveVar(undefined);
+    this.selectedIssuanceLocation = new ReactiveVar(undefined, (oldValue, newValue) => oldValue === newValue);
+    this.estimatedGasConsumption = new ReactiveVar(0);
+    this.issuanceLocations = new ReactiveVar([]);
+
+    // Trigger a form update after everything has been created to set `selectedReclaimer`
+    setTimeout(() => this.onFormUpdate(), 0);
+});
+
+Template.reclaim.onRendered(function() {
     Tracker.autorun(() => {
+        const selectedReclaimer = this.selectedReclaimer.get();
+        const selectedIssuanceLocation = this.selectedIssuanceLocation.get();
+
         let newReclaimOrigins;
-        if (!selectedReclaimer.get() || !selectedIssuanceLocation.get()) {
+        if (!selectedReclaimer || !selectedIssuanceLocation) {
             newReclaimOrigins = [];
         } else {
-            newReclaimOrigins = lob.getReclaimOrigins(selectedIssuanceLocation.get(), selectedReclaimer.get())
+            newReclaimOrigins = lob.getReclaimOrigins(selectedIssuanceLocation, selectedReclaimer)
                 .map((address) => {
                     return {
-                        issuanceLocation: selectedIssuanceLocation.get(),
-                        reclaimer: selectedReclaimer.get(),
+                        issuanceLocation: selectedIssuanceLocation,
+                        reclaimer: selectedReclaimer,
                         currentOwner: address,
                     }
                 })
@@ -36,78 +84,13 @@ Template.reclaim.onCreated(function() {
                     return lob.getReclaimableBalanceFrom(obj.issuanceLocation, obj.reclaimer, obj.currentOwner).get() > 0;
                 });
         }
-        reclaimOrigins.set(newReclaimOrigins);
+        this.reclaimOrigins.set(newReclaimOrigins);
+
+        setTimeout(() => this.onFormUpdate(), 0);
     });
 
-    this.onFormUpdate = function() {
-        const {issuanceLocation, reclaimer, from, amount} = this.getValues();
-        selectedReclaimer.set(reclaimer);
-        selectedIssuanceLocation.set(issuanceLocation);
-
-        if (issuanceLocation) {
-            lob.estimateGasReclaim(issuanceLocation, reclaimer, from, amount, (error, gasEstimate) => {
-                estimatedGasConsumption.set(gasEstimate);
-            });
-        }
-
-        // Validate after the DOM has updated, because changes to one input may affect the values of other inputs
-        setTimeout(() => {
-            this.validate();
-        }, 0);
-    };
-
-    this.resetErrors = function() {
-        this.$('.dapp-error').removeClass('dapp-error');
-    };
-
-    this.validate = function(errorOnEmpty = false) {
-        // TODO: Show error messages
-
-        this.resetErrors();
-        let hasError = false;
-
-        const {reclaimer, issuanceLocation, from, amount} = this.getValues();
-
-        if (!web3.isAddress(reclaimer)) {
-            // Error should already be displayed by dapp_selectAccount
-            hasError = true;
-        }
-
-        if (!issuanceLocation && errorOnEmpty) {
-            this.$('[name=issuanceLocation]').addClass('dapp-error');
-            hasError = true;
-        }
-
-        if (issuanceLocation) {
-            if (!from && errorOnEmpty) {
-                this.$('[name=from]').addClass('dapp-error');
-                hasError = true;
-            }
-
-            if (!web3.isAddress(from)) {
-                this.$('[name=from]').addClass('dapp-error');
-                hasError = true;
-            }
-        }
-
-        if (lob.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from).get() < amount) {
-            this.$('[name=amount]').addClass('dapp-error');
-            hasError = true;
-        }
-
-        return !hasError;
-    };
-
-    // Trigger a form update after everything has been created to set `reclaimer`
-    setTimeout(() => this.onFormUpdate(), 0);
-});
-
-Template.reclaim.helpers({
-    myAccounts() {
-        return EthAccounts.find().fetch();
-    },
-    issuances() {
-        return Array.from(lob.getIssuanceLocationsForWhichReclaimsArePossible(lob.accounts.get()))
+    Tracker.autorun(() => {
+        const issuanceLocations = Array.from(lob.getIssuanceLocationsForWhichReclaimsArePossible(lob.accounts.get()))
             .map((issuanceLocation) => {
                 return {
                     issuanceLocation,
@@ -116,17 +99,29 @@ Template.reclaim.helpers({
                 }
             })
             .filter((obj) => {
-                return lob.getReclaimableBalance(obj.issuanceLocation, selectedReclaimer.get()) > 0;
-            })
+                return lob.getReclaimableBalance(obj.issuanceLocation, this.selectedReclaimer.get()) > 0;
+            });
+        this.issuanceLocations.set(issuanceLocations);
+
+        setTimeout(() => this.onFormUpdate(), 0);
+    });
+});
+
+Template.reclaim.helpers({
+    myAccounts() {
+        return EthAccounts.find().fetch();
+    },
+    issuances() {
+        return Template.instance().issuanceLocations.get();
     },
     reclaimOrigins() {
-        return reclaimOrigins.get();
+        return Template.instance().reclaimOrigins.get();
     },
     gasPrice() {
         return EthBlocks.latest.gasPrice;
     },
     gasEstimate() {
-        return estimatedGasConsumption.get();
+        return Template.instance().estimatedGasConsumption.get();
     }
 });
 
@@ -146,12 +141,11 @@ Template.reclaim.events({
         const {reclaimer, from, issuanceLocation, amount, gasPrice} = Template.instance().getValues();
 
         lob.reclaim(issuanceLocation, reclaimer, from, amount, gasPrice, (error) => {
-            if (error) { handleUnknownEthereumError(error); return; }
-            // TODO: i18n
-            GlobalNotification.success({
-                content: 'Transaction successfully submitted',
-                duration: 4
-            });
+            if (error) {
+                NotificationCenter.showError(error);
+                return;
+            }
+            NotificationCenter.showTransactionSubmitted();
         });
     }
 });
