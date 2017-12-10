@@ -3,9 +3,12 @@ import { CertificateChain } from "../../lib/CertificateChain";
 import { lob } from "../../lib/LOB";
 import { hexToBytes } from "../../lib/utils";
 import { rootContractAddresses } from "../../lib/RootContracts";
+import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
 
 Template.createLicenseContract.onCreated(function() {
     EthAccounts.init();
+
+    this.estimatedGasConsumption = new ReactiveVar(0);
 
     this.getValues = function() {
         const rootContractAddress = this.find('[name=rootContract]').value;
@@ -23,6 +26,13 @@ Template.createLicenseContract.onCreated(function() {
     };
 
     this.onFormUpdate = function() {
+        const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate} = Template.instance().getValues();
+
+        lob.estimateGasCreateLicenseContract(rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, (error, gasConsumption) => {
+            if (error) { handleUnknownEthereumError(error); return; }
+            this.estimatedGasConsumption.set(gasConsumption);
+        });
+
         // Validate after the DOM has updated, because changes to one input may affect the values of other inputs
         setTimeout(() => {
             this.validate();
@@ -78,7 +88,13 @@ Template.createLicenseContract.helpers({
     myAccounts() {
         return EthAccounts.find().fetch();
     },
-    rootContracts: rootContractAddresses
+    rootContracts: rootContractAddresses,
+    gasPrice() {
+        return EthBlocks.latest.gasPrice;
+    },
+    gasEstimate() {
+        return Template.instance().estimatedGasConsumption.get();
+    }
 });
 
 Template.createLicenseContract.events({
@@ -95,9 +111,9 @@ Template.createLicenseContract.events({
             return;
         }
 
-        const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate} = Template.instance().getValues();
+        const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, gasPrice, certificate} = Template.instance().getValues();
 
-        lob.createLicenseContract(rootContractAddress, issuerName, liability, safekeepingPeriod, certificate, (error) => {
+        lob.createLicenseContract(rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, gasPrice, (error) => {
             if (error) {
                 GlobalNotification.error({
                     content: error,

@@ -43,6 +43,13 @@
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>
+                <div class="row clear">
+                    <div class="col col-4 mobile-full">
+                        <h4>Gas</h4>
+                        {{> dapp_selectGasPrice gas=gasEstimate gasPrice=gasPrice unit="ether"}}
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
                 <hr>
                 <button class="dapp-block-button" id="submit">Create license contract</button>
             </form>
