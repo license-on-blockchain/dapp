@@ -102,6 +102,9 @@ Template.body.helpers({
     },
     enableInstallation() {
         return Settings.enableInstallation().get();
+    },
+    enableIssuerActions() {
+        return Settings.enableIssuerActions().get();
     }
 });
 

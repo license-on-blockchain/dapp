@@ -32,6 +32,14 @@
                     </a>
                 </li>
             {{/if}}
+            {{#if enableIssuerActions}}
+                <li>
+                    <a href="/licensecontracts" class="{{ activeIfCurrentRoute 'licensecontracts' }}">
+                        <i class="icon-plus"></i>
+                        <span>{{_ "tab.title.licenseContracts"}}</span>
+                    </a>
+                </li>
+            {{/if}}
             <li class="dapp-flex-item"></li>
             <li>
                 <a href="/settings" class="{{ activeIfCurrentRoute 'settings' }}">

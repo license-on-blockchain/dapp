@@ -18,6 +18,7 @@
       "transfer": "Transfer",
       "install": "Install",
       "reclaim": "Reclaim",
+      "licenseContracts": "Issue",
       "settings": "Settings"
     }
   },
@@ -30,6 +31,10 @@
       "enableInstallation": {
         "title": "Show installation actions",
         "description": "Enable actions needed to activate software installations using LOB licenses"
+      },
+      "enableIssuerActions": {
+        "title": "Issuer Actions",
+        "description": "Enable actions to issue new licenses using LOB"
       },
       "language": {
         "title": "Language",
@@ -201,7 +206,7 @@
   },
   "signLicenseContract": {
     "title": "<strong>Sign</strong> license contract",
-    "inputs": {
+    "input": {
       "licenseContract": {
         "title": "License Contract",
         "description": "The license contract you want to sign"
