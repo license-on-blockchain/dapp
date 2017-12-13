@@ -34,13 +34,12 @@ function validate(errorOnEmpty = false) {
     let noErrors = true;
 
     // TODO: Check that private key exists for from account
-    // TODO: i18n
     noErrors &= validateField('reclaimer', web3.isAddress(reclaimer), true);
-    noErrors &= validateField('issuance', issuanceLocation, errorOnEmpty, "You need to select a license to reclaim");
-    noErrors &= validateField('from', web3.isAddress(from), errorOnEmpty && from, "This is not a valid ethereum address");
-    noErrors &= validateField('amount', amount, errorOnEmpty, "You need to specify how many licenses to reclaim");
-    noErrors &= validateField('amount', amount <= lob.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from).get(), amount, "You can only reclaim " + lob.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from).get() + " licenses from the selected account");
-    noErrors &= validateField('amount', amount > 0, amount, "You need to reclaim at least one license");
+    noErrors &= validateField('issuance', issuanceLocation, errorOnEmpty, TAPi18n.__('reclaim.error.no_license_selected'));
+    noErrors &= validateField('from', web3.isAddress(from), errorOnEmpty && from, TAPi18n.__("reclaim.error.from_not_valid"));
+    noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__("reclaim.error.amount_not_specified"));
+    noErrors &= validateField('amount', amount <= lob.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from).get(), amount, TAPi18n.__("reclaim.error.amount_less_than_balance", lob.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from).get()));
+    noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__("reclaim.error.amount_zero"));
 
     return noErrors;
 }

@@ -4,21 +4,21 @@
             <form id="form-transfer">
                 <h1>
                     {{#if destroy}}
-                        <strong>Destroy</strong> licenses
+                        {{{_ "transfer.title.destroy"}}}
                     {{else if allowReclaim}}
-                        <strong>Transfer</strong> licenses and allow <strong>reclaim</strong>
+                        {{{_ "transfer.title.transferAndAllowReclaim"}}}
                     {{else}}
-                        <strong>Transfer</strong> licenses
+                        {{{_ "transfer.title.transfer"}}}
                     {{/if}}
                 </h1>
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
-                        <h4>From</h4>
+                        <h4>{{_ "transfer.input.from.title"}}</h4>
                         {{> dapp_selectAccount accounts=myAccounts class="sender" name="sender" value=from}}
                     </div>
                     <div class="col col-6 mobile-full">
                         {{#unless destroy}}
-                            <h4>To</h4>
+                            <h4>{{_ "transfer.input.to.title"}}</h4>
                             {{> dapp_addressInput placeholder="0x000000.." name="recipient"}}
                             <div class="lob-error-message" data-for="recipient"></div>
                         {{/unless}}
@@ -27,8 +27,8 @@
                 </div>
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
-                        <h4>License</h4>
-                        <select name="issuance" title="License to transfer">
+                        <h4>{{_ "transfer.input.issuance.title"}}</h4>
+                        <select name="issuance" title="{{_ "transfer.input.issuance.description"}}">
                             {{#each issuances}}
                                 {{> issuanceOption}}
                             {{/each}}
@@ -36,15 +36,15 @@
                         <div class="lob-error-message" data-for="issuance"></div>
                     </div>
                     <div class="col col-6 mobile-full">
-                        <h4>Amount</h4>
-                        <input name="amount" type="number" title="Number of licenses to transfer">
+                        <h4>{{_ "transfer.input.amount.title"}}</h4>
+                        <input name="amount" type="number" title="{{_ "transfer.input.amount.description"}}">
                         <div class="lob-error-message" data-for="amount"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>
                 <div class="row clear">
                     <div class="col col-4 mobile-full">
-                        <h4>Gas</h4>
+                        <h4>{{_ "generic.input.gas.title"}}</h4>
                         {{> dapp_selectGasPrice gas=gasEstimate gasPrice=gasPrice unit="ether"}}
                     </div>
                     <div class="dapp-clear-fix"></div>
@@ -52,15 +52,15 @@
                 <hr>
                 <button class="dapp-block-button" id="transfer">
                     {{#if destroy}}
-                        Destroy
+                        {{_ "transfer.button.destroy"}}
                     {{else if allowReclaim}}
-                        Transfer and allow reclaim
+                        {{_ "transfer.button.transferAndAllowReclaim"}}
                     {{else}}
-                        Transfer
+                        {{_ "transfer.button.transfer"}}
                     {{/if}}
                 </button>
                 {{#unless destroy}}{{#unless allowReclaim}}
-                    <p>If you wish to destroy a license click <a href="/destroy">here</a>.</p>
+                    <p>{{{_ "transfer.destroyLink"}}}</p>
                 {{/unless}}{{/unless}}
             </form>
         </main>
@@ -68,5 +68,5 @@
 </template>
 
 <template name="issuanceOption">
-    <option value="{{issuanceID}}|{{licenseContract}}" {{preselected}}>{{description}} – {{balance}} Licenses</option>
+    <option value="{{issuanceID}}|{{licenseContract}}" {{preselected}}>{{description}} – {{balance}} {{_ "generic.license" count=balance}}</option>
 </template>

@@ -38,14 +38,13 @@ function validate(errorOnEmpty = false) {
     const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate} = this.getValues();
     let noErrors = true;
 
-    // TODO: i18n
-    noErrors &= validateField('rootContract', rootContractAddress, errorOnEmpty, "You need to specify under which root contract you want to create your license contract");
-    noErrors &= validateField('issuerAddress', web3.isAddress(issuerAddress), true, "You need to choose which address to use for future license issuings");
-    noErrors &= validateField('issuerName', issuerName, errorOnEmpty, "Please provide your or your organisation's name that matches the name on the SSL certificate");
-    noErrors &= validateField('safekeepingPeriod', safekeepingPeriod, errorOnEmpty, "Please specify, how long you keep purchase records");
-    noErrors &= validateField('sslCertificate', certificate, errorOnEmpty, "Please provide an SSL certificate");
+    noErrors &= validateField('rootContract', rootContractAddress, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_root_contract_selected'));
+    noErrors &= validateField('issuerAddress', web3.isAddress(issuerAddress), true, TAPi18n.__('createLicenseContract.error.no_issuer_address_selected'));
+    noErrors &= validateField('issuerName', issuerName, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_issuerName_entered'));
+    noErrors &= validateField('safekeepingPeriod', safekeepingPeriod, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_safekeepingPeriod_entered'));
+    noErrors &= validateField('sslCertificate', certificate, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_sslCertificate_entered'));
     // TODO: Allow certificate to be formatted as PEM
-    noErrors &= validateField('sslCertificate', () => { return new CertificateChain(certificate)}, certificate, "The certificate is not valid");
+    noErrors &= validateField('sslCertificate', () => { return new CertificateChain(certificate)}, certificate, TAPi18n.__('createLicenseContract.error.sslCertificate_not_valid'));
 
     return noErrors;
 }
@@ -95,7 +94,6 @@ Template.createLicenseContract.events({
                 NotificationCenter.showError(error);
                 return;
             }
-            // TODO: i18n
             NotificationCenter.showTransactionSubmitted();
         })
 

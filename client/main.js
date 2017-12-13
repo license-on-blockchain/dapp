@@ -110,3 +110,7 @@ Template.body.onCreated(function() {
         lob.watchRootContract(rootContractAddress);
     }
 });
+
+Meteor.startup(function() {
+    TAPi18n.setLanguage(Settings.language().get());
+});

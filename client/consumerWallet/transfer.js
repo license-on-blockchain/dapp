@@ -52,13 +52,12 @@ function validate(errorOnEmpty = false) {
     let noErrors = true;
 
     // TODO: Check if private key exists for account
-    // TODO: i18n
     noErrors &= validateField('sender', web3.isAddress(sender), true);
-    noErrors &= validateField('recipient', web3.isAddress(recipient), errorOnEmpty, "Not a valid recipient address");
-    noErrors &= validateField('issuance', issuanceID, errorOnEmpty, "You must select an issuance to transfer");
-    noErrors &= validateField('amount', amount, errorOnEmpty, "You must specify how many licenses you want to transfer");
-    noErrors &= validateField('amount', amount > 0, amount, "You need to transfer at least one license");
-    noErrors &= validateField('amount', amount <= lob.getBalances(issuanceLocation).getOwnedBalance(sender).toNumber(), amount, "You cannot transfer more licenses than you own");
+    noErrors &= validateField('recipient', web3.isAddress(recipient), errorOnEmpty, TAPi18n.__('transfer.error.recipient_not_valid_address'));
+    noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'));
+    noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'));
+    noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('transfer.error.amount_zero'));
+    noErrors &= validateField('amount', amount <= lob.getBalances(issuanceLocation).getOwnedBalance(sender).toNumber(), amount, TAPi18n.__('transfer.error.amount_less_than_balance'));
 
     return noErrors;
 }

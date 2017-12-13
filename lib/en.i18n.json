@@ -1,0 +1,235 @@
+{
+  "generic": {
+    "input": {
+      "gas": {
+        "title": "Gas",
+        "description": ""
+      }
+    },
+    "license": "License",
+    "license_plural": "Licenses",
+    "OK": "OK",
+    "loading": "Loading…",
+    "transaction_successfully_submitted": "Transaction successfully submitted"
+  },
+  "tab": {
+    "title": {
+      "licenses": "Licenses",
+      "transfer": "Transfer",
+      "install": "Install",
+      "reclaim": "Reclaim",
+      "settings": "Settings"
+    }
+  },
+  "footer": {
+    "copyright": "© 2017 LOB, Alex Hoppen"
+  },
+  "settings": {
+    "title": "<strong>Settings</strong>",
+    "input": {
+      "enableInstallation": {
+        "title": "Show installation actions",
+        "description": "Enable actions needed to activate software installations using LOB licenses"
+      },
+      "language": {
+        "title": "Language",
+        "description": "Choose the language the LOB wallet shall be in"
+      }
+    }
+  },
+  "licenses": {
+    "title": "<strong>Licenses</strong>",
+    "heading": {
+      "revokedLicenses": "Revoked licenses"
+    },
+    "hover": {
+      "ownedBalance": "Licenses owned by you",
+      "borrowedBalance": "Licenses given to you that may be reclaimed by the original owner"
+    },
+    "button": {
+      "transfer": "Transfer",
+      "certificate": "Certificate",
+      "history": "History"
+    },
+    "transferDescription": {
+      "licenses_not_transferred": "The licenses have not been transferred on yet.",
+      "licenses_completely_transferred": "The licenses have all been transferred to %s.",
+      "licenses_partially_transferred": "%s have been transferred to %s.",
+      "licenses_completely_transferred_indirectly": "The licenses have been completely transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
+      "licenses_partially_transferred_indirectly": "%s licenses have been transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
+      "no_owned_licenses": "You do not currently own any licenses of this issuing."
+    }
+  },
+  "licenseCertificate": {
+    "certificate_signed": "This certificate has been signed using the SSL certificate with fingerprint %s",
+    "licenseInfo": {
+      "intro": "%s has issued the following license under this LOB license contract:",
+      "description": "License type",
+      "code": "License code",
+      "amount": "Amount",
+      "auditTime": "Audit time",
+      "originalOwner": "Original owner",
+      "issuanceID": "Issuance ID"
+    },
+    "certificateCheck": {
+      "certificateValid": "Certificate valid",
+      "signatureValid": "Signature valid",
+      "leafCertificateCommonName": "Certificate issued to",
+      "certificateIssuer": "Certificate issuer"
+    },
+    "auditRemarkIntro": "Audit remark:"
+  },
+  "licenseHistory": {
+    "license_contract": "License contract",
+    "your_address": "Your address"
+  },
+  "reclaim": {
+    "title": "<strong>Reclaim</strong> licenses",
+    "input": {
+      "to": {
+        "title": "To",
+        "description": ""
+      },
+      "from": {
+        "title": "From",
+        "description": "Account to reclaim license from"
+      },
+      "issuance": {
+        "title": "License",
+        "description": "License to reclaim"
+      },
+      "amount": {
+        "title": "Amount",
+        "description": "Number of licenses to reclaim"
+      }
+    },
+    "button": {
+      "reclaim": "Reclaim"
+    },
+    "error": {
+      "no_license_selected": "You need to select a license to reclaim",
+      "from_not_valid": "This is not a valid ethereum address",
+      "amount_not_specified": "You need to specify how many licenses to reclaim",
+      "amount_less_than_balance": "You can only reclaim %s licenses from the selected account",
+      "amount_zero": "You need to reclaim at least one license"
+    }
+  },
+  "transfer": {
+    "title": {
+      "destroy": "<strong>Destroy</strong> licenses",
+      "transferAndAllowReclaim": "<strong>Transfer</strong> licenses and allow <strong>reclaim</strong>",
+      "transfer": "<strong>Transfer</strong> licenses"
+    },
+    "input": {
+      "from": {
+        "title": "From",
+        "description": ""
+      },
+      "to": {
+        "title": "To",
+        "description": ""
+      },
+      "issuance": {
+        "title": "License",
+        "description": "License to transfer"
+      },
+      "amount": {
+        "title": "Amount",
+        "description": "Number of licenses to transfer"
+      }
+    },
+    "button": {
+      "destroy": "Destroy",
+      "transfer": "Transfer",
+      "transferAndAllowReclaim": "Transfer and allow reclaim"
+    },
+    "destroyLink": "If you wish to destroy a license click <a href='/destroy'>here</a>.",
+    "error": {
+      "recipient_not_valid_address": "Not a valid recipient address",
+      "no_issuance_selected": "You must select an issuance to transfer",
+      "no_amount_specified": "You must specify how many licenses you want to transfer",
+      "amount_zero": "You need to transfer at least one license",
+      "amount_less_than_balance": "You cannot transfer more licenses than you own"
+    }
+  },
+  "managedLicenseContractList": {
+    "title": "<strong>License contracts</strong> managed by you",
+    "button": {
+      "sign": "Sign"
+    },
+    "createContractLink": "<a href='/licensecontracts/create'>Create</a> new license contract"
+  },
+  "createLicenseContract": {
+    "title": "<strong>Register</strong> as license issuer",
+    "input": {
+      "rootContract": {
+        "title": "Root Contract",
+        "description": "The root contract you choose to create your license contract under defines the legal framework of your license issuings"
+      },
+      "issuerAddress": {
+        "title": "Issuer Address",
+        "description": ""
+      },
+      "issuerName": {
+        "title": "Issuer Name",
+        "description": "The name of the person or organisation issuing licenses under the license contract. This should correspond to the common name in the SSL certificate."
+      },
+      "liability": {
+        "title": "Liability",
+        "description": "A free text field in which you can specify the liability you grant for each license issuing"
+      },
+      "safekeepingPeriod": {
+        "title": "Safekeeping Period (Years)",
+        "description": "The number of years you will keep all documents you inspected as part of the license issuing"
+      },
+      "sslCertificate": {
+        "title": "SSL-Certificate (PKCS#12 encoded as Hex)",
+        "description": "TODO: Proper description when SSL format has been decided on"
+      }
+    },
+    "button": {
+      "create": "Create License Contract"
+    },
+    "error": {
+      "no_root_contract_selected": "You need to specify under which root contract you want to create your license contract",
+      "no_issuer_address_selected": "You need to choose which address to use for future license issuings",
+      "no_issuerName_entered": "Please provide your or your organisation's name that matches the name on the SSL certificate",
+      "no_safekeepingPeriod_entered": "Please specify, how long you keep purchase records",
+      "no_sslCertificate_entered": "Please provide an SSL certificate",
+      "sslCertificate_not_valid": "The certificate is not valid"
+    }
+  },
+  "signLicenseContract": {
+    "title": "<strong>Sign</strong> license contract",
+    "inputs": {
+      "licenseContract": {
+        "title": "License Contract",
+        "description": "The license contract you want to sign"
+      },
+      "manualSignature": {
+        "title": "Signature",
+        "description": "The digital signature of the certificate text created using the private key of the SSL certificate you provided when creating the license contract"
+      },
+      "privateKey": {
+        "title": "Private SSL key",
+        "description": "The private key for the SSL certificate you provided when creating the license contract. The key will never be transmitted anywhere but only be used to generate the signature."
+      }
+    },
+    "button": {
+      "sign": "Sign"
+    },
+    "signMethod": {
+      "privateKey": "Sign using private key",
+      "manual": "Manually generate signature"
+    },
+    "error": {
+      "alreadySigned": "This license contract has already been signed.",
+      "signature_not_in_hex": "Signature is not in hex",
+      "signature_empty": "Signature must not be empty",
+      "privateKey_empty": "Private key must not be empty",
+      "signature_not_valid": "Signature is not valid",
+      "signature_verification_data_not_loaded_yet": "Data necessary to verify the signature not loaded from the blockchain yet. Please wait a moment and try again.",
+      "privateKey_verification_data_not_loaded_yet": "Data necessary to generate the signature not loaded from the blockchain yet. Please wait a moment and try again."
+    }
+  }
+}

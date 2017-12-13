@@ -95,17 +95,15 @@ Template.licenseRow.events({
 });
 
 function transferDescription(transfers) {
-    // TODO: i18n
     switch (transfers.length) {
         case 1:
-            return "Die Lizenzen wurden noch nicht weiter übertragen.";
-            break;
+            return TAPi18n.__('licenses.transferDescription.licenses_not_transferred');
         case 2:
             const recipient = transfers[1].args.to + ((lob.accounts.get().indexOf(transfers[1].args.to) !== -1) ? " (Ihre Adresse)" : "");
             if (transfers[0].args.amount === transfers[1].args.amount) {
-                return "Die Lizenzen wurden vollständig an " + recipient + " übertragen.";
+                return TAPi18n.__('licenses.transferDescription.licenses_completely_transferred', recipient);
             } else {
-                return transfers[1].args.amount + " Lizenzen wurden an " + recipient + " übertragen.";
+                return TAPi18n.__("licenses.transferDescription.licenses_partially_transferred", transfers[1].args.amount, recipient);
             }
         default:
             const snapshots = lob.computeBalanceSnapshots(transfers);
@@ -117,11 +115,11 @@ function transferDescription(transfers) {
                 }
             }
             if (userBalance === transfers[0].args.amount) {
-                return "Die Lizenzen wurden Ihnen vollständig, aber (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.";
+                return TAPi18n.__('licenses.transferDescription.licenses_completely_transferred_indirectly');
             } else if (userBalance === 0) {
-                return "Sie besizten aktuell keine Lizenzen dieser Bescheinigung.";
+                return TAPi18n.__('licenses.transferDescription.no_owned_licenses');
             } else {
-                return userBalance + " Lizenzen wurden Ihnen (möglicherweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.";
+                return TAPi18n.__('licenses.transferDescription.licenses_partially_transferred_indirectly', userBalance);
             }
     }
 }
@@ -134,8 +132,7 @@ Template.licenseCertificate.onCreated(function() {
     const issuanceLocation = Template.instance().data.issuanceLocation;
     const licenseContractAddress = issuanceLocation.licenseContractAddress;
 
-    // TODO: i18n
-    this.certificateText = new ReactiveVar("Loading…");
+    this.certificateText = new ReactiveVar(TAPi18n.__("generic.loading"));
     lob.getCertificateText(licenseContractAddress, (error, value) => {
         if (error) { handleUnknownEthereumError(error); return; }
         this.certificateText.set(value);
@@ -171,7 +168,10 @@ Template.licenseCertificate.helpers({
         return Template.instance().issuance.sslCertificate.get();
     },
     issuanceID() {
-        return Template.instance().data.issuanceID;
+        return Template.instance().data.issuanceLocation.issuanceID;
+    },
+    issuerName() {
+        return Template.instance().issuance.issuerName.get();
     },
     originalOwner() {
         return Template.instance().issuance.originalOwner.get();
@@ -196,16 +196,22 @@ Template.licenseCertificate.helpers({
     },
     certificateValid() {
         const certificateChain = Template.instance().certificateChain.get();
-        // TODO: i18n
-        return certificateChain ? "" + certificateChain.verifyCertificateChain() : "false";
+        if (certificateChain && certificateChain.verifyCertificateChain()) {
+            return "✔"
+        } else {
+            return "❌";
+        }
     },
     signatureValid() {
         const certificateText = Template.instance().certificateText.get();
         const signature = Template.instance().issuance.signature.get();
         const certificateChain = Template.instance().certificateChain.get();
 
-        // TODO: i18n
-        return certificateChain ? "" + certificateChain.verifySignature(certificateText, signature) : "false";
+        if (certificateChain && certificateChain.verifySignature(certificateText, signature)) {
+            return "✔"
+        } else {
+            return "❌";
+        }
     },
     leafCertificateCommonName() {
         const certificateChain = Template.instance().certificateChain.get();

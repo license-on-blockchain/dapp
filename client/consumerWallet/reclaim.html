@@ -3,17 +3,17 @@
         <main class="dapp-content">
             <form id="form-transfer">
                 <h1>
-                    <strong>Reclaim</strong> licenses
+                    {{{_ "reclaim.title"}}}
                 </h1>
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
-                        <h4>To</h4>
+                        <h4>{{_ "reclaim.input.to.title"}}</h4>
                         {{> dapp_selectAccount accounts=myAccounts class="reclaimer" name="reclaimer"}}
                         <div class="lob-error-message" data-for="reclaimer"></div>
                     </div>
                     <div class="col col-6 mobile-full">
-                        <h4>From</h4>
-                        <select name="from" title="Account to reclaim license from">
+                        <h4>{{_ "reclaim.input.from.title"}}</h4>
+                        <select name="from" title="{{_ "reclaim.input.from.description"}}">
                             {{#each reclaimOrigins}}
                                 {{> reclaimOriginOption}}
                             {{/each}}
@@ -24,8 +24,8 @@
                 </div>
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
-                        <h4>License</h4>
-                        <select name="issuance" title="License to reclaim">
+                        <h4>{{_ "reclaim.input.issuance.title"}}</h4>
+                        <select name="issuance" title="{{_ "reclaim.input.issuance.description"}}">
                             {{#each issuances}}
                                 {{> reclaimIssuanceOption}}
                             {{/each}}
@@ -33,8 +33,8 @@
                         <div class="lob-error-message" data-for="issuance"></div>
                     </div>
                     <div class="col col-6 mobile-full">
-                        <h4>Amount</h4>
-                        <input name="amount" type="number" title="Number of licenses to transfer">
+                        <h4>{{_ "reclaim.input.amount.title"}}</h4>
+                        <input name="amount" type="number" title="{{_ "reclaim.input.amount.description"}}">
                         <div class="lob-error-message" data-for="amount"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
@@ -42,14 +42,14 @@
                 <hr>
                 <div class="row clear">
                     <div class="col col-4 mobile-full">
-                        <h4>Gas</h4>
+                        <h4>{{_ "generic.input.gas.title"}}</h4>
                         {{> dapp_selectGasPrice gas=gasEstimate gasPrice=gasPrice unit="ether"}}
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>
                 <hr>
                 <button class="dapp-block-button" id="reclaim">
-                    Reclaim
+                    {{_ "reclaim.button.reclaim"}}
                 </button>
             </form>
         </main>
@@ -57,9 +57,9 @@
 </template>
 
 <template name="reclaimIssuanceOption">
-    <option value="{{issuanceLocation}}" {{preselected}}>{{description}} – {{balance}} Licenses</option>
+    <option value="{{issuanceLocation}}" {{preselected}}>{{description}} – {{balance}} {{_ "generic.license" count=balance}}</option>
 </template>
 
 <template name="reclaimOriginOption">
-    <option value="{{address}}">{{address}} – {{reclaimableBalance}} Licenses</option>
+    <option value="{{address}}">{{address}} – {{reclaimableBalance}} {{_ "generic.license" count=reclaimableBalance}}</option>
 </template>

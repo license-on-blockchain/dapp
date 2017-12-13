@@ -1,7 +1,7 @@
 <template name="managedLicenseContractList">
     <div class="dapp-flex-content">
         <main class="dapp-content">
-            <h1><strong>License contracts</strong> managed by you</h1>
+            <h1>{{{_ "managedLicenseContractList.title"}}}</h1>
             <table class="dapp-zebra">
                 <tbody>
                 {{#each licenseContracts}}
@@ -9,7 +9,7 @@
                 {{/each}}
                 </tbody>
             </table>
-            <a href="/licensecontracts/create">Create new license contract</a>
+            {{{_ "managedLicenseContractList.createContractLink"}}}
         </main>
     </div>
 </template>
@@ -21,7 +21,7 @@
         </td>
         <td>
             {{#if showSignButton}}
-                <a href="/licensecontracts/sign/{{address}}"><i class="icon-pencil"></i> Sign</a>
+                <a href="/licensecontracts/sign/{{address}}"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.sign"}}</a>
             {{/if}}
         </td>
     </tr>

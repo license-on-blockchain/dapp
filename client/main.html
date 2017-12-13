@@ -9,26 +9,26 @@
             <li>
                 <a href="/licenses" class="{{ activeIfCurrentRoute 'licenses' }}">
                     <i class="icon-docs"></i>
-                    <span>Licenses</span>
+                    <span>{{_ "tab.title.licenses"}}</span>
                 </a>
             </li>
             <li>
                 <a href="/transfer" class="{{ activeIfCurrentRoute 'transfer' }}">
                     <i class="icon-arrow-up"></i>
-                    <span>Transfer</span>
+                    <span>{{_ "tab.title.transfer"}}</span>
                 </a>
             </li>
             {{#if enableInstallation}}
                 <li>
                     <a href="/transferreclaim" class="{{ activeIfCurrentRoute 'transferreclaim' }}">
                         <i class="icon-link"></i>
-                        <span>Install</span>
+                        <span>{{_ "tab.title.install"}}</span>
                     </a>
                 </li>
                 <li>
                     <a href="/reclaim" class="{{ activeIfCurrentRoute 'reclaim' }}">
                         <i class="icon-arrow-down"></i>
-                        <span>Reclaim</span>
+                        <span>{{_ "tab.title.reclaim"}}</span>
                     </a>
                 </li>
             {{/if}}
@@ -36,7 +36,7 @@
             <li>
                 <a href="/settings" class="{{ activeIfCurrentRoute 'settings' }}">
                     <i class="icon-settings"></i>
-                    <span>Settings</span>
+                    <span>{{_ "tab.title.settings"}}</span>
                 </a>
             </li>
         </ul>
@@ -48,6 +48,6 @@
 
 <!-- footer -->
 <footer class="dapp-footer">
-    © 2017 LOB, Alex Hoppen
+    {{_ "footer.copyright"}}
 </footer>
 </body>

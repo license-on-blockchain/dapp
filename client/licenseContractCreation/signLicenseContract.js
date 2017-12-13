@@ -26,8 +26,7 @@ function computeSignature(signingMethod, manualSignature, privateKey, certificat
             const reencoedSignature = forge.util.bytesToHex(binSignature);
             if (reencoedSignature !== manualSignature) {
                 // If reencoding the signature does not give the same result, the signature is not valid hex
-                // TODO: i18n
-                throw 'Signature is not in hex';
+                throw TAPi18n.__("signLicenseContract.error.signature_not_in_hex");
             }
             return forge.util.hexToBytes(manualSignature);
         case 'privateKey':
@@ -124,13 +123,11 @@ function validate(errorOnEmpty = false) {
     switch (signMethod) {
         case 'manual':
             fieldToValidate = 'manualSignature';
-            // TODO: i18n
-            noErrors &= validateField('manualSignature', manualSignature, errorOnEmpty, "Signature must not be empty");
+            noErrors &= validateField('manualSignature', manualSignature, errorOnEmpty, TAPi18n.__('signLicenseContract.error.signature_empty'));
             break;
         case 'privateKey':
             fieldToValidate = 'privateKey';
-            // TODO: i18n
-            noErrors &= validateField('privateKey', privateKey, errorOnEmpty, "Private key must not be empty");
+            noErrors &= validateField('privateKey', privateKey, errorOnEmpty, TAPi18n.__('signLicenseContract.error.privateKey_empty'));
             break;
         default:
             console.error("Unknown signing method: " + signMethod);
@@ -145,16 +142,14 @@ function validate(errorOnEmpty = false) {
         const certificateText = this.selectedLicenseContract.get().certificateText.get();
 
         if (sslCertificate && certificateText) {
-            // TODO: i18n
             noErrors &= validateField(fieldToValidate, () => {
                 const certificateChain = new CertificateChain(sslCertificate);
                 const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
                 return verifySignature(signature, certificateText, certificateChain);
-            }, true, "Signature is not valid");
+            }, true, TAPi18n.__('signLicenseContract.error.signature_not_valid'));
         } else {
-            // TODO: i18n
-            noErrors &= validateField('manualSignature', false, errorOnEmpty, "Data necessary to verify the signature not loaded from the blockchain yet. Please wait a moment and try again.");
-            noErrors &= validateField('privateKey', false, errorOnEmpty, "Data necessary to generate the signature not loaded from the blockchain yet. Please wait a moment and try again.");
+            noErrors &= validateField('manualSignature', false, errorOnEmpty, TAPi18n.__('signLicenseContract.error.signature_verification_data_not_loaded_yet'));
+            noErrors &= validateField('privateKey', false, errorOnEmpty, TAPi18n.__('signLicenseContract.error.privateKey_verification_data_not_loaded_yet'));
         }
     }
 

@@ -2,11 +2,11 @@
     <div class="dapp-flex-content">
         <main class="dapp-content">
             <form id="form-signLicenseContract">
-                <h1><strong>Sign</strong> license contract</h1>
+                <h1>{{{_ "signLicenseContract.title"}}}</h1>
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
-                        <h4>License contract</h4>
-                        <select name="licenseContract">
+                        <h4>{{_ "signLicenseContract.inputs.licenseContract.title"}}</h4>
+                        <select name="licenseContract" title="{{_ "signLicenseContract.inputs.licenseContract.description"}}">
                             {{#each licenseContracts}}
                                 {{> licenseContractOption}}
                             {{/each}}
@@ -15,24 +15,24 @@
                     <div class="dapp-clear-fix"></div>
                 </div>
                 {{#if alreadySigned}}
-                    <h3>This license contract has already been signed.</h3>
+                    <h3>{{_ "signLicenseContract.error.alreadySigned"}}</h3>
                 {{else}}
                     <div class="row clear">
                         <div class="col col-12 mobile-full">
                             <div class="dapp-segmented-control dapp-small">
                                 <input type="radio" value="privateKey" id="privateKey" name="signMethod" checked>
-                                <label for="privateKey">Sign using private key</label>
+                                <label for="privateKey">{{_ "signLicenseContract.signMethod.privateKey"}}</label>
 
                                 <input type="radio" value="manual" id="manual" name="signMethod">
-                                <label for="manual">Manually generate signature</label>
+                                <label for="manual">{{_ "signLicenseContract.signMethod.manual"}}</label>
                             </div>
                             {{#if manualSignature}}
-                                <h4>Signature</h4>
-                                <textarea name="manualSignature"></textarea>
+                                <h4>{{_ "signLicenseContract.input.manualSignature.title"}}</h4>
+                                <textarea name="manualSignature" title="{{_ "signLicenseContract.input.manualSignature.description"}}"></textarea>
                                 <div class="lob-error-message" data-for="manualSignature"></div>
                             {{else}}
-                                <h4>Private SSL key</h4>
-                                <textarea name="privateKey"></textarea>
+                                <h4>{{_ "signLicenseContract.input.privateKey.title"}}</h4>
+                                <textarea name="privateKey" title="{{_ "signLicenseContract.input.privateKey.description"}}"></textarea>
                                 <div class="lob-error-message" data-for="privateKey"></div>
                             {{/if}}
                         </div>
@@ -40,14 +40,14 @@
                     </div>
                     <div class="row clear">
                         <div class="col col-4 mobile-full">
-                            <h4>Gas</h4>
+                            <h4>{{_ "generic.input.gas.title"}}</h4>
                             {{> dapp_selectGasPrice gas=gasEstimate gasPrice=gasPrice unit="ether"}}
                         </div>
                         <div class="dapp-clear-fix"></div>
                     </div>
                     <hr>
                     <button class="dapp-block-button" id="sign">
-                        Sign
+                        {{_ "signLicenseContract.button.sign"}}
                     </button>
                 {{/if}}
             </form>

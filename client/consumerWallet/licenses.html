@@ -1,7 +1,7 @@
 <template name="licenses">
     <div class="dapp-flex-content">
         <main class="dapp-content">
-            <h1><strong>Licenses</strong></h1>
+            <h1>{{{_ "licenses.title"}}}</h1>
             <table class="dapp-zebra">
                 <tbody>
                 {{#each licenses}}
@@ -10,7 +10,7 @@
                 </tbody>
             </table>
             {{#if revokedLicenses}}
-                <h2>Revoked licenses</h2>
+                <h2>{{_ "licenses.heading.revokedLicenses"}}</h2>
                 <table class="dapp-zebra">
                     <tbody>
                     {{#each revokedLicenses}}
@@ -27,9 +27,9 @@
     <tr>
         <td><strong>{{description}}</strong></td>
         <td>
-            <span title="Licenses owned by you">{{balance}}</span>
+            <span title="{{_ "licenses.hover.ownedBalance"}}">{{balance}}</span>
             {{#if borrowedBalance}}
-                <span title="Licenses given to you that may be reclaimed by the original owner">
+                <span title="{{_ "licenses.hover.borrowedBalance"}}">
                 (+{{borrowedBalance}})
                 </span>
             {{/if}}
@@ -37,10 +37,10 @@
         {{#if revoked}}
             <td></td>
         {{else}}
-            <td><a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> Transfer</a></td>
+            <td><a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> {{_ "licenses.button.transfer"}}</a></td>
         {{/if}}
-        <td><a class="showCertificate" href="#"><i class="icon-doc"></i> Certificate</a></td>
-        <td><a class="showHistory" href="#"><i class="icon-graph"></i> History</a></td>
+        <td><a class="showCertificate" href="#"><i class="icon-doc"></i> {{_ "licenses.button.certificate"}}</a></td>
+        <td><a class="showHistory" href="#"><i class="icon-graph"></i> {{_ "licenses.button.history"}}</a></td>
     </tr>
 </template>
 
@@ -52,30 +52,30 @@
             {{/each}}
         </p>
 
-        <p><i>Diese Erklärung wurde mit SSL-Zertifikat {{sslCertificate}} unterzeichnet.</i></p>
+        <p><i>{{_ "licenseCertificate.certificate_signed" sslCertificate}}</i></p>
         <hr>
         <p>
-            Soft&Cloud hat unter diesem LOB-License-Contract folgende Software-Lizenz bescheinigt:
+            {{_ "licenseCertificate.licenseInfo.intro" issuerName}}
         </p>
         <table class="dapp-zebra">
             <tbody>
             <tr>
-                <td>Lizenztyp</td><td><strong>{{licenseDescription}}</strong></td>
+                <td>{{_ "licenseCertificate.licenseInfo.description"}}</td><td><strong>{{licenseDescription}}</strong></td>
             </tr>
             <tr>
-                <td>Lizenzcode</td><td><strong>{{licenseCode}}</strong></td>
+                <td>{{_ "licenseCertificate.licenseInfo.code"}}</td><td><strong>{{licenseCode}}</strong></td>
             </tr>
             <tr>
-                <td>Anzahl</td><td><strong>{{originalSupply}}</strong></td>
+                <td>{{_ "licenseCertificate.licenseInfo.amount"}}</td><td><strong>{{originalSupply}}</strong></td>
             </tr>
             <tr>
-                <td>Zeitpunkt der Bescheinigung</td><td><strong>{{auditTime}}</strong></td>
+                <td>{{_ "licenseCertificate.licenseInfo.auditTime"}}</td><td><strong>{{auditTime}}</strong></td>
             </tr>
             <tr>
-                <td>Empfänger der Bescheinigung</td><td><strong>{{originalOwner}}</strong></td>
+                <td>{{_ "licenseCertificate.licenseInfo.originalOwner"}}</td><td><strong>{{originalOwner}}</strong></td>
             </tr>
             <tr>
-                <td>Bescheinigungs-ID</td><td><strong>{{issuanceID}}</strong></td>
+                <td>{{_ "licenseCertificate.licenseInfo.issuanceID"}}</td><td><strong>{{issuanceID}}</strong></td>
             </tr>
             </tbody>
         </table>
@@ -84,33 +84,33 @@
         <table class="dapp-zebra">
             <tbody>
             <tr>
-                <td>Zertifikat gültig</td><td><strong>{{certificateValid}}</strong></td>
+                <td>{{_ "licenseCertificate.certificateCheck.certificateValid"}}</td><td><strong>{{certificateValid}}</strong></td>
             </tr>
             <tr>
-                <td>Signatur gültig</td><td><strong>{{signatureValid}}</strong></td>
+                <td>{{_ "licenseCertificate.certificateCheck.signatureValid"}}</td><td><strong>{{signatureValid}}</strong></td>
             </tr>
             <tr>
-                <td>Zertifikat ausgestellt für</td><td><strong>{{leafCertificateCommonName}}</strong></td>
+                <td>{{_ "licenseCertificate.certificateCheck.leafCertificateCommonName"}}</td><td><strong>{{leafCertificateCommonName}}</strong></td>
             </tr>
             <tr>
-                <td>Zertifikataussteller</td><td><strong>{{rootCertificateCommonName}}</strong></td>
+                <td>{{_ "licenseCertificate.certificateCheck.certificateIssuer"}}</td><td><strong>{{rootCertificateCommonName}}</strong></td>
             </tr>
             </tbody>
         </table>
         {{#if auditRemark}}
-            <p><i>Vermerk aus dem Lizenzaudit:</i> {{auditRemark}}</p>
+            <p><i>{{_ "licenseCertificate.auditRemarkIntro"}}</i> {{auditRemark}}</p>
         {{/if}}
         <hr>
         <p>{{transferDescription}}</p>
     </div>
     <div class="dapp-modal-buttons">
-        <button class="dapp-primary-button hideModal">OK</button>
+        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
     </div>
 </template>
 
 <template name="licenseHistory">
     <canvas id="graphContainer"></canvas>
     <div class="dapp-modal-buttons">
-        <button class="dapp-primary-button hideModal">OK</button>
+        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
     </div>
 </template>
