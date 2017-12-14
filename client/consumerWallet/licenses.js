@@ -165,7 +165,8 @@ Template.licenseCertificate.helpers({
         return Template.instance().certificateText.get().split('\n');
     },
     sslCertificate() {
-        return Template.instance().issuance.sslCertificate.get();
+        const certificateChain = new CertificateChain(Template.instance().issuance.sslCertificate.get());
+        return certificateChain.getLeafCertificatePublicKeyFingerprint();
     },
     issuanceID() {
         return Template.instance().data.issuanceLocation.issuanceID;
