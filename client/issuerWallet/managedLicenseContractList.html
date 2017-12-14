@@ -20,7 +20,9 @@
             <strong>{{address}}</strong>
         </td>
         <td>
-            {{#if showSignButton}}
+            {{#if signed}}
+                <a href="/licensecontracts/issue/{{address}}"><i class="icon-plus"></i> {{_ "managedLicenseContractList.button.issue"}}</a>
+            {{else}}
                 <a href="/licensecontracts/sign/{{address}}"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.sign"}}</a>
             {{/if}}
         </td>

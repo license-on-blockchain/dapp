@@ -160,7 +160,8 @@
   "managedLicenseContractList": {
     "title": "<strong>License contracts</strong> managed by you",
     "button": {
-      "sign": "Sign"
+      "sign": "Sign",
+      "issue": "Issue"
     },
     "createContractLink": "<a href='/licensecontracts/create'>Create</a> new license contract"
   },
@@ -235,6 +236,66 @@
       "signature_not_valid": "Signature is not valid",
       "signature_verification_data_not_loaded_yet": "Data necessary to verify the signature not loaded from the blockchain yet. Please wait a moment and try again.",
       "privateKey_verification_data_not_loaded_yet": "Data necessary to generate the signature not loaded from the blockchain yet. Please wait a moment and try again."
+    }
+  },
+  "issueLicense": {
+    "title": "<strong>Issue</strong> new license",
+    "input": {
+      "licenseContract": {
+        "title": "License Contract",
+        "description": "Choose the license contract under which to issue the license"
+      },
+      "licenseTemplate": {
+        "title": "Template",
+        "description": "If you are issuing one of the licenses in this list, use the well-known code and description"
+      },
+      "code": {
+        "title": "Code",
+        "description": "A unique code for the type of license to be issued"
+      },
+      "description": {
+        "title": "Description",
+        "description": "A human readable description of the license to be issued"
+      },
+      "amount": {
+        "title": "Amount",
+        "description": "Number of licenses to be issued"
+      },
+      "auditTime": {
+        "title": "Audit date",
+        "description": "The date at which you performed the license audit"
+      },
+      "auditRemark": {
+        "title": "Audit remark",
+        "description": "A free text remark you want to add regarding the audit"
+      },
+      "initialOwnerAddress": {
+        "title": "Initial owner address",
+        "description": "The Ethereum address of the initial owner of the licenses"
+      },
+      "initialOwnerName": {
+        "title": "Initial owner name",
+        "description": "The name of the initial owner of the licenses"
+      },
+      "fee": {
+        "title": "Issuance fee",
+        "description": "The fee that will be paid to LOB for issuing the license"
+      }
+    },
+    "button": {
+      "issueLicense": "Issue License"
+    },
+    "error": {
+      "licenseContract_not_valid": "You have not selected a license contract",
+      "code_empty": "Please enter a code for the license type",
+      "description_empty": "Please enter a description of the license type",
+      "amount_empty": "Please specify how many licenses to issue",
+      "amount_zero": "You need to issue at least one license",
+      "auditTime_empty": "You need to specify when you performed the audit",
+      "auditTime_in_future": "The audit cannot be in the future since it has to already been performed",
+      "initialOwnerAddress_not_valid": "This is not a valid Ethereum address",
+      "initialOwnerName_empty": "Please specify the name of the person or organisation that will initally receive the licenses",
+      "fee_not_fetched": "The issuance fee has not been fetched from the blockchain yet. Please wait a moment for the value to update and try again"
     }
   }
 }

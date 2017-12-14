@@ -15,10 +15,13 @@
   padding-right: 80px;
 }
 
-form#form-transfer, form#form-createLicenseContract, form#form-signLicenseContract {
-  input[type=text], input[type=number], select, .dapp-address-input, .dapp-select-gas-price, textarea {
+form#form-transfer, form#form-createLicenseContract, form#form-signLicenseContract, form#form-issueLicense {
+  input[type=text], input[type=number], input[type=date], input[type=datetime-local], select, .dapp-address-input, .dapp-select-gas-price, textarea {
     width: 100%;
     height: @gridHeight*2;
+  }
+  input[readonly] {
+    color: @colorGrayDark;
   }
   textarea {
     height: @gridHeight*4;
@@ -81,4 +84,12 @@ h4 {
 
 .lob-error-message {
   height: 1em;
+}
+
+.issueLicenseFee {
+  font-size: 2em;
+  > span {
+    font-size: 0.6em;
+    text-transform: uppercase;
+  }
 }

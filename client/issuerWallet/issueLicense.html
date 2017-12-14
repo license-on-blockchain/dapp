@@ -1,0 +1,101 @@
+<template name="issueLicense">
+    <div class="dapp-flex-content">
+        <main class="dapp-content">
+            <h1>{{{_ "issueLicense.title"}}}</h1>
+            <form id="form-issueLicense">
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "issueLicense.input.licenseContract.title"}}</h4>
+                        <select name="licenseContract" title="{{_ "issueLicense.input.licenseContract.description"}}">
+                            {{#each licenseContracts}}
+                                {{> licenseContractOption}}
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "issueLicense.input.licenseTemplate.title"}}</h4>
+                        <select name="licenseTemplate" title="{{_ "issueLicense.input.licenseTemplate.description"}}">
+                            <option value="">Custom</option>
+                            {{#each licenseTemplates}}
+                                <optgroup label="{{name}}">
+                                    {{#each templates}}
+                                        {{> licenseTemplateOption}}
+                                    {{/each}}
+                                </optgroup>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "issueLicense.input.code.title"}}</h4>
+                        <input type="text" name="code" value="{{templateLicenseCode}}" {{codeAndDescriptionReadonly}} title="{{_ "issueLicense.input.code.description"}}">
+                        <div class="lob-error-message" data-for="code"></div>
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "issueLicense.input.description.title"}}</h4>
+                        <input type="text" name="description" value="{{templateLicenseDescription}}" {{codeAndDescriptionReadonly}} title="{{_ "issueLicense.input.description.description"}}">
+                        <div class="lob-error-message" data-for="description"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "issueLicense.input.amount.title"}}</h4>
+                        <input type="number" name="amount" title="{{_ "issueLicense.input.amount.description"}}">
+                        <div class="lob-error-message" data-for="amount"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "issueLicense.input.auditTime.title"}}</h4>
+                        <input type="datetime-local" name="auditTime" title="{{_ "issueLicense.input.auditTime.description"}}">
+                        <div class="lob-error-message" data-for="auditTime"></div>
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "issueLicense.input.auditRemark.title"}}</h4>
+                        <textarea name="auditRemark" title="{{_ "issueLicense.input.auditRemark.description"}}"></textarea>
+                        <div class="lob-error-message" data-for="auditRemark"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "issueLicense.input.initialOwnerAddress.title"}}</h4>
+                        {{> dapp_addressInput placeholder="0x000000.." name="initialOwnerAddress"}}
+                        <div class="lob-error-message" data-for="initialOwnerAddress"></div>
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "issueLicense.input.initialOwnerName.title"}}</h4>
+                        <input type="text" name="initialOwnerName" title="{{_ "issueLicense.input.initialOwnerName.description"}}">
+                        <div class="lob-error-message" data-for="initialOwnerName"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-4 mobile-full">
+                        <h4>{{_ "generic.input.gas.title"}}</h4>
+                        {{> dapp_selectGasPrice gas=gasEstimate gasPrice=gasPrice unit="ether"}}
+                    </div>
+                    <div class="col col-2">
+                        &nbsp;
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "issueLicense.input.fee.title"}}</h4>
+                        <span class="issueLicenseFee">{{fee}} <span>Ether</span></span>
+                        <div class="lob-error-message" data-for="fee"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <hr>
+                <button class="dapp-block-button" id="issueLicense">{{_ "issueLicense.button.issueLicense"}}</button>
+            </form>
+        </main>
+    </div>
+</template>
+
+<template name="licenseTemplateOption">
+    <option value="{{code}}">{{description}}</option>
+</template>

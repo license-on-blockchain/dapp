@@ -174,9 +174,9 @@ Template.signLicenseContract.onRendered(function() {
     Tracker.autorun(() => {
         let licenseContracts = lob.getManagedLicenseContracts(lob.accounts.get());
         // Don't show license contracts that are already signed
-        // licenseContracts = licenseContracts.filter((licenseContract) => !licenseContract.signature.get());
+        licenseContracts = licenseContracts.filter((licenseContract) => !licenseContract.signature.get());
         this.licenseContracts.set(licenseContracts);
-        setTimeout(() => this.onFormUpdate, 0);
+        setTimeout(() => this.onFormUpdate(), 0);
     });
 
     this.onFormUpdate();

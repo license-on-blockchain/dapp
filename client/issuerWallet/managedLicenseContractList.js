@@ -10,7 +10,7 @@ Template.licenseContractRow.helpers({
     address() {
         return this.address;
     },
-    showSignButton() {
-        return !this.signature.get();
+    signed() {
+        return this.signature.get();
     }
 });
