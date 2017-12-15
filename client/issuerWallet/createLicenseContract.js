@@ -21,7 +21,7 @@ function getValues() {
 function onFormUpdate() {
     const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate} = Template.instance().getValues();
 
-    lob.estimateGasCreateLicenseContract(rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, (error, gasConsumption) => {
+    lob.licenseIssuing.estimateGas.createLicenseContract(rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, (error, gasConsumption) => {
         if (error) { handleUnknownEthereumError(error); return; }
         this.estimatedGasConsumption.set(gasConsumption);
     });
@@ -89,7 +89,7 @@ Template.createLicenseContract.events({
 
         const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, gasPrice, certificate} = Template.instance().getValues();
 
-        lob.createLicenseContract(rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, gasPrice, (error) => {
+        lob.licenseIssuing.createLicenseContract(rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, gasPrice, (error) => {
             if (error) {
                 NotificationCenter.showError(error);
                 return;

@@ -99,7 +99,7 @@ function onFormUpdate() {
 
     try {
         const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
-        lob.estimateGasSignLicenseContract(licenseContractAddress, signature, selectedLicenseContract.issuerAddress, (error, gasConsumpution) => {
+        lob.licenseIssuing.estimateGas.signLicenseContract(licenseContractAddress, signature, selectedLicenseContract.issuerAddress, (error, gasConsumpution) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(gasConsumpution);
         });
@@ -239,7 +239,7 @@ Template.signLicenseContract.events({
         const binSignature = computeSignature(signMethod, manualSignature, privateKey, selectedLicenseContract.certificateText.get());
         const from = selectedLicenseContract.issuerAddress;
 
-        lob.signLicenseContract(licenseContractAddress, binSignature, from, gasPrice, (error) => {
+        lob.licenseIssuing.signLicenseContract(licenseContractAddress, binSignature, from, gasPrice, (error) => {
             if (error) {
                 NotificationCenter.showError(error);
                 return;

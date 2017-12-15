@@ -36,7 +36,7 @@ function onFormUpdate() {
         const auditTimestamp = (auditTime || new Date()).getTime() / 1000;
         const from = selectedLicenseContract.issuerAddress;
         const fee = selectedLicenseContract.fee.get();
-        lob.estimateGasIssueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, fee, (error, value) => {
+        lob.licenseIssuing.estimateGas.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, fee, (error, value) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(value);
         });
@@ -173,7 +173,7 @@ Template.issueLicense.events({
         const from = selectedLicenseContract.issuerAddress;
         const fee = selectedLicenseContract.fee.get();
 
-        lob.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, fee, gasPrice, (error) => {
+        lob.licenseIssuing.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, fee, gasPrice, (error) => {
             if (error) {
                 NotificationCenter.showError(error);
                 return;
