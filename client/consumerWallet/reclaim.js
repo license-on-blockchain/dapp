@@ -18,7 +18,7 @@ function onFormUpdate() {
     this.selectedIssuanceLocation.set(issuanceLocation);
 
     if (issuanceLocation) {
-        lob.estimateGasReclaim(issuanceLocation, reclaimer, from, amount, (error, gasEstimate) => {
+        lob.transfer.estimateGas.reclaim(issuanceLocation, reclaimer, from, amount, (error, gasEstimate) => {
             this.estimatedGasConsumption.set(gasEstimate);
         });
     }
@@ -38,7 +38,8 @@ function validate(errorOnEmpty = false) {
     noErrors &= validateField('issuance', issuanceLocation, errorOnEmpty, TAPi18n.__('reclaim.error.no_license_selected'));
     noErrors &= validateField('from', web3.isAddress(from), errorOnEmpty && from, TAPi18n.__("reclaim.error.from_not_valid"));
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__("reclaim.error.amount_not_specified"));
-    noErrors &= validateField('amount', amount <= lob.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from).get(), amount, TAPi18n.__("reclaim.error.amount_less_than_balance", lob.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from).get()));
+    const reclaimableBalance = lob.balances.getOpenReclaims(reclaimer).getReclaimableBalanceFrom(issuanceLocation, from);
+    noErrors &= validateField('amount', amount <= reclaimableBalance, amount, TAPi18n.__("reclaim.error.amount_less_than_balance", reclaimableBalance));
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__("reclaim.error.amount_zero"));
 
     return noErrors;
@@ -71,7 +72,7 @@ Template.reclaim.onRendered(function() {
         if (!selectedReclaimer || !selectedIssuanceLocation) {
             newReclaimOrigins = [];
         } else {
-            newReclaimOrigins = lob.getReclaimOrigins(selectedIssuanceLocation, selectedReclaimer)
+            newReclaimOrigins = lob.balances.getOpenReclaims(selectedReclaimer).getReclaimOrigins(selectedIssuanceLocation)
                 .map((address) => {
                     return {
                         issuanceLocation: selectedIssuanceLocation,
@@ -80,7 +81,7 @@ Template.reclaim.onRendered(function() {
                     }
                 })
                 .filter((obj) => {
-                    return lob.getReclaimableBalanceFrom(obj.issuanceLocation, obj.reclaimer, obj.currentOwner).get() > 0;
+                    return lob.balances.getOpenReclaims(obj.reclaimer).getReclaimableBalanceFrom(obj.issuanceLocation, obj.currentOwner) > 0;
                 });
         }
         this.reclaimOrigins.set(newReclaimOrigins);
@@ -89,7 +90,15 @@ Template.reclaim.onRendered(function() {
     });
 
     Tracker.autorun(() => {
-        const issuanceLocations = Array.from(lob.getIssuanceLocationsForWhichReclaimsArePossible(lob.accounts.get()))
+        const issuanceLocationsSet = new Set();
+
+        for (const address of lob.accounts.get()) {
+            const merge = lob.balances.getOpenReclaims(address).getReclaimableIssuanceLocations();
+            for (const issuanceLocation of merge) {
+                issuanceLocationsSet.add(issuanceLocation);
+            }
+        }
+        const issuanceLocations = Array.from(issuanceLocationsSet)
             .map((issuanceLocation) => {
                 return {
                     issuanceLocation,
@@ -98,7 +107,7 @@ Template.reclaim.onRendered(function() {
                 }
             })
             .filter((obj) => {
-                return lob.getReclaimableBalance(obj.issuanceLocation, this.selectedReclaimer.get()) > 0;
+                return lob.balances.getOpenReclaims(this.selectedReclaimer.get()).getReclaimableBalance(obj.issuanceLocation) > 0;
             });
         this.issuanceLocations.set(issuanceLocations);
 
@@ -139,7 +148,7 @@ Template.reclaim.events({
 
         const {reclaimer, from, issuanceLocation, amount, gasPrice} = Template.instance().getValues();
 
-        lob.reclaim(issuanceLocation, reclaimer, from, amount, gasPrice, (error) => {
+        lob.transfer.reclaim(issuanceLocation, reclaimer, from, amount, gasPrice, (error) => {
             if (error) {
                 NotificationCenter.showError(error);
                 return;
@@ -160,13 +169,17 @@ Template.reclaimIssuanceOption.helpers({
         return this.metadata.description.get();
     },
     balance() {
-        return lob.getReclaimableBalance(this.issuanceLocation, lob.accounts.get());
+        let balance = 0;
+        for (const account of lob.accounts.get()) {
+            balance += lob.balances.getOpenReclaims(account).getReclaimableBalance(this.issuanceLocation);
+        }
+        return balance;
     },
 });
 
 Template.reclaimOriginOption.helpers({
     reclaimableBalance() {
-        return lob.getReclaimableBalanceFrom(this.issuanceLocation, this.reclaimer, this.currentOwner).get();
+        return lob.balances.getOpenReclaims(this.reclaimer).getReclaimableBalanceFrom(this.issuanceLocation, this.currentOwner);
     },
     address() {
         return this.currentOwner;

@@ -26,12 +26,12 @@ function onFormUpdate() {
     const {sender, recipient, amount, issuanceLocation} = this.getValues();
 
     if (this.data && this.data.allowReclaim) {
-        lob.estimateGasTransferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, (error, value) => {
+        lob.transfer.estimateGas.transferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, (error, value) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(value);
         });
     } else {
-        lob.estimateGasTransferLicense(issuanceLocation, sender, recipient, amount, (error, value) => {
+        lob.transfer.estimateGas.transferLicense(issuanceLocation, sender, recipient, amount, (error, value) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(value);
         });
@@ -57,7 +57,7 @@ function validate(errorOnEmpty = false) {
     noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'));
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'));
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('transfer.error.amount_zero'));
-    noErrors &= validateField('amount', amount <= lob.getBalances(issuanceLocation).getOwnedBalance(sender).toNumber(), amount, TAPi18n.__('transfer.error.amount_less_than_balance'));
+    noErrors &= validateField('amount', amount <= lob.balances.getBalanceForIssuanceLocation(issuanceLocation).getOwnedBalance(sender).toNumber(), amount, TAPi18n.__('transfer.error.amount_less_than_balance'));
 
     return noErrors;
 }
@@ -97,7 +97,7 @@ Template.transfer.helpers({
                 return {
                     issuanceLocation,
                     metadata: lob.getIssuanceMetadata(issuanceLocation),
-                    balance: lob.getBalances(issuanceLocation),
+                    balance: lob.balances.getBalanceForIssuanceLocation(issuanceLocation),
                     selected: (issuanceLocation.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceLocation.issuanceID === selectedIssuanceID),
                 }
             })
@@ -127,7 +127,7 @@ Template.transfer.events({
         const {sender, issuanceLocation, recipient, amount, gasPrice} = Template.instance().getValues();
 
         if (Template.instance().data && Template.instance().data.allowReclaim) {
-            lob.transferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, gasPrice, (error) => {
+            lob.transfer.transferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, gasPrice, (error) => {
                 if (error) {
                     NotificationCenter.showError(error);
                     return;
@@ -135,7 +135,7 @@ Template.transfer.events({
                 NotificationCenter.showTransactionSubmitted();
             });
         } else {
-            lob.transferLicense(issuanceLocation, sender, recipient, amount, gasPrice, (error) => {
+            lob.transfer.transferLicense(issuanceLocation, sender, recipient, amount, gasPrice, (error) => {
                 if (error) {
                     NotificationCenter.showError(error);
                     return;
