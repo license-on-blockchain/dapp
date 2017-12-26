@@ -102,7 +102,7 @@ Template.reclaim.onRendered(function() {
             .map((issuanceLocation) => {
                 return {
                     issuanceLocation,
-                    metadata: lob.getIssuanceMetadata(issuanceLocation),
+                    metadata: lob.issuances.getIssuance(issuanceLocation),
                     selected: false,
                 }
             })

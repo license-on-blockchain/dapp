@@ -9,7 +9,7 @@ function getLicenseRows(revoked) {
             return {
                 issuanceLocation: issuanceLocation,
                 balance: lob.balances.getBalanceForIssuanceLocation(issuanceLocation),
-                metadata: lob.getIssuanceMetadata(issuanceLocation)
+                metadata: lob.issuances.getIssuance(issuanceLocation)
             };
         })
         .filter((obj) => obj.metadata.revoked && (obj.metadata.revoked.get() === revoked))
@@ -140,7 +140,7 @@ Template.licenseCertificate.onCreated(function() {
         }
     });
 
-    this.issuance = lob.getIssuanceMetadata(issuanceLocation);
+    this.issuance = lob.issuances.getIssuance(issuanceLocation);
 
     this.transferDescription = new ReactiveVar("…");
     lob.balances.getLicenseTransfers(issuanceLocation, (error, transfers) => {
@@ -237,7 +237,7 @@ Template.licenseHistory.onRendered(function() {
         const issuanceLocation = this.data.issuanceLocation;
         const canvas = Template.instance().find('#graphContainer');
 
-        const issuance = lob.getIssuanceMetadata(issuanceLocation);
+        const issuance = lob.issuances.getIssuance(issuanceLocation);
 
         lob.balances.getLicenseTransfers(issuanceLocation, (error, transfers) => {
             if (error) { handleUnknownEthereumError(error); return; }

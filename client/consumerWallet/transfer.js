@@ -96,7 +96,7 @@ Template.transfer.helpers({
             .map((issuanceLocation) => {
                 return {
                     issuanceLocation,
-                    metadata: lob.getIssuanceMetadata(issuanceLocation),
+                    metadata: lob.issuances.getIssuance(issuanceLocation),
                     balance: lob.balances.getBalanceForIssuanceLocation(issuanceLocation),
                     selected: (issuanceLocation.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceLocation.issuanceID === selectedIssuanceID),
                 }
