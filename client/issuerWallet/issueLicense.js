@@ -34,7 +34,7 @@ function onFormUpdate() {
 
     if (selectedLicenseContract) {
         const auditTimestamp = (auditTime || new Date()).getTime() / 1000;
-        const from = selectedLicenseContract.issuerAddress;
+        const from = selectedLicenseContract.issuerAddress.get();
         const fee = selectedLicenseContract.fee.get();
         lob.licenseIssuing.estimateGas.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, fee, (error, value) => {
             if (error) { handleUnknownEthereumError(error); return; }
@@ -83,7 +83,7 @@ Template.issueLicense.onCreated(function() {
 
 Template.issueLicense.onRendered(function() {
     Tracker.autorun(() => {
-        let licenseContracts = lob.getManagedLicenseContracts(lob.accounts.get());
+        let licenseContracts = lob.licenseContracts.getManagedLicenseContracts(lob.accounts.get());
         // Don't show license contracts that are not signed yet
         licenseContracts = licenseContracts.filter((licenseContract) => licenseContract.signature.get());
         this.licenseContracts.set(licenseContracts);
@@ -170,7 +170,7 @@ Template.issueLicense.events({
 
         const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
         const auditTimestamp = (auditTime || new Date()).getTime() / 1000;
-        const from = selectedLicenseContract.issuerAddress;
+        const from = selectedLicenseContract.issuerAddress.get();
         const fee = selectedLicenseContract.fee.get();
 
         lob.licenseIssuing.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, fee, gasPrice, (error) => {

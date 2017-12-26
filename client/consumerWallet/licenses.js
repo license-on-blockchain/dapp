@@ -133,9 +133,11 @@ Template.licenseCertificate.onCreated(function() {
     const licenseContractAddress = issuanceLocation.licenseContractAddress;
 
     this.certificateText = new ReactiveVar(TAPi18n.__("generic.loading"));
-    lob.getCertificateText(licenseContractAddress, (error, value) => {
-        if (error) { handleUnknownEthereumError(error); return; }
-        this.certificateText.set(value);
+    Tracker.autorun(() => {
+        const certificateText = lob.licenseContracts.getLicenseContract(licenseContractAddress).certificateText.get();
+        if (certificateText) {
+            this.certificateText.set(certificateText);
+        }
     });
 
     this.issuance = lob.getIssuanceMetadata(issuanceLocation);
@@ -148,7 +150,7 @@ Template.licenseCertificate.onCreated(function() {
 
     this.certificateChain = new ReactiveVar(null);
     Tracker.autorun(() => {
-        const sslCertificate = this.issuance.sslCertificate.get();
+        const sslCertificate = this.issuance.licenseContract.sslCertificate.get();
         if (sslCertificate) {
             try {
                 this.certificateChain.set(new CertificateChain(sslCertificate))
@@ -165,14 +167,14 @@ Template.licenseCertificate.helpers({
         return Template.instance().certificateText.get().split('\n');
     },
     sslCertificate() {
-        const certificateChain = new CertificateChain(Template.instance().issuance.sslCertificate.get());
+        const certificateChain = new CertificateChain(Template.instance().issuance.licenseContract.sslCertificate.get());
         return certificateChain.getLeafCertificatePublicKeyFingerprint();
     },
     issuanceID() {
         return Template.instance().data.issuanceLocation.issuanceID;
     },
     issuerName() {
-        return Template.instance().issuance.issuerName.get();
+        return Template.instance().issuance.licenseContract.issuerName.get();
     },
     originalOwner() {
         return Template.instance().issuance.originalOwner.get();
@@ -205,7 +207,7 @@ Template.licenseCertificate.helpers({
     },
     signatureValid() {
         const certificateText = Template.instance().certificateText.get();
-        const signature = Template.instance().issuance.signature.get();
+        const signature = Template.instance().issuance.licenseContract.signature.get();
         const certificateChain = Template.instance().certificateChain.get();
 
         if (certificateChain && certificateChain.verifySignature(certificateText, signature)) {
@@ -240,7 +242,7 @@ Template.licenseHistory.onRendered(function() {
         lob.balances.getLicenseTransfers(issuanceLocation, (error, transfers) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.autorun(() => {
-                drawLicenseHistory(canvas, transfers, issuance.issuerName.get(), issuance.originalOwner.get());
+                drawLicenseHistory(canvas, transfers, issuance.licenseContract.issuerName.get(), issuance.originalOwner.get());
             });
         });
     });

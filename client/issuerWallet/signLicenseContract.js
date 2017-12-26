@@ -99,7 +99,7 @@ function onFormUpdate() {
 
     try {
         const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
-        lob.licenseIssuing.estimateGas.signLicenseContract(licenseContractAddress, signature, selectedLicenseContract.issuerAddress, (error, gasConsumpution) => {
+        lob.licenseIssuing.estimateGas.signLicenseContract(licenseContractAddress, signature, selectedLicenseContract.issuerAddress.get(), (error, gasConsumpution) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(gasConsumpution);
         });
@@ -172,7 +172,7 @@ Template.signLicenseContract.onCreated(function() {
 
 Template.signLicenseContract.onRendered(function() {
     Tracker.autorun(() => {
-        let licenseContracts = lob.getManagedLicenseContracts(lob.accounts.get());
+        let licenseContracts = lob.licenseContracts.getManagedLicenseContracts(lob.accounts.get());
         // Don't show license contracts that are already signed
         licenseContracts = licenseContracts.filter((licenseContract) => !licenseContract.signature.get());
         this.licenseContracts.set(licenseContracts);
@@ -237,7 +237,7 @@ Template.signLicenseContract.events({
         const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
 
         const binSignature = computeSignature(signMethod, manualSignature, privateKey, selectedLicenseContract.certificateText.get());
-        const from = selectedLicenseContract.issuerAddress;
+        const from = selectedLicenseContract.issuerAddress.get();
 
         lob.licenseIssuing.signLicenseContract(licenseContractAddress, binSignature, from, gasPrice, (error) => {
             if (error) {

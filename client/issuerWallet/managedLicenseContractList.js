@@ -2,7 +2,7 @@ import { lob } from "../../lib/LOB";
 
 Template.managedLicenseContractList.helpers({
     licenseContracts() {
-        return lob.getManagedLicenseContracts(lob.accounts.get());
+        return lob.licenseContracts.getManagedLicenseContracts(lob.accounts.get());
     }
 });
 
