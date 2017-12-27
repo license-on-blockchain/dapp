@@ -43,8 +43,16 @@
                 <div class="row clear">
                     <div class="col col-12 mobile-full">
                         <h4>{{_ "createLicenseContract.input.sslCertificate.title"}}</h4>
-                        <textarea name="sslCertificate" title="{{_ "createLicenseContract.input.sslCertificate.description"}}"></textarea>
+                        <textarea name="sslCertificate" title="{{_ "createLicenseContract.input.sslCertificate.description"}}" class="monospaced"></textarea>
                         <div class="lob-error-message" data-for="sslCertificate"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-12 mobile-full">
+                        <h4>{{_ "createLicenseContract.input.sslPrivateKey.title"}}</h4>
+                        <textarea name="sslPrivateKey" title="{{_ "createLicenseContract.input.sslPrivateKey.description"}}" class="monospaced"></textarea>
+                        <div class="lob-error-message" data-for="sslPrivateKey"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>
@@ -63,5 +71,5 @@
 </template>
 
 <template name="rootContractOption">
-    <option value="{{this}}">{{this}}</option>
+    <option value="{{address}}">{{name}} ({{address}})</option>
 </template>

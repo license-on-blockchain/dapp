@@ -4,6 +4,7 @@ import { CertificateChain } from "../../lib/CertificateChain";
 import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
 import { resetErrors, validateField } from "../../lib/FormHelpers";
 import { NotificationCenter } from "../../lib/NotificationCenter";
+import {privateKeyCache} from "../../lib/PrivateKeyCache";
 
 /**
  * Depending on the chosen signing method, either compute the signature or use the passed manual signature. Should the
@@ -210,13 +211,15 @@ Template.signLicenseContract.helpers({
     manualSignature() {
         return Template.instance().manualSigning.get();
     },
+    cachedPrivateKey() {
+        return privateKeyCache.getPrivateKeyForContractAddress(Template.instance().data.licenseContractAddress);
+    },
     gasPrice() {
         return EthBlocks.latest.gasPrice;
     },
     gasEstimate() {
         return Template.instance().estimatedGasConsumption.get();
     },
-
 });
 
 Template.signLicenseContract.events({
@@ -233,6 +236,8 @@ Template.signLicenseContract.events({
             return;
         }
 
+        privateKeyCache.clearPrivateKeyForContractAddress(Template.instance().data.licenseContractAddress);
+
         let {licenseContractAddress, manualSignature, privateKey, signMethod, gasPrice} = Template.instance().getValues();
         const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
 
@@ -245,6 +250,7 @@ Template.signLicenseContract.events({
                 return;
             }
             NotificationCenter.showTransactionSubmitted();
+            Router.go('licensecontracts');
         })
     }
 });

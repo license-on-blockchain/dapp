@@ -191,6 +191,10 @@
       "sslCertificate": {
         "title": "SSL-Certificate (PKCS#12 encoded as Hex encrypted with an empty password or PEM-encoded certificate chain)",
         "description": "TODO: Proper description when SSL format has been decided on"
+      },
+      "sslPrivateKey": {
+        "title": "SSL private key (optional)",
+        "description": "TODO: Proper description when SSL format has been decided on"
       }
     },
     "button": {
@@ -202,8 +206,12 @@
       "no_issuerName_entered": "Please provide your or your organisation's name that matches the name on the SSL certificate",
       "no_safekeepingPeriod_entered": "Please specify, how long you keep purchase records",
       "no_sslCertificate_entered": "Please provide an SSL certificate",
-      "sslCertificate_not_valid": "The certificate is not valid"
+      "sslCertificate_not_valid": "The certificate is not valid",
+      "sslPrivateKey_does_not_match": "The private key does not match the given certificate"
     }
+  },
+  "waitForContractCreationMining": {
+    "title": "<strong>Waiting</strong> for contract creation to be mined"
   },
   "signLicenseContract": {
     "title": "<strong>Sign</strong> license contract",

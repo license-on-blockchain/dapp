@@ -2,10 +2,11 @@ import { EthAccounts } from 'meteor/ethereum:accounts';
 import { CertificateChain } from "../../lib/CertificateChain";
 import { lob } from "../../lib/LOB";
 import { hexToBytes } from "../../lib/utils";
-import { rootContractAddresses } from "../../lib/RootContracts";
+import { rootContracts } from "../../lib/RootContracts";
 import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
 import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
+import {privateKeyCache} from "../../lib/PrivateKeyCache";
 
 function getValues() {
     const rootContractAddress = this.find('[name=rootContract]').value;
@@ -19,8 +20,9 @@ function getValues() {
     } else {
         certificate = hexToBytes(certificate);
     }
+    const privateKey = this.find('[name=sslPrivateKey]').value;
 
-    return {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate};
+    return {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, privateKey};
 }
 
 function onFormUpdate() {
@@ -40,7 +42,7 @@ function onFormUpdate() {
 function validate(errorOnEmpty = false) {
     this.resetErrors();
 
-    const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate} = this.getValues();
+    const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, privateKey} = this.getValues();
     let noErrors = true;
 
     noErrors &= validateField('rootContract', rootContractAddress, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_root_contract_selected'));
@@ -48,7 +50,17 @@ function validate(errorOnEmpty = false) {
     noErrors &= validateField('issuerName', issuerName, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_issuerName_entered'));
     noErrors &= validateField('safekeepingPeriod', safekeepingPeriod, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_safekeepingPeriod_entered'));
     noErrors &= validateField('sslCertificate', certificate, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_sslCertificate_entered'));
-    noErrors &= validateField('sslCertificate', () => { return new CertificateChain(certificate)}, certificate, TAPi18n.__('createLicenseContract.error.sslCertificate_not_valid'));
+    noErrors &= validateField('sslCertificate', () => {
+        const certificateChain = new CertificateChain(certificate);
+        return certificateChain.verifyCertificateChain();
+    }, certificate, TAPi18n.__('createLicenseContract.error.sslCertificate_not_valid'));
+    noErrors &= validateField('sslPrivateKey', () => {
+        const textToSign = 'Test';
+        // Sign some arbitrary text and check that the signature can be verified
+        const signature = CertificateChain.generateSignature(textToSign, privateKey);
+        const certificateChain = new CertificateChain(certificate);
+        return certificateChain.verifySignature(textToSign, signature);
+    }, privateKey && certificate, TAPi18n.__('createLicenseContract.error.sslPrivateKey_does_not_match'));
 
     return noErrors;
 }
@@ -68,7 +80,9 @@ Template.createLicenseContract.helpers({
     myAccounts() {
         return EthAccounts.find().fetch();
     },
-    rootContracts: rootContractAddresses,
+    rootContracts: Object.entries(rootContracts).map(([address, name]) => {
+        return {address, name};
+    }),
     gasPrice() {
         return EthBlocks.latest.gasPrice;
     },
@@ -91,15 +105,16 @@ Template.createLicenseContract.events({
             return;
         }
 
-        const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, gasPrice, certificate} = Template.instance().getValues();
+        const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, gasPrice, certificate, privateKey} = Template.instance().getValues();
 
-        lob.licenseIssuing.createLicenseContract(rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, gasPrice, (error) => {
+        lob.licenseIssuing.createLicenseContract(rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, gasPrice, (error, transactionHash) => {
             if (error) {
                 NotificationCenter.showError(error);
                 return;
             }
+            privateKeyCache.addPrivateKeyForTransaction(transactionHash, privateKey);
+            Router.go('licensecontracts.waitforcreationmining', {rootContract: rootContractAddress, transactionHash});
             NotificationCenter.showTransactionSubmitted();
-        })
-
+        });
     }
 });

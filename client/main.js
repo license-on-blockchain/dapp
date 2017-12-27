@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { lob } from "../lib/LOB";
 import { Settings } from "../lib/Settings";
-import { rootContractAddresses } from "../lib/RootContracts";
+import { rootContracts } from "../lib/RootContracts";
 import './main.html';
 
 Router.route('/', function () {
@@ -72,6 +72,8 @@ Router.route('/licensecontracts/create', function() {
 
 Router.route('/licensecontracts', function() {
     this.render('managedLicenseContractList');
+}, {
+    name: 'licensecontracts'
 });
 
 Router.route('/licensecontracts/sign', function () {
@@ -84,6 +86,8 @@ Router.route('/licensecontracts/sign/:licenseContractAddress', function() {
             licenseContractAddress: this.params.licenseContractAddress
         }
     });
+}, {
+    name: 'licensecontracts.sign.withAddress'
 });
 
 Router.route('/licensecontracts/issue', function() {
@@ -96,6 +100,17 @@ Router.route('/licensecontracts/issue/:licenseContractAddress', function() {
             licenseContractAddress: this.params.licenseContractAddress
         }
     });
+});
+
+Router.route('/licensecontracts/waitforcreationmining/:rootContract/:transactionHash', function() {
+    this.render('waitForContractCreationMining', {
+        data: {
+            rootContract: this.params.rootContract,
+            transactionHash: this.params.transactionHash
+        }
+    });
+}, {
+    name: 'licensecontracts.waitforcreationmining'
 });
 
 
@@ -121,7 +136,7 @@ Template.body.helpers({
 });
 
 Template.body.onCreated(function() {
-    for (const rootContractAddress of rootContractAddresses) {
+    for (const rootContractAddress of Object.keys(rootContracts)) {
         lob.watchRootContract(rootContractAddress);
     }
 });
