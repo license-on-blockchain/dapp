@@ -33,7 +33,6 @@ function validate(errorOnEmpty = false) {
     const {reclaimer, issuanceLocation, from, amount} = this.getValues();
     let noErrors = true;
 
-    // TODO: Check that private key exists for from account
     noErrors &= validateField('reclaimer', web3.isAddress(reclaimer), true);
     noErrors &= validateField('issuance', issuanceLocation, errorOnEmpty, TAPi18n.__('reclaim.error.no_license_selected'));
     noErrors &= validateField('from', web3.isAddress(from), errorOnEmpty && from, TAPi18n.__("reclaim.error.from_not_valid"));

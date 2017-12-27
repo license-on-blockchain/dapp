@@ -51,7 +51,6 @@ function validate(errorOnEmpty = false) {
     const {sender, issuanceID, issuanceLocation, recipient, amount} = this.getValues();
     let noErrors = true;
 
-    // TODO: Check if private key exists for account
     noErrors &= validateField('sender', web3.isAddress(sender), true);
     noErrors &= validateField('recipient', web3.isAddress(recipient), errorOnEmpty, TAPi18n.__('transfer.error.recipient_not_valid_address'));
     noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'));
