@@ -13,7 +13,12 @@ function getValues() {
     const issuerName = this.find('[name=issuerName]').value;
     const liability = this.find('[name=liability]').value;
     const safekeepingPeriod = this.find('[name=safekeepingPeriod]').value;
-    const certificate = hexToBytes(this.find('[name=sslCertificate]').value);
+    let certificate = this.find('[name=sslCertificate]').value;
+    if (certificate.startsWith("-----BEGIN CERTIFICATE-----")) {
+        certificate = CertificateChain.convertPemCertificateToPKCS12Bytes(certificate);
+    } else {
+        certificate = hexToBytes(certificate);
+    }
 
     return {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate};
 }
@@ -43,7 +48,6 @@ function validate(errorOnEmpty = false) {
     noErrors &= validateField('issuerName', issuerName, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_issuerName_entered'));
     noErrors &= validateField('safekeepingPeriod', safekeepingPeriod, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_safekeepingPeriod_entered'));
     noErrors &= validateField('sslCertificate', certificate, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_sslCertificate_entered'));
-    // TODO: Allow certificate to be formatted as PEM
     noErrors &= validateField('sslCertificate', () => { return new CertificateChain(certificate)}, certificate, TAPi18n.__('createLicenseContract.error.sslCertificate_not_valid'));
 
     return noErrors;

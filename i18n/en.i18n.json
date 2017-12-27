@@ -189,7 +189,7 @@
         "description": "The number of years you will keep all documents you inspected as part of the license issuing"
       },
       "sslCertificate": {
-        "title": "SSL-Certificate (PKCS#12 encoded as Hex)",
+        "title": "SSL-Certificate (PKCS#12 encoded as Hex encrypted with an empty password or PEM-encoded certificate chain)",
         "description": "TODO: Proper description when SSL format has been decided on"
       }
     },
