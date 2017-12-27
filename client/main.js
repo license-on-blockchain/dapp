@@ -8,7 +8,11 @@ Router.route('/', function () {
     this.render('licenses');
 });
 
-Router.route('/licenses');
+Router.route('/licenses', function() {
+    this.render('licenses');
+}, {
+    name: 'licenses'
+});
 
 // Transfer
 Router.route('/transfer');

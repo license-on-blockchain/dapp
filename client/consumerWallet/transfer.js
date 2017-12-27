@@ -132,6 +132,7 @@ Template.transfer.events({
                     return;
                 }
                 NotificationCenter.showTransactionSubmitted();
+                Router.go('licenses');
             });
         } else {
             lob.transfer.transferLicense(issuanceLocation, sender, recipient, amount, gasPrice, (error) => {
@@ -140,6 +141,7 @@ Template.transfer.events({
                     return;
                 }
                 NotificationCenter.showTransactionSubmitted();
+                Router.go('licenses');
             });
         }
     }
