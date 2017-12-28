@@ -158,7 +158,7 @@ Template.issuanceOption.helpers({
         return this.selected ? 'selected' : '';
     },
     description() {
-        return this.metadata.description.get();
+        return this.metadata.description;
     },
     balance() {
         return this.balance.getOwnedBalance(selectedSenderAccount.get());

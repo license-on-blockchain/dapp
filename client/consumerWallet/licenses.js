@@ -9,15 +9,15 @@ function getLicenseRows(revoked) {
             return {
                 issuanceLocation: issuanceLocation,
                 balance: lob.balances.getBalanceForIssuanceLocation(issuanceLocation),
-                metadata: lob.issuances.getIssuance(issuanceLocation)
+                metadata: lob.issuances.getIssuance(issuanceLocation) || {}
             };
         })
-        .filter((obj) => obj.metadata.revoked && (obj.metadata.revoked.get() === revoked))
+        .filter((obj) => obj.metadata.revoked === revoked)
         .filter((obj) => obj.balance.getBalance(lob.accounts.get()) > 0)
         .sort((lhs, rhs) => {
             // Sort based on description
-            const lhsDescription = lhs.metadata.description.get();
-            const rhsDescription = rhs.metadata.description.get();
+            const lhsDescription = lhs.metadata.description;
+            const rhsDescription = rhs.metadata.description;
             if (lhsDescription && rhsDescription) {
                 if (lhsDescription < rhsDescription) {
                     return -1;
@@ -46,7 +46,7 @@ Template.licenseRow.helpers({
         if (typeof this.revoked === 'undefined') {
             return false;
         }
-        return this.revoked.get();
+        return this.revoked;
     },
     balance() {
         return this.balance.getOwnedBalance(lob.accounts.get()).toNumber();
@@ -60,16 +60,16 @@ Template.licenseRow.helpers({
         }, [undefined, new BigNumber(-1)])[0];
     },
     description() {
-        return this.metadata.description.get();
+        return this.metadata.description;
     },
     revoked() {
-        return this.metadata.revoked.get();
+        return this.metadata.revoked;
     },
     licenseContract() {
-        return this.issuanceLocation.licenseContractAddress;
+        return this.metadata.licenseContract;
     },
     issuanceID() {
-        return this.issuanceLocation.issuanceID;
+        return this.metadata.issuanceID;
     }
 });
 
@@ -141,6 +141,7 @@ Template.licenseCertificate.onCreated(function() {
     });
 
     this.issuance = lob.issuances.getIssuance(issuanceLocation);
+    this.licenseContract = lob.licenseContracts.getLicenseContract(this.issuance.licenseContract);
 
     this.transferDescription = new ReactiveVar("…");
     lob.balances.getLicenseTransfers(issuanceLocation, (error, transfers) => {
@@ -150,7 +151,7 @@ Template.licenseCertificate.onCreated(function() {
 
     this.certificateChain = new ReactiveVar(null);
     Tracker.autorun(() => {
-        const sslCertificate = this.issuance.licenseContract.sslCertificate.get();
+        const sslCertificate = this.licenseContract.sslCertificate.get();
         if (sslCertificate) {
             try {
                 this.certificateChain.set(new CertificateChain(sslCertificate))
@@ -167,32 +168,32 @@ Template.licenseCertificate.helpers({
         return Template.instance().certificateText.get().split('\n');
     },
     sslCertificate() {
-        const certificateChain = new CertificateChain(Template.instance().issuance.licenseContract.sslCertificate.get());
+        const certificateChain = new CertificateChain(Template.instance().licenseContract.sslCertificate.get());
         return certificateChain.getLeafCertificatePublicKeyFingerprint();
     },
     issuanceID() {
-        return Template.instance().data.issuanceLocation.issuanceID;
+        return Template.instance().data.issuanceID;
     },
     issuerName() {
-        return Template.instance().issuance.licenseContract.issuerName.get();
+        return Template.instance().licenseContract.issuerName;
     },
     originalOwner() {
-        return Template.instance().issuance.originalOwner.get();
+        return Template.instance().issuance.originalOwner;
     },
     auditTime() {
-        return dateFormat(new Date(Template.instance().issuance.auditTime.get().toNumber() * 1000));
+        return dateFormat(new Date(Template.instance().issuance.auditTime * 1000));
     },
     originalSupply() {
-        return Template.instance().issuance.originalSupply.get();
+        return Template.instance().issuance.originalSupply;
     },
     licenseDescription() {
-        return Template.instance().issuance.description.get();
+        return Template.instance().issuance.description;
     },
     licenseCode() {
-        return Template.instance().issuance.code.get();
+        return Template.instance().issuance.code;
     },
     auditRemark() {
-        return Template.instance().issuance.auditRemark.get();
+        return Template.instance().issuance.auditRemark;
     },
     transferDescription() {
         return Template.instance().transferDescription.get();
@@ -207,7 +208,7 @@ Template.licenseCertificate.helpers({
     },
     signatureValid() {
         const certificateText = Template.instance().certificateText.get();
-        const signature = Template.instance().issuance.licenseContract.signature.get();
+        const signature = Template.instance().licenseContract.signature.get();
         const certificateChain = Template.instance().certificateChain.get();
 
         if (certificateChain && certificateChain.verifySignature(certificateText, signature)) {
@@ -238,11 +239,12 @@ Template.licenseHistory.onRendered(function() {
         const canvas = Template.instance().find('#graphContainer');
 
         const issuance = lob.issuances.getIssuance(issuanceLocation);
+        const licenseContract = lob.licenseContracts.getLicenseContract(issuance.licenseContract);
 
         lob.balances.getLicenseTransfers(issuanceLocation, (error, transfers) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.autorun(() => {
-                drawLicenseHistory(canvas, transfers, issuance.licenseContract.issuerName.get(), issuance.originalOwner.get());
+                drawLicenseHistory(canvas, transfers, licenseContract.issuerName.get(), issuance.originalOwner);
             });
         });
     });

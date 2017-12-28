@@ -165,7 +165,7 @@ Template.reclaimIssuanceOption.helpers({
         return this.selected ? 'selected' : '';
     },
     description() {
-        return this.metadata.description.get();
+        return this.metadata.description;
     },
     balance() {
         let balance = 0;
