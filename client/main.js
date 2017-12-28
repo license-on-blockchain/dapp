@@ -80,6 +80,14 @@ Router.route('/licensecontracts', function() {
     name: 'licensecontracts'
 });
 
+Router.route('/licensecontracts/:address', function() {
+    this.render('manageLicenseContract', {
+        data: {
+            address: this.params.address
+        }
+    })
+});
+
 Router.route('/licensecontracts/sign', function () {
     this.render('signLicenseContract');
 });

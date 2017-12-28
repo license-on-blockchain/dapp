@@ -1,0 +1,26 @@
+<template name="manageLicenseContract">
+    <div class="dapp-flex-content">
+        <main class="dapp-content">
+            <h1>{{{_ "manageLicenseContract.title"}}}</h1>
+            <table class="dapp-zebra">
+                <tbody>
+                {{#each issuances}}
+                    {{> issuanceRow}}
+                {{/each}}
+                </tbody>
+            </table>
+        </main>
+    </div>
+</template>
+
+<template name="issuanceRow">
+    <tr>
+        <td><strong>{{description}}</strong></td>
+        <td><strong>{{code}}</strong></td>
+        <td>
+            {{#unless revoked}}
+                <a href="/licensecontracts/revoke/{{licenseContract}}/{{issuanceID}}"><i class="icon-ban"></i> {{_ "manageLicenseContract.button.revokeIssuance"}}</a>
+            {{/unless}}
+        </td>
+    </tr>
+</template>

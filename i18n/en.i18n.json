@@ -165,6 +165,12 @@
     },
     "createContractLink": "<a href='/licensecontracts/create'>Create</a> new license contract"
   },
+  "manageLicenseContract": {
+    "title": "<strong>Manage</strong> license contract",
+    "button": {
+      "revokeIssuance": "Revoke"
+    }
+  },
   "createLicenseContract": {
     "title": "<strong>Register</strong> as license issuer",
     "input": {

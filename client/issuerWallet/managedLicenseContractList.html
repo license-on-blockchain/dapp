@@ -17,7 +17,11 @@
 <template name="licenseContractRow">
     <tr>
         <td>
-            <strong>{{address}}</strong>
+            {{#if signed}}
+                <a href="/licensecontracts/{{address}}"><strong>{{address}}</strong></a>
+            {{else}}
+                <strong>{{address}}</strong>
+            {{/if}}
         </td>
         <td>
             {{#if signed}}
