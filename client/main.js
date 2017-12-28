@@ -70,10 +70,6 @@ Router.route('/reclaim');
 // Settings
 Router.route('/settings');
 
-Router.route('/licensecontracts/create', function() {
-    this.render('createLicenseContract');
-});
-
 Router.route('/licensecontracts', function() {
     this.render('managedLicenseContractList');
 }, {
@@ -86,6 +82,23 @@ Router.route('/licensecontracts/:address', function() {
             address: this.params.address
         }
     })
+}, {
+    name: 'manageLicenseContract'
+});
+
+Router.route('/licensecontracts/create', function() {
+    this.render('createLicenseContract');
+});
+
+Router.route('/licensecontracts/waitforcreationmining/:rootContract/:transactionHash', function() {
+    this.render('waitForContractCreationMining', {
+        data: {
+            rootContract: this.params.rootContract,
+            transactionHash: this.params.transactionHash
+        }
+    });
+}, {
+    name: 'licensecontracts.waitforcreationmining'
 });
 
 Router.route('/licensecontracts/sign', function () {
@@ -114,15 +127,13 @@ Router.route('/licensecontracts/issue/:licenseContractAddress', function() {
     });
 });
 
-Router.route('/licensecontracts/waitforcreationmining/:rootContract/:transactionHash', function() {
-    this.render('waitForContractCreationMining', {
+Router.route('/licensecontracts/revoke/:licenseContractAddress/:issuanceID', function() {
+    this.render('revokeIssuance', {
         data: {
-            rootContract: this.params.rootContract,
-            transactionHash: this.params.transactionHash
+            licenseContract: this.params.licenseContractAddress,
+            issuanceID: this.params.issuanceID,
         }
-    });
-}, {
-    name: 'licensecontracts.waitforcreationmining'
+    })
 });
 
 

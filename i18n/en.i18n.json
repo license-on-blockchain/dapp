@@ -171,6 +171,26 @@
       "revokeIssuance": "Revoke"
     }
   },
+  "revokeIssuance": {
+    "title": "<strong>Revoke</strong> licenese",
+    "input": {
+      "licenseContract": {
+        "title": "License Contract",
+        "description": "The license contract under which licenses shall be revoked"
+      },
+      "issuance": {
+        "title": "Licenses",
+        "description": "The licenses to revoke"
+      }
+    },
+    "button": {
+      "revoke": "Revoke"
+    },
+    "error": {
+      "no_licenseContract_selected": "You need to select a license contract under which licenses shall be revoked",
+      "no_issuanceID_selected": "You need to select a license to revoke"
+    }
+  },
   "createLicenseContract": {
     "title": "<strong>Register</strong> as license issuer",
     "input": {
