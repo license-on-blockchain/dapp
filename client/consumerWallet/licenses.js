@@ -4,7 +4,7 @@ import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
 import { CertificateChain } from "../../lib/CertificateChain";
 
 function getLicenseRows(revoked) {
-    return lob.getRelevantIssuanceLocations(lob.accounts.get())
+    return lob.balances.getNonZeroBalanceIssuanceLocations(lob.accounts.get())
         .map((issuanceLocation) => {
             return {
                 issuanceLocation: issuanceLocation,

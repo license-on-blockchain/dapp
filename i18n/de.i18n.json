@@ -45,14 +45,14 @@
   "licenses": {
     "title": "<strong>Licenses</strong>",
     "heading": {
-      "revokedLicenses": "Lizenzbescheinigungen widerrufen"
+      "revokedLicenses": "Widerrufene Lizenzbescheinigungen"
     },
     "hover": {
       "ownedBalance": "Ihre Lizenzen",
       "borrowedBalance": "Fremde Lizenzen, die Ihnen übertragen wurden aber von dem Eigentümer zurückgefordert werden können"
     },
     "button": {
-      "transfer": "Übertragung",
+      "transfer": "Übertragen",
       "certificate": "Zertifikat",
       "history": "Historie"
     },

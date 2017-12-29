@@ -91,11 +91,11 @@ Template.transfer.helpers({
             selectedIssuanceID = Number(Template.instance().data.issuanceID);
         }
 
-        return lob.getRelevantIssuanceLocations(selectedSenderAccount.get())
+        return lob.balances.getNonZeroBalanceIssuanceLocations(selectedSenderAccount.get())
             .map((issuanceLocation) => {
                 return {
                     issuanceLocation,
-                    metadata: lob.issuances.getIssuance(issuanceLocation),
+                    metadata: lob.issuances.getIssuance(issuanceLocation) || {},
                     balance: lob.balances.getBalanceForIssuanceLocation(issuanceLocation),
                     selected: (issuanceLocation.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceLocation.issuanceID === selectedIssuanceID),
                 }
