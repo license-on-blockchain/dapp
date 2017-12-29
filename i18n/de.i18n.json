@@ -1,0 +1,335 @@
+{
+  "generic": {
+    "input": {
+      "gas": {
+        "title": "Gas",
+        "description": ""
+      }
+    },
+    "license": "Lizenz",
+    "license_plural": "Lizenzen",
+    "OK": "OK",
+    "loading": "Loading…",
+    "transaction_successfully_submitted": "Transaktion wurde erfolgreich auf die Ethereum-Blockchain übertragen"
+  },
+  "tab": {
+    "title": {
+      "licenses": "Lizenzen",
+      "transfer": "Übertragen",
+      "install": "Installieren",
+      "reclaim": "Zurückfordern",
+      "licenseContracts": "Ausstellen",
+      "settings": "Einstellungen"
+    }
+  },
+  "footer": {
+    "copyright": "© 2017 LOB, Alex Hoppen"
+  },
+  "settings": {
+    "title": "<strong>Settings</strong>",
+    "input": {
+      "enableInstallation": {
+        "title": "Aktionen zur Softwareinstallation anzeigen",
+        "description": "Aktionen, die zur Aktivierung einer Softwarelizenz in einer konkreten Installation benötigt werden, freischalten"
+      },
+      "enableIssuerActions": {
+        "title": "Aktionen der Bescheinigungsstelle",
+        "description": "Aktionen zur Bestätigung von Lizenzen mittels LOB freischalten"
+      },
+      "language": {
+        "title": "Sprache",
+        "description": "Sprache des LOB-Wallets wählen"
+      }
+    }
+  },
+  "licenses": {
+    "title": "<strong>Licenses</strong>",
+    "heading": {
+      "revokedLicenses": "Lizenzbescheinigungen widerrufen"
+    },
+    "hover": {
+      "ownedBalance": "Ihre Lizenzen",
+      "borrowedBalance": "Fremde Lizenzen, die Ihnen übertragen wurden aber von dem Eigentümer zurückgefordert werden können"
+    },
+    "button": {
+      "transfer": "Übertragung",
+      "certificate": "Zertifikat",
+      "history": "Historie"
+    },
+    "transferDescription": {
+      "licenses_not_transferred": "Die Lizenzen wurden noch nicht weiter übertragen.",
+      "licenses_completely_transferred": "Die Lizenzen wurden vollständig an %s übertragen.",
+      "licenses_partially_transferred": "%s Lizenzen wurden an %s übertragen.",
+      "licenses_completely_transferred_indirectly": "Die Lizenzen wurden Ihnen vollständig, aber (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.",
+      "licenses_partially_transferred_indirectly": "%s Lizenzen wurden Ihnen (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.",
+      "no_owned_licenses": "Sie besitzen aktuell keine Lizenzen dieser Bescheinigung."
+    }
+  },
+  "licenseCertificate": {
+    "certificate_signed": "Diese Erklärung wurde mit SSL-Zertifikat mit Public-Key-Fingerprint %s unterzeichnet.",
+    "licenseInfo": {
+      "intro": "%s hat unter diesem LOB-License-Contract folgende Software-Lizenz bescheinigt:",
+      "description": "Lizenztyp",
+      "code": "Lizenzcode",
+      "amount": "Anzahl",
+      "auditTime": "Zeitpunkt der Bescheinigung",
+      "originalOwner": "Empfänger der Bescheinigung",
+      "issuanceID": "Bescheinigungs-ID"
+    },
+    "certificateCheck": {
+      "certificateValid": "Zertifikat gültig",
+      "signatureValid": "Signatur gültig",
+      "leafCertificateCommonName": "Zertifikat ausgestellt für",
+      "certificateIssuer": "Zertifikataussteller"
+    },
+    "auditRemarkIntro": "Vermerk aus dem Lizenzaudit:"
+  },
+  "licenseHistory": {
+    "license_contract": "Smart Contract der Bescheinigungsstelle",
+    "your_address": "Ihre öffentliche Adresse auf der Ethereum-Blockchain"
+  },
+  "reclaim": {
+    "title": "Lizenzen <strong>zurückfordern</strong>",
+    "input": {
+      "to": {
+        "title": "An",
+        "description": ""
+      },
+      "from": {
+        "title": "Von",
+        "description": "Öffentliche Ethereum-Adresse, an die die Lizenz übertragen wurde"
+      },
+      "issuance": {
+        "title": "License",
+        "description": "Zurückforderbare Lizenz"
+      },
+      "amount": {
+        "title": "Amount",
+        "description": "Anzahl der rückforderbaren Lizenzen"
+      }
+    },
+    "button": {
+      "reclaim": "Zurückfordern"
+    },
+    "error": {
+      "no_license_selected": "Sie müssen die Lizenz, die Sie zurückfordern möchten, auswählen",
+      "from_not_valid": "Dies ist keine gültige öffentliche Ethereum-Adresse",
+      "amount_not_specified": "Sie müssen angeben, wie viele Lizenzen Sie zurückfordern möchten",
+      "amount_less_than_balance": "Sie können maximal %s Lizenzen von der ausgewählten Ethereum-Adresse zurückfordern",
+      "amount_zero": "Sie müssen wenigstens eine Lizenz zurückfordern"
+    }
+  },
+  "transfer": {
+    "title": {
+      "destroy": "Lizenzbescheinigungen <strong>zerstören</strong> (invalidieren)",
+      "transferAndAllowReclaim": "Lizenzen <strong>übertragen</strong>, aber <strong>Rückforderbarkeit</strong> ermöglichen",
+      "transfer": "Lizenz(en) <strong>übertragen</strong>"
+    },
+    "input": {
+      "from": {
+        "title": "Von",
+        "description": ""
+      },
+      "to": {
+        "title": "An",
+        "description": ""
+      },
+      "issuance": {
+        "title": "Lizenz",
+        "description": "Zu übertragende Lizenz"
+      },
+      "amount": {
+        "title": "Anzahl",
+        "description": "Anzahl der zu übertragenden Lizenzen"
+      }
+    },
+    "button": {
+      "destroy": "Zerstören",
+      "transfer": "Übertragen",
+      "transferAndAllowReclaim": "rückforderbar übertragen"
+    },
+    "destroyLink": "Wenn Sie die Lizenzbescheinigung zerstören (d.h. auf der Ethereum-Blockchain ivalidieren) möchten, <a href='/destroy'>bestätigen Sie hier</a>.",
+    "error": {
+      "recipient_not_valid_address": "Die Empfänger-Adresse ist keine gültige öffentliche Ethereum-Adresse",
+      "no_issuance_selected": "Sie müssen angeben, welche Lizenzen Sie übertragen möchten",
+      "no_amount_specified": "Sie müssen angeben, wie viele Lizenzen Sie übertragen möchten",
+      "amount_zero": "Sie müssen wenigstens eine Lizenz übertragen",
+      "amount_less_than_balance": "Sie können nicht mehr Lizenzen übertragen, als Sie besitzen"
+    }
+  },
+  "managedLicenseContractList": {
+    "title": "<strong>Smart Contracts zur Bescheinigung von Lizenzen</strong>, über die Sie verfügen",
+    "button": {
+      "sign": "Unterzeichnet",
+      "issue": "Augestellt"
+    },
+    "createContractLink": "Neuen Smart Contract zur Bescheinigung von Lizenzen <a href='/licensecontracts/create'>erstellen</a>"
+  },
+  "manageLicenseContract": {
+    "title": "Smart Contracts zur Bescheinigung von Lizenzen <strong>verwalten</strong>",
+    "button": {
+      "revokeIssuance": "Smart Contract Widerrufen"
+    }
+  },
+  "revokeIssuance": {
+    "title": "Lizenzbescheinigung <strong>widerrufen</strong>",
+    "input": {
+      "licenseContract": {
+        "title": "Smart Contract zur Bescheinigung von Lizenzen",
+        "description": "Smart Contract, unter dem die Lizenzbescheinigung widerrufen werden soll"
+      },
+      "issuance": {
+        "title": "Lizenzen",
+        "description": "Widerrufebare Lizenzbescheinigungen"
+      }
+    },
+    "button": {
+      "revoke": "Widerrufen"
+    },
+    "error": {
+      "no_licenseContract_selected": "Sie müssen den Smart Contract, unter dem die Lizenzbescheinigung widerrufen werden soll, angeben",
+      "no_issuanceID_selected": "Sie müssen die Lizenzbescheinigung, die Sie widerrufen möchten, angeben"
+    }
+  },
+  "createLicenseContract": {
+    "title": "Als Lizenz-Bescheinigungsstelle <strong>registrieren</strong>",
+    "input": {
+      "rootContract": {
+        "title": "Root Contract",
+        "description": "Der LOB-Root-Contract, den Sie wählen, definiert die rechtlichen Rahmenbedingungen und Ihre Verpflichtungen, unter denen Sie Lizenzen bescheinigen werden"
+      },
+      "issuerAddress": {
+        "title": "Ihre Ethereum-Adresse",
+        "description": "öffentliche Ethereum-Adresse, unter der Sie Software-Lizenzbescheinigungen ausstellen möchten"
+      },
+      "issuerName": {
+        "title": "Name Ihrer Bescheinigungsstelle",
+        "description": "Name der Person oder der Organisation, die Lizenzbescheinigungen unter dem neuen Smart Contract ausstellen wird. Diese Angabe sollte mit dem 'common name' in Ihrem SSL-Zertifikat übereinstimmen"
+      },
+      "liability": {
+        "title": "Haftung",
+        "description": "Angabe, in welchem Umfang Sie für die Richtigkeit der von Ihnen bescheinigten Lizenzen haften werden"
+      },
+      "safekeepingPeriod": {
+        "title": "Aufbewahrungsfrist (Jahre)",
+        "description": "Angabe des Zeitraums, innerhalb dessen Sie alle Unterlagen, die Sie im Rahmen Ihres Lizenzbescheinigungsprozesses eingesehen und geprüft haben, vorhalten werden"
+      },
+      "sslCertificate": {
+        "title": "SSL-Zertifikat, das Ihre Identität bestätigt (PKCS#12 codiert als Hex, verschlüsselt mit einem leeren Passwort oder PEM-codierte Zertifikatskette)",
+        "description": "TODO: Proper description when SSL format has been decided on"
+      },
+      "sslPrivateKey": {
+        "title": "Privater Schlüssel zu Ihrem SSL-Zertifikat (optional)",
+        "description": "TODO: Proper description when SSL format has been decided on"
+      }
+    },
+    "button": {
+      "create": "Ihren persönlichen Smart Contract zur Bescheinigung von Lizenzen generieren"
+    },
+    "error": {
+      "no_root_contract_selected": "Sie müssen den Root-Contract angeben, unter dem Sie Ihren Smart Contract generieren möchten",
+      "no_issuer_address_selected": "Sie müssen die öffentlichen Ethereum-Adresse angeben, die Sie zukünftig für Ihre Lizenzbescheinigungen nutzen werden",
+      "no_issuerName_entered": "Sie müssen Ihren persönlichen Namen oder den Namen Ihrer Organisation angeben, der mit dem Namen auf dem SSL-Zertifikat übereinstimmt",
+      "no_safekeepingPeriod_entered": "Sie müssen angeben, wie viele Jahre die Unterlagen, die Sie im Rahmen Ihres Lizenzbescheinigungsprozesses eingesehen und geprüft haben, vorhalten werden",
+      "no_sslCertificate_entered": "Sie müssen das SSL-Zertifikat, mit dem Sie Ihre Identität bestätigen, angeben",
+      "sslCertificate_not_valid": "Das SSL-Zertifikat ist nicht gültig",
+      "sslPrivateKey_does_not_match": "Der angegebene private Schlüssel passt nicht zu dem angegebenen SSL-Zertifikat"
+    }
+  },
+  "waitForContractCreationMining": {
+    "title": "<strong>Warten</strong> auf Bestätigung Ihres Smart Contracts zur Bescheinigung von Lizenzen auf der Ethereum-Blockchain"
+  },
+  "signLicenseContract": {
+    "title": "Smart Contract zur Bescheinigung von Lizenzen <strong>unterscheiben</strong>",
+    "inputs": {
+      "licenseContract": {
+        "title": "Smart Contract zur Bescheinigung von Lizenzen",
+        "description": "Auswahl des Smart Contracts, den Sie unterzeichnen möchten"
+      },
+      "manualSignature": {
+        "title": "Elektronische Signatur",
+        "description": "Ihre elektronische Signatur, mit der Sie den Bestätigungstext, mit dem Sie Ihre Lizenzbescheinigungen ausstatten werden und der damit die rechtliche Verbindlichkeit Ihrer Lizenzbescheinigungen definiert, unterzeichnen (unter Nutzung des privaten Schlüssels Ihres SSL-Zertifikats)"
+      },
+      "privateKey": {
+        "title": "Privater Schlüssel Ihres SSL-Zertifikats",
+        "description": "Eingabe des privaten Schlüssels des SSL-Zertifikats, das Sie bei der Generierung Ihres Smart Contract zur Bescheinigung von Lizenzen angegeben haben (der Schlüssel wird niemals irgendwohin übertragen, sondern nur lokal genutzt, um die Elektronische Signatur zu generieren, alternativ können Sie den Bestätigungstext in einer anderen Anwendung unterzeichnen und die elektronische Signatur direkt eingeben)"
+      }
+    },
+    "button": {
+      "sign": "Rechtsverbindlich unterzeichnen und damit die rechtlichen Rahmenbedingungen und Ihre Verpflichtungen, unter denen Sie zukünftig in diesem Smart Contract Lizenzen bescheinigen werden, bestätigen"
+    },
+    "signMethod": {
+      "privateKey": "Unterzeichnen mit Nutzung des privaten Schlüssels Ihres SSL-Zertifikats",
+      "manual": "Elektronische Signatur extern erstellen und eingeben"
+    },
+    "error": {
+      "alreadySigned": "Diese Smart Contract zur Bescheinigung von Lizenzenwurde bereits unterzeichnet",
+      "signature_not_in_hex": "Die elektronische Signatur ist nicht im HEX-Format angegeben",
+      "signature_empty": "Sie müssen eine elektronische Signatur eingeben",
+      "privateKey_empty": "Sie müssen den privaten Schlüssel Ihres SSL-Zertifikats eingeben",
+      "signature_not_valid": "Die elektronische Signatur ist nicht gültig",
+      "signature_verification_data_not_loaded_yet": "Zur Überprüfung der elektronischen Signatur ist ein Zugriff auf die Ethereum-Blockchain erforderlich, der noch nicht erfolgen konnte. Bitte warten Sie einen Moment und versuchen Sie es dann erneut",
+      "privateKey_verification_data_not_loaded_yet": "Zur Erstellung der elektronischen Signatur ist ein Zugriff auf die Ethereum-Blockchain erforderlich, der noch nicht erfolgen konnte. Bitte warten Sie einen Moment und versuchen Sie es dann erneut"
+    }
+  },
+  "issueLicense": {
+    "title": "Neue Lizenzen <strong>bescheinigen</strong>",
+    "input": {
+      "licenseContract": {
+        "title": "Smart Contract zur Bescheinigung von Lizenzen",
+        "description": "Wählen Sie Ihren Smart Contract aus, unter dem Sie eine Lizenzbescheinigung ausstellen möchten"
+      },
+      "licenseTemplate": {
+        "title": "Lizenz",
+        "description": "Wenn Sie eine der Lizenzen aus dieser Liste bescheinigen möchten, wählen Sie die vorgegebenen Daten für Lizenzcode und Lizenzbeschreibung aus"
+      },
+      "code": {
+        "title": "Lizenzcode",
+        "description": "Eindeutiger Code, der die Lizenz, die Sie bescheinigen, identifiziert"
+      },
+      "description": {
+        "title": "Lizenzbeschreibung",
+        "description": "Text, der die Lizenz, die Sie bescheinigen, für Menschen verständlich und eindeutig beschreibt"
+      },
+      "amount": {
+        "title": "Anzahl",
+        "description": "Anzahl der bescheinigten Lizenzen des ausgewählten Typs, die Sie bescheinigen"
+      },
+      "auditTime": {
+        "title": "Datum des Lizenz-Audits",
+        "description": "Datum, an dem Sie die Lizenzprüfung vorgenommen haben"
+      },
+      "auditRemark": {
+        "title": "Anmerkung zum Lizenz-Audit",
+        "description": "Text, der Ihre Prüfhandlungen und spezifische Ergebnisse Ihres Lizenzaudits näher spezifiziert (bspw. Angabe der Unterlagen, die Ihnen vorliegen)"
+      },
+      "initialOwnerAddress": {
+        "title": "öffentliche Ethereum-Adresse des Lizenz-Inhabers",
+        "description": "öffentliche Ethereum-Adresse der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen"
+      },
+      "initialOwnerName": {
+        "title": "Lizenz-Inhaber",
+        "description": "Name der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen"
+      },
+      "fee": {
+        "title": "Ausstellungsgebühr",
+        "description": "Gebühr, die an LOB gezahlt wird für die Entwicklung und Nutzung des Bescheinigungsverfahrens"
+      }
+    },
+    "button": {
+      "issueLicense": "Lizenz bescheinigen"
+    },
+    "error": {
+      "licenseContract_not_valid": "Sie müssen einen Smart Contract zur Bescheinigung von Lizenzen angeben",
+      "code_empty": "Sie müssen einen Lizenzcode angeben",
+      "description_empty": "Sie müssen eine Lizenzbeschreibung angeben",
+      "amount_empty": "Sie müssen die Anzahl der bescheinigten Lizenzen angeben",
+      "amount_zero": "Sie müssen mindestens eine Lizenz bescheinigen",
+      "auditTime_empty": "Sie müssen angeben, an welchem Datum Sie Ihren Lizenz-Audit vorgenommen haben",
+      "auditTime_in_future": "Das Audit-Datum kann nicht in der Zukunft liegen, da Sie zunächst den Audit vornehmen müssen und erst dann die Lizenzbescheinigung ausstellen können",
+      "initialOwnerAddress_not_valid": "Dies ist keine gültige öffentliche Ethereum-Adresse",
+      "initialOwnerName_empty": "Sie müssen den Namen der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen, angeben",
+      "fee_not_fetched": "Die Ausstellungsgebühr konnte noch nicht von der Ethereum-Blockchain gelesen werden. Bitte warten Sie einen Moment und versuchen Sie es dann erneut"
+    }
+  }
+}

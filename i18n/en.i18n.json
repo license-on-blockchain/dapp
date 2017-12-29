@@ -172,7 +172,7 @@
     }
   },
   "revokeIssuance": {
-    "title": "<strong>Revoke</strong> licenese",
+    "title": "<strong>Revoke</strong> license",
     "input": {
       "licenseContract": {
         "title": "License Contract",
@@ -204,11 +204,11 @@
       },
       "issuerName": {
         "title": "Issuer Name",
-        "description": "The name of the person or organisation issuing licenses under the license contract. This should correspond to the common name in the SSL certificate."
+        "description": "The name of the person or organisation issuing licenses under the license contract. This should correspond to the common name in the SSL certificate"
       },
       "liability": {
         "title": "Liability",
-        "description": "A free text field in which you can specify the liability you grant for each license issuing"
+        "description": "Specification of the liability you grant for each license issuing"
       },
       "safekeepingPeriod": {
         "title": "Safekeeping Period (Years)",
@@ -263,13 +263,13 @@
       "manual": "Manually generate signature"
     },
     "error": {
-      "alreadySigned": "This license contract has already been signed.",
+      "alreadySigned": "This license contract has already been signed",
       "signature_not_in_hex": "Signature is not in hex",
       "signature_empty": "Signature must not be empty",
       "privateKey_empty": "Private key must not be empty",
       "signature_not_valid": "Signature is not valid",
-      "signature_verification_data_not_loaded_yet": "Data necessary to verify the signature not loaded from the blockchain yet. Please wait a moment and try again.",
-      "privateKey_verification_data_not_loaded_yet": "Data necessary to generate the signature not loaded from the blockchain yet. Please wait a moment and try again."
+      "signature_verification_data_not_loaded_yet": "Data necessary to verify the signature not loaded from the blockchain yet. Please wait a moment and try again",
+      "privateKey_verification_data_not_loaded_yet": "Data necessary to generate the signature not loaded from the blockchain yet. Please wait a moment and try again"
     }
   },
   "issueLicense": {
@@ -281,7 +281,7 @@
       },
       "licenseTemplate": {
         "title": "Template",
-        "description": "If you are issuing one of the licenses in this list, use the well-known code and description"
+        "description": "If you are issuing one of the licenses in this list, use the pre-defined code and description"
       },
       "code": {
         "title": "Code",
