@@ -30,13 +30,12 @@ function onFormUpdate() {
     }
     this.selectedTemplateCode.set(licenseTemplateCode);
 
-    const selectedLicenseContract = this.licenseContracts.get().filter((licenseContract) => licenseContract.address === licenseContractAddress)[0];
-    this.selectedLicenseContract.set(selectedLicenseContract);
+    this.selectedLicenseContract.set(licenseContractAddress);
 
-    if (selectedLicenseContract) {
+    if (licenseContractAddress) {
         const auditTimestamp = (auditTime || new Date()).getTime() / 1000;
-        const from = selectedLicenseContract.issuerAddress.get();
-        const fee = selectedLicenseContract.fee.get();
+        const from = lob.licenseContracts.getIssuerAddress(licenseContractAddress);
+        const fee = lob.licenseContracts.getFee(licenseContractAddress);
         lob.licenseIssuing.estimateGas.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, fee, (error, value) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(value);
@@ -63,7 +62,7 @@ function validate(errorOnEmpty = false) {
     noErrors &= validateField('auditTime', auditTime <= new Date(), auditTime, TAPi18n.__('issueLicense.error.auditTime_in_future'));
     noErrors &= validateField('initialOwnerAddress', web3.isAddress(initialOwnerAddress), errorOnEmpty, TAPi18n.__('issueLicense.error.initialOwnerAddress_not_valid'));
     noErrors &= validateField('initialOwnerName', initialOwnerName, errorOnEmpty, TAPi18n.__('issueLicense.error.initialOwnerName_empty'));
-    noErrors &= validateField('fee', this.selectedLicenseContract.get() && this.selectedLicenseContract.get().fee.get(), errorOnEmpty, TAPi18n.__('issueLicense.error.fee_not_fetched'));
+    noErrors &= validateField('fee', this.selectedLicenseContract.get() && lob.licenseContracts.getFee(this.selectedLicenseContract.get()) !== null, errorOnEmpty, TAPi18n.__('issueLicense.error.fee_not_fetched'));
 
     return noErrors;
 }
@@ -86,7 +85,9 @@ Template.issueLicense.onRendered(function() {
     Tracker.autorun(() => {
         let licenseContracts = lob.licenseContracts.getManagedLicenseContracts(Accounts.get());
         // Don't show license contracts that are not signed yet
-        licenseContracts = licenseContracts.filter((licenseContract) => licenseContract.signature.get());
+        licenseContracts = licenseContracts.filter((licenseContract) => {
+            return lob.licenseContracts.isSigned(licenseContract);
+        });
         this.licenseContracts.set(licenseContracts);
         setTimeout(() => this.onFormUpdate(), 0);
     });
@@ -103,8 +104,8 @@ Template.issueLicense.helpers({
         }
         return Template.instance().licenseContracts.get().map((licenseContract) => {
             return {
-                licenseContract,
-                selected: licenseContract.address.toLowerCase() === preselectedLicenseContract
+                address: licenseContract,
+                selected: licenseContract.toLowerCase() === preselectedLicenseContract
             }
         });
     },
@@ -140,7 +141,7 @@ Template.issueLicense.helpers({
     fee() {
         const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
         if (selectedLicenseContract) {
-            return web3.fromWei(selectedLicenseContract.fee.get());
+            return web3.fromWei(lob.licenseContracts.getFee(selectedLicenseContract));
         } else {
             return "…";
         }
@@ -167,12 +168,11 @@ Template.issueLicense.events({
             return;
         }
 
-        const {licenseContractAddress, licenseTemplateCode, code, description, amount, auditTime, auditRemark, initialOwnerAddress, initialOwnerName, gasPrice} = Template.instance().getValues();
+        const {licenseContractAddress, code, description, amount, auditTime, auditRemark, initialOwnerAddress, initialOwnerName, gasPrice} = Template.instance().getValues();
 
-        const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
         const auditTimestamp = (auditTime || new Date()).getTime() / 1000;
-        const from = selectedLicenseContract.issuerAddress.get();
-        const fee = selectedLicenseContract.fee.get();
+        const from = lob.licenseContracts.getIssuerAddress(licenseContractAddress);
+        const fee = lob.licenseContracts.getFee(licenseContractAddress);
 
         lob.licenseIssuing.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, fee, gasPrice, (error) => {
             if (error) {

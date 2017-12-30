@@ -3,7 +3,13 @@ import {Accounts} from "../../lib/Accounts";
 
 Template.managedLicenseContractList.helpers({
     licenseContracts() {
-        return lob.licenseContracts.getManagedLicenseContracts(Accounts.get()).sort((lhs, rhs) => lhs.address.localeCompare(rhs.address));
+        return lob.licenseContracts.getManagedLicenseContracts(Accounts.get())
+            .sort()
+            .map((licenseContract) => {
+                return {
+                    address: licenseContract
+                }
+            });
     }
 });
 
@@ -12,6 +18,6 @@ Template.licenseContractRow.helpers({
         return this.address;
     },
     signed() {
-        return this.signature.get();
+        return lob.licenseContracts.getSignature(this.address);
     }
 });

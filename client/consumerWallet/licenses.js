@@ -133,19 +133,19 @@ function dateFormat(date) {
 }
 
 Template.licenseCertificate.onCreated(function() {
-    const issuanceLocation = Template.instance().data.issuanceLocation;
+    const issuanceLocation = this.data.issuanceLocation;
     const licenseContractAddress = issuanceLocation.licenseContractAddress;
+    this.licenseContract = licenseContractAddress;
 
     this.certificateText = new ReactiveVar(TAPi18n.__("generic.loading"));
     Tracker.autorun(() => {
-        const certificateText = lob.licenseContracts.getLicenseContract(licenseContractAddress).certificateText.get();
+        const certificateText = lob.licenseContracts.getCertificateText(licenseContractAddress);
         if (certificateText) {
             this.certificateText.set(certificateText);
         }
     });
 
     this.issuance = lob.issuances.getIssuance(issuanceLocation);
-    this.licenseContract = lob.licenseContracts.getLicenseContract(this.issuance.licenseContract);
 
     this.transferDescription = new ReactiveVar("…");
     lob.balances.getLicenseTransfers(issuanceLocation, (error, transfers) => {
@@ -155,7 +155,7 @@ Template.licenseCertificate.onCreated(function() {
 
     this.certificateChain = new ReactiveVar(null);
     Tracker.autorun(() => {
-        const sslCertificate = this.licenseContract.sslCertificate.get();
+        const sslCertificate = lob.licenseContracts.getSSLCertificate(licenseContractAddress);
         if (sslCertificate) {
             try {
                 this.certificateChain.set(new CertificateChain(sslCertificate))
@@ -172,14 +172,15 @@ Template.licenseCertificate.helpers({
         return Template.instance().certificateText.get().split('\n');
     },
     sslCertificate() {
-        const certificateChain = new CertificateChain(Template.instance().licenseContract.sslCertificate.get());
+        const sslCertificate = lob.licenseContracts.getSSLCertificate(Template.instance().licenseContract);
+        const certificateChain = new CertificateChain(sslCertificate);
         return certificateChain.getLeafCertificatePublicKeyFingerprint();
     },
     issuanceID() {
         return Template.instance().data.issuanceID;
     },
     issuerName() {
-        return Template.instance().licenseContract.issuerName;
+        return lob.licenseContracts.getIssuerName(Template.instance().licenseContract);
     },
     originalOwner() {
         return Template.instance().issuance.originalOwner;
@@ -212,7 +213,7 @@ Template.licenseCertificate.helpers({
     },
     signatureValid() {
         const certificateText = Template.instance().certificateText.get();
-        const signature = Template.instance().licenseContract.signature.get();
+        const signature = lob.licenseContracts.getSignature(Template.instance().licenseContract);
         const certificateChain = Template.instance().certificateChain.get();
 
         if (certificateChain && certificateChain.verifySignature(certificateText, signature)) {
@@ -243,12 +244,12 @@ Template.licenseHistory.onRendered(function() {
         const canvas = Template.instance().find('#graphContainer');
 
         const issuance = lob.issuances.getIssuance(issuanceLocation);
-        const licenseContract = lob.licenseContracts.getLicenseContract(issuance.licenseContract);
+        const issuerName = lob.getIssuerName(issuanceLocation.licenseContract);
 
         lob.balances.getLicenseTransfers(issuanceLocation, (error, transfers) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.autorun(() => {
-                drawLicenseHistory(canvas, transfers, licenseContract.issuerName.get(), issuance.originalOwner);
+                drawLicenseHistory(canvas, transfers, issuerName, issuance.originalOwner);
             });
         });
     });

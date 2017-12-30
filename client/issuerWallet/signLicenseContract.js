@@ -93,15 +93,12 @@ function onFormUpdate() {
             return;
     }
 
-    // Update the selected license contract
-    const licenseContracts = this.licenseContracts.get();
-    // Fetch the LicenseContract object with this address
-    const selectedLicenseContract = licenseContracts.filter((licenseContract) => licenseContract.address === licenseContractAddress)[0];
-    this.selectedLicenseContract.set(selectedLicenseContract);
+    this.selectedLicenseContract.set(licenseContractAddress);
 
     try {
         const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
-        lob.licenseIssuing.estimateGas.signLicenseContract(licenseContractAddress, signature, selectedLicenseContract.issuerAddress.get(), (error, gasConsumpution) => {
+        const issuerAddress = lob.licenseContracts.getIssuerAddress(licenseContractAddress);
+        lob.licenseIssuing.estimateGas.signLicenseContract(licenseContractAddress, signature, issuerAddress, (error, gasConsumpution) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(gasConsumpution);
         });
@@ -140,8 +137,8 @@ function validate(errorOnEmpty = false) {
     if (manualSignature || privateKey) {
         // Only perform signature validation if private key / manual signature are present
 
-        const sslCertificate = this.selectedLicenseContract.get().sslCertificate.get();
-        const certificateText = this.selectedLicenseContract.get().certificateText.get();
+        const sslCertificate = lob.licenseContracts.getSSLCertificate(this.selectedLicenseContract.get());
+        const certificateText = lob.licenseContracts.getCertificateText(this.selectedLicenseContract.get());
 
         if (sslCertificate && certificateText) {
             noErrors &= validateField(fieldToValidate, () => {
@@ -176,7 +173,9 @@ Template.signLicenseContract.onRendered(function() {
     Tracker.autorun(() => {
         let licenseContracts = lob.licenseContracts.getManagedLicenseContracts(Accounts.get());
         // Don't show license contracts that are already signed
-        licenseContracts = licenseContracts.filter((licenseContract) => !licenseContract.signature.get());
+        licenseContracts = licenseContracts.filter((licenseContract) => {
+            return !lob.licenseContracts.isSigned(licenseContract);
+        });
         this.licenseContracts.set(licenseContracts);
         setTimeout(() => this.onFormUpdate(), 0);
     });
@@ -195,16 +194,15 @@ Template.signLicenseContract.helpers({
         }
         return Template.instance().licenseContracts.get().map((licenseContract) => {
             return {
-                licenseContract,
-                selected: licenseContract.address.toLowerCase() === preselectedLicenseContract
+                address: licenseContract,
+                selected: licenseContract.toLowerCase() === preselectedLicenseContract
             }
         });
     },
     alreadySigned() {
         const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
-
         if (selectedLicenseContract) {
-            return selectedLicenseContract.signature.get();
+            return lob.licenseContracts.isSigned(selectedLicenseContract);
         } else {
             return false;
         }
@@ -241,9 +239,10 @@ Template.signLicenseContract.events({
 
         let {licenseContractAddress, manualSignature, privateKey, signMethod, gasPrice} = Template.instance().getValues();
         const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
+        const certificateText = lob.licenseContracts.getCertificateText(selectedLicenseContract);
 
-        const binSignature = computeSignature(signMethod, manualSignature, privateKey, selectedLicenseContract.certificateText.get());
-        const from = selectedLicenseContract.issuerAddress.get();
+        const binSignature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
+        const from = lob.licenseContracts.getIssuerAddress(licenseContractAddress);
 
         lob.licenseIssuing.signLicenseContract(licenseContractAddress, binSignature, from, gasPrice, (error) => {
             if (error) {
@@ -261,6 +260,6 @@ Template.licenseContractOption.helpers({
         return this.selected ? 'selected' : '';
     },
     address() {
-        return this.licenseContract.address;
+        return this.address;
     }
 });

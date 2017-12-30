@@ -21,7 +21,7 @@ function onFormUpdate() {
     this.selectedLicenseContract.set(licenseContract);
 
     if (licenseContract) {
-        const issuerAddress = lob.licenseContracts.getLicenseContract(licenseContract).issuerAddress.get();
+        const issuerAddress = lob.licenseContracts.getIssuerAddress(licenseContract);
         lob.licenseIssuing.estimateGas.revokeIssuance(licenseContract, issuanceID, issuerAddress, (error, gasConsumption) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(gasConsumption);
@@ -67,11 +67,11 @@ Template.revokeIssuance.onRendered(function() {
 Template.revokeIssuance.helpers({
     licenseContracts() {
         return Template.instance().licenseContracts.get()
-            .sort((lhs, rhs) => lhs.address.localeCompare(rhs.address))
+            .sort()
             .map((licenseContract) => {
                 return {
-                    licenseContract: licenseContract,
-                    selected: Template.instance().data.licenseContract === licenseContract.address
+                    address: licenseContract,
+                    selected: Template.instance().data.licenseContract === licenseContract
                 }
             });
     },
@@ -115,7 +115,7 @@ Template.revokeIssuance.events({
         }
 
         const {licenseContract, issuanceID, gasPrice} = Template.instance().getValues();
-        const issuerAddress = lob.licenseContracts.getLicenseContract(licenseContract).issuerAddress.get();
+        const issuerAddress = lob.licenseContracts.getIssuerAddress(licenseContract);
 
         lob.licenseIssuing.revokeIssuance(licenseContract, issuanceID, issuerAddress, gasPrice, (error) => {
             if (error) {
