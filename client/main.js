@@ -151,10 +151,10 @@ Template.body.helpers({
         return currentRoute === name ? 'active' : '';
     },
     enableInstallation() {
-        return Settings.enableInstallation().get();
+        return Settings.enableInstallation.get();
     },
     enableIssuerActions() {
-        return Settings.enableIssuerActions().get();
+        return Settings.enableIssuerActions.get();
     }
 });
 
@@ -168,5 +168,5 @@ Template.body.onCreated(function() {
 });
 
 Meteor.startup(function() {
-    TAPi18n.setLanguage(Settings.language().get());
+    TAPi18n.setLanguage(Settings.language.get());
 });
