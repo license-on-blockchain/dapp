@@ -1,4 +1,4 @@
-import { lob } from "../../lib/LOB";
+import {lob} from "../../lib/LOB";
 
 Template.managedLicenseContractList.helpers({
     licenseContracts() {

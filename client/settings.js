@@ -1,4 +1,4 @@
-import { Settings } from "../lib/Settings";
+import {Settings} from "../lib/Settings";
 
 Template.settings.helpers({
     enableInstallationChecked() {

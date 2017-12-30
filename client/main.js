@@ -1,7 +1,7 @@
-import { Template } from 'meteor/templating';
-import { lob } from "../lib/LOB";
-import { Settings } from "../lib/Settings";
-import { rootContracts } from "../lib/RootContracts";
+import {Template} from 'meteor/templating';
+import {lob} from "../lib/LOB";
+import {Settings} from "../lib/Settings";
+import {rootContracts} from "../lib/RootContracts";
 import './main.html';
 
 Router.route('/', function () {

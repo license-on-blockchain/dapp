@@ -1,8 +1,8 @@
-import { lob } from "../../lib/LOB";
-import { resetErrors, validateField } from "../../lib/FormHelpers";
-import { licenseTemplates } from "../../lib/licenseTemplates";
-import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
-import { NotificationCenter } from "../../lib/NotificationCenter";
+import {lob} from "../../lib/LOB";
+import {resetErrors, validateField} from "../../lib/FormHelpers";
+import {licenseTemplates} from "../../lib/licenseTemplates";
+import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
+import {NotificationCenter} from "../../lib/NotificationCenter";
 
 function getValues() {
     const licenseContractAddress = this.find('[name=licenseContract]').value;

@@ -1,9 +1,9 @@
 import forge from 'node-forge';
-import { lob } from "../../lib/LOB";
-import { CertificateChain } from "../../lib/CertificateChain";
-import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
-import { resetErrors, validateField } from "../../lib/FormHelpers";
-import { NotificationCenter } from "../../lib/NotificationCenter";
+import {lob} from "../../lib/LOB";
+import {CertificateChain} from "../../lib/CertificateChain";
+import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
+import {resetErrors, validateField} from "../../lib/FormHelpers";
+import {NotificationCenter} from "../../lib/NotificationCenter";
 import {privateKeyCache} from "../../lib/PrivateKeyCache";
 
 /**

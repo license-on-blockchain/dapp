@@ -1,5 +1,5 @@
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
-import {getLicenseContract, getRootContract} from "../../lib/lob/contractRetrieval";
+import {getRootContract} from "../../lib/lob/contractRetrieval";
 import {privateKeyCache} from "../../lib/PrivateKeyCache";
 import {EthNotificationCenter} from "../../lib/lob/EthNotificationCenter";
 

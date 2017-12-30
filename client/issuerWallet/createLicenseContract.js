@@ -1,9 +1,9 @@
-import { EthAccounts } from 'meteor/ethereum:accounts';
-import { CertificateChain } from "../../lib/CertificateChain";
-import { lob } from "../../lib/LOB";
-import { hexToBytes } from "../../lib/utils";
-import { rootContracts } from "../../lib/RootContracts";
-import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
+import {EthAccounts} from 'meteor/ethereum:accounts';
+import {CertificateChain} from "../../lib/CertificateChain";
+import {lob} from "../../lib/LOB";
+import {hexToBytes} from "../../lib/utils";
+import {rootContracts} from "../../lib/RootContracts";
+import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
 import {privateKeyCache} from "../../lib/PrivateKeyCache";
