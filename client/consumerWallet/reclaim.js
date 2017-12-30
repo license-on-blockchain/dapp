@@ -1,8 +1,8 @@
-import { lob } from "../../lib/LOB";
-import { IssuanceLocation } from "../../lib/IssuanceLocation";
-import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
-import { resetErrors, validateField } from "../../lib/FormHelpers";
+import {lob} from "../../lib/LOB";
+import {IssuanceLocation} from "../../lib/IssuanceLocation";
+import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {Accounts} from "../../lib/Accounts";
+import {NotificationCenter} from "../../lib/NotificationCenter";
 
 function getValues() {
     const reclaimer = TemplateVar.getFrom(this.find('[name=reclaimer]'), 'value');

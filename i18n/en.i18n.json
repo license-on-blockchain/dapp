@@ -45,7 +45,8 @@
   "licenses": {
     "title": "<strong>Licenses</strong>",
     "heading": {
-      "revokedLicenses": "Revoked licenses"
+      "revokedLicenses": "Revoked licenses",
+      "latestTransfers": "Latest transfers"
     },
     "hover": {
       "ownedBalance": "Licenses owned by you",
@@ -63,6 +64,30 @@
       "licenses_completely_transferred_indirectly": "The licenses have been completely transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
       "licenses_partially_transferred_indirectly": "%s licenses have been transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
       "no_owned_licenses": "You do not currently own any licenses of this issuing."
+    },
+    "pendingTransactionRow": {
+      "transactionType": {
+        "transfer": "Transfer",
+        "reclaimableTransfer": "Reclaimable Transfer",
+        "reclaim": "Reclaim"
+      },
+      "confirmation": "__count__ confirmation",
+      "confirmation_plural": "__count__ confirmations",
+      "unconfirmed": "unconfirmed",
+      "monthAbbrevations": {
+        "1": "Jan",
+        "2": "Feb",
+        "3": "Mar",
+        "4": "Apr",
+        "5": "May",
+        "6": "Jun",
+        "7": "Jul",
+        "8": "Aug",
+        "9": "Sep",
+        "10": "Oct",
+        "11": "Nov",
+        "12": "Dez"
+      }
     }
   },
   "licenseCertificate": {

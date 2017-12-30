@@ -19,8 +19,47 @@
                     </tbody>
                 </table>
             {{/if}}
+            {{#if hasPendingTransfers}}
+                <h2>{{_ "licenses.heading.latestTransfers"}}</h2>
+                <table class="dapp-zebra">
+                    <tbody>
+                    {{#each pendingTransfers}}
+                        {{> pendingTransactionRow}}
+                    {{/each}}
+                    </tbody>
+                </table>
+            {{/if}}
         </main>
     </div>
+</template>
+
+<template name="pendingTransactionRow">
+    <tr class="pendingTransactionRow">
+        <td class="date simptip-position-right" data-tooltip="{{fullDate}}">
+            <h2>{{month}}</h2>
+            <p>{{day}}</p>
+        </td>
+        <td>
+            <h2>{{type}}</h2>
+            <p>
+                <span class="address">
+                    {{> dapp_identicon identity=from class="dapp-tiny"}}
+                    {{from}}
+                </span>
+                <span class="arrow">➔</span>
+                <span class="address">
+                    {{> dapp_identicon identity=to class="dapp-tiny"}}
+                    {{to}}
+                </span>
+            </p>
+        </td>
+        <td>
+            {{confirmationStatus}}
+        </td>
+        <td class="amount">
+            {{amount}}
+        </td>
+    </tr>
 </template>
 
 <template name="licenseRow">
