@@ -39,7 +39,7 @@ function validate(errorOnEmpty = false) {
     noErrors &= validateField('from', web3.isAddress(from), errorOnEmpty && from, TAPi18n.__("reclaim.error.from_not_valid"));
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__("reclaim.error.amount_not_specified"));
     if (issuanceLocation) {
-        const reclaimableBalance = lob.balances.getOpenReclaims(reclaimer).getReclaimableBalanceFrom(issuanceLocation, from);
+        const reclaimableBalance = lob.balances.getReclaimableBalanceFrom(reclaimer, issuanceLocation, from);
         noErrors &= validateField('amount', amount <= reclaimableBalance, amount, TAPi18n.__("reclaim.error.amount_less_than_balance", reclaimableBalance));
     }
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__("reclaim.error.amount_zero"));
@@ -74,7 +74,7 @@ Template.reclaim.onRendered(function() {
         if (!selectedReclaimer || !selectedIssuanceLocation) {
             newReclaimOrigins = [];
         } else {
-            newReclaimOrigins = lob.balances.getOpenReclaims(selectedReclaimer).getReclaimOrigins(selectedIssuanceLocation)
+            newReclaimOrigins = lob.balances.getReclaimOrigins(selectedIssuanceLocation, selectedReclaimer)
                 .map((address) => {
                     return {
                         issuanceLocation: selectedIssuanceLocation,
@@ -83,7 +83,7 @@ Template.reclaim.onRendered(function() {
                     }
                 })
                 .filter((obj) => {
-                    return lob.balances.getOpenReclaims(obj.reclaimer).getReclaimableBalanceFrom(obj.issuanceLocation, obj.currentOwner) > 0;
+                    return lob.balances.getReclaimableBalanceFrom(obj.issuanceLocation, obj.reclaimer, obj.currentOwner) > 0;
                 });
         }
         this.reclaimOrigins.set(newReclaimOrigins);
@@ -92,15 +92,7 @@ Template.reclaim.onRendered(function() {
     });
 
     Tracker.autorun(() => {
-        const issuanceLocationsSet = new Set();
-
-        for (const address of Accounts.get()) {
-            const merge = lob.balances.getOpenReclaims(address).getReclaimableIssuanceLocations();
-            for (const issuanceLocation of merge) {
-                issuanceLocationsSet.add(issuanceLocation);
-            }
-        }
-        const issuanceLocations = Array.from(issuanceLocationsSet)
+        const issuanceLocations = lob.balances.getReclaimableIssuanceLocations(Accounts.get())
             .map((issuanceLocation) => {
                 return {
                     issuanceLocation,
@@ -109,7 +101,7 @@ Template.reclaim.onRendered(function() {
                 }
             })
             .filter((obj) => {
-                return lob.balances.getOpenReclaims(this.selectedReclaimer.get()).getReclaimableBalance(obj.issuanceLocation) > 0;
+                return lob.balances.getReclaimableBalance(obj.issuanceLocation, this.selectedReclaimer.get()) > 0;
             });
         this.issuanceLocations.set(issuanceLocations);
 
@@ -173,7 +165,7 @@ Template.reclaimIssuanceOption.helpers({
     balance() {
         let balance = 0;
         for (const account of Accounts.get()) {
-            balance += lob.balances.getOpenReclaims(account).getReclaimableBalance(this.issuanceLocation);
+            balance += lob.balances.getReclaimableBalance(this.issuanceLocation, account);
         }
         return balance;
     },
@@ -181,7 +173,7 @@ Template.reclaimIssuanceOption.helpers({
 
 Template.reclaimOriginOption.helpers({
     reclaimableBalance() {
-        return lob.balances.getOpenReclaims(this.reclaimer).getReclaimableBalanceFrom(this.issuanceLocation, this.currentOwner);
+        return lob.balances.getReclaimableBalanceFrom(this.issuanceLocation, this.reclaimer, this.currentOwner);
     },
     address() {
         return this.currentOwner;
