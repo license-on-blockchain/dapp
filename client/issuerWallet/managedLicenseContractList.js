@@ -1,8 +1,9 @@
 import {lob} from "../../lib/LOB";
+import {Accounts} from "../../lib/Accounts";
 
 Template.managedLicenseContractList.helpers({
     licenseContracts() {
-        return lob.licenseContracts.getManagedLicenseContracts(lob.accounts.get()).sort((lhs, rhs) => lhs.address.localeCompare(rhs.address));
+        return lob.licenseContracts.getManagedLicenseContracts(Accounts.get()).sort((lhs, rhs) => lhs.address.localeCompare(rhs.address));
     }
 });
 

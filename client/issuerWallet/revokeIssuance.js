@@ -2,6 +2,7 @@ import {lob} from "../../lib/LOB";
 import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {NotificationCenter} from "../../lib/NotificationCenter";
+import {Accounts} from "../../lib/Accounts";
 
 function getValues() {
     let licenseContract = this.find('[name=licenseContract]').value;
@@ -58,7 +59,7 @@ Template.revokeIssuance.onCreated(function() {
 
 Template.revokeIssuance.onRendered(function() {
     Tracker.autorun(() => {
-        this.licenseContracts.set(lob.licenseContracts.getManagedLicenseContracts(lob.accounts.get()));
+        this.licenseContracts.set(lob.licenseContracts.getManagedLicenseContracts(Accounts.get()));
         setTimeout(() => this.onFormUpdate(), 0);
     })
 });

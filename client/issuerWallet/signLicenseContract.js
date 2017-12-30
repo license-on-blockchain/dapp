@@ -5,6 +5,7 @@ import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
 import {privateKeyCache} from "../../lib/PrivateKeyCache";
+import {Accounts} from "../../lib/Accounts";
 
 /**
  * Depending on the chosen signing method, either compute the signature or use the passed manual signature. Should the
@@ -173,7 +174,7 @@ Template.signLicenseContract.onCreated(function() {
 
 Template.signLicenseContract.onRendered(function() {
     Tracker.autorun(() => {
-        let licenseContracts = lob.licenseContracts.getManagedLicenseContracts(lob.accounts.get());
+        let licenseContracts = lob.licenseContracts.getManagedLicenseContracts(Accounts.get());
         // Don't show license contracts that are already signed
         licenseContracts = licenseContracts.filter((licenseContract) => !licenseContract.signature.get());
         this.licenseContracts.set(licenseContracts);

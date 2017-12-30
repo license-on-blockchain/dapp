@@ -2,6 +2,7 @@ import { lob } from "../../lib/LOB";
 import { IssuanceLocation } from "../../lib/IssuanceLocation";
 import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
 import { resetErrors, validateField } from "../../lib/FormHelpers";
+import {Accounts} from "../../lib/Accounts";
 
 function getValues() {
     const reclaimer = TemplateVar.getFrom(this.find('[name=reclaimer]'), 'value');
@@ -93,7 +94,7 @@ Template.reclaim.onRendered(function() {
     Tracker.autorun(() => {
         const issuanceLocationsSet = new Set();
 
-        for (const address of lob.accounts.get()) {
+        for (const address of Accounts.get()) {
             const merge = lob.balances.getOpenReclaims(address).getReclaimableIssuanceLocations();
             for (const issuanceLocation of merge) {
                 issuanceLocationsSet.add(issuanceLocation);
@@ -171,7 +172,7 @@ Template.reclaimIssuanceOption.helpers({
     },
     balance() {
         let balance = 0;
-        for (const account of lob.accounts.get()) {
+        for (const account of Accounts.get()) {
             balance += lob.balances.getOpenReclaims(account).getReclaimableBalance(this.issuanceLocation);
         }
         return balance;

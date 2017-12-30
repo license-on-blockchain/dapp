@@ -3,6 +3,7 @@ import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {licenseTemplates} from "../../lib/licenseTemplates";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {NotificationCenter} from "../../lib/NotificationCenter";
+import {Accounts} from "../../lib/Accounts";
 
 function getValues() {
     const licenseContractAddress = this.find('[name=licenseContract]').value;
@@ -83,7 +84,7 @@ Template.issueLicense.onCreated(function() {
 
 Template.issueLicense.onRendered(function() {
     Tracker.autorun(() => {
-        let licenseContracts = lob.licenseContracts.getManagedLicenseContracts(lob.accounts.get());
+        let licenseContracts = lob.licenseContracts.getManagedLicenseContracts(Accounts.get());
         // Don't show license contracts that are not signed yet
         licenseContracts = licenseContracts.filter((licenseContract) => licenseContract.signature.get());
         this.licenseContracts.set(licenseContracts);

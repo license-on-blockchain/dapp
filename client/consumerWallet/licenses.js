@@ -2,9 +2,10 @@ import {lob} from "../../lib/LOB.js";
 import {drawLicenseHistory} from '../../lib/licenseHistory';
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {CertificateChain} from "../../lib/CertificateChain";
+import {Accounts} from "../../lib/Accounts";
 
 function getLicenseRows(revoked) {
-    return lob.balances.getNonZeroBalanceIssuanceLocations(lob.accounts.get())
+    return lob.balances.getNonZeroBalanceIssuanceLocations(Accounts.get())
         .map((issuanceLocation) => {
             return {
                 issuanceLocation: issuanceLocation,
@@ -13,7 +14,7 @@ function getLicenseRows(revoked) {
             };
         })
         .filter((obj) => obj.metadata.revoked === revoked)
-        .filter((obj) => obj.balance.getBalance(lob.accounts.get()) > 0)
+        .filter((obj) => obj.balance.getBalance(Accounts.get()) > 0)
         .sort((lhs, rhs) => {
             // Sort based on description
             const lhsDescription = lhs.metadata.description;
@@ -49,13 +50,13 @@ Template.licenseRow.helpers({
         return this.revoked;
     },
     balance() {
-        return this.balance.getOwnedBalance(lob.accounts.get()).toNumber();
+        return this.balance.getOwnedBalance(Accounts.get()).toNumber();
     },
     borrowedBalance() {
-        return this.balance.getBorrowedBalance(lob.accounts.get()).toNumber();
+        return this.balance.getBorrowedBalance(Accounts.get()).toNumber();
     },
     maxBalanceAddress() {
-        return this.balance.getAllOwnedBalances(lob.accounts.get()).reduce(([lhsAddress, lhsBalance], [rhsAddress, rhsBalance]) => {
+        return this.balance.getAllOwnedBalances(Accounts.get()).reduce(([lhsAddress, lhsBalance], [rhsAddress, rhsBalance]) => {
             return lhsBalance.comparedTo(rhsBalance) < 0 ? [rhsAddress, rhsBalance] : [lhsAddress, lhsBalance];
         }, [undefined, new BigNumber(-1)])[0];
     },
@@ -99,7 +100,7 @@ function transferDescription(transfers) {
         case 1:
             return TAPi18n.__('licenses.transferDescription.licenses_not_transferred');
         case 2:
-            const recipient = transfers[1].args.to + ((lob.accounts.get().indexOf(transfers[1].args.to) !== -1) ? " (Ihre Adresse)" : "");
+            const recipient = transfers[1].args.to + ((Accounts.get().indexOf(transfers[1].args.to) !== -1) ? " (Ihre Adresse)" : "");
             if (transfers[0].args.amount === transfers[1].args.amount) {
                 return TAPi18n.__('licenses.transferDescription.licenses_completely_transferred', recipient);
             } else {
@@ -110,7 +111,7 @@ function transferDescription(transfers) {
             const latestSnapshot = snapshots[snapshots.length - 1];
             let userBalance = 0;
             for (const address of Object.keys(latestSnapshot)) {
-                if (lob.accounts.get().indexOf(address) !== -1) {
+                if (Accounts.get().indexOf(address) !== -1) {
                     userBalance += latestSnapshot[address];
                 }
             }
