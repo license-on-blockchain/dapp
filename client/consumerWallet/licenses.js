@@ -230,7 +230,7 @@ Template.licenseHistory.onRendered(function() {
         const canvas = Template.instance().find('#graphContainer');
 
         const issuance = lob.issuances.getIssuance(issuanceLocation);
-        const issuerName = lob.getIssuerName(issuanceLocation.licenseContract);
+        const issuerName = lob.licenseContracts.getIssuerName(issuanceLocation.licenseContractAddress);
 
         lob.balances.getLicenseTransfers(issuanceLocation, (error, transfers) => {
             if (error) { handleUnknownEthereumError(error); return; }

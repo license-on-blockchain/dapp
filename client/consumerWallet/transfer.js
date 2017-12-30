@@ -99,6 +99,7 @@ Template.transfer.helpers({
                     selected: (issuanceLocation.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceLocation.issuanceID === selectedIssuanceID),
                 }
             })
+            .filter((obj) => !obj.metadata.revoked)
             .filter((obj) => lob.balances.getOwnedBalance(obj.issuanceLocation, selectedSenderAccount.get()) > 0);
     },
     gasPrice() {

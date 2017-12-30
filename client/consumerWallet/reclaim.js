@@ -39,7 +39,7 @@ function validate(errorOnEmpty = false) {
     noErrors &= validateField('from', web3.isAddress(from), errorOnEmpty && from, TAPi18n.__("reclaim.error.from_not_valid"));
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__("reclaim.error.amount_not_specified"));
     if (issuanceLocation) {
-        const reclaimableBalance = lob.balances.getReclaimableBalanceFrom(reclaimer, issuanceLocation, from);
+        const reclaimableBalance = lob.balances.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from);
         noErrors &= validateField('amount', amount <= reclaimableBalance, amount, TAPi18n.__("reclaim.error.amount_less_than_balance", reclaimableBalance));
     }
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__("reclaim.error.amount_zero"));
