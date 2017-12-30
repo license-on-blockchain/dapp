@@ -13,22 +13,8 @@ function getLicenseRows(revoked) {
             };
         })
         .filter((obj) => obj.metadata.revoked === revoked)
-        .filter((obj) => lob.balances.getBalance(obj.issuanceLocation, Accounts.get()) > 0)
         .sort((lhs, rhs) => {
-            // Sort based on description
-            const lhsDescription = lhs.metadata.description;
-            const rhsDescription = rhs.metadata.description;
-            if (lhsDescription && rhsDescription) {
-                if (lhsDescription < rhsDescription) {
-                    return -1;
-                } else if (lhsDescription > rhsDescription) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            } else {
-                return 0;
-            }
+            return lhs.metadata.description.localeCompare(rhs.metadata.description);
         });
 }
 
@@ -60,8 +46,8 @@ Template.licenseRow.helpers({
                 return [account, lob.balances.getOwnedBalance(this.issuanceLocation, account)];
             })
             .reduce(([lhsAddress, lhsBalance], [rhsAddress, rhsBalance]) => {
-                return lhsBalance.comparedTo(rhsBalance) < 0 ? [rhsAddress, rhsBalance] : [lhsAddress, lhsBalance];
-            }, [undefined, new BigNumber(-1)])[0];
+                return lhsBalance > rhsBalance ? [lhsAddress, lhsBalance] : [rhsAddress, rhsBalance];
+            }, [undefined, -1])[0];
     },
     description() {
         return this.metadata.description;

@@ -2,7 +2,7 @@
     <div class="dapp-flex-content">
         <main class="dapp-content">
             <h1>{{{_ "licenses.title"}}}</h1>
-            <table class="dapp-zebra">
+            <table class="dapp-zebra licensesTable">
                 <tbody>
                 {{#each licenses}}
                     {{> licenseRow}}
@@ -11,7 +11,7 @@
             </table>
             {{#if revokedLicenses}}
                 <h2>{{_ "licenses.heading.revokedLicenses"}}</h2>
-                <table class="dapp-zebra">
+                <table class="dapp-zebra licensesTable">
                     <tbody>
                     {{#each revokedLicenses}}
                         {{> licenseRow}}
