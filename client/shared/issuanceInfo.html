@@ -1,0 +1,65 @@
+<template name="issuanceInfo">
+
+    <div class="issuanceInfo">
+        <h1>{{description}}</h1>
+        <h2>{{code}}
+        </h2>
+        <h3>{{_ "issuanceInfo.heading.details"}}</h3>
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td><strong>{{_ "issuanceInfo.field.licenseContractAddress"}}</strong></td>
+                <td>{{licenseContract}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "issuanceInfo.field.issuanceID"}}</strong></td>
+                <td>{{issuanceID}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "issuanceInfo.field.originalOwner"}}</strong></td>
+                <td>{{originalOwner}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "issuanceInfo.field.originalSupply"}}</strong></td>
+                <td>{{originalSupply}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "issuanceInfo.field.auditTime"}}</strong></td>
+                <td>{{auditTime}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "issuanceInfo.field.auditRemark"}}</strong></td>
+                <td>{{auditRemark}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "issuanceInfo.field.revoked"}}</strong></td>
+                <td>
+                    {{#if revoked}}
+                        {{_ "generic.yes"}}
+                    {{else}}
+                        {{_ "generic.no"}}
+                    {{/if}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>{{_ "issuanceInfo.heading.balances"}}</h3>
+        <table class="dapp-zebra">
+            <tbody>
+            {{#each balances}}
+                <tr>
+                    <td><strong>{{address}}</strong></td>
+                    <td>{{balance}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="dapp-modal-buttons">
+        <button class="showCertificate">{{_ "issuanceInfo.button.showCertificate"}}</button>
+        <button class="showTransferHistory">{{_ "issuanceInfo.button.showTransferHistory"}}</button>
+        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
+    </div>
+</template>

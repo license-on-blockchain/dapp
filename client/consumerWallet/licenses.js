@@ -5,6 +5,7 @@ import {CertificateChain} from "../../lib/CertificateChain";
 import {Accounts} from "../../lib/Accounts";
 import {TransactionType} from "../../lib/lob/Transactions";
 import {IssuanceLocation} from "../../lib/IssuanceLocation";
+import {formatDate} from "../../lib/utils";
 
 function getLicenseRows(revoked) {
     return lob.balances.getNonZeroBalanceIssuanceLocations(Accounts.get())
@@ -72,6 +73,15 @@ Template.licenseRow.helpers({
 });
 
 Template.licenseRow.events({
+    'click a.showIssuanceInfo'() {
+        EthElements.Modal.show({
+            template: 'issuanceInfo',
+            data: {
+                issuanceLocation: Template.instance().data.issuanceLocation
+            },
+            class: 'mediumModal'
+        });
+    },
     'click a.showCertificate'() {
         EthElements.Modal.show({
             template: 'licenseCertificate',
@@ -116,7 +126,7 @@ Template.pendingTransactionRow.helpers({
         return transactionType + " (" + issuanceDescription + ")";
     },
     fullDate() {
-        return dateFormat(new Date(this.timestamp));
+        return formatDate(new Date(this.timestamp));
     },
     month() {
         const month = new Date(this.timestamp).getMonth() + 1;
@@ -167,10 +177,6 @@ function transferDescription(transfers) {
                 return TAPi18n.__('licenses.transferDescription.licenses_partially_transferred_indirectly', userBalance);
             }
     }
-}
-
-function dateFormat(date) {
-    return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
 }
 
 Template.licenseCertificate.onCreated(function() {
@@ -227,7 +233,7 @@ Template.licenseCertificate.helpers({
         return Template.instance().issuance.originalOwner;
     },
     auditTime() {
-        return dateFormat(new Date(Template.instance().issuance.auditTime * 1000));
+        return formatDate(new Date(Template.instance().issuance.auditTime * 1000));
     },
     originalSupply() {
         return Template.instance().issuance.originalSupply;

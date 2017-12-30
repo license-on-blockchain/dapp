@@ -9,6 +9,8 @@
     "license": "License",
     "license_plural": "Licenses",
     "OK": "OK",
+    "yes": "Yes",
+    "no": "No",
     "loading": "Loading…",
     "transaction_successfully_submitted": "Transaction successfully submitted"
   },
@@ -112,6 +114,26 @@
   "licenseHistory": {
     "license_contract": "License contract",
     "your_address": "Your address"
+  },
+  "issuanceInfo": {
+    "heading": {
+      "details": "Details",
+      "balances": "Balances"
+    },
+    "field": {
+      "code": "Code",
+      "licenseContractAddress": "License Contract",
+      "issuanceID": "Issuance ID",
+      "originalOwner": "Original Owner",
+      "originalSupply": "Original Supply",
+      "auditTime": "Audit Date",
+      "auditRemark": "Audit Remark",
+      "revoked": "Revoked"
+    },
+    "button": {
+      "showCertificate": "Certificate",
+      "showTransferHistory": "Transfer History"
+    }
   },
   "reclaim": {
     "title": "<strong>Reclaim</strong> licenses",

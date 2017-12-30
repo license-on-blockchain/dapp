@@ -64,7 +64,7 @@
 
 <template name="licenseRow">
     <tr>
-        <td><strong>{{description}}</strong></td>
+        <td><a href="#" class="showIssuanceInfo"><strong>{{description}}</strong></a></td>
         <td>
             <span title="{{_ "licenses.hover.ownedBalance"}}">{{balance}}</span>
             {{#if borrowedBalance}}

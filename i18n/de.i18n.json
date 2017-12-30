@@ -9,6 +9,8 @@
     "license": "Lizenz",
     "license_plural": "Lizenzen",
     "OK": "OK",
+    "yes": "Ja",
+    "no": "Nein",
     "loading": "Loading…",
     "transaction_successfully_submitted": "Transaktion wurde erfolgreich auf die Ethereum-Blockchain übertragen"
   },
@@ -112,6 +114,26 @@
   "licenseHistory": {
     "license_contract": "Smart Contract der Bescheinigungsstelle",
     "your_address": "Ihre öffentliche Adresse auf der Ethereum-Blockchain"
+  },
+  "issuanceInfo": {
+    "heading": {
+      "details": "Details",
+      "balances": "Saldo"
+    },
+    "field": {
+      "code": "Lizenzcode",
+      "licenseContractAddress": "Smart Contract zur Bescheinigung der Lizenzen",
+      "issuanceID": "Bescheinigungs-ID",
+      "originalOwner": "Erster Lizenzbesitzer",
+      "originalSupply": "Anzahl",
+      "auditTime": "Zeitpunkt der Bescheinigung",
+      "auditRemark": "Anmerkung zum Lizenz-Audit",
+      "revoked": "Widerrufen"
+    },
+    "button": {
+      "showCertificate": "Certificate",
+      "showTransferHistory": "Transfer History"
+    }
   },
   "reclaim": {
     "title": "Lizenzen <strong>zurückfordern</strong>",
