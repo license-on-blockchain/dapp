@@ -9,12 +9,11 @@ function getLicenseRows(revoked) {
         .map((issuanceLocation) => {
             return {
                 issuanceLocation: issuanceLocation,
-                balance: lob.balances.getBalanceForIssuanceLocation(issuanceLocation),
                 metadata: lob.issuances.getIssuance(issuanceLocation) || {}
             };
         })
         .filter((obj) => obj.metadata.revoked === revoked)
-        .filter((obj) => obj.balance.getBalance(Accounts.get()) > 0)
+        .filter((obj) => lob.balances.getBalance(obj.issuanceLocation, Accounts.get()) > 0)
         .sort((lhs, rhs) => {
             // Sort based on description
             const lhsDescription = lhs.metadata.description;
@@ -50,15 +49,19 @@ Template.licenseRow.helpers({
         return this.revoked;
     },
     balance() {
-        return this.balance.getOwnedBalance(Accounts.get()).toNumber();
+        return lob.balances.getOwnedBalance(this.issuanceLocation, Accounts.get());
     },
     borrowedBalance() {
-        return this.balance.getBorrowedBalance(Accounts.get()).toNumber();
+        return lob.balances.getBorrowedBalance(this.issuanceLocation, Accounts.get());
     },
     maxBalanceAddress() {
-        return this.balance.getAllOwnedBalances(Accounts.get()).reduce(([lhsAddress, lhsBalance], [rhsAddress, rhsBalance]) => {
-            return lhsBalance.comparedTo(rhsBalance) < 0 ? [rhsAddress, rhsBalance] : [lhsAddress, lhsBalance];
-        }, [undefined, new BigNumber(-1)])[0];
+        return Accounts.get()
+            .map((account) => {
+                return [account, lob.balances.getOwnedBalance(this.issuanceLocation, account)];
+            })
+            .reduce(([lhsAddress, lhsBalance], [rhsAddress, rhsBalance]) => {
+                return lhsBalance.comparedTo(rhsBalance) < 0 ? [rhsAddress, rhsBalance] : [lhsAddress, lhsBalance];
+            }, [undefined, new BigNumber(-1)])[0];
     },
     description() {
         return this.metadata.description;

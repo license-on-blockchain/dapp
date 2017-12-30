@@ -56,7 +56,7 @@ function validate(errorOnEmpty = false) {
     noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'));
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'));
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('transfer.error.amount_zero'));
-    noErrors &= validateField('amount', amount <= lob.balances.getBalanceForIssuanceLocation(issuanceLocation).getOwnedBalance(sender).toNumber(), amount, TAPi18n.__('transfer.error.amount_less_than_balance'));
+    noErrors &= validateField('amount', amount <= lob.balances.getOwnedBalance(issuanceLocation, sender), amount, TAPi18n.__('transfer.error.amount_less_than_balance'));
 
     return noErrors;
 }
@@ -96,11 +96,10 @@ Template.transfer.helpers({
                 return {
                     issuanceLocation,
                     metadata: lob.issuances.getIssuance(issuanceLocation) || {},
-                    balance: lob.balances.getBalanceForIssuanceLocation(issuanceLocation),
                     selected: (issuanceLocation.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceLocation.issuanceID === selectedIssuanceID),
                 }
             })
-            .filter((obj) => obj.balance.getOwnedBalance(selectedSenderAccount.get()) > 0);
+            .filter((obj) => lob.balances.getOwnedBalance(obj.issuanceLocation, selectedSenderAccount.get()) > 0);
     },
     gasPrice() {
         return EthBlocks.latest.gasPrice;
@@ -161,6 +160,6 @@ Template.issuanceOption.helpers({
         return this.metadata.description;
     },
     balance() {
-        return this.balance.getOwnedBalance(selectedSenderAccount.get());
+        return lob.balances.getOwnedBalance(this.issuanceLocation, selectedSenderAccount.get());
     },
 });
