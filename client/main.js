@@ -159,9 +159,12 @@ Template.body.helpers({
 });
 
 Template.body.onCreated(function() {
-    for (const rootContractAddress of Object.keys(rootContracts)) {
-        lob.watchRootContract(rootContractAddress);
-    }
+    // TODO: Hack: Allow PersistentMinimongo2 to load values from storage
+    setTimeout(() => {
+        for (const rootContractAddress of Object.keys(rootContracts)) {
+            lob.watchRootContract(rootContractAddress);
+        }
+    }, 0);
 });
 
 Meteor.startup(function() {
