@@ -2,7 +2,7 @@ import {EthAccounts} from 'meteor/ethereum:accounts';
 import {CertificateChain} from "../../lib/CertificateChain";
 import {lob} from "../../lib/LOB";
 import {hexToBytes} from "../../lib/utils";
-import {rootContracts} from "../../lib/RootContracts";
+import {RootContracts} from "../../lib/RootContracts";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
@@ -80,9 +80,7 @@ Template.createLicenseContract.helpers({
     myAccounts() {
         return EthAccounts.find().fetch();
     },
-    rootContracts: Object.entries(rootContracts).map(([address, name]) => {
-        return {address, name};
-    }),
+    rootContracts: RootContracts.getAddressesAndNames(),
     gasPrice() {
         return EthBlocks.latest.gasPrice;
     },

@@ -1,7 +1,7 @@
 import {Template} from 'meteor/templating';
 import {lob} from "../lib/LOB";
 import {Settings} from "../lib/Settings";
-import {rootContracts} from "../lib/RootContracts";
+import {RootContracts} from "../lib/RootContracts";
 import './main.html';
 
 Router.route('/', function () {
@@ -76,16 +76,6 @@ Router.route('/licensecontracts', function() {
     name: 'licensecontracts'
 });
 
-Router.route('/licensecontracts/:address', function() {
-    this.render('manageLicenseContract', {
-        data: {
-            address: this.params.address
-        }
-    })
-}, {
-    name: 'manageLicenseContract'
-});
-
 Router.route('/licensecontracts/create', function() {
     this.render('createLicenseContract');
 });
@@ -136,6 +126,16 @@ Router.route('/licensecontracts/revoke/:licenseContractAddress/:issuanceID', fun
     })
 });
 
+Router.route('/licensecontracts/:address', function() {
+    this.render('manageLicenseContract', {
+        data: {
+            address: this.params.address
+        }
+    })
+}, {
+    name: 'manageLicenseContract'
+});
+
 
 Template.body.helpers({
     activeIfCurrentRoute(name) {
@@ -161,7 +161,7 @@ Template.body.helpers({
 Template.body.onCreated(function() {
     // TODO: Hack: Allow PersistentMinimongo2 to load values from storage
     setTimeout(() => {
-        for (const rootContractAddress of Object.keys(rootContracts)) {
+        for (const rootContractAddress of RootContracts.getAddresses()) {
             lob.watchRootContract(rootContractAddress);
         }
     }, 0);
