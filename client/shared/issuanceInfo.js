@@ -1,6 +1,17 @@
 import {lob} from "../../lib/LOB";
 import {formatDate} from "../../lib/utils";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
+import {LicenseContractInfo} from "./licenseContractInfo";
+
+export const IssuanceInfo = {
+    show(issuanceLocation) {
+        EthElements.Modal.show({
+            template: 'issuanceInfo',
+            data: {issuanceLocation},
+            class: 'mediumModal'
+        });
+    }
+};
 
 Template.issuanceInfo.onCreated(function() {
     this.data.issuance = new ReactiveVar({});
@@ -62,6 +73,9 @@ Template.issuanceInfo.helpers({
 Template.issuanceInfo.events({
     'click button.hideModal'() {
         EthElements.Modal.hide();
+    },
+    'click a.showLicenseContractInfo'() {
+        LicenseContractInfo.show(Template.instance().data.issuanceLocation.licenseContractAddress)
     },
     'click button.showCertificate'() {
         EthElements.Modal.show({

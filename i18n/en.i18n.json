@@ -115,6 +115,21 @@
     "license_contract": "License contract",
     "your_address": "Your address"
   },
+  "licenseContractInfo": {
+    "title": "License Contract",
+    "heading": {
+      "details": "Details",
+      "issuances": "Issuances",
+      "certificateText": "Certificate Text"
+    },
+    "field": {
+      "issuerName": "Issuer Name",
+      "issuerAddress": "Issuer Address",
+      "signed": "Signed",
+      "fee": "Issuing Fee",
+      "rootContract": "LOB Root Contract"
+    }
+  },
   "issuanceInfo": {
     "heading": {
       "details": "Details",

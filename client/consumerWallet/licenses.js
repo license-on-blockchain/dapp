@@ -6,6 +6,7 @@ import {Accounts} from "../../lib/Accounts";
 import {TransactionType} from "../../lib/lob/Transactions";
 import {IssuanceLocation} from "../../lib/IssuanceLocation";
 import {formatDate} from "../../lib/utils";
+import {IssuanceInfo} from "../shared/issuanceInfo";
 
 function getLicenseRows(revoked) {
     return lob.balances.getNonZeroBalanceIssuanceLocations(Accounts.get())
@@ -74,13 +75,7 @@ Template.licenseRow.helpers({
 
 Template.licenseRow.events({
     'click a.showIssuanceInfo'() {
-        EthElements.Modal.show({
-            template: 'issuanceInfo',
-            data: {
-                issuanceLocation: Template.instance().data.issuanceLocation
-            },
-            class: 'mediumModal'
-        });
+        IssuanceInfo.show(Template.instance().data.issuanceLocation);
     },
     'click a.showCertificate'() {
         EthElements.Modal.show({

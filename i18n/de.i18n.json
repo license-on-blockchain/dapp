@@ -115,6 +115,21 @@
     "license_contract": "Smart Contract der Bescheinigungsstelle",
     "your_address": "Ihre öffentliche Adresse auf der Ethereum-Blockchain"
   },
+  "licenseContractInfo": {
+    "title": "Smart Contract zur Bescheinigung der Lizenzen",
+    "heading": {
+      "details": "Details",
+      "issuances": "Lizenausstellungen",
+      "certificateText": "Zertifikatstext"
+    },
+    "field": {
+      "issuerName": "Name des Ausstellers",
+      "issuerAddress": "Adresse des Ausstellers",
+      "signed": "Signiert",
+      "fee": "Ausstellungsgebühr",
+      "rootContract": "LOB Root Contract"
+    }
+  },
   "issuanceInfo": {
     "heading": {
       "details": "Details",
