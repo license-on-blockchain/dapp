@@ -245,8 +245,8 @@
   "managedLicenseContractList": {
     "title": "<strong>Smart Contracts zur Bescheinigung von Lizenzen</strong>, über die Sie verfügen",
     "button": {
-      "sign": "Unterzeichnet",
-      "issue": "Augestellt"
+      "sign": "Unterzeichnen",
+      "issue": "Ausstellen"
     },
     "createContractLink": "Neuen Smart Contract zur Bescheinigung von Lizenzen <a href='/licensecontracts/create'>erstellen</a>"
   },
