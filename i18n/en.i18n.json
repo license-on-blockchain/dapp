@@ -254,6 +254,7 @@
   },
   "manageLicenseContract": {
     "title": "<strong>Manage</strong> license contract",
+    "revoked": "Revoked",
     "button": {
       "revokeIssuance": "Revoke"
     }

@@ -254,6 +254,7 @@
   },
   "manageLicenseContract": {
     "title": "Smart Contracts zur Bescheinigung von Lizenzen <strong>verwalten</strong>",
+    "revoked": "Widerrufen",
     "button": {
       "revokeIssuance": "Lizenzausstellung widerrufen"
     }

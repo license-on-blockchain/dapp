@@ -65,7 +65,7 @@
 <template name="licenseRow">
     <tr class="clickable">
         <td><strong>{{description}}</strong></td>
-        <td>
+        <td class="buttonColumn">
             <span title="{{_ "licenses.hover.ownedBalance"}}">{{balance}}</span>
             {{#if borrowedBalance}}
                 <span title="{{_ "licenses.hover.borrowedBalance"}}">
@@ -73,13 +73,13 @@
                 </span>
             {{/if}}
         </td>
-        {{#if revoked}}
-            <td></td>
-        {{else}}
-            <td><a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> {{_ "licenses.button.transfer"}}</a></td>
-        {{/if}}
-        <td><a class="showCertificate" href="#"><i class="icon-doc"></i> {{_ "licenses.button.certificate"}}</a></td>
-        <td><a class="showHistory" href="#"><i class="icon-graph"></i> {{_ "licenses.button.history"}}</a></td>
+        <td class="buttonColumn">
+        {{#unless revoked}}
+            <a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> {{_ "licenses.button.transfer"}}</a>
+        {{/unless}}
+        </td>
+        <td class="buttonColumn"><a class="showCertificate" href="#"><i class="icon-doc"></i> {{_ "licenses.button.certificate"}}</a></td>
+        <td class="buttonColumn"><a class="showHistory" href="#"><i class="icon-graph"></i> {{_ "licenses.button.history"}}</a></td>
     </tr>
 </template>
 
