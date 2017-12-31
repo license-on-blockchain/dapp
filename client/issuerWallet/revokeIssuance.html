@@ -6,11 +6,8 @@
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "revokeIssuance.input.licenseContract.title"}}</h4>
-                        <select name="licenseContract" title="{{_ "revokeIssuance.input.licenseContract.description"}}">
-                            {{#each licenseContracts}}
-                                {{> licenseContractOption}}
-                            {{/each}}
-                        </select>
+
+                        {{> selectAddress addresses=licenseContracts class="licenseContract"}}
                         <div class="lob-error-message" data-for="licenseContract"></div>
                     </div>
                     <div class="col col-6 mobile-full">

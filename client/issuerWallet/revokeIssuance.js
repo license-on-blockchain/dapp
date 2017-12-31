@@ -5,7 +5,7 @@ import {NotificationCenter} from "../../lib/NotificationCenter";
 import {Accounts} from "../../lib/Accounts";
 
 function getValues() {
-    let licenseContract = this.find('[name=licenseContract]').value;
+    let licenseContract = TemplateVar.getFrom(this.find('.licenseContract'), 'address');
     if (licenseContract === '') {
         licenseContract = null;
     }
@@ -78,6 +78,7 @@ Template.revokeIssuance.helpers({
             .map((licenseContract) => {
                 return {
                     address: licenseContract,
+                    name: lob.licenseContracts.getDisplayName(licenseContract),
                     selected: Template.instance().data.licenseContract === licenseContract
                 }
             });

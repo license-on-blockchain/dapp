@@ -53,7 +53,7 @@ function verifySignature(signature, certificateText, certificateChain) {
 }
 
 function getValues() {
-    const licenseContractAddress = this.find('[name=licenseContract]').value;
+    const licenseContractAddress = TemplateVar.getFrom(this.find('.licenseContract'), 'address');
     let signMethod = null;
     if (this.find('[name=signMethod]:checked')) {
         signMethod = this.find('[name=signMethod]:checked').value;
@@ -197,12 +197,15 @@ Template.signLicenseContract.helpers({
         if (preselectedLicenseContract) {
             preselectedLicenseContract = preselectedLicenseContract.toLowerCase();
         }
-        return Template.instance().licenseContracts.get().map((licenseContract) => {
-            return {
-                address: licenseContract,
-                selected: licenseContract.toLowerCase() === preselectedLicenseContract
-            }
-        });
+        return Template.instance().licenseContracts.get()
+            .map((licenseContract) => {
+                return {
+                    address: licenseContract,
+                    name: lob.licenseContracts.getDisplayName(licenseContract),
+                    selected: licenseContract.toLowerCase() === preselectedLicenseContract
+                }
+            })
+            .sort((lhs, rhs) => lhs.address.localeCompare(rhs.address));
     },
     alreadySigned() {
         const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
@@ -257,14 +260,5 @@ Template.signLicenseContract.events({
             NotificationCenter.showTransactionSubmitted();
             Router.go('licensecontracts');
         })
-    }
-});
-
-Template.licenseContractOption.helpers({
-    preselected() {
-        return this.selected ? 'selected' : '';
-    },
-    address() {
-        return this.address;
     }
 });

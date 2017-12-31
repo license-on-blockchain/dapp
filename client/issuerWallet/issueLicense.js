@@ -6,7 +6,7 @@ import {NotificationCenter} from "../../lib/NotificationCenter";
 import {Accounts} from "../../lib/Accounts";
 
 function getValues() {
-    const licenseContractAddress = this.find('[name=licenseContract]').value;
+    const licenseContractAddress = TemplateVar.getFrom(this.find('.licenseContract'), 'address');
     const licenseTemplateCode = this.find('[name=licenseTemplate]').value;
     const code = this.find('[name=code]').value;
     const description = this.find('[name=description]').value;
@@ -112,6 +112,7 @@ Template.issueLicense.helpers({
         return Template.instance().licenseContracts.get().map((licenseContract) => {
             return {
                 address: licenseContract,
+                name: lob.licenseContracts.getDisplayName(licenseContract),
                 selected: licenseContract.toLowerCase() === preselectedLicenseContract
             }
         });

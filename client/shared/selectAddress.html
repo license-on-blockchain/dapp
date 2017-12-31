@@ -1,0 +1,14 @@
+<template name="selectAddress">
+    <div class="selectAddress {{class}}">
+        {{> dapp_identicon identity=selectedAddress class="dapp-tiny"}}
+        <select name="licenseContract" title="{{_ "revokeIssuance.input.licenseContract.description"}}">
+            {{#each addresses}}
+                {{> selectAddressOption}}
+            {{/each}}
+        </select>
+    </div>
+</template>
+
+<template name="selectAddressOption">
+    <option value="{{address}}" {{preselected}}>{{name}}</option>
+</template>
