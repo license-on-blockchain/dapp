@@ -24,10 +24,11 @@ Template.licenseContractRow.helpers({
 });
 
 Template.licenseContractRow.events({
-    'click tr'() {
+    'click tr'(event) {
+        if (event.target.tagName.toLowerCase() === 'a') {
+            // Don't show license contract info if a button link was clicked
+            return;
+        }
         LicenseContractInfo.show(this.address);
-    },
-    'click a'(event) {
-        event.stopPropagation();
     }
 });

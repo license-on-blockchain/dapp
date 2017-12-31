@@ -93,10 +93,11 @@ Template.licenseRow.events({
             class: 'wideModal'
         });
     },
-    'click a'(event) {
-        event.stopPropagation();
-    },
-    'click tr'() {
+    'click tr'(event) {
+        if (event.target.tagName.toLowerCase() === 'a') {
+            // Don't show issuance info if a button link was clicked
+            return;
+        }
         IssuanceInfo.show(Template.instance().data.issuanceLocation);
     },
 });
