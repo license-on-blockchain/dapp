@@ -14,14 +14,17 @@ export const IssuanceInfo = {
 };
 
 Template.issuanceInfo.onCreated(function() {
-    this.data.issuance = new ReactiveVar({});
+    this.computations = new Set();
+
+    const issuanceLocation = this.data.issuanceLocation;
+    this.data.issuance = {
+        get() {
+            return lob.issuances.getIssuance(issuanceLocation);
+        }
+    };
+
     this.data.balances = new ReactiveVar([]);
-
-    Tracker.autorun(() => {
-        this.data.issuance.set(lob.issuances.getIssuance(this.data.issuanceLocation));
-    });
-
-    Tracker.autorun(() => {
+    const balancesComputation = Tracker.autorun(() => {
         lob.balances.getLicenseTransfers(this.data.issuanceLocation, (error, transfers) => {
             if (error) { handleUnknownEthereumError(error); return; }
             const snapshots = lob.computeBalanceSnapshots(transfers);
@@ -34,8 +37,14 @@ Template.issuanceInfo.onCreated(function() {
             this.data.balances.set(balances);
         })
     });
+    this.computations.add(balancesComputation);
 });
 
+Template.issuanceInfo.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
+});
 
 Template.issuanceInfo.helpers({
     licenseContract() {

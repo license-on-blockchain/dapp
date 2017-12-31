@@ -158,6 +158,8 @@ function validate(errorOnEmpty = false) {
 Template.signLicenseContract.onCreated(function() {
     EthBlocks.init();
 
+    this.computations = new Set();
+
     this.manualSigning = new ReactiveVar(false);
     this.selectedLicenseContract = new ReactiveVar(undefined);
     this.estimatedGasConsumption = new ReactiveVar(0);
@@ -170,7 +172,7 @@ Template.signLicenseContract.onCreated(function() {
 });
 
 Template.signLicenseContract.onRendered(function() {
-    Tracker.autorun(() => {
+    const licenseContractsComputation = Tracker.autorun(() => {
         let licenseContracts = lob.licenseContracts.getManagedLicenseContracts(Accounts.get());
         // Don't show license contracts that are already signed
         licenseContracts = licenseContracts.filter((licenseContract) => {
@@ -179,8 +181,13 @@ Template.signLicenseContract.onRendered(function() {
         this.licenseContracts.set(licenseContracts);
         setTimeout(() => this.onFormUpdate(), 0);
     });
+    this.computations.add(licenseContractsComputation);
+});
 
-    this.onFormUpdate();
+Template.signLicenseContract.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
 });
 
 Template.signLicenseContract.helpers({

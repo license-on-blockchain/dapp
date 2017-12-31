@@ -16,19 +16,31 @@ export const TransferTransactionInfo = {
 };
 
 Template.transferTransactionInfo.onCreated(function() {
-    this.data.transaction = new ReactiveVar({});
-    Tracker.autorun(() => {
-        const transaction = lob.transactions.getTransaction(this.data.transactionHash);
-        this.data.transaction.set(transaction);
-    });
+    this.computations = new Set();
+
+    const transactionHash = this.data.transactionHash;
+
+    // Fake a reactive var that is just a reference
+    this.data.transaction = {
+        get() {
+            return lob.transactions.getTransaction(transactionHash);
+        }
+    };
 
     this.data.web3Transaction = new ReactiveVar({});
-    Tracker.autorun(() => {
+    const web3TransactionComputation = Tracker.autorun(() => {
         web3.eth.getTransaction(this.data.transactionHash, (error, transaction) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.data.web3Transaction.set(transaction);
         });
-    })
+    });
+    this.computations.add(web3TransactionComputation);
+});
+
+Template.transferTransactionInfo.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
 });
 
 Template.transferTransactionInfo.helpers({

@@ -70,6 +70,8 @@ function validate(errorOnEmpty = false) {
 Template.issueLicense.onCreated(function() {
     EthBlocks.init();
 
+    this.computations = new Set();
+
     this.licenseContracts = new ReactiveVar([]);
     this.selectedLicenseContract = new ReactiveVar(undefined);
     this.selectedTemplateCode = new ReactiveVar(null);
@@ -82,7 +84,7 @@ Template.issueLicense.onCreated(function() {
 });
 
 Template.issueLicense.onRendered(function() {
-    Tracker.autorun(() => {
+    const licenseContractsComputation = Tracker.autorun(() => {
         let licenseContracts = lob.licenseContracts.getManagedLicenseContracts(Accounts.get());
         // Don't show license contracts that are not signed yet
         licenseContracts = licenseContracts.filter((licenseContract) => {
@@ -91,6 +93,13 @@ Template.issueLicense.onRendered(function() {
         this.licenseContracts.set(licenseContracts);
         setTimeout(() => this.onFormUpdate(), 0);
     });
+    this.computations.add(licenseContractsComputation);
+});
+
+Template.issueLicense.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
 });
 
 Template.issueLicense.helpers({

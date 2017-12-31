@@ -185,17 +185,20 @@ function transferDescription(transfers) {
 }
 
 Template.licenseCertificate.onCreated(function() {
+    this.computations = new Set();
+
     const issuanceLocation = this.data.issuanceLocation;
     const licenseContractAddress = issuanceLocation.licenseContractAddress;
     this.licenseContract = licenseContractAddress;
 
     this.certificateText = new ReactiveVar(TAPi18n.__("generic.loading"));
-    Tracker.autorun(() => {
+    const certificateTextComputation = Tracker.autorun(() => {
         const certificateText = lob.licenseContracts.getCertificateText(licenseContractAddress);
         if (certificateText) {
             this.certificateText.set(certificateText);
         }
     });
+    this.computations.add(certificateTextComputation);
 
     this.issuance = lob.issuances.getIssuance(issuanceLocation);
 
@@ -206,7 +209,7 @@ Template.licenseCertificate.onCreated(function() {
     });
 
     this.certificateChain = new ReactiveVar(null);
-    Tracker.autorun(() => {
+    const certificateChainComputation = Tracker.autorun(() => {
         const sslCertificate = lob.licenseContracts.getSSLCertificate(licenseContractAddress);
         if (sslCertificate) {
             try {
@@ -216,6 +219,13 @@ Template.licenseCertificate.onCreated(function() {
             }
         }
     });
+    this.computations.add(certificateChainComputation);
+});
+
+Template.licenseCertificate.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
 });
 
 Template.licenseCertificate.helpers({

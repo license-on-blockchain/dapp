@@ -60,13 +60,14 @@ Template.reclaim.onCreated(function() {
     this.selectedIssuanceLocation = new ReactiveVar(undefined, (oldValue, newValue) => oldValue === newValue);
     this.estimatedGasConsumption = new ReactiveVar(0);
     this.issuanceLocations = new ReactiveVar([]);
+    this.computations = new Set();
 
     // Trigger a form update after everything has been created to set `selectedReclaimer`
     setTimeout(() => this.onFormUpdate(), 0);
 });
 
 Template.reclaim.onRendered(function() {
-    Tracker.autorun(() => {
+    const reclaimOriginsCompuation = Tracker.autorun(() => {
         const selectedReclaimer = this.selectedReclaimer.get();
         const selectedIssuanceLocation = this.selectedIssuanceLocation.get();
 
@@ -90,8 +91,9 @@ Template.reclaim.onRendered(function() {
 
         setTimeout(() => this.onFormUpdate(), 0);
     });
+    this.computations.add(reclaimOriginsCompuation);
 
-    Tracker.autorun(() => {
+    const issuanceLocationsComputation = Tracker.autorun(() => {
         const issuanceLocations = lob.balances.getReclaimableIssuanceLocations(Accounts.get())
             .map((issuanceLocation) => {
                 return {
@@ -114,6 +116,13 @@ Template.reclaim.onRendered(function() {
 
         setTimeout(() => this.onFormUpdate(), 0);
     });
+    this.computations.add(issuanceLocationsComputation);
+});
+
+Template.reclaim.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
 });
 
 Template.reclaim.helpers({

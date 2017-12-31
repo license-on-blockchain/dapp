@@ -81,6 +81,8 @@ Template.transfer.onCreated(function() {
     EthAccounts.init();
     EthBlocks.init();
 
+    this.computations = new Set();
+
     this.getValues = getValues;
     this.resetErrors = resetErrors;
     this.onFormUpdate = onFormUpdate;
@@ -95,7 +97,7 @@ Template.transfer.onCreated(function() {
 });
 
 Template.transfer.onRendered(function() {
-    Tracker.autorun(() => {
+    const issuanceLocationsComputation = Tracker.autorun(() => {
         let selectedLicenseContract = this.data.licenseContract;
         if (selectedLicenseContract) {
             selectedLicenseContract = selectedLicenseContract.toLowerCase();
@@ -116,6 +118,13 @@ Template.transfer.onRendered(function() {
 
         setTimeout(() => this.onFormUpdate(), 0);
     });
+    this.computations.add(issuanceLocationsComputation);
+});
+
+Template.transfer.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
 });
 
 Template.transfer.helpers({

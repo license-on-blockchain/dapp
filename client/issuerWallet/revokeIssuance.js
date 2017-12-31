@@ -47,6 +47,8 @@ function validate(errorOnEmpty = false) {
 Template.revokeIssuance.onCreated(function() {
     EthBlocks.init();
 
+    this.computations = new Set();
+
     this.licenseContracts = new ReactiveVar([]);
     this.selectedLicenseContract = new ReactiveVar(null);
     this.estimatedGasConsumption = new ReactiveVar(0);
@@ -58,10 +60,17 @@ Template.revokeIssuance.onCreated(function() {
 });
 
 Template.revokeIssuance.onRendered(function() {
-    Tracker.autorun(() => {
+    const licenseContractsComputation = Tracker.autorun(() => {
         this.licenseContracts.set(lob.licenseContracts.getManagedLicenseContracts(Accounts.get()));
         setTimeout(() => this.onFormUpdate(), 0);
-    })
+    });
+    this.computations.add(licenseContractsComputation);
+});
+
+Template.revokeIssuance.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
 });
 
 Template.revokeIssuance.helpers({
