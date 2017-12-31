@@ -6,7 +6,7 @@ import {NotificationCenter} from "../../lib/NotificationCenter";
 
 function getValues() {
     const reclaimer = TemplateVar.getFrom(this.find('[name=reclaimer]'), 'value');
-    const from = this.find('[name=from]').value;
+    const from = TemplateVar.getFrom(this.find('.from'), 'value');
     const issuanceLocation = IssuanceLocation.fromString(this.find('[name=issuance]').value);
     const amount = this.find('[name=amount]').value;
     const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
@@ -75,14 +75,16 @@ Template.reclaim.onRendered(function() {
         } else {
             newReclaimOrigins = lob.balances.getReclaimOrigins(selectedIssuanceLocation, selectedReclaimer)
                 .map((address) => {
+                    const reclaimableBalance = lob.balances.getReclaimableBalanceFrom(selectedIssuanceLocation, selectedReclaimer, address);
                     return {
-                        issuanceLocation: selectedIssuanceLocation,
-                        reclaimer: selectedReclaimer,
-                        currentOwner: address,
+                        address: address,
+                        name: address + ' – ' + reclaimableBalance + " " + TAPi18n.__("generic.license", {count: reclaimableBalance}),
+                        selected: false,
+                        reclaimableBalance: reclaimableBalance
                     }
                 })
                 .filter((obj) => {
-                    return lob.balances.getReclaimableBalanceFrom(obj.issuanceLocation, obj.reclaimer, obj.currentOwner) > 0;
+                    return obj.reclaimableBalance > 0;
                 });
         }
         this.reclaimOrigins.set(newReclaimOrigins);

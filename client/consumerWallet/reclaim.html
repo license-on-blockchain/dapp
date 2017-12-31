@@ -13,11 +13,7 @@
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "reclaim.input.from.title"}}</h4>
-                        <select name="from" title="{{_ "reclaim.input.from.description"}}">
-                            {{#each reclaimOrigins}}
-                                {{> reclaimOriginOption}}
-                            {{/each}}
-                        </select>
+                        {{> selectAddress addresses=reclaimOrigins class="from"}}
                         <div class="lob-error-message" data-for="from"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>

@@ -2,7 +2,7 @@ Template.selectAddress.onCreated(function() {
     this.update = function() {
         if (this.view.isRendered) {
             const address = this.find('select').value;
-            TemplateVar.set(this, 'address', address);
+            TemplateVar.set(this, 'value', address);
         }
     };
 });
@@ -23,7 +23,7 @@ Template.selectAddress.helpers({
         return this.addresses;
     },
     selectedAddress() {
-        return TemplateVar.get('address');
+        return TemplateVar.get('value');
     },
     class() {
         return this.class;

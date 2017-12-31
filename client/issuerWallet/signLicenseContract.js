@@ -53,7 +53,7 @@ function verifySignature(signature, certificateText, certificateChain) {
 }
 
 function getValues() {
-    const licenseContractAddress = TemplateVar.getFrom(this.find('.licenseContract'), 'address');
+    const licenseContractAddress = TemplateVar.getFrom(this.find('.licenseContract'), 'value');
     let signMethod = null;
     if (this.find('[name=signMethod]:checked')) {
         signMethod = this.find('[name=signMethod]:checked').value;

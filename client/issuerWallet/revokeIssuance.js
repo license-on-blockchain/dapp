@@ -5,7 +5,7 @@ import {NotificationCenter} from "../../lib/NotificationCenter";
 import {Accounts} from "../../lib/Accounts";
 
 function getValues() {
-    let licenseContract = TemplateVar.getFrom(this.find('.licenseContract'), 'address');
+    let licenseContract = TemplateVar.getFrom(this.find('.licenseContract'), 'value');
     if (licenseContract === '') {
         licenseContract = null;
     }

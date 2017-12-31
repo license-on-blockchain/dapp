@@ -6,7 +6,7 @@ import {NotificationCenter} from "../../lib/NotificationCenter";
 import {Accounts} from "../../lib/Accounts";
 
 function getValues() {
-    const licenseContractAddress = TemplateVar.getFrom(this.find('.licenseContract'), 'address');
+    const licenseContractAddress = TemplateVar.getFrom(this.find('.licenseContract'), 'value');
     const licenseTemplateCode = this.find('[name=licenseTemplate]').value;
     const code = this.find('[name=code]').value;
     const description = this.find('[name=description]').value;
