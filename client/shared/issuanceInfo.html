@@ -9,7 +9,7 @@
             <tbody>
             <tr>
                 <td><strong>{{_ "issuanceInfo.field.licenseContractAddress"}}</strong></td>
-                <td><a href="#" class="showLicenseContractInfo">{{licenseContract}}</a></td>
+                <td><a href="#" class="showLicenseContractInfo"><i>{{> dapp_identicon identity=licenseContract class="dapp-tiny"}} {{licenseContract}}</i></a></td>
             </tr>
             <tr>
                 <td><strong>{{_ "issuanceInfo.field.issuanceID"}}</strong></td>
@@ -49,7 +49,7 @@
             <tbody>
             {{#each balances}}
                 <tr>
-                    <td><strong>{{address}}</strong></td>
+                    <td><strong>{{> dapp_identicon identity=address class="dapp-tiny"}} {{address}}</strong></td>
                     <td>{{balance}}</td>
                 </tr>
             {{/each}}
