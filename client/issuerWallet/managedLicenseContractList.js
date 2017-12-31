@@ -1,5 +1,6 @@
 import {lob} from "../../lib/LOB";
 import {Accounts} from "../../lib/Accounts";
+import {LicenseContractInfo} from "../shared/licenseContractInfo";
 
 Template.managedLicenseContractList.helpers({
     licenseContracts() {
@@ -19,5 +20,14 @@ Template.licenseContractRow.helpers({
     },
     signed() {
         return lob.licenseContracts.getSignature(this.address);
+    }
+});
+
+Template.licenseContractRow.events({
+    'click tr'() {
+        LicenseContractInfo.show(this.address);
+    },
+    'click a'(event) {
+        event.stopPropagation();
     }
 });

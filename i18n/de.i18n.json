@@ -246,14 +246,15 @@
     "title": "<strong>Smart Contracts zur Bescheinigung von Lizenzen</strong>, über die Sie verfügen",
     "button": {
       "sign": "Unterzeichnen",
-      "issue": "Ausstellen"
+      "issue": "Ausstellen",
+      "manage": "Verwalten"
     },
     "createContractLink": "Neuen Smart Contract zur Bescheinigung von Lizenzen <a href='/licensecontracts/create'>erstellen</a>"
   },
   "manageLicenseContract": {
     "title": "Smart Contracts zur Bescheinigung von Lizenzen <strong>verwalten</strong>",
     "button": {
-      "revokeIssuance": "Smart Contract Widerrufen"
+      "revokeIssuance": "Lizenzausstellung widerrufen"
     }
   },
   "revokeIssuance": {

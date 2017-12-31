@@ -162,7 +162,7 @@ Router.route('/licensecontracts/revoke/:licenseContractAddress/:issuanceID', fun
     })
 });
 
-Router.route('/licensecontracts/:address', function() {
+Router.route('/licensecontracts/manage/:address', function() {
     this.render('manageLicenseContract', {
         data: {
             address: this.params.address
