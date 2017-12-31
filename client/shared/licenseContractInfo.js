@@ -18,6 +18,13 @@ Template.licenseContractInfo.helpers({
     address() {
         return this.address;
     },
+    internalName() {
+        let internalName = null;
+        Tracker.nonreactive(() => {
+            internalName = lob.licenseContracts.getInternalName(this.address);
+        });
+        return internalName;
+    },
     issuerName() {
         return lob.licenseContracts.getIssuerName(this.address);
     },
@@ -47,6 +54,9 @@ Template.licenseContractInfo.helpers({
 });
 
 Template.licenseContractInfo.events({
+    'input .internalName'(event) {
+        lob.licenseContracts.setInternalName(this.address, event.target.innerText.trim());
+    },
     'click button.hideModal'() {
         EthElements.Modal.hide();
     },

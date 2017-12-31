@@ -127,6 +127,7 @@
       "certificateText": "Zertifikatstext"
     },
     "field": {
+      "internalName": "Interner Name",
       "issuerName": "Name des Ausstellers",
       "issuerAddress": "Adresse des Ausstellers",
       "signed": "Signiert",

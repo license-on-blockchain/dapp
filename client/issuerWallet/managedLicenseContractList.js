@@ -16,10 +16,10 @@ Template.managedLicenseContractList.helpers({
 
 Template.licenseContractRow.helpers({
     address() {
-        return this.address;
+        return lob.licenseContracts.getDisplayName(this.address);
     },
     signed() {
-        return lob.licenseContracts.getSignature(this.address);
+        return lob.licenseContracts.isSigned(this.address);
     }
 });
 
