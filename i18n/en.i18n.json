@@ -232,7 +232,7 @@
       "transfer": "Transfer",
       "transferAndAllowReclaim": "Transfer and allow reclaim"
     },
-    "destroyLink": "If you wish to destroy a license click <a href='/destroy'>here</a>.",
+    "destroyLink": "If you wish to destroy a license click <a href='%s'>here</a>.",
     "error": {
       "recipient_not_valid_address": "Not a valid recipient address",
       "no_issuance_selected": "You must select an issuance to transfer",

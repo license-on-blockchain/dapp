@@ -10,7 +10,10 @@ const selectedSenderAccount = new ReactiveVar();
 function getValues() {
     const sender = TemplateVar.getFrom(this.find('[name=sender]'), 'value');
     const [issuanceID, licenseContract] = this.find('[name=issuance]').value.split("|");
-    const issuanceLocation = IssuanceLocation.fromComponents(licenseContract, issuanceID);
+    let issuanceLocation = null;
+    if (issuanceID && licenseContract) {
+        issuanceLocation = IssuanceLocation.fromComponents(licenseContract, issuanceID);
+    }
     let recipient;
     if (this.data && this.data.destroy) {
         recipient = "0x0000000000000000000000000000000000000000";
@@ -25,19 +28,31 @@ function getValues() {
 function onFormUpdate() {
     const {sender, recipient, amount, issuanceLocation} = this.getValues();
 
-    if (this.data && this.data.allowReclaim) {
-        lob.transfer.estimateGas.transferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, (error, value) => {
-            if (error) { handleUnknownEthereumError(error); return; }
-            this.estimatedGasConsumption.set(value);
-        });
-    } else {
-        lob.transfer.estimateGas.transferLicense(issuanceLocation, sender, recipient, amount, (error, value) => {
-            if (error) { handleUnknownEthereumError(error); return; }
-            this.estimatedGasConsumption.set(value);
-        });
+    if (issuanceLocation) {
+        if (this.data && this.data.allowReclaim) {
+            lob.transfer.estimateGas.transferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, (error, value) => {
+                if (error) { handleUnknownEthereumError(error); return; }
+                this.estimatedGasConsumption.set(value);
+            });
+        } else {
+            lob.transfer.estimateGas.transferLicense(issuanceLocation, sender, recipient, amount, (error, value) => {
+                if (error) { handleUnknownEthereumError(error); return; }
+                this.estimatedGasConsumption.set(value);
+            });
+        }
     }
 
+
     selectedSenderAccount.set(sender);
+
+    let destroyLink = '/destroy';
+    if (issuanceLocation) {
+        destroyLink += '/from/' + sender + '/licenseContract/' + issuanceLocation.licenseContractAddress + '/issuance/' + issuanceLocation.issuanceID;
+        if (amount) {
+            destroyLink += '/amount/' + amount;
+        }
+    }
+    this.destroyLink.set(destroyLink);
 
     // Validate after the DOM has updated, because changes to one input may affect the values of other inputs
     setTimeout(() => {
@@ -56,7 +71,7 @@ function validate(errorOnEmpty = false) {
     noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'));
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'));
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('transfer.error.amount_zero'));
-    noErrors &= validateField('amount', amount <= lob.balances.getOwnedBalance(issuanceLocation, sender), amount, TAPi18n.__('transfer.error.amount_less_than_balance'));
+    noErrors &= validateField('amount', () => amount <= lob.balances.getOwnedBalance(issuanceLocation, sender), issuanceLocation && amount, TAPi18n.__('transfer.error.amount_less_than_balance'));
 
     return noErrors;
 }
@@ -71,27 +86,22 @@ Template.transfer.onCreated(function() {
     this.validate = validate;
 
     this.estimatedGasConsumption = new ReactiveVar(0);
+    this.destroyLink = new ReactiveVar('/destroy');
+    this.issuanceLocations = new ReactiveVar([]);
 
     // Trigger a form update after everything has been created to set `selectedSenderAccount`
     setTimeout(() => this.onFormUpdate(), 0);
 });
 
-Template.transfer.helpers({
-    myAccounts() {
-        return EthAccounts.find().fetch();
-    },
-    issuances() {
-        let selectedLicenseContract = undefined;
-        let selectedIssuanceID = undefined;
-        if (Template.instance().data) {
-            selectedLicenseContract = Template.instance().data.licenseContract;
-            if (selectedLicenseContract) {
-                selectedLicenseContract = selectedLicenseContract.toLowerCase();
-            }
-            selectedIssuanceID = Number(Template.instance().data.issuanceID);
+Template.transfer.onRendered(function() {
+    Tracker.autorun(() => {
+        let selectedLicenseContract = this.data.licenseContract;
+        if (selectedLicenseContract) {
+            selectedLicenseContract = selectedLicenseContract.toLowerCase();
         }
-
-        return lob.balances.getNonZeroBalanceIssuanceLocations(selectedSenderAccount.get())
+        let selectedIssuanceID = this.data.issuanceID;
+        
+        const issuanceLocations = lob.balances.getNonZeroBalanceIssuanceLocations(selectedSenderAccount.get())
             .map((issuanceLocation) => {
                 return {
                     issuanceLocation,
@@ -101,12 +111,30 @@ Template.transfer.helpers({
             })
             .filter((obj) => !obj.metadata.revoked)
             .filter((obj) => lob.balances.getOwnedBalance(obj.issuanceLocation, selectedSenderAccount.get()) > 0);
+        this.issuanceLocations.set(issuanceLocations);
+
+        setTimeout(() => this.onFormUpdate(), 0);
+    });
+});
+
+Template.transfer.helpers({
+    myAccounts() {
+        return EthAccounts.find().fetch();
+    },
+    issuances() {
+        return Template.instance().issuanceLocations.get();
+    },
+    amount() {
+        return this.amount;
     },
     gasPrice() {
         return EthBlocks.latest.gasPrice;
     },
     gasEstimate() {
         return Template.instance().estimatedGasConsumption.get();
+    },
+    destroyLink() {
+        return Template.instance().destroyLink.get();
     }
 });
 

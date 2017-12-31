@@ -37,7 +37,7 @@
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "transfer.input.amount.title"}}</h4>
-                        <input name="amount" type="number" title="{{_ "transfer.input.amount.description"}}">
+                        <input name="amount" type="number" title="{{_ "transfer.input.amount.description"}}" value="{{amount}}">
                         <div class="lob-error-message" data-for="amount"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
@@ -60,7 +60,7 @@
                     {{/if}}
                 </button>
                 {{#unless destroy}}{{#unless allowReclaim}}
-                    <p>{{{_ "transfer.destroyLink"}}}</p>
+                    <p>{{{_ "transfer.destroyLink" destroyLink}}}</p>
                 {{/unless}}{{/unless}}
             </form>
         </main>

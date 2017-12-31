@@ -15,13 +15,27 @@ Router.route('/licenses', function() {
 });
 
 // Transfer
-Router.route('/transfer');
+Router.route('/transfer', function() {
+    this.render('transfer', {
+        data: {}
+    });
+});
 Router.route('/transfer/from/:from/licenseContract/:licenseContract/issuance/:issuance', function () {
     this.render('transfer', {
         data: {
             licenseContract: this.params.licenseContract,
             issuanceID: this.params.issuance,
             from: this.params.from,
+        }
+    });
+});
+Router.route('/transfer/from/:from/licenseContract/:licenseContract/issuance/:issuance/amount/:amount', function () {
+    this.render('transfer', {
+        data: {
+            licenseContract: this.params.licenseContract,
+            issuanceID: this.params.issuance,
+            from: this.params.from,
+            amount: this.params.amount,
         }
     });
 });
@@ -44,6 +58,17 @@ Router.route('/destroy/from/:from/licenseContract/:licenseContract/issuance/:iss
         }
     });
 });
+Router.route('/destroy/from/:from/licenseContract/:licenseContract/issuance/:issuance/amount/:amount', function () {
+    this.render('transfer', {
+        data: {
+            licenseContract: this.params.licenseContract,
+            issuanceID: this.params.issuance,
+            from: this.params.from,
+            amount: this.params.amount,
+            destroy: true
+        }
+    });
+});
 
 // Transfer and allow reclaim
 Router.route('/transferreclaim', function () {
@@ -60,6 +85,17 @@ Router.route('/transferreclaim/from/:from/licenseContract/:licenseContract/issua
             issuanceID: this.params.issuance,
             from: this.params.from,
             allowReclaim: true
+        }
+    });
+});
+Router.route('/transferreclaim/from/:from/licenseContract/:licenseContract/issuance/:issuance/amount/:amount', function () {
+    this.render('transfer', {
+        data: {
+            licenseContract: this.params.licenseContract,
+            issuanceID: this.params.issuance,
+            from: this.params.from,
+            amount: this.params.amount,
+            allowReclaim: true,
         }
     });
 });

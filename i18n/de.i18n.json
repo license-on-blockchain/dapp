@@ -232,7 +232,7 @@
       "transfer": "Übertragen",
       "transferAndAllowReclaim": "rückforderbar übertragen"
     },
-    "destroyLink": "Wenn Sie die Lizenzbescheinigung zerstören (d.h. auf der Ethereum-Blockchain ivalidieren) möchten, <a href='/destroy'>bestätigen Sie hier</a>.",
+    "destroyLink": "Wenn Sie die Lizenzbescheinigung zerstören (d.h. auf der Ethereum-Blockchain ivalidieren) möchten, <a href='%s'>klicken Sie hier</a>.",
     "error": {
       "recipient_not_valid_address": "Die Empfänger-Adresse ist keine gültige öffentliche Ethereum-Adresse",
       "no_issuance_selected": "Sie müssen angeben, welche Lizenzen Sie übertragen möchten",
