@@ -120,6 +120,7 @@
   },
   "licenseContractInfo": {
     "title": "License Contract",
+    "no_issuances": "No Issuances",
     "heading": {
       "details": "Details",
       "issuances": "Issuances",

@@ -43,6 +43,10 @@
                     <td><a href="#" class="showIssuanceInfo"><strong>{{issuanceID}}</strong></a></td>
                     <td>{{description}}</td>
                 </tr>
+            {{else}}
+                <tr>
+                    <td><strong>{{_ "licenseContractInfo.no_issuances"}}</strong></td>
+                </tr>
             {{/each}}
             </tbody>
         </table>

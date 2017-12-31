@@ -120,6 +120,7 @@
   },
   "licenseContractInfo": {
     "title": "Smart Contract zur Bescheinigung der Lizenzen",
+    "no_issuances": "Keine Lizenzausstellungen",
     "heading": {
       "details": "Details",
       "issuances": "Lizenausstellungen",
