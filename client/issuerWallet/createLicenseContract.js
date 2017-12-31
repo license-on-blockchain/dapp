@@ -66,8 +66,6 @@ function validate(errorOnEmpty = false) {
 }
 
 Template.createLicenseContract.onCreated(function() {
-    EthAccounts.init();
-
     this.estimatedGasConsumption = new ReactiveVar(0);
 
     this.getValues = getValues;

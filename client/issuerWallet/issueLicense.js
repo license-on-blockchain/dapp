@@ -68,8 +68,6 @@ function validate(errorOnEmpty = false) {
 }
 
 Template.issueLicense.onCreated(function() {
-    EthBlocks.init();
-
     this.computations = new Set();
 
     this.licenseContracts = new ReactiveVar([]);

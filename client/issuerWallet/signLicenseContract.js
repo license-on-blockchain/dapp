@@ -156,8 +156,6 @@ function validate(errorOnEmpty = false) {
 }
 
 Template.signLicenseContract.onCreated(function() {
-    EthBlocks.init();
-
     this.computations = new Set();
 
     this.manualSigning = new ReactiveVar(false);

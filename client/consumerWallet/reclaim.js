@@ -48,8 +48,6 @@ function validate(errorOnEmpty = false) {
 }
 
 Template.reclaim.onCreated(function() {
-    EthAccounts.init();
-
     this.resetErrors = resetErrors;
     this.getValues = getValues;
     this.onFormUpdate = onFormUpdate;

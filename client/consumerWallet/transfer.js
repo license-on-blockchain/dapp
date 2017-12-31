@@ -78,9 +78,6 @@ function validate(errorOnEmpty = false) {
 }
 
 Template.transfer.onCreated(function() {
-    EthAccounts.init();
-    EthBlocks.init();
-
     this.computations = new Set();
 
     this.getValues = getValues;

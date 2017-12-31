@@ -207,6 +207,7 @@ Meteor.startup(function() {
     TAPi18n.setLanguage(Settings.language.get());
 
     if (Meteor.isClient) {
+        EthAccounts.init();
         EthBlocks.init();
     }
 });
