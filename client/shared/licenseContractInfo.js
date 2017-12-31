@@ -34,7 +34,12 @@ Template.licenseContractInfo.helpers({
         return lob.licenseContracts.getRootContract(this.address);
     },
     certificateText() {
-        return lob.licenseContracts.getCertificateText(this.address).split('\n');
+        const certificateText = lob.licenseContracts.getCertificateText(this.address);
+        if (certificateText) {
+            return certificateText.split('\n');
+        } else {
+            return certificateText;
+        }
     },
     issuances() {
         return lob.issuances.getIssuancesOfLicenseContract(this.address);
