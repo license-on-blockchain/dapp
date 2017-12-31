@@ -256,6 +256,7 @@
   "manageLicenseContract": {
     "title": "<strong>Manage</strong> license contract",
     "revoked": "Revoked",
+    "no_issuances": "No Issuances",
     "button": {
       "revokeIssuance": "Revoke"
     }

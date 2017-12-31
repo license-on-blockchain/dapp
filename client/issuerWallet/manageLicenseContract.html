@@ -6,6 +6,8 @@
                 <tbody>
                 {{#each issuances}}
                     {{> issuanceRow}}
+                {{else}}
+                    <tr><td><strong>{{_ "manageLicenseContract.no_issuances"}}</strong></td></tr>
                 {{/each}}
                 </tbody>
             </table>
