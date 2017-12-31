@@ -235,6 +235,7 @@
     "destroyLink": "If you wish to destroy a license click <a href='%s'>here</a>.",
     "error": {
       "recipient_not_valid_address": "Not a valid recipient address",
+      "recipient_equal_to_sender": "The recipient must be different from the sender address",
       "no_issuance_selected": "You must select an issuance to transfer",
       "no_amount_specified": "You must specify how many licenses you want to transfer",
       "amount_zero": "You need to transfer at least one license",

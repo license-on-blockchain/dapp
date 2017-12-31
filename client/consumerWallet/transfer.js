@@ -68,6 +68,7 @@ function validate(errorOnEmpty = false) {
 
     noErrors &= validateField('sender', web3.isAddress(sender), true);
     noErrors &= validateField('recipient', web3.isAddress(recipient), errorOnEmpty, TAPi18n.__('transfer.error.recipient_not_valid_address'));
+    noErrors &= validateField('recipient', () => recipient.toLowerCase() !== sender.toLowerCase(), recipient && sender, TAPi18n.__('transfer.error.recipient_equal_to_sender'));
     noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'));
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'));
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('transfer.error.amount_zero'));
