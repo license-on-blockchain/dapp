@@ -94,6 +94,9 @@
   },
   "licenseCertificate": {
     "certificate_signed": "This certificate has been signed using the SSL certificate with public key fingerprint %s.",
+    "heading": {
+      "certificateCheck": "Certificate information"
+    },
     "licenseInfo": {
       "intro": "%s has issued the following license under this LOB license contract:",
       "description": "License type",
