@@ -114,6 +114,8 @@ Router.route('/licensecontracts', function() {
 
 Router.route('/licensecontracts/create', function() {
     this.render('createLicenseContract');
+}, {
+    name: 'licensecontracts.create'
 });
 
 Router.route('/licensecontracts/waitforcreationmining/:rootContract/:transactionHash', function() {

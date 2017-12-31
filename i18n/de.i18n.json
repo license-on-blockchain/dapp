@@ -249,9 +249,9 @@
     "button": {
       "sign": "Unterzeichnen",
       "issue": "Ausstellen",
-      "manage": "Verwalten"
-    },
-    "createContractLink": "Neuen Smart Contract zur Bescheinigung von Lizenzen <a href='/licensecontracts/create'>erstellen</a>"
+      "manage": "Verwalten",
+      "createLicenseContract": "Neuen Smart Contract zur Bescheinigung von Lizenzen erstellen"
+    }
   },
   "manageLicenseContract": {
     "title": "Smart Contracts zur Bescheinigung von Lizenzen <strong>verwalten</strong>",

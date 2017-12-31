@@ -249,9 +249,9 @@
     "button": {
       "sign": "Sign",
       "issue": "Issue",
-      "manage": "Manage"
-    },
-    "createContractLink": "<a href='/licensecontracts/create'>Create</a> new license contract"
+      "manage": "Manage",
+      "createLicenseContract": "Create a new license contract"
+    }
   },
   "manageLicenseContract": {
     "title": "<strong>Manage</strong> license contract",

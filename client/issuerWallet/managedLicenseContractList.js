@@ -14,6 +14,13 @@ Template.managedLicenseContractList.helpers({
     }
 });
 
+Template.managedLicenseContractList.events({
+    'click button.createLicenseContract'(event) {
+        event.preventDefault();
+        Router.go('licensecontracts.create');
+    }
+});
+
 Template.licenseContractRow.helpers({
     name() {
         return lob.licenseContracts.getDisplayName(this.address);
