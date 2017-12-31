@@ -75,9 +75,6 @@ Template.licenseRow.helpers({
 });
 
 Template.licenseRow.events({
-    'click a.showIssuanceInfo'() {
-        IssuanceInfo.show(Template.instance().data.issuanceLocation);
-    },
     'click a.showCertificate'() {
         EthElements.Modal.show({
             template: 'licenseCertificate',
@@ -95,7 +92,13 @@ Template.licenseRow.events({
             },
             class: 'wideModal'
         });
-    }
+    },
+    'click a'(event) {
+        event.stopPropagation();
+    },
+    'click tr'() {
+        IssuanceInfo.show(Template.instance().data.issuanceLocation);
+    },
 });
 
 Template.pendingTransactionRow.helpers({

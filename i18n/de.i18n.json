@@ -146,8 +146,8 @@
       "revoked": "Widerrufen"
     },
     "button": {
-      "showCertificate": "Certificate",
-      "showTransferHistory": "Transfer History"
+      "showCertificate": "Zertifikat",
+      "showTransferHistory": "Transaktionshistorie"
     }
   },
   "transferTransactionInfo": {

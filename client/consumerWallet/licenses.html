@@ -34,7 +34,7 @@
 </template>
 
 <template name="pendingTransactionRow">
-    <tr class="pendingTransactionRow">
+    <tr class="pendingTransactionRow clickable">
         <td class="date simptip-position-right" data-tooltip="{{fullDate}}">
             <h2>{{month}}</h2>
             <p>{{day}}</p>
@@ -63,8 +63,8 @@
 </template>
 
 <template name="licenseRow">
-    <tr>
-        <td><a href="#" class="showIssuanceInfo"><strong>{{description}}</strong></a></td>
+    <tr class="clickable">
+        <td><strong>{{description}}</strong></td>
         <td>
             <span title="{{_ "licenses.hover.ownedBalance"}}">{{balance}}</span>
             {{#if borrowedBalance}}
