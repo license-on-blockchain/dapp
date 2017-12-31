@@ -102,6 +102,13 @@ Template.reclaim.onRendered(function() {
             })
             .filter((obj) => {
                 return lob.balances.getReclaimableBalance(obj.issuanceLocation, this.selectedReclaimer.get()) > 0;
+            })
+            .sort((lhs, rhs) => {
+                if (lhs.metadata.description && rhs.metadata.description) {
+                    return lhs.metadata.description.localeCompare(rhs.metadata.description);
+                } else {
+                    return 0;
+                }
             });
         this.issuanceLocations.set(issuanceLocations);
 
