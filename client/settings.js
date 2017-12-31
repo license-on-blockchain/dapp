@@ -21,6 +21,5 @@ Template.settings.events({
     },
     'change [name=language]'(event) {
         Settings.language.set(event.currentTarget.value);
-        TAPi18n.setLanguage(event.currentTarget.value);
     }
 });

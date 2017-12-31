@@ -204,10 +204,14 @@ Template.body.onCreated(function() {
 });
 
 Meteor.startup(function() {
-    TAPi18n.setLanguage(Settings.language.get());
 
     if (Meteor.isClient) {
         EthAccounts.init();
         EthBlocks.init();
+        Tracker.autorun(() => {
+            TAPi18n.setLanguage(Settings.language.get()).fail((error) => {
+                console.error(error)
+            });
+        });
     }
 });
