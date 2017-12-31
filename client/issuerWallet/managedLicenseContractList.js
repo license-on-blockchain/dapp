@@ -15,8 +15,11 @@ Template.managedLicenseContractList.helpers({
 });
 
 Template.licenseContractRow.helpers({
-    address() {
+    name() {
         return lob.licenseContracts.getDisplayName(this.address);
+    },
+    address() {
+        return this.address;
     },
     signed() {
         return lob.licenseContracts.isSigned(this.address);

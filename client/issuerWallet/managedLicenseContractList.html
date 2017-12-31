@@ -17,7 +17,7 @@
 <template name="licenseContractRow">
     <tr class="clickable">
         <td>
-            <strong>{{address}}</strong>
+            <strong>{{> dapp_identicon identity=address class="dapp-tiny"}} {{name}}</strong>
         </td>
         <td class="buttonColumn">
             {{#if signed}}
