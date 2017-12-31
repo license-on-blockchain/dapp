@@ -293,7 +293,7 @@ Template.licenseCertificate.events({
 Template.licenseHistory.onRendered(function() {
     this.autorun(() => {
         const issuanceLocation = this.data.issuanceLocation;
-        const canvas = Template.instance().find('#graphContainer');
+        const canvas = Template.instance().find('#graphCanvas');
 
         const issuance = lob.issuances.getIssuance(issuanceLocation);
         const issuerName = lob.licenseContracts.getIssuerName(issuanceLocation.licenseContractAddress);
