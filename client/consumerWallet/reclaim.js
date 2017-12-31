@@ -165,6 +165,7 @@ Template.reclaim.events({
             }
             NotificationCenter.showTransactionSubmitted();
         });
+        Router.go('licenses');
     }
 });
 
