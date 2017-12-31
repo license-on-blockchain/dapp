@@ -7,6 +7,7 @@ import {TransactionType} from "../../lib/lob/Transactions";
 import {IssuanceLocation} from "../../lib/IssuanceLocation";
 import {formatDate} from "../../lib/utils";
 import {IssuanceInfo} from "../shared/issuanceInfo";
+import {TransferTransactionInfo} from "./transferTransactionInfo";
 
 function getLicenseRows(revoked) {
     return lob.balances.getNonZeroBalanceIssuanceLocations(Accounts.get())
@@ -141,6 +142,12 @@ Template.pendingTransactionRow.helpers({
         } else {
             return TAPi18n.__('licenses.pendingTransactionRow.unconfirmed');
         }
+    }
+});
+
+Template.pendingTransactionRow.events({
+    'click tr'() {
+        TransferTransactionInfo.show(this.transactionHash);
     }
 });
 

@@ -150,6 +150,25 @@
       "showTransferHistory": "Transfer History"
     }
   },
+  "transferTransactionInfo": {
+    "title": {
+      "reclaim": "Rückforderung",
+      "reclaimableTransfer": "Übertragung mit Rückforderungsrecht",
+      "transfer": "Übertragung"
+    },
+    "field": {
+      "issuance": "Lizenz",
+      "from": "Von",
+      "to": "An",
+      "reclaimer": "Rückforderer",
+      "amount": "Übertragene Lizenzen",
+      "submissionDate": "Datum",
+      "blockNumber": "Gemined in Block",
+      "transactionFee": "Transaktionsgebühr"
+    },
+    "confirmation": "__count__ Bestätigung",
+    "confirmation_plural": "__count__ Bestätigungen"
+  },
   "reclaim": {
     "title": "Lizenzen <strong>zurückfordern</strong>",
     "input": {

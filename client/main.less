@@ -108,6 +108,8 @@ h4 {
 }
 
 .pendingTransactionRow {
+  cursor: pointer;
+
   .date {
     p {
       font-size: 2em;
@@ -115,10 +117,6 @@ h4 {
   }
   .address {
     font-style: italic;
-    .dapp-identicon {
-      position: relative;
-      top: 5px;
-    }
   }
   .arrow {
     margin-left: 7px;
@@ -129,7 +127,12 @@ h4 {
   }
 }
 
-.issuanceInfo, .licenseContractInfo {
+.dapp-identicon.dapp-tiny {
+  position: relative;
+  top: 5px;
+}
+
+.issuanceInfo, .licenseContractInfo, .transferTransactionInfo {
   h1 {
     margin-bottom: 5px;
   }

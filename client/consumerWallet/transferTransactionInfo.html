@@ -1,0 +1,65 @@
+<template name="transferTransactionInfo">
+    <div class="transferTransactionInfo">
+        <h1>
+            {{#if reclaim}}
+                {{_ "transferTransactionInfo.title.reclaim"}}
+            {{else if reclaimable}}
+                {{_ "transferTransactionInfo.title.reclaimableTransfer"}}
+            {{else}}
+                {{_ "transferTransactionInfo.title.transfer"}}
+            {{/if}}
+        </h1>
+        <h2>{{transactionHash}}</h2>
+
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td><strong>{{_ "transferTransactionInfo.field.issuance"}}</strong></td>
+                <td><a href="#" class="showIssuanceInfo">{{issuanceDescription}}</a></td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "transferTransactionInfo.field.from"}}</strong></td>
+                <td><i>{{> dapp_identicon identity=from class="dapp-tiny"}} {{from}}</i></td>
+            </tr>
+            <tr>
+                <td><strong>
+                    {{#if reclaim}}
+                        {{_ "transferTransactionInfo.field.reclaimer"}}
+                    {{else}}
+                        {{_ "transferTransactionInfo.field.to"}}
+                    {{/if}}
+                </strong></td>
+                <td><i>{{> dapp_identicon identity=to class="dapp-tiny"}} {{to}}</i></td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "transferTransactionInfo.field.amount"}}</strong></td>
+                <td>{{amount}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "transferTransactionInfo.field.submissionDate"}}</strong></td>
+                <td>{{submissionDate}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "transferTransactionInfo.field.blockNumber"}}</strong></td>
+                <td>
+                    {{#if blockNumber}}
+                        {{blockNumber}}
+                        ({{_ "transferTransactionInfo.confirmation" count=confirmations}})
+                    {{else}}
+                        {{_ "transferTransactionInfo.not_mined_yet"}}
+                    {{/if}}
+                </td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "transferTransactionInfo.field.transactionFee"}}</strong></td>
+                <td>
+                    {{transactionFee}} Ether
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="dapp-modal-buttons">
+        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
+    </div>
+</template>

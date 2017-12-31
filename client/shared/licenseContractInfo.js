@@ -12,7 +12,7 @@ export const LicenseContractInfo = {
             class: 'mediumModal'
         });
     }
-}
+};
 
 Template.licenseContractInfo.helpers({
     address() {
