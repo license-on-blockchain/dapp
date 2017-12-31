@@ -18,8 +18,8 @@ function waitForLicenseContractCreation(rootContract, transactionHash, minedCall
         } else {
             // TODO: Stop watching after contract has been created
             // Transaction not mined yet. Wait for a license contract creation event of the root contract
-            EthNotificationCenter.onLicenseContractCreation(rootContract, (licenseContractAddress, eventTransactionHash) => {
-                if (eventTransactionHash === transactionHash) {
+            EthNotificationCenter.onLicenseContractCreation(rootContract, (event) => {
+                if (event.transactionHash === transactionHash) {
                     minedCallback(licenseContractAddress);
                 }
             });

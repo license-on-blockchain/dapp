@@ -44,9 +44,9 @@
                 <td>
                     {{#if blockNumber}}
                         {{blockNumber}}
-                        ({{_ "transferTransactionInfo.confirmation" count=confirmations}})
+                        ({{_ "generic.confirmation" count=confirmations}})
                     {{else}}
-                        {{_ "transferTransactionInfo.not_mined_yet"}}
+                        {{_ "generic.unconfirmed"}}
                     {{/if}}
                 </td>
             </tr>

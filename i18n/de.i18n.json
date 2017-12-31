@@ -12,7 +12,12 @@
     "yes": "Ja",
     "no": "Nein",
     "loading": "Loading…",
-    "transaction_successfully_submitted": "Transaktion wurde erfolgreich auf die Ethereum-Blockchain übertragen"
+    "transaction_successfully_submitted": "Transaktion wurde erfolgreich auf die Ethereum-Blockchain übertragen",
+    "confirmation": "__count__ Bestätigung", 
+    "confirmation_plural": "__count__ Bestätigungen",
+    "unconfirmed": "Noch nicht gemined",
+    "year": "__count__ Jahr",
+    "year_plural": "__count__ Jahre"
   },
   "tab": {
     "title": {
@@ -71,10 +76,9 @@
       "transactionType": {
         "transfer": "Übertragung",
         "reclaimableTransfer": "Übertragung mit Rückforderungsrecht",
-        "reclaim": "Rückforderung"
+        "reclaim": "Rückforderung",
+        "licenseContractCreation": "Erzeugung eines Smart Contracts zur Bescheinigung von Lizenzen"
       },
-      "confirmation": "__count__ Bestätigung",
-      "confirmation_plural": "__count__ Bestätigungen",
       "unconfirmed": "unbestätigt",
       "monthAbbrevations": {
         "1": "Jan",
@@ -170,9 +174,7 @@
       "submissionDate": "Datum",
       "blockNumber": "Gemined in Block",
       "transactionFee": "Transaktionsgebühr"
-    },
-    "confirmation": "__count__ Bestätigung",
-    "confirmation_plural": "__count__ Bestätigungen"
+    }
   },
   "reclaim": {
     "title": "Lizenzen <strong>zurückfordern</strong>",
@@ -246,6 +248,9 @@
   },
   "managedLicenseContractList": {
     "title": "<strong>Smart Contracts zur Bescheinigung von Lizenzen</strong>, über die Sie verfügen",
+    "heading": {
+      "latestTransactions": "Letzte Transaktionen"
+    },
     "button": {
       "sign": "Unterzeichnen",
       "issue": "Ausstellen",
@@ -328,6 +333,19 @@
       "no_sslCertificate_entered": "Sie müssen das SSL-Zertifikat, mit dem Sie Ihre Identität bestätigen, angeben",
       "sslCertificate_not_valid": "Das SSL-Zertifikat ist nicht gültig",
       "sslPrivateKey_does_not_match": "Der angegebene private Schlüssel passt nicht zu dem angegebenen SSL-Zertifikat"
+    }
+  },
+  "licenseContractCreationTransactionInfo": {
+    "title": "Transaktion zur Erzeugung eines Smart Contracts zur Bescheinigung von Lizenzen",
+    "field": {
+      "rootContract": "Root Contract",
+      "issuerAddress": "Adresse des Ausstellers",
+      "issuerName": "Name des Ausstellers",
+      "liability": "Haftung",
+      "safekeepingPeriod": "Aufbewahrungsfrist",
+      "submissionDate": "Datum",
+      "blockNumber": "Gemined in Block",
+      "transactionFee": "Transaktionsgebühr"
     }
   },
   "waitForContractCreationMining": {

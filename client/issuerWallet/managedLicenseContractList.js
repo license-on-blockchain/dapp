@@ -11,6 +11,9 @@ Template.managedLicenseContractList.helpers({
                     address: licenseContract
                 }
             });
+    },
+    latestLicenseContractCreations() {
+        return lob.transactions.getLatestLicenseContractCreations();
     }
 });
 

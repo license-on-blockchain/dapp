@@ -12,7 +12,12 @@
     "yes": "Yes",
     "no": "No",
     "loading": "Loading…",
-    "transaction_successfully_submitted": "Transaction successfully submitted"
+    "transaction_successfully_submitted": "Transaction successfully submitted",
+    "confirmation": "__count__ confirmation",
+    "confirmation_plural": "__count__ confirmations",
+    "unconfirmed": "Not mined yet",
+    "year": "__count__ year",
+    "year_plural": "__count__ years"
   },
   "tab": {
     "title": {
@@ -71,10 +76,9 @@
       "transactionType": {
         "transfer": "Transfer",
         "reclaimableTransfer": "Reclaimable Transfer",
-        "reclaim": "Reclaim"
+        "reclaim": "Reclaim",
+        "licenseContractCreation": "License Contract Creation"
       },
-      "confirmation": "__count__ confirmation",
-      "confirmation_plural": "__count__ confirmations",
       "unconfirmed": "unconfirmed",
       "monthAbbrevations": {
         "1": "Jan",
@@ -170,9 +174,7 @@
       "submissionDate": "Submission Date",
       "blockNumber": "Mined in Block",
       "transactionFee": "Transaction Fee"
-    },
-    "confirmation": "__count__ confirmation",
-    "confirmation_plural": "__count__ confirmations"
+    }
   },
   "reclaim": {
     "title": "<strong>Reclaim</strong> licenses",
@@ -246,6 +248,9 @@
   },
   "managedLicenseContractList": {
     "title": "<strong>License contracts</strong> managed by you",
+    "heading": {
+      "latestTransactions": "Latest Transactions"
+    },
     "button": {
       "sign": "Sign",
       "issue": "Issue",
@@ -328,6 +333,19 @@
       "no_sslCertificate_entered": "Please provide an SSL certificate",
       "sslCertificate_not_valid": "The certificate is not valid",
       "sslPrivateKey_does_not_match": "The private key does not match the given certificate"
+    }
+  },
+  "licenseContractCreationTransactionInfo": {
+    "title": "License Contract Creation Transaction",
+    "field": {
+      "rootContract": "Root Contract",
+      "issuerAddress": "Issuer Address",
+      "issuerName": "Issuer Name",
+      "liability": "Liability",
+      "safekeepingPeriod": "Safekeeping Period",
+      "submissionDate": "Submission Date",
+      "blockNumber": "Mined in Block",
+      "transactionFee": "Transaction Fee"
     }
   },
   "waitForContractCreationMining": {

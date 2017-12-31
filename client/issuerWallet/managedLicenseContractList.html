@@ -9,6 +9,14 @@
                 {{/each}}
                 </tbody>
             </table>
+            <h2>{{_ "managedLicenseContractList.heading.latestTransactions"}}</h2>
+            <table class="dapp-zebra">
+                <tbody>
+                {{#each latestLicenseContractCreations}}
+                    {{> pendingTransactionRow}}
+                {{/each}}
+                </tbody>
+            </table>
             <button class="dapp-block-button createLicenseContract">
                 {{{_ "managedLicenseContractList.button.createLicenseContract"}}}
             </button>

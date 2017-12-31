@@ -102,59 +102,6 @@ Template.licenseRow.events({
     },
 });
 
-Template.pendingTransactionRow.helpers({
-    type() {
-        let transactionType;
-        switch (this.transactionType) {
-            case TransactionType.Transfer:
-                if (this.reclaimable) {
-                    transactionType = TAPi18n.__('licenses.pendingTransactionRow.transactionType.reclaimableTransfer');
-                } else {
-                    transactionType = TAPi18n.__('licenses.pendingTransactionRow.transactionType.transfer');
-                }
-                break;
-            case TransactionType.Reclaim:
-                transactionType = TAPi18n.__('licenses.pendingTransactionRow.transactionType.reclaim');
-                break;
-        }
-        const issuanceLocation = IssuanceLocation.fromComponents(this.licenseContract, this.issuanceID);
-        let issuanceDescription = "…";
-        const issuance = lob.issuances.getIssuance(issuanceLocation);
-        if (issuance) {
-            issuanceDescription = issuance.description;
-        }
-        return transactionType + " (" + issuanceDescription + ")";
-    },
-    fullDate() {
-        return formatDate(new Date(this.timestamp));
-    },
-    month() {
-        const month = new Date(this.timestamp).getMonth() + 1;
-        return TAPi18n.__('licenses.pendingTransactionRow.monthAbbrevations.' + month);
-    },
-    day() {
-        return new Date(this.timestamp).getDate();
-    },
-    confirmationStatus() {
-        if (this.blockNumber) {
-            const confirmations = EthBlocks.latest.number - this.blockNumber;
-            if (confirmations > 12) {
-                return '';
-            } else {
-                return TAPi18n.__('licenses.pendingTransactionRow.confirmation', {count: confirmations});
-            }
-        } else {
-            return TAPi18n.__('licenses.pendingTransactionRow.unconfirmed');
-        }
-    }
-});
-
-Template.pendingTransactionRow.events({
-    'click tr'() {
-        TransferTransactionInfo.show(this.transactionHash);
-    }
-});
-
 function transferDescription(transfers) {
     switch (transfers.length) {
         case 1:

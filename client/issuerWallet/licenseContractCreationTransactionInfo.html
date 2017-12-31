@@ -1,0 +1,57 @@
+<template name="licenseContractCreationTransactionInfo">
+    <div class="licenseContractCreationTransactionInfo">
+        <h1>
+            {{_ "licenseContractCreationTransactionInfo.title"}}
+        </h1>
+        <h2>{{transactionHash}}</h2>
+
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.rootContract"}}</strong></td>
+                <td>{{rootContract}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.issuerAddress"}}</strong></td>
+                <td><i>{{> dapp_identicon identity=issuerAddress class="dapp-tiny"}} {{issuerAddress}}</i></td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.issuerName"}}</strong></td>
+                <td>{{issuerName}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.liablity"}}</strong></td>
+                <td>{{liability}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.safekeepingPeriod"}}</strong></td>
+                <td>{{_ "generic.year" count=safekeepingPeriod}} </td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.submissionDate"}}</strong></td>
+                <td>{{submissionDate}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.blockNumber"}}</strong></td>
+                <td>
+                    {{#if blockNumber}}
+                        {{blockNumber}}
+                        ({{_ "generic.confirmation" count=confirmations}})
+                    {{else}}
+                        {{_ "generic.unconfirmed"}}
+                    {{/if}}
+                </td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.transactionFee"}}</strong></td>
+                <td>
+                    {{transactionFee}} Ether
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="dapp-modal-buttons">
+        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
+    </div>
+</template>
