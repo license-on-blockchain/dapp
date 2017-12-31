@@ -257,6 +257,10 @@
     "title": "Smart Contracts zur Bescheinigung von Lizenzen <strong>verwalten</strong>",
     "revoked": "Bereits widerrufen",
     "no_issuances": "Keine Lizenzausstellungen",
+    "heading": {
+      "details": "Details",
+      "issuances": "Lizenzausstellungen"
+    },
     "button": {
       "revokeIssuance": "Lizenzausstellung widerrufen"
     }

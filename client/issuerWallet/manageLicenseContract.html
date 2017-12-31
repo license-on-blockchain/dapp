@@ -2,10 +2,24 @@
     <div class="dapp-flex-content">
         <main class="dapp-content">
             <h1>{{{_ "manageLicenseContract.title"}}}</h1>
+            <h2>{{_ "manageLicenseContract.heading.details"}}</h2>
+            {{> licenseContractDetails}}
+
+            <h2>{{_ "manageLicenseContract.heading.issuances"}}</h2>
             <table class="dapp-zebra">
                 <tbody>
                 {{#each issuances}}
-                    {{> issuanceRow}}
+                    <tr class="clickable issuancesRow">
+                        <td><strong>{{description}}</strong></td>
+                        <td><strong>{{code}}</strong></td>
+                        <td class="wideButtonColumn">
+                            {{#if revoked}}
+                                <i>{{_ "manageLicenseContract.revoked"}}</i>
+                            {{else}}
+                                <a href="/licensecontracts/revoke/{{licenseContract}}/{{issuanceID}}"><i class="icon-ban"></i> {{_ "manageLicenseContract.button.revokeIssuance"}}</a>
+                            {{/if}}
+                        </td>
+                    </tr>
                 {{else}}
                     <tr><td><strong>{{_ "manageLicenseContract.no_issuances"}}</strong></td></tr>
                 {{/each}}
@@ -13,18 +27,4 @@
             </table>
         </main>
     </div>
-</template>
-
-<template name="issuanceRow">
-    <tr>
-        <td><strong>{{description}}</strong></td>
-        <td><strong>{{code}}</strong></td>
-        <td class="wideButtonColumn">
-            {{#if revoked}}
-                <i>{{_ "manageLicenseContract.revoked"}}</i>
-            {{else}}
-                <a href="/licensecontracts/revoke/{{licenseContract}}/{{issuanceID}}"><i class="icon-ban"></i> {{_ "manageLicenseContract.button.revokeIssuance"}}</a>
-            {{/if}}
-        </td>
-    </tr>
 </template>

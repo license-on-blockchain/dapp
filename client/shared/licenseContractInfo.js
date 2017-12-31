@@ -18,12 +18,32 @@ Template.licenseContractInfo.helpers({
     address() {
         return this.address;
     },
+    certificateText() {
+        const certificateText = lob.licenseContracts.getCertificateText(this.address);
+        if (certificateText) {
+            return certificateText.split('\n');
+        } else {
+            return certificateText;
+        }
+    },
+    issuances() {
+        return lob.issuances.getIssuancesOfLicenseContract(this.address);
+    }
+});
+
+Template.licenseContractInfo.events({
+    'click button.hideModal'() {
+        EthElements.Modal.hide();
+    },
+    'click a.showIssuanceInfo'() {
+        const issuanceLocation = IssuanceLocation.fromComponents(this.licenseContract, this.issuanceID);
+        IssuanceInfo.show(issuanceLocation);
+    }
+});
+
+Template.licenseContractDetails.helpers({
     internalName() {
-        let internalName = null;
-        Tracker.nonreactive(() => {
-            internalName = lob.licenseContracts.getInternalName(this.address);
-        });
-        return internalName;
+        return lob.licenseContracts.getInternalName(this.address);
     },
     issuerName() {
         return lob.licenseContracts.getIssuerName(this.address);
@@ -40,28 +60,10 @@ Template.licenseContractInfo.helpers({
     rootContract() {
         return lob.licenseContracts.getRootContract(this.address);
     },
-    certificateText() {
-        const certificateText = lob.licenseContracts.getCertificateText(this.address);
-        if (certificateText) {
-            return certificateText.split('\n');
-        } else {
-            return certificateText;
-        }
-    },
-    issuances() {
-        return lob.issuances.getIssuancesOfLicenseContract(this.address);
-    }
 });
 
-Template.licenseContractInfo.events({
-    'input .internalName'(event) {
+Template.licenseContractDetails.events({
+    'blur .internalName'(event) {
         lob.licenseContracts.setInternalName(this.address, event.target.innerText.trim());
-    },
-    'click button.hideModal'() {
-        EthElements.Modal.hide();
-    },
-    'click a.showIssuanceInfo'(event) {
-        const issuanceLocation = IssuanceLocation.fromComponents(this.licenseContract, this.issuanceID);
-        IssuanceInfo.show(issuanceLocation);
     }
 });

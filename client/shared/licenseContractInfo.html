@@ -4,40 +4,7 @@
         <h2>{{address}}</h2>
 
         <h3>{{_ "licenseContractInfo.heading.details"}}</h3>
-        <table class="dapp-zebra">
-            <tbody>
-            <tr>
-                <td><strong>{{_ "licenseContractInfo.field.internalName"}}</strong></td>
-                <td><span contenteditable="true" class="internalName">{{internalName}}</span></td>
-            </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractInfo.field.issuerName"}}</strong></td>
-                <td>{{issuerName}}</td>
-            </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractInfo.field.issuerAddress"}}</strong></td>
-                <td>{{issuerAddress}}</td>
-            </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractInfo.field.signed"}}</strong></td>
-                <td>
-                    {{#if signed}}
-                        {{_ "generic.yes"}}
-                    {{else}}
-                        {{_ "generic.no"}}
-                    {{/if}}
-                </td>
-            </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractInfo.field.fee"}}</strong></td>
-                <td>{{fee}} Ether</td>
-            </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractInfo.field.rootContract"}}</strong></td>
-                <td>{{rootContract}}</td>
-            </tr>
-            </tbody>
-        </table>
+        {{> licenseContractDetails}}
 
         <h3>{{_ "licenseContractInfo.heading.issuances"}}</h3>
         <table class="dapp-zebra">
@@ -66,4 +33,41 @@
             <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
         </div>
     </div>
+</template>
+
+<template name="licenseContractDetails">
+    <table class="dapp-zebra">
+        <tbody>
+        <tr>
+            <td><strong>{{_ "licenseContractInfo.field.internalName"}}</strong></td>
+            <td><span contenteditable="true" class="internalName">{{internalName}}</span></td>
+        </tr>
+        <tr>
+            <td><strong>{{_ "licenseContractInfo.field.issuerName"}}</strong></td>
+            <td>{{issuerName}}</td>
+        </tr>
+        <tr>
+            <td><strong>{{_ "licenseContractInfo.field.issuerAddress"}}</strong></td>
+            <td><i>{{> dapp_identicon identity=issuerAddress class="dapp-tiny"}} {{issuerAddress}}</i></td>
+        </tr>
+        <tr>
+            <td><strong>{{_ "licenseContractInfo.field.signed"}}</strong></td>
+            <td>
+                {{#if signed}}
+                    {{_ "generic.yes"}}
+                {{else}}
+                    {{_ "generic.no"}}
+                {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>{{_ "licenseContractInfo.field.fee"}}</strong></td>
+            <td>{{fee}} Ether</td>
+        </tr>
+        <tr>
+            <td><strong>{{_ "licenseContractInfo.field.rootContract"}}</strong></td>
+            <td><i>{{> dapp_identicon identity=rootContract class="dapp-tiny"}} {{rootContract}}</i></td>
+        </tr>
+        </tbody>
+    </table>
 </template>

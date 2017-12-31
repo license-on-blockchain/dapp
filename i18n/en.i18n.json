@@ -257,6 +257,10 @@
     "title": "<strong>Manage</strong> license contract",
     "revoked": "Revoked",
     "no_issuances": "No Issuances",
+    "heading": {
+      "details": "Details",
+      "issuances": "Issuances"
+    },
     "button": {
       "revokeIssuance": "Revoke"
     }
