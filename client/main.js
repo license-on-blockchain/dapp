@@ -202,7 +202,7 @@ Template.body.onCreated(function() {
         for (const rootContractAddress of RootContracts.getAddresses()) {
             lob.watchRootContract(rootContractAddress);
         }
-    }, 0);
+    }, 1000);
 });
 
 Meteor.startup(function() {
