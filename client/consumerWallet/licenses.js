@@ -12,7 +12,10 @@ import {TransferTransactionInfo} from "./transferTransactionInfo";
 const defaultTransactionLimit = 3; // Should be odd so that show all row is white
 
 function getLicenseRows(revoked) {
-    return lob.balances.getNonZeroBalanceIssuanceLocations(Accounts.get())
+    const issuanceLocations = lob.balances.getNonZeroBalanceIssuanceLocations(Accounts.get())
+        .concat(lob.balances.getReclaimableIssuanceLocations(Accounts.get()));
+
+    return Array.from(new Set(issuanceLocations))
         .map((issuanceLocation) => {
             return {
                 issuanceLocation: issuanceLocation,
@@ -64,8 +67,15 @@ Template.licenseRow.helpers({
     balance() {
         return lob.balances.getOwnedBalance(this.issuanceLocation, Accounts.get());
     },
+    extendedBalanceInfo() {
+        return lob.balances.getBorrowedBalance(this.issuanceLocation, Accounts.get()) > 0 ||
+            lob.balances.getReclaimableBalance(this.issuanceLocation, Accounts.get()) > 0;
+    },
     borrowedBalance() {
         return lob.balances.getBorrowedBalance(this.issuanceLocation, Accounts.get());
+    },
+    reclaimableBalance() {
+        return lob.balances.getReclaimableBalance(this.issuanceLocation, Accounts.get());
     },
     maxBalanceAddress() {
         return Accounts.get()

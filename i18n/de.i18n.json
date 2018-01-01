@@ -64,7 +64,8 @@
     },
     "hover": {
       "ownedBalance": "Ihre Lizenzen",
-      "borrowedBalance": "Fremde Lizenzen, die Ihnen übertragen wurden aber von dem Eigentümer zurückgefordert werden können"
+      "borrowedBalance": "Fremde Lizenzen, die Ihnen übertragen wurden aber von dem Eigentümer zurückgefordert werden können",
+      "reclaimableBalance": "Lizenzen, die Sie an eine andere Adresse übertragen haben, aber zurückfordern können"
     },
     "button": {
       "transfer": "Übertragen",

@@ -64,7 +64,8 @@
     },
     "hover": {
       "ownedBalance": "Licenses owned by you",
-      "borrowedBalance": "Licenses given to you that may be reclaimed by the original owner"
+      "borrowedBalance": "Licenses given to you that may be reclaimed by the original owner",
+      "reclaimableBalance": "Licenses you have transferred to someone else but have the right to reclaim them"
     },
     "button": {
       "transfer": "Transfer",

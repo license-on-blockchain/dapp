@@ -44,11 +44,12 @@
     <tr class="clickable">
         <td><strong>{{description}}</strong></td>
         <td class="buttonColumn">
-            <span title="{{_ "licenses.hover.ownedBalance"}}">{{balance}}</span>
-            {{#if borrowedBalance}}
-                <span title="{{_ "licenses.hover.borrowedBalance"}}">
-                (+{{borrowedBalance}})
-                </span>
+            {{#if extendedBalanceInfo}}
+                <span class="simptip-position-bottom" data-tooltip="{{_ "licenses.hover.ownedBalance"}}">{{balance}}</span>
+                / <span class="simptip-position-bottom" data-tooltip="{{_ "licenses.hover.borrowedBalance"}}">{{borrowedBalance}}</span>
+                / <span class="simptip-position-bottom" data-tooltip="{{_ "licenses.hover.reclaimableBalance"}}">{{reclaimableBalance}}</span>
+            {{else}}
+                {{balance}}
             {{/if}}
         </td>
         <td class="buttonColumn">
