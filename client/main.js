@@ -5,6 +5,19 @@ import {RootContracts} from "../lib/RootContracts";
 import './main.html';
 import {PersistentCollections} from "../lib/PersistentCollections";
 import {browserSetupOK} from "./shared/browsercheck";
+import {arraysEqual} from "../lib/utils";
+
+let __lastAccounts = null;
+function onAccountsChange(callback) {
+    const newAccounts = web3.eth.accounts;
+    if (__lastAccounts !== null) {
+        if (!arraysEqual(__lastAccounts, newAccounts)) {
+            callback();
+        }
+    }
+    __lastAccounts = newAccounts;
+    setTimeout(() => onAccountsChange(callback), 1000);
+}
 
 Template.body.onCreated(function() {
     if (!browserSetupOK()) {
@@ -54,6 +67,11 @@ Meteor.startup(function() {
                     lob.watchRootContract(rootContractAddress);
                 }
             });
+
+            onAccountsChange(() => {
+                // Reload the dapp on accounts change since this is the easiest way to clear all non-persistent caches
+                location.reload();
+            })
         }
     }
 });
