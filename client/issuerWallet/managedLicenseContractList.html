@@ -39,6 +39,8 @@
         <td class="buttonColumn">
             {{#if signed}}
                 <a href="/licensecontracts/issue/{{address}}"><i class="icon-plus"></i> {{_ "managedLicenseContractList.button.issue"}}</a>
+            {{else if signaturePending}}
+                <i>{{_ "managedLicenseContractList.signature_pending"}}</i>
             {{else}}
                 <a href="/licensecontracts/sign/{{address}}"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.sign"}}</a>
             {{/if}}

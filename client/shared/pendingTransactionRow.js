@@ -3,6 +3,7 @@ import {IssuanceLocation} from "../../lib/IssuanceLocation";
 import {TransactionType} from "../../lib/lob/Transactions";
 import {IssuanceInfo as TransferTransactionInfo} from "./issuanceInfo";
 import {LicenseContractCreationTransactionInfo} from "../issuerWallet/licenseContractCreationTransactionInfo";
+import {LicenseContractSigningTransactionInfo} from "../issuerWallet/licenseContractSigningTransactionInfo";
 
 Template.pendingTransactionRow.helpers({
     fullDate() {
@@ -18,6 +19,8 @@ Template.pendingTransactionRow.helpers({
     type() {
         if (this.transactionType === TransactionType.LicenseContractCreation) {
             return TAPi18n.__('licenses.pendingTransactionRow.transactionType.licenseContractCreation')
+        } else if (this.transactionType === TransactionType.LicenseContractSigning) {
+            return TAPi18n.__('licenses.pendingTransactionRow.transactionType.licenseContractSigning')
         } else if ([TransactionType.Transfer, TransactionType.Reclaim].indexOf(this.transactionType) !== -1) {
             let transactionType;
             switch (this.transactionType) {
@@ -50,6 +53,8 @@ Template.pendingTransactionRow.helpers({
                 return this.from;
             case TransactionType.LicenseContractCreation:
                 return this.issuerAddress;
+            case TransactionType.LicenseContractSigning:
+                return this.from;
         }
     },
     to() {
@@ -58,6 +63,8 @@ Template.pendingTransactionRow.helpers({
             case TransactionType.Reclaim:
                 return this.to;
             case TransactionType.LicenseContractCreation:
+                return this.licenseContract;
+            case TransactionType.LicenseContractSigning:
                 return this.licenseContract;
         }
     },
@@ -85,6 +92,9 @@ Template.pendingTransactionRow.events({
                 break;
             case TransactionType.LicenseContractCreation:
                 LicenseContractCreationTransactionInfo.show(this.transactionHash);
+                break;
+            case TransactionType.LicenseContractSigning:
+                LicenseContractSigningTransactionInfo.show(this.transactionHash);
                 break;
         }
     }

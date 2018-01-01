@@ -1,0 +1,45 @@
+<template name="licenseContractSigningTransactionInfo">
+    <div class="licenseContractSigningTransactionInfo">
+        <h1>
+            {{_ "licenseContractSigningTransactionInfo.title"}}
+        </h1>
+        <h2>{{transactionHash}}</h2>
+
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td><strong>{{_ "licenseContractSigningTransactionInfo.field.licenseContract"}}</strong></td>
+                <td><i>{{> dapp_identicon identity=licenseContract class="dapp-tiny"}} {{licenseContract}}</i></td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractSigningTransactionInfo.field.from"}}</strong></td>
+                <td><i>{{> dapp_identicon identity=from class="dapp-tiny"}} {{from}}</i></td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractSigningTransactionInfo.field.submissionDate"}}</strong></td>
+                <td>{{submissionDate}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractSigningTransactionInfo.field.blockNumber"}}</strong></td>
+                <td>
+                    {{#if blockNumber}}
+                        {{blockNumber}}
+                        ({{_ "generic.confirmation" count=confirmations}})
+                    {{else}}
+                        <i>{{_ "generic.unconfirmed"}}</i>
+                    {{/if}}
+                </td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractSigningTransactionInfo.field.transactionFee"}}</strong></td>
+                <td>
+                    {{transactionFee}} Ether
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="dapp-modal-buttons">
+        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
+    </div>
+</template>

@@ -46,6 +46,9 @@ Template.licenseContractRow.helpers({
     },
     signed() {
         return lob.licenseContracts.isSigned(this.address);
+    },
+    signaturePending() {
+        return lob.transactions.hasPendingSigningTransaction(this.address);
     }
 });
 

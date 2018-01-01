@@ -78,7 +78,8 @@
         "transfer": "Transfer",
         "reclaimableTransfer": "Reclaimable Transfer",
         "reclaim": "Reclaim",
-        "licenseContractCreation": "License Contract Creation"
+        "licenseContractCreation": "License Contract Creation",
+        "licenseContractSigning": "License Contract Signing"
       },
       "unconfirmed": "unconfirmed",
       "monthAbbrevations": {
@@ -258,7 +259,8 @@
       "manage": "Manage",
       "createLicenseContract": "Create a new license contract",
       "showAll": "Show All"
-    }
+    },
+    "signature_pending": "Signature Pending"
   },
   "manageLicenseContract": {
     "title": "<strong>Manage</strong> license contract",
@@ -346,6 +348,17 @@
       "issuerName": "Issuer Name",
       "liability": "Liability",
       "safekeepingPeriod": "Safekeeping Period",
+      "submissionDate": "Submission Date",
+      "blockNumber": "Mined in Block",
+      "transactionFee": "Transaction Fee"
+    },
+    "not_determined_yet": "Not determined yet"
+  },
+  "licenseContractSigningTransactionInfo": {
+    "title": "License Contract Singing Transaction",
+    "field": {
+      "licenseContract": "License Contract Address",
+      "from": "From",
       "submissionDate": "Submission Date",
       "blockNumber": "Mined in Block",
       "transactionFee": "Transaction Fee"

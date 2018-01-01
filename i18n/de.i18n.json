@@ -40,7 +40,7 @@
         "description": "Aktionen, die zur Aktivierung einer Softwarelizenz in einer konkreten Installation benötigt werden, freischalten"
       },
       "enableIssuerActions": {
-        "title": "Aktionen der Bescheinigungsstelle",
+        "title": "Aktionen der Bescheinigungsstelle anzeigen",
         "description": "Aktionen zur Bestätigung von Lizenzen mittels LOB freischalten"
       },
       "language": {
@@ -78,7 +78,8 @@
         "transfer": "Übertragung",
         "reclaimableTransfer": "Übertragung mit Rückforderungsrecht",
         "reclaim": "Rückforderung",
-        "licenseContractCreation": "Erzeugung eines Smart Contracts zur Bescheinigung von Lizenzen"
+        "licenseContractCreation": "Erzeugung eines Smart Contracts zur Bescheinigung von Lizenzen",
+        "licenseContractSigning": "Signatur eines Smart Contracts zur Bescheinigung von Lizenzen"
       },
       "unconfirmed": "unbestätigt",
       "monthAbbrevations": {
@@ -258,7 +259,8 @@
       "manage": "Verwalten",
       "createLicenseContract": "Neuen Smart Contract zur Bescheinigung von Lizenzen erstellen",
       "showAll": "Alle anzeigen"
-    }
+    },
+    "signature_pending": "Signatur wird verarbeitet"
   },
   "manageLicenseContract": {
     "title": "Smart Contracts zur Bescheinigung von Lizenzen <strong>verwalten</strong>",
@@ -351,6 +353,17 @@
       "transactionFee": "Transaktionsgebühr"
     },
     "not_determined_yet": "Noch nicht bestimmt"
+  },
+  "licenseContractSigningTransactionInfo": {
+    "title": "Transaktion zur Signatur eines Smart Contracts zur Bescheinigung von Lizenzen",
+    "field": {
+      "licenseContract": "Zu signierender Smart Contract",
+      "from": "Absender",
+      "submissionDate": "Datum",
+      "blockNumber": "Gemined in Block",
+      "transactionFee": "Transaktionsgebühr"
+    },
+    "not_determined_yet": "Not determined yet"
   },
   "waitForContractCreationMining": {
     "title": "<strong>Warten</strong> auf Bestätigung Ihres Smart Contracts zur Bescheinigung von Lizenzen auf der Ethereum-Blockchain",
