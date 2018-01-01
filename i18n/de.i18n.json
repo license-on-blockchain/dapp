@@ -476,5 +476,37 @@
       "initialOwnerName_empty": "Sie müssen den Namen der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen, angeben",
       "fee_not_fetched": "Die Ausstellungsgebühr konnte noch nicht von der Ethereum-Blockchain gelesen werden. Bitte warten Sie einen Moment und versuchen Sie es dann erneut"
     }
+  },
+  "browsercheck": {
+    "browserNotSupported": {
+      "title": "Browser nicht unterstützt",
+      "message": "Die LOB-Wallet benötigt Chrome oder Firefox<br>mit der MetaMask Extension zum Zugriff auf die Ethereum-Blockchain",
+      "installChrome": "Chrome herunterladen",
+      "installChromeUrl": "https://www.google.de/chrome/browser/desktop/index.html?hl=de",
+      "installFirefox": "Firefox herunterladen",
+      "installFirefoxUrl": "https://www.mozilla.org/de/firefox/new/"
+    },
+    "firefoxTooOld": {
+      "title": "Firefox zu alt",
+      "message": "Die LOB-Wallet erfordert mindestens Firefox Version 57. Bitte updaten Sie Ihren Browser.",
+      "updateFirefox": "Firefox aktualisieren",
+      "updateFirefoxUrl": "https://support.mozilla.org/de/kb/firefox-auf-die-letzte-version-aktualisieren"
+    },
+    "chromeTooOld": {
+      "title": "Chrome zu alt",
+      "message": "Die LOB-Wallet erfordert mindestens Chrome Version 63. Bitte updaten Sie Ihren Browser.",
+      "updateFirefox": "Chrome aktualisieren",
+      "updateFirefoxUrl": "https://support.google.com/chrome/answer/95414?hl=de"
+    },
+    "metamaskNotInstalled": {
+      "title": "Metamask nicht installiert",
+      "message": "Die LOB-Wallet benötigt MetaMask um mit der Ethereum Blockchain zu kommunizieren. Bitte insallieren Sie MetaMask.",
+      "installFirefox": "https://addons.mozilla.org/de/firefox/addon/ether-metamask/",
+      "installChrome": "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=de"
+    },
+    "metamaskLocked": {
+      "title": "Metamask gesperrt",
+      "message": "Der Zugriff über MetaMask ist gesperrt. Bitte entsperren Sie MetaMask indem Sie oben rechts auf den Fuchs klicken und Ihr MetaMask-Passwort eingeben"
+    }
   }
 }

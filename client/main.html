@@ -3,53 +3,55 @@
 </head>
 
 <body>
-<header class="dapp-header">
-    <nav>
-        <ul>
-            <li>
-                <a href="/licenses" class="{{ activeIfCurrentRoute 'licenses' }}">
-                    <i class="icon-docs"></i>
-                    <span>{{_ "tab.title.licenses"}}</span>
-                </a>
-            </li>
-            {{#if enableIssuerActions}}
+{{#if browserCheckSucceeded}}
+    <header class="dapp-header">
+        <nav>
+            <ul>
                 <li>
-                    <a href="/licensecontracts" class="{{ activeIfCurrentRoute 'licensecontracts' }}">
-                        <i class="icon-plus"></i>
-                        <span>{{_ "tab.title.licenseContracts"}}</span>
+                    <a href="/licenses" class="{{ activeIfCurrentRoute 'licenses' }}">
+                        <i class="icon-docs"></i>
+                        <span>{{_ "tab.title.licenses"}}</span>
                     </a>
                 </li>
-            {{/if}}
-            <li>
-                <a href="/transfer" class="{{ activeIfCurrentRoute 'transfer' }}">
-                    <i class="icon-arrow-up"></i>
-                    <span>{{_ "tab.title.transfer"}}</span>
-                </a>
-            </li>
-            {{#if enableInstallation}}
+                {{#if enableIssuerActions}}
+                    <li>
+                        <a href="/licensecontracts" class="{{ activeIfCurrentRoute 'licensecontracts' }}">
+                            <i class="icon-plus"></i>
+                            <span>{{_ "tab.title.licenseContracts"}}</span>
+                        </a>
+                    </li>
+                {{/if}}
                 <li>
-                    <a href="/transferreclaim" class="{{ activeIfCurrentRoute 'transferreclaim' }}">
-                        <i class="icon-link"></i>
-                        <span>{{_ "tab.title.install"}}</span>
+                    <a href="/transfer" class="{{ activeIfCurrentRoute 'transfer' }}">
+                        <i class="icon-arrow-up"></i>
+                        <span>{{_ "tab.title.transfer"}}</span>
                     </a>
                 </li>
+                {{#if enableInstallation}}
+                    <li>
+                        <a href="/transferreclaim" class="{{ activeIfCurrentRoute 'transferreclaim' }}">
+                            <i class="icon-link"></i>
+                            <span>{{_ "tab.title.install"}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/reclaim" class="{{ activeIfCurrentRoute 'reclaim' }}">
+                            <i class="icon-arrow-down"></i>
+                            <span>{{_ "tab.title.reclaim"}}</span>
+                        </a>
+                    </li>
+                {{/if}}
+                <li class="dapp-flex-item"></li>
                 <li>
-                    <a href="/reclaim" class="{{ activeIfCurrentRoute 'reclaim' }}">
-                        <i class="icon-arrow-down"></i>
-                        <span>{{_ "tab.title.reclaim"}}</span>
+                    <a href="/settings" class="{{ activeIfCurrentRoute 'settings' }}">
+                        <i class="icon-settings"></i>
+                        <span>{{_ "tab.title.settings"}}</span>
                     </a>
                 </li>
-            {{/if}}
-            <li class="dapp-flex-item"></li>
-            <li>
-                <a href="/settings" class="{{ activeIfCurrentRoute 'settings' }}">
-                    <i class="icon-settings"></i>
-                    <span>{{_ "tab.title.settings"}}</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
+            </ul>
+        </nav>
+    </header>
+{{/if}}
 {{> Router}}
 {{> GlobalNotifications }}
 {{> dapp_modalPlaceholder}}

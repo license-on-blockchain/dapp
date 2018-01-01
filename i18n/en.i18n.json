@@ -476,5 +476,37 @@
       "initialOwnerName_empty": "Please specify the name of the person or organisation that will initally receive the licenses",
       "fee_not_fetched": "The issuance fee has not been fetched from the blockchain yet. Please wait a moment for the value to update and try again"
     }
+  },
+  "browsercheck": {
+    "browserNotSupported": {
+      "title": "Browser not supported",
+      "message": "The LOB Wallet requires Chrome or Firefox<br>with the MetaMask extension to access the Ethereum Blockchain",
+      "installChrome": "Download Chrome",
+      "installChromeUrl": "https://www.google.de/chrome/browser/desktop/index.html?hl=en",
+      "installFirefox": "Download Firefox",
+      "installFirefoxUrl": "https://www.mozilla.org/en-US/firefox/new/"
+    },
+    "firefoxTooOld": {
+      "title": "Firefox too old",
+      "message": "The LOB Wallet require at least Firefox version 57. Please update your browser.",
+      "updateFirefox": "Update Firefox",
+      "updateFirefoxUrl": "https://support.mozilla.org/en-US/kb/update-firefox-latest-version"
+    },
+    "chromeTooOld": {
+      "title": "Chrome too old",
+      "message": "The LOB Wallet require at least Chrome version 63. Please update your browser.",
+      "updateFirefox": "Update Chrome",
+      "updateFirefoxUrl": "https://support.google.com/chrome/answer/95414?hl=en"
+    },
+    "metamaskNotInstalled": {
+      "title": "Metamask not installed",
+      "message": "The LOB Wallet requires MetaMask to communicate with the Ethereum Blockchain. Please install MetaMask.",
+      "installFirefox": "https://addons.mozilla.org/en/firefox/addon/ether-metamask/",
+      "installChrome": "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
+    },
+    "metamaskLocked": {
+      "title": "Metamask locked",
+      "message": "MetaMask is locked.<br> Please unlock MetaMask by clicking on the fox in the top right corner and entering you MetaMask password."
+    }
   }
 }

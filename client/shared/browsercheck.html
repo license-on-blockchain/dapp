@@ -1,0 +1,39 @@
+<template name="browsercheck">
+    <div class="dapp-flex-content">
+        <main class="dapp-content">
+            <div class="browsercheck">
+                {{#if browserInvalid}}
+                    <h1>{{_ "browsercheck.browserNotSupported.title"}}</h1>
+                    <p>{{{_ "browsercheck.browserNotSupported.message"}}}</p>
+                    <p><a href="{{_ "browsercheck.browserNotSupported.installChromeUrl"}}">{{_ "browsercheck.browserNotSupported.installChrome"}}</a></p>
+                    <p><a href="{{_ "browsercheck.browserNotSupported.installFirefoxUrl"}}">{{_ "browsercheck.browserNotSupported.installFirefox"}}</a></p>
+                {{else if firefoxVersionTooLow}}
+                    <h1>{{_ "browsercheck.firefoxTooOld.title"}}</h1>
+                    <p>{{_ "browsercheck.firefoxTooOld.message"}}</p>
+                    <p><a href="{{_ "browsercheck.firefoxTooOld.updateFirefoxUrl"}}">{{_ "browsercheck.firefoxTooOld.updateFirefox"}}</a></p>
+                {{else if chromeVersionTooLow}}
+                    <h1>{{_ "browsercheck.chromeTooOld.title"}}</h1>
+                    <p>{{_ "browsercheck.chromeTooOld.message"}}</p>
+                    <p><a href="{{_ "browsercheck.chromeTooOld.updateFirefoxUrl"}}">{{_ "browsercheck.chromeTooOld.updateFirefox"}}</a></p>
+                {{else if metamaskNotInstalled}}
+                    <h1>{{_ "browsercheck.metamaskNotInstalled.title"}}</h1>
+                    <p>{{_ "browsercheck.metamaskNotInstalled.message"}}</p>
+                    <a target="_blank" href="
+                        {{#if isFirefox}}
+                        {{_ "browsercheck.metamaskNotInstalled.installFirefox"}}
+                       {{else if isChrome}}
+                        {{_ "browsercheck.metamaskNotInstalled.installChrome"}}
+                       {{else}}
+                           https://metamask.io
+                       {{/if}}
+                    ">
+                    <img class="installMetamask" src="download-metamask-dark.png">
+                    </a>
+                {{else if metamaskLocked}}
+                    <h1>{{_ "browsercheck.metamaskLocked.title"}}</h1>
+                    <p>{{{_ "browsercheck.metamaskLocked.message"}}}</p>
+                {{/if}}
+            </div>
+        </main>
+    </div>
+</template>
