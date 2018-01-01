@@ -11,9 +11,7 @@ Template.selectAddress.onCreated(function() {
 });
 
 Template.selectAddress.onRendered(function() {
-    setTimeout(() => {
-        this.update();
-    }, 0);
+    setTimeout(() => this.update(), 0);
 });
 
 Template.selectAddress.helpers({
@@ -21,9 +19,7 @@ Template.selectAddress.helpers({
         // Update whenever the addresses change
         // This is actually a pretty awful hack, but I haven't found a better way to listen to changes of this.addresses
         const template = Template.instance();
-        setTimeout(() => {
-            template.update();
-        }, 0);
+        setTimeout(() => template.update(), 0);
         return this.addresses;
     },
     selectedAddress() {

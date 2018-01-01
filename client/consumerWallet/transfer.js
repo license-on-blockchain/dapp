@@ -58,9 +58,7 @@ function onFormUpdate() {
     this.destroyLink.set(destroyLink);
 
     // Validate after the DOM has updated, because changes to one input may affect the values of other inputs
-    setTimeout(() => {
-        this.validate();
-    }, 0);
+    setTimeout(() => this.validate(), 0);
 }
 
 function validate(errorOnEmpty = false) {
