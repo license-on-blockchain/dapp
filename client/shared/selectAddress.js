@@ -1,4 +1,7 @@
 Template.selectAddress.onCreated(function() {
+    if (!TemplateVar.get('value')) {
+        TemplateVar.set('value', '');
+    }
     this.update = function() {
         if (this.view.isRendered) {
             const address = this.find('select').value;
@@ -8,18 +11,19 @@ Template.selectAddress.onCreated(function() {
 });
 
 Template.selectAddress.onRendered(function() {
-    Tracker.autorun(() => {
-        setTimeout(() => {
-            this.update();
-        });
-    });
+    setTimeout(() => {
+        this.update();
+    }, 0);
 });
 
 Template.selectAddress.helpers({
     addresses() {
         // Update whenever the addresses change
         // This is actually a pretty awful hack, but I haven't found a better way to listen to changes of this.addresses
-        Template.instance().update();
+        const template = Template.instance();
+        setTimeout(() => {
+            template.update();
+        }, 0);
         return this.addresses;
     },
     selectedAddress() {
