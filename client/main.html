@@ -12,6 +12,14 @@
                     <span>{{_ "tab.title.licenses"}}</span>
                 </a>
             </li>
+            {{#if enableIssuerActions}}
+                <li>
+                    <a href="/licensecontracts" class="{{ activeIfCurrentRoute 'licensecontracts' }}">
+                        <i class="icon-plus"></i>
+                        <span>{{_ "tab.title.licenseContracts"}}</span>
+                    </a>
+                </li>
+            {{/if}}
             <li>
                 <a href="/transfer" class="{{ activeIfCurrentRoute 'transfer' }}">
                     <i class="icon-arrow-up"></i>
@@ -29,14 +37,6 @@
                     <a href="/reclaim" class="{{ activeIfCurrentRoute 'reclaim' }}">
                         <i class="icon-arrow-down"></i>
                         <span>{{_ "tab.title.reclaim"}}</span>
-                    </a>
-                </li>
-            {{/if}}
-            {{#if enableIssuerActions}}
-                <li>
-                    <a href="/licensecontracts" class="{{ activeIfCurrentRoute 'licensecontracts' }}">
-                        <i class="icon-plus"></i>
-                        <span>{{_ "tab.title.licenseContracts"}}</span>
                     </a>
                 </li>
             {{/if}}
