@@ -4,6 +4,7 @@ import {IssuanceLocation} from "../../lib/IssuanceLocation";
 import {formatDate} from "../../lib/utils";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
+import {Etherscan} from "../../lib/Etherscan";
 
 export const LicenseContractSigningTransactionInfo = {
     show(transactionHash) {
@@ -66,6 +67,9 @@ Template.licenseContractSigningTransactionInfo.helpers({
         } else {
             return "…";
         }
+    },
+    etherscanUrl() {
+        return Etherscan.getUrlForTransaction(this.transactionHash);
     }
 });
 

@@ -17,7 +17,8 @@
     "confirmation_plural": "__count__ confirmations",
     "unconfirmed": "Unconfirmed",
     "year": "__count__ year",
-    "year_plural": "__count__ years"
+    "year_plural": "__count__ years",
+    "viewOnEtherscan": "View on Etherscan.io"
   },
   "tab": {
     "title": {

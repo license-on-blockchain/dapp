@@ -1,7 +1,7 @@
 import {formatDate} from "../../lib/utils";
 import {IssuanceLocation} from "../../lib/IssuanceLocation";
 import {TransactionType} from "../../lib/lob/Transactions";
-import {IssuanceInfo as TransferTransactionInfo} from "./issuanceInfo";
+import {TransferTransactionInfo} from "../consumerWallet/transferTransactionInfo";
 import {LicenseContractCreationTransactionInfo} from "../issuerWallet/licenseContractCreationTransactionInfo";
 import {LicenseContractSigningTransactionInfo} from "../issuerWallet/licenseContractSigningTransactionInfo";
 
