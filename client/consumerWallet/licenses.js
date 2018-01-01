@@ -79,8 +79,8 @@ Template.licenseRow.helpers({
     description() {
         return this.metadata.description;
     },
-    revoked() {
-        return this.metadata.revoked;
+    transferPossible() {
+        return !this.metadata.revoked && lob.balances.getOwnedBalance(this.issuanceLocation, Accounts.get()) > 0;
     },
     licenseContract() {
         return this.metadata.licenseContract;

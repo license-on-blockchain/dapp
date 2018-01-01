@@ -52,9 +52,9 @@
             {{/if}}
         </td>
         <td class="buttonColumn">
-        {{#unless revoked}}
+        {{#if transferPossible}}
             <a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> {{_ "licenses.button.transfer"}}</a>
-        {{/unless}}
+        {{/if}}
         </td>
         <td class="buttonColumn"><a class="showCertificate" href="#"><i class="icon-doc"></i> {{_ "licenses.button.certificate"}}</a></td>
         <td class="buttonColumn"><a class="showHistory" href="#"><i class="icon-graph"></i> {{_ "licenses.button.history"}}</a></td>
