@@ -109,7 +109,7 @@ Template.createLicenseContract.events({
                 return;
             }
             privateKeyCache.addPrivateKeyForTransaction(transactionHash, privateKey);
-            Router.go('licensecontracts.waitforcreationmining', {rootContract: rootContractAddress, transactionHash});
+            Router.go('licensecontracts.waitforcreationmining', {transactionHash});
             NotificationCenter.showTransactionSubmitted();
         });
     }

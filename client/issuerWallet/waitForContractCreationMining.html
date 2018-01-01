@@ -1,7 +1,32 @@
 <template name="waitForContractCreationMining">
     <div class="dapp-flex-content">
         <main class="dapp-content">
-            <h1>{{{_ "waitForContractCreationMining.title"}}}</h1>
+            <h1><div class="spinner"></div> {{{_ "waitForContractCreationMining.title"}}}</h1>
+
+            <table class="dapp-zebra">
+                <tbody>
+                <tr>
+                    <td><strong>{{_ "waitForContractCreationMining.field.from"}}</strong></td>
+                    <td><i>{{> dapp_identicon identity=from class="dapp-tiny"}} {{from}}</i></td>
+                </tr>
+                <tr>
+                    <td><strong>{{_ "waitForContractCreationMining.field.to"}}</strong></td>
+                    <td><i>{{> dapp_identicon identity=to class="dapp-tiny"}} {{to}}</i></td>
+                </tr>
+                <tr>
+                    <td><strong>{{_ "waitForContractCreationMining.field.gasPrice"}}</strong></td>
+                    <td>{{gasPrice}} Gwei</td>
+                </tr>
+                <tr>
+                    <td><strong>{{_ "waitForContractCreationMining.field.maximumFee"}}</strong></td>
+                    <td>{{maximumFee}} Ether</td>
+                </tr>
+                <tr>
+                    <td><strong>{{_ "waitForContractCreationMining.field.transactionHash"}}</strong></td>
+                    <td><i>{{transactionHash}}</i></td>
+                </tr>
+                </tbody>
+            </table>
         </main>
     </div>
 </template>

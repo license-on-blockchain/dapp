@@ -169,3 +169,19 @@ span[contenteditable=true] {
 .createLicenseContract {
   margin-top: @gridHeight;
 }
+
+.spinner {
+  display: inline-block;
+  border: 0.2em solid @colorGrayLight;
+  border-top: 0.2em solid @colorBlue;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  animation: spin 2s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

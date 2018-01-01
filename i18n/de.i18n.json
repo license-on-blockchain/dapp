@@ -349,7 +349,14 @@
     }
   },
   "waitForContractCreationMining": {
-    "title": "<strong>Warten</strong> auf Bestätigung Ihres Smart Contracts zur Bescheinigung von Lizenzen auf der Ethereum-Blockchain"
+    "title": "<strong>Warten</strong> auf Bestätigung Ihres Smart Contracts zur Bescheinigung von Lizenzen auf der Ethereum-Blockchain",
+    "field": {
+      "from": "Von",
+      "to": "An",
+      "gasPrice": "Gas Preis",
+      "maximumFee": "Maximale Transaktionsgebühr",
+      "transactionHash": "Transaktions-Hash"
+    }
   },
   "signLicenseContract": {
     "title": "Smart Contract zur Bescheinigung von Lizenzen <strong>unterscheiben</strong>",

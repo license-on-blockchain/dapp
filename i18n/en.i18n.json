@@ -349,7 +349,14 @@
     }
   },
   "waitForContractCreationMining": {
-    "title": "<strong>Waiting</strong> for contract creation to be mined"
+    "title": "<strong>Waiting</strong> for contract creation to be mined",
+    "field": {
+      "from": "From",
+      "to": "To",
+      "gasPrice": "Gas Price",
+      "maximumFee": "Maximum Fee",
+      "transactionHash": "Transaction Hash"
+    }
   },
   "signLicenseContract": {
     "title": "<strong>Sign</strong> license contract",

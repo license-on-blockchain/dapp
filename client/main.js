@@ -119,10 +119,9 @@ Router.route('/licensecontracts/create', function() {
     name: 'licensecontracts.create'
 });
 
-Router.route('/licensecontracts/waitforcreationmining/:rootContract/:transactionHash', function() {
+Router.route('/licensecontracts/waitforcreationmining/:transactionHash', function() {
     this.render('waitForContractCreationMining', {
         data: {
-            rootContract: this.params.rootContract,
             transactionHash: this.params.transactionHash
         }
     });

@@ -1,35 +1,51 @@
-import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
-import {getRootContract} from "../../lib/lob/contractRetrieval";
 import {privateKeyCache} from "../../lib/PrivateKeyCache";
-import {EthNotificationCenter} from "../../lib/lob/EthNotificationCenter";
-
-function waitForLicenseContractCreation(rootContract, transactionHash, minedCallback) {
-    // First check if the transaction has already been mined
-    web3.eth.getTransaction(transactionHash, (error, transaction) => {
-        if (error) { handleUnknownEthereumError(error); return; }
-        if (transaction.blockNumber) {
-            // The transaction has already been mined. Fetch the event from the specified block
-            getRootContract(rootContract).LicenseContractCreation({}, {fromBlock: transaction.blockNumber, toBlock: transaction.blockNumber}, (error, event) => {
-                if (error) { handleUnknownEthereumError(error); return; }
-                if (event.transactionHash === transactionHash) {
-                    minedCallback(event.args.licenseContractAddress.toLowerCase());
-                }
-            });
-        } else {
-            // TODO: Stop watching after contract has been created
-            // Transaction not mined yet. Wait for a license contract creation event of the root contract
-            EthNotificationCenter.onLicenseContractCreation(rootContract, (event) => {
-                if (event.transactionHash === transactionHash) {
-                    minedCallback(licenseContractAddress);
-                }
-            });
-        }
-    });
-}
+import {lob} from "../../lib/LOB";
+import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 
 Template.waitForContractCreationMining.onCreated(function() {
-    waitForLicenseContractCreation(this.data.rootContract, this.data.transactionHash, (licenseContractAddress) => {
-        privateKeyCache.associateTransactionPrivateKeyWithContractAddress(this.data.transactionHash, licenseContractAddress);
-        Router.go('licensecontracts.sign.withAddress', {licenseContractAddress: licenseContractAddress});
+    this.computations = new Set();
+
+    const waitForCreationComputation = Tracker.autorun(() => {
+        const transaction = lob.transactions.getTransaction(this.data.transactionHash);
+        if (transaction && transaction.licenseContract) {
+            privateKeyCache.associateTransactionPrivateKeyWithContractAddress(this.data.transactionHash, transaction.licenseContract);
+            Router.go('licensecontracts.sign.withAddress', {licenseContractAddress: transaction.licenseContract});
+        }
     });
+    this.computations.add(waitForCreationComputation);
+
+    this.web3Transaction = new ReactiveVar({});
+    web3.eth.getTransaction(this.data.transactionHash, (error, transaction) => {
+        if (error) { handleUnknownEthereumError(error); return; }
+        this.web3Transaction.set(transaction);
+    });
+});
+
+Template.waitForContractCreationMining.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
+});
+
+Template.waitForContractCreationMining.helpers({
+    from() {
+        return Template.instance().web3Transaction.get().from;
+    },
+    to() {
+        return Template.instance().web3Transaction.get().to;
+    },
+    gasPrice() {
+        return web3.fromWei(Template.instance().web3Transaction.get().gasPrice, 'gwei');
+    },
+    maximumFee() {
+        const web3Transaction = Template.instance().web3Transaction.get();
+        if (web3Transaction.gasPrice) {
+            return web3.fromWei(web3Transaction.gasPrice.mul(web3Transaction.gas));
+        } else {
+            return 0;
+        }
+    },
+    transactionHash() {
+        return this.transactionHash;
+    }
 });
