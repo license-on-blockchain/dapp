@@ -3,6 +3,7 @@ import {lob} from "../lib/LOB";
 import {Settings} from "../lib/Settings";
 import {RootContracts} from "../lib/RootContracts";
 import './main.html';
+import {PersistentCollections} from "../lib/PersistentCollections";
 
 Router.route('/', function () {
     this.render('licenses');
@@ -197,12 +198,11 @@ Template.body.helpers({
 });
 
 Template.body.onCreated(function() {
-    // TODO: Hack: Allow PersistentMinimongo2 to load values from storage
-    setTimeout(() => {
+    PersistentCollections.afterAllInitialisations(() => {
         for (const rootContractAddress of RootContracts.getAddresses()) {
             lob.watchRootContract(rootContractAddress);
         }
-    }, 1000);
+    });
 });
 
 Meteor.startup(function() {
