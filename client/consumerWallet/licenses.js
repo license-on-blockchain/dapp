@@ -9,6 +9,8 @@ import {formatDate} from "../../lib/utils";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {TransferTransactionInfo} from "./transferTransactionInfo";
 
+const defaultTransactionLimit = 3; // Should be odd so that show all row is white
+
 function getLicenseRows(revoked) {
     return lob.balances.getNonZeroBalanceIssuanceLocations(Accounts.get())
         .map((issuanceLocation) => {
@@ -23,6 +25,10 @@ function getLicenseRows(revoked) {
         });
 }
 
+Template.licenses.onCreated(function() {
+    this.showAllTransactions = new ReactiveVar(false);
+});
+
 Template.licenses.helpers({
     licenses() {
         return getLicenseRows(/*revoked*/false);
@@ -31,10 +37,20 @@ Template.licenses.helpers({
         return getLicenseRows(/*revoked*/true);
     },
     hasPendingTransfers() {
-        return lob.transactions.getPendingTransfers().count() > 0;
+        return lob.transactions.getLatestTransfers().count() > 0;
     },
-    pendingTransfers() {
-        return lob.transactions.getPendingTransfers();
+    recentTransfers() {
+        const limit = Template.instance().showAllTransactions.get() ? 0 : defaultTransactionLimit;
+        return lob.transactions.getLatestTransfers(limit);
+    },
+    showingAllTransactions() {
+        return Template.instance().showAllTransactions.get() || lob.transactions.getLatestTransfers(0).count() <= defaultTransactionLimit;
+    }
+});
+
+Template.licenses.events({
+    'click tr.showAllRow'() {
+        Template.instance().showAllTransactions.set(true);
     }
 });
 

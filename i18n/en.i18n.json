@@ -62,7 +62,8 @@
     "button": {
       "transfer": "Transfer",
       "certificate": "Certificate",
-      "history": "History"
+      "history": "History",
+      "showAll": "Show All"
     },
     "transferDescription": {
       "licenses_not_transferred": "The licenses have not been transferred on yet.",
@@ -255,7 +256,8 @@
       "sign": "Sign",
       "issue": "Issue",
       "manage": "Manage",
-      "createLicenseContract": "Create a new license contract"
+      "createLicenseContract": "Create a new license contract",
+      "showAll": "Show All"
     }
   },
   "manageLicenseContract": {

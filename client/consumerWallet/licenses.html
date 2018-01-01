@@ -23,9 +23,16 @@
                 <h2>{{_ "licenses.heading.latestTransfers"}}</h2>
                 <table class="dapp-zebra">
                     <tbody>
-                    {{#each pendingTransfers}}
+                    {{#each recentTransfers}}
                         {{> pendingTransactionRow}}
                     {{/each}}
+                    {{#unless showingAllTransactions}}
+                        <tr class="showAllRow clickable">
+                            <td colspan="3">
+                                {{_ "licenses.button.showAll"}}
+                            </td>
+                        </tr>
+                    {{/unless}}
                     </tbody>
                 </table>
             {{/if}}

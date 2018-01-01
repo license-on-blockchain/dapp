@@ -15,10 +15,17 @@
                 {{#each latestLicenseContractCreations}}
                     {{> pendingTransactionRow}}
                 {{/each}}
+                {{#unless showingAllTransactions}}
+                    <tr class="showAllRow clickable">
+                        <td colspan="3">
+                            {{_ "managedLicenseContractList.button.showAll"}}
+                        </td>
+                    </tr>
+                {{/unless}}
                 </tbody>
             </table>
             <button class="dapp-block-button createLicenseContract">
-                {{{_ "managedLicenseContractList.button.createLicenseContract"}}}
+                {{_ "managedLicenseContractList.button.createLicenseContract"}}
             </button>
         </main>
     </div>

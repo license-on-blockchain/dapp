@@ -62,7 +62,8 @@
     "button": {
       "transfer": "Übertragen",
       "certificate": "Zertifikat",
-      "history": "Historie"
+      "history": "Historie",
+      "showAll": "Alle anzeigen"
     },
     "transferDescription": {
       "licenses_not_transferred": "Die Lizenzen wurden noch nicht weiter übertragen.",
@@ -255,7 +256,8 @@
       "sign": "Unterzeichnen",
       "issue": "Ausstellen",
       "manage": "Verwalten",
-      "createLicenseContract": "Neuen Smart Contract zur Bescheinigung von Lizenzen erstellen"
+      "createLicenseContract": "Neuen Smart Contract zur Bescheinigung von Lizenzen erstellen",
+      "showAll": "Alle anzeigen"
     }
   },
   "manageLicenseContract": {

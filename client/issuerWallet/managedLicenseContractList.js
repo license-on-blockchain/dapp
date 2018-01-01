@@ -2,6 +2,12 @@ import {lob} from "../../lib/LOB";
 import {Accounts} from "../../lib/Accounts";
 import {LicenseContractInfo} from "../shared/licenseContractInfo";
 
+const defaultTransactionLimit = 3; // Should be odd so that show all row is white
+
+Template.managedLicenseContractList.onCreated(function() {
+    this.showAllTransactions = new ReactiveVar(false);
+});
+
 Template.managedLicenseContractList.helpers({
     licenseContracts() {
         return lob.licenseContracts.getManagedLicenseContracts(Accounts.get())
@@ -13,7 +19,11 @@ Template.managedLicenseContractList.helpers({
             });
     },
     latestLicenseContractCreations() {
-        return lob.transactions.getLatestLicenseContractCreations();
+        const limit = Template.instance().showAllTransactions.get() ? 0 : defaultTransactionLimit;
+        return lob.transactions.getLatestLicenseContractCreations(limit);
+    },
+    showingAllTransactions() {
+        return Template.instance().showAllTransactions.get() || lob.transactions.getLatestLicenseContractCreations(0).count() <= defaultTransactionLimit;
     }
 });
 
@@ -21,6 +31,9 @@ Template.managedLicenseContractList.events({
     'click button.createLicenseContract'(event) {
         event.preventDefault();
         Router.go('licensecontracts.create');
+    },
+    'click tr.showAllRow'() {
+        Template.instance().showAllTransactions.set(true);
     }
 });
 
