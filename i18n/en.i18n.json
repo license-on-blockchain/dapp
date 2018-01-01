@@ -46,7 +46,14 @@
       "language": {
         "title": "Language",
         "description": "Choose the language the LOB wallet shall be in"
+      },
+      "clearCaches": {
+        "title": "Clear Caches",
+        "buttonTitle": "Clear Caches"
       }
+    },
+    "confirmation": {
+      "clearCaches": "Are you sure you want to delete all locally stored data? This action will not affect any data stored on the blockchain."
     }
   },
   "licenses": {

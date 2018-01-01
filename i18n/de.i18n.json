@@ -46,7 +46,14 @@
       "language": {
         "title": "Sprache",
         "description": "Sprache des LOB-Wallets wählen"
+      },
+      "clearCaches": {
+        "title": "Cache leeren",
+        "buttonTitle": "Cache leeren"
       }
+    },
+    "confirmation": {
+      "clearCaches": "Sind Sie sich sicher, dass Sie alle lokal gespeicherten Daten löschen möchen? Dies betrifft keine auf der Blockchain gespeicherten Daten."
     }
   },
   "licenses": {

@@ -1,4 +1,5 @@
 import {Settings} from "../lib/Settings";
+import {PersistentCollections} from "../lib/PersistentCollections";
 
 Template.settings.helpers({
     enableInstallationChecked() {
@@ -21,5 +22,12 @@ Template.settings.events({
     },
     'change [name=language]'(event) {
         Settings.language.set(event.currentTarget.value);
+    },
+    'click button.clearCaches'(event) {
+        event.preventDefault();
+        if (confirm(TAPi18n.__('settings.confirmation.clearCaches'))) {
+            PersistentCollections.clearAll();
+            location.reload();
+        }
     }
 });
