@@ -1,3 +1,5 @@
+import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
+
 const Browser = {
     Other: 0,
     Firefox: 1,
@@ -20,17 +22,28 @@ function metamaskLocked() {
     return web3.currentProvider.isMetaMask && web3.eth.accounts.length === 0;
 }
 
-export function browserSetupOK() {
-    const web3Installed = typeof web3 !== 'undefined';
-    return web3Installed && !metamaskLocked();
+export function checkBrowserSetup(callback) {
+    if (typeof web3 === 'undefined') {
+        callback(false);
+    }
+    web3.eth.getAccounts((error, accounts) => {
+        if (error) { handleUnknownEthereumError(error); return; }
+        if (web3.currentProvider.isMetaMask && accounts.length === 0) {
+            callback(false);
+        } else {
+            callback(true);
+        }
+    });
 }
 
 function pollBrowserCheck() {
-    if (browserSetupOK()) {
-        window.location = '/';
-    } else {
-        setTimeout(pollBrowserCheck, 1000);
-    }
+    checkBrowserSetup((success) => {
+        if (success) {
+            window.location = '/';
+        } else {
+            setTimeout(pollBrowserCheck, 1000);
+        }
+    });
 }
 
 Template.browsercheck.onRendered(function() {

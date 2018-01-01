@@ -4,7 +4,7 @@ import {Settings} from "../lib/Settings";
 import {RootContracts} from "../lib/RootContracts";
 import './main.html';
 import {PersistentCollections} from "../lib/PersistentCollections";
-import {browserSetupOK} from "./shared/browsercheck";
+import {checkBrowserSetup} from "./shared/browsercheck";
 import {arraysEqual} from "../lib/utils";
 
 let __lastAccounts = null;
@@ -20,9 +20,12 @@ function onAccountsChange(callback) {
 }
 
 Template.body.onCreated(function() {
-    if (!browserSetupOK()) {
-        Router.go('browsercheck');
-    }
+
+    checkBrowserSetup((success) => {
+        if (!success) {
+            Router.go('browsercheck');
+        }
+    });
 });
 
 Template.body.helpers({
@@ -44,8 +47,17 @@ Template.body.helpers({
     enableIssuerActions() {
         return Settings.enableIssuerActions.get();
     },
-    browserCheckSucceeded() {
-        return browserSetupOK();
+    showHeader() {
+        let currentRoute;
+        if (Router.current() && Router.current().route.getName()) {
+            currentRoute = Router.current().route.getName();
+            if (currentRoute.indexOf('.') !== -1) {
+                currentRoute = currentRoute.substring(0, currentRoute.indexOf('.'));
+            }
+        } else {
+            currentRoute = 'licenses';
+        }
+        return currentRoute !== 'browsercheck';
     }
 });
 
@@ -57,21 +69,23 @@ Meteor.startup(function() {
             });
         });
 
-        if (browserSetupOK()) {
-            EthAccounts.init();
-            EthBlocks.init();
+        checkBrowserSetup((success) => {
+            if (success) {
+                EthAccounts.init();
+                EthBlocks.init();
 
-            PersistentCollections.init();
-            PersistentCollections.afterAllInitialisations(() => {
-                for (const rootContractAddress of RootContracts.getAddresses()) {
-                    lob.watchRootContract(rootContractAddress);
-                }
-            });
+                PersistentCollections.init();
+                PersistentCollections.afterAllInitialisations(() => {
+                    for (const rootContractAddress of RootContracts.getAddresses()) {
+                        lob.watchRootContract(rootContractAddress);
+                    }
+                });
 
-            onAccountsChange(() => {
-                // Reload the dapp on accounts change since this is the easiest way to clear all non-persistent caches
-                location.reload();
-            })
-        }
+                onAccountsChange(() => {
+                    // Reload the dapp on accounts change since this is the easiest way to clear all non-persistent caches
+                    location.reload();
+                })
+            }
+        });
     }
 });
