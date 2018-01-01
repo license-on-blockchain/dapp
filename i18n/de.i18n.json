@@ -15,7 +15,7 @@
     "transaction_successfully_submitted": "Transaktion wurde erfolgreich auf die Ethereum-Blockchain übertragen",
     "confirmation": "__count__ Bestätigung", 
     "confirmation_plural": "__count__ Bestätigungen",
-    "unconfirmed": "Noch nicht gemined",
+    "unconfirmed": "Unbestätigt",
     "year": "__count__ Jahr",
     "year_plural": "__count__ Jahre"
   },
@@ -341,6 +341,7 @@
     "title": "Transaktion zur Erzeugung eines Smart Contracts zur Bescheinigung von Lizenzen",
     "field": {
       "rootContract": "Root Contract",
+      "licenseContractAddress": "Adresse des neuen Smart Contracts",
       "issuerAddress": "Adresse des Ausstellers",
       "issuerName": "Name des Ausstellers",
       "liability": "Haftung",
@@ -348,7 +349,8 @@
       "submissionDate": "Datum",
       "blockNumber": "Gemined in Block",
       "transactionFee": "Transaktionsgebühr"
-    }
+    },
+    "not_determined_yet": "Noch nicht bestimmt"
   },
   "waitForContractCreationMining": {
     "title": "<strong>Warten</strong> auf Bestätigung Ihres Smart Contracts zur Bescheinigung von Lizenzen auf der Ethereum-Blockchain",

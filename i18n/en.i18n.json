@@ -15,7 +15,7 @@
     "transaction_successfully_submitted": "Transaction successfully submitted",
     "confirmation": "__count__ confirmation",
     "confirmation_plural": "__count__ confirmations",
-    "unconfirmed": "Not mined yet",
+    "unconfirmed": "Unconfirmed",
     "year": "__count__ year",
     "year_plural": "__count__ years"
   },
@@ -341,6 +341,7 @@
     "title": "License Contract Creation Transaction",
     "field": {
       "rootContract": "Root Contract",
+      "licenseContractAddress": "License Contract Address",
       "issuerAddress": "Issuer Address",
       "issuerName": "Issuer Name",
       "liability": "Liability",
@@ -348,7 +349,8 @@
       "submissionDate": "Submission Date",
       "blockNumber": "Mined in Block",
       "transactionFee": "Transaction Fee"
-    }
+    },
+    "not_determined_yet": "Not determined yet"
   },
   "waitForContractCreationMining": {
     "title": "<strong>Waiting</strong> for contract creation to be mined",

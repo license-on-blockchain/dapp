@@ -9,7 +9,17 @@
             <tbody>
             <tr>
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.rootContract"}}</strong></td>
-                <td>{{rootContract}}</td>
+                <td><i>{{> dapp_identicon identity=rootContract class="dapp-tiny"}} {{rootContract}}</i></td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.licenseContractAddress"}}</strong></td>
+                <td>
+                    {{#if licenseContract}}
+                        <i>{{> dapp_identicon identity=licenseContract class="dapp-tiny"}} {{licenseContract}}</i>
+                    {{else}}
+                        <i>{{_ "licenseContractCreationTransactionInfo.not_determined_yet"}}</i>
+                    {{/if}}
+                </td>
             </tr>
             <tr>
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.issuerAddress"}}</strong></td>
@@ -20,7 +30,7 @@
                 <td>{{issuerName}}</td>
             </tr>
             <tr>
-                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.liablity"}}</strong></td>
+                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.liability"}}</strong></td>
                 <td>{{liability}}</td>
             </tr>
             <tr>
@@ -38,7 +48,7 @@
                         {{blockNumber}}
                         ({{_ "generic.confirmation" count=confirmations}})
                     {{else}}
-                        {{_ "generic.unconfirmed"}}
+                        <i>{{_ "generic.unconfirmed"}}</i>
                     {{/if}}
                 </td>
             </tr>

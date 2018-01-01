@@ -47,6 +47,9 @@ Template.licenseContractCreationTransactionInfo.helpers({
     rootContract() {
         return this.transaction.get().rootContract;
     },
+    licenseContract() {
+        return this.transaction.get().licenseContract;
+    },
     issuerAddress() {
         return this.transaction.get().issuerAddress;
     },
