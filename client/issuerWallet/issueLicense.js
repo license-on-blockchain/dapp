@@ -6,7 +6,7 @@ import {NotificationCenter} from "../../lib/NotificationCenter";
 import {Accounts} from "../../lib/Accounts";
 
 function getValues() {
-    const licenseContractAddress = TemplateVar.getFrom(this.find('.licenseContract'), 'value');
+    const licenseContractAddress = TemplateVar.getFrom(this.find('.licenseContract'), 'value').toLowerCase();
     const licenseTemplateCode = this.find('[name=licenseTemplate]').value;
     const code = this.find('[name=code]').value;
     const description = this.find('[name=description]').value;
@@ -16,7 +16,7 @@ function getValues() {
         auditTime = null;
     }
     const auditRemark = this.find('[name=auditRemark]').value;
-    const initialOwnerAddress = this.find('[name=initialOwnerAddress]').value;
+    const initialOwnerAddress = this.find('[name=initialOwnerAddress]').value.toLowerCase();
     const initialOwnerName = this.find('[name=initialOwnerName]').value;
     const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
     return {licenseContractAddress, licenseTemplateCode, code, description, amount, auditTime, auditRemark, initialOwnerAddress, initialOwnerName, gasPrice};

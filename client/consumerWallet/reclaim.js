@@ -5,8 +5,8 @@ import {Accounts} from "../../lib/Accounts";
 import {NotificationCenter} from "../../lib/NotificationCenter";
 
 function getValues() {
-    const reclaimer = TemplateVar.getFrom(this.find('[name=reclaimer]'), 'value');
-    const from = TemplateVar.getFrom(this.find('.from'), 'value');
+    const reclaimer = TemplateVar.getFrom(this.find('[name=reclaimer]'), 'value').toLowerCase();
+    const from = TemplateVar.getFrom(this.find('.from'), 'value').toLowerCase();
     const issuanceLocation = IssuanceLocation.fromString(this.find('[name=issuance]').value);
     const amount = this.find('[name=amount]').value;
     const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');

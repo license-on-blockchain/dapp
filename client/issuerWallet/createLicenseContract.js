@@ -9,8 +9,8 @@ import {NotificationCenter} from "../../lib/NotificationCenter";
 import {privateKeyCache} from "../../lib/PrivateKeyCache";
 
 function getValues() {
-    const rootContractAddress = this.find('[name=rootContract]').value;
-    const issuerAddress = TemplateVar.getFrom(this.find('[name=issuerAddress]'), 'value');
+    const rootContractAddress = this.find('[name=rootContract]').value.toLowerCase();
+    const issuerAddress = TemplateVar.getFrom(this.find('[name=issuerAddress]'), 'value').toLowerCase();
     const issuerName = this.find('[name=issuerName]').value;
     const liability = this.find('[name=liability]').value;
     const safekeepingPeriod = this.find('[name=safekeepingPeriod]').value;

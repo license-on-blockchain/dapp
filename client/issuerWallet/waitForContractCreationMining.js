@@ -12,7 +12,7 @@ function waitForLicenseContractCreation(rootContract, transactionHash, minedCall
             getRootContract(rootContract).LicenseContractCreation({}, {fromBlock: transaction.blockNumber, toBlock: transaction.blockNumber}, (error, event) => {
                 if (error) { handleUnknownEthereumError(error); return; }
                 if (event.transactionHash === transactionHash) {
-                    minedCallback(event.args.licenseContractAddress);
+                    minedCallback(event.args.licenseContractAddress.toLowerCase());
                 }
             });
         } else {

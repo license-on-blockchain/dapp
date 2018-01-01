@@ -8,8 +8,11 @@ import { NotificationCenter } from "../../lib/NotificationCenter";
 const selectedSenderAccount = new ReactiveVar();
 
 function getValues() {
-    const sender = TemplateVar.getFrom(this.find('[name=sender]'), 'value');
-    const [issuanceID, licenseContract] = this.find('[name=issuance]').value.split("|");
+    const sender = TemplateVar.getFrom(this.find('[name=sender]'), 'value').toLowerCase();
+    let [issuanceID, licenseContract] = this.find('[name=issuance]').value.split("|");
+    if (licenseContract) {
+        licenseContract = licenseContract.toLowerCase();
+    }
     let issuanceLocation = null;
     if (issuanceID && licenseContract) {
         issuanceLocation = IssuanceLocation.fromComponents(licenseContract, issuanceID);
