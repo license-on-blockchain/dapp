@@ -60,7 +60,7 @@ Template.licenseContractCreationTransactionInfo.helpers({
         return this.transaction.get().liability;
     },
     safekeepingPeriod() {
-        return this.transaction.get().safekeepingPeriod;
+        return Number(this.transaction.get().safekeepingPeriod);
     },
     submissionDate() {
         return formatDate(new Date(this.transaction.get().timestamp));
