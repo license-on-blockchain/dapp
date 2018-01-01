@@ -57,6 +57,11 @@
             <a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> {{_ "licenses.button.transfer"}}</a>
         {{/if}}
         </td>
+        <td class="buttonColumn">
+        {{#if reclaimPossible}}
+            <a href="/reclaim/reclaimer/{{maxReclaimableBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-down"></i> {{_ "licenses.button.reclaim"}}</a>
+        {{/if}}
+        </td>
         <td class="buttonColumn"><a class="showCertificate" href="#"><i class="icon-doc"></i> {{_ "licenses.button.certificate"}}</a></td>
         <td class="buttonColumn"><a class="showHistory" href="#"><i class="icon-graph"></i> {{_ "licenses.button.history"}}</a></td>
     </tr>

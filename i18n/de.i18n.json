@@ -69,6 +69,7 @@
     },
     "button": {
       "transfer": "Übertragen",
+      "reclaim": "Zurückfordern",
       "certificate": "Zertifikat",
       "history": "Historie",
       "showAll": "Alle anzeigen"

@@ -102,7 +102,7 @@ Template.transfer.onRendered(function() {
         if (selectedLicenseContract) {
             selectedLicenseContract = selectedLicenseContract.toLowerCase();
         }
-        let selectedIssuanceID = this.data.issuanceID;
+        let selectedIssuanceID = Number(this.data.issuanceID);
         
         const issuanceLocations = lob.balances.getNonZeroBalanceIssuanceLocations(selectedSenderAccount.get())
             .map((issuanceLocation) => {

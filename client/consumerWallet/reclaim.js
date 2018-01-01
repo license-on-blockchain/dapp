@@ -94,12 +94,18 @@ Template.reclaim.onRendered(function() {
     this.computations.add(reclaimOriginsCompuation);
 
     const issuanceLocationsComputation = Tracker.autorun(() => {
+        let selectedLicenseContract = this.data.licenseContract;
+        if (selectedLicenseContract) {
+            selectedLicenseContract = selectedLicenseContract.toLowerCase();
+        }
+        let selectedIssuanceID = Number(this.data.issuanceID);
+
         const issuanceLocations = lob.balances.getReclaimableIssuanceLocations(Accounts.get())
             .map((issuanceLocation) => {
                 return {
                     issuanceLocation,
                     metadata: lob.issuances.getIssuance(issuanceLocation) || {},
-                    selected: false,
+                    selected: (issuanceLocation.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceLocation.issuanceID === selectedIssuanceID),
                 }
             })
             .filter((obj) => {

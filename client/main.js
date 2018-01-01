@@ -102,7 +102,21 @@ Router.route('/transferreclaim/from/:from/licenseContract/:licenseContract/issua
 });
 
 // Reclaim
-Router.route('/reclaim');
+Router.route('/reclaim', function() {
+    this.render('reclaim', {
+        data: {}
+    });
+});
+
+Router.route('/reclaim/reclaimer/:reclaimer/licenseContract/:licenseContract/issuance/:issuance', function() {
+    this.render('reclaim', {
+        data: {
+            licenseContract: this.params.licenseContract,
+            issuanceID: this.params.issuance,
+            reclaimer: this.params.reclaimer
+        }
+    });
+});
 
 // Settings
 Router.route('/settings');

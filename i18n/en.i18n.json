@@ -69,6 +69,7 @@
     },
     "button": {
       "transfer": "Transfer",
+      "reclaim": "Reclaim",
       "certificate": "Certificate",
       "history": "History",
       "showAll": "Show All"

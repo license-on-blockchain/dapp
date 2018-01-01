@@ -86,11 +86,23 @@ Template.licenseRow.helpers({
                 return lhsBalance > rhsBalance ? [lhsAddress, lhsBalance] : [rhsAddress, rhsBalance];
             }, [undefined, -1])[0];
     },
+    maxReclaimableBalanceAddress() {
+        return Accounts.get()
+            .map((account) => {
+                return [account, lob.balances.getReclaimableBalance(this.issuanceLocation, account)];
+            })
+            .reduce(([lhsAddress, lhsBalance], [rhsAddress, rhsBalance]) => {
+                return lhsBalance > rhsBalance ? [lhsAddress, lhsBalance] : [rhsAddress, rhsBalance];
+            }, [undefined, -1])[0];
+    },
     description() {
         return this.metadata.description;
     },
     transferPossible() {
         return !this.metadata.revoked && lob.balances.getOwnedBalance(this.issuanceLocation, Accounts.get()) > 0;
+    },
+    reclaimPossible() {
+        return !this.metadata.revoked && lob.balances.getReclaimableBalance(this.issuanceLocation, Accounts.get()) > 0;
     },
     licenseContract() {
         return this.metadata.licenseContract;
