@@ -95,15 +95,17 @@ function onFormUpdate() {
 
     this.selectedLicenseContract.set(licenseContractAddress);
 
-    try {
-        const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
-        const issuerAddress = lob.licenseContracts.getIssuerAddress(licenseContractAddress);
-        lob.licenseIssuing.estimateGas.signLicenseContract(licenseContractAddress, signature, issuerAddress, (error, gasConsumpution) => {
-            if (error) { handleUnknownEthereumError(error); return; }
-            this.estimatedGasConsumption.set(gasConsumpution);
-        });
-    } catch (error) {
-        this.estimatedGasConsumption.set(0);
+    if (licenseContractAddress) {
+        try {
+            const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
+            const issuerAddress = lob.licenseContracts.getIssuerAddress(licenseContractAddress);
+            lob.licenseIssuing.estimateGas.signLicenseContract(licenseContractAddress, signature, issuerAddress, (error, gasConsumpution) => {
+                if (error) { handleUnknownEthereumError(error); return; }
+                this.estimatedGasConsumption.set(gasConsumpution);
+            });
+        } catch (error) {
+            this.estimatedGasConsumption.set(0);
+        }
     }
 
     // Validate after the DOM has updated, because changes to one input may affect the values of other inputs
@@ -133,22 +135,24 @@ function validate(errorOnEmpty = false) {
             return;
     }
 
-    // If something has been entered, verify the signature
-    if (manualSignature || privateKey) {
-        // Only perform signature validation if private key / manual signature are present
+    if (this.selectedLicenseContract.get()) {
+        // If something has been entered, verify the signature
+        if (manualSignature || privateKey) {
+            // Only perform signature validation if private key / manual signature are present
 
-        const sslCertificate = lob.licenseContracts.getSSLCertificate(this.selectedLicenseContract.get());
-        const certificateText = lob.licenseContracts.getCertificateText(this.selectedLicenseContract.get());
+            const sslCertificate = lob.licenseContracts.getSSLCertificate(this.selectedLicenseContract.get());
+            const certificateText = lob.licenseContracts.getCertificateText(this.selectedLicenseContract.get());
 
-        if (sslCertificate && certificateText) {
-            noErrors &= validateField(fieldToValidate, () => {
-                const certificateChain = new CertificateChain(sslCertificate);
-                const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
-                return verifySignature(signature, certificateText, certificateChain);
-            }, true, TAPi18n.__('signLicenseContract.error.signature_not_valid'));
-        } else {
-            noErrors &= validateField('manualSignature', false, errorOnEmpty, TAPi18n.__('signLicenseContract.error.signature_verification_data_not_loaded_yet'));
-            noErrors &= validateField('privateKey', false, errorOnEmpty, TAPi18n.__('signLicenseContract.error.privateKey_verification_data_not_loaded_yet'));
+            if (sslCertificate && certificateText) {
+                noErrors &= validateField(fieldToValidate, () => {
+                    const certificateChain = new CertificateChain(sslCertificate);
+                    const signature = computeSignature(signMethod, manualSignature, privateKey, certificateText);
+                    return verifySignature(signature, certificateText, certificateChain);
+                }, true, TAPi18n.__('signLicenseContract.error.signature_not_valid'));
+            } else {
+                noErrors &= validateField('manualSignature', false, errorOnEmpty, TAPi18n.__('signLicenseContract.error.signature_verification_data_not_loaded_yet'));
+                noErrors &= validateField('privateKey', false, errorOnEmpty, TAPi18n.__('signLicenseContract.error.privateKey_verification_data_not_loaded_yet'));
+            }
         }
     }
 
