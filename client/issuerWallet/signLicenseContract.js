@@ -67,12 +67,17 @@ function getValues() {
         privateKey = this.find('[name=privateKey]').value;
     }
 
+    let confirmCertificateText = false;
+    if (this.find('[name=confirmCertificateText]')) {
+        confirmCertificateText = this.find('[name=confirmCertificateText]').checked;
+    }
+
     let gasPrice = 0;
     if (this.find('.dapp-select-gas-price')) {
         gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
     }
 
-    return {licenseContractAddress, signMethod, manualSignature, privateKey, gasPrice};
+    return {licenseContractAddress, signMethod, manualSignature, privateKey, confirmCertificateText, gasPrice};
 }
 
 function onFormUpdate() {
@@ -117,7 +122,7 @@ function validate(errorOnEmpty = false) {
 
     let noErrors = true;
 
-    let {manualSignature, privateKey, signMethod} = this.getValues();
+    let {manualSignature, privateKey, signMethod, confirmCertificateText} = this.getValues();
 
     let fieldToValidate;
     // Verify that manual signature or private key has been entered
@@ -155,6 +160,7 @@ function validate(errorOnEmpty = false) {
             }
         }
     }
+    noErrors &= validateField('confirmCertificateText', confirmCertificateText, signMethod === 'privateKey' && errorOnEmpty, TAPi18n.__('signLicenseContract.error.confirmCertificateText_not_ticked'));
     noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'));
 
     return noErrors;
@@ -225,6 +231,19 @@ Template.signLicenseContract.helpers({
             return lob.licenseContracts.isSigned(selectedLicenseContract);
         } else {
             return false;
+        }
+    },
+    certificateText() {
+        const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
+        if (selectedLicenseContract) {
+            const certificateText = lob.licenseContracts.getCertificateText(selectedLicenseContract);
+            if (certificateText) {
+                return certificateText.split('\n');
+            } else {
+                return [];
+            }
+        } else {
+            return [];
         }
     },
     manualSignature() {

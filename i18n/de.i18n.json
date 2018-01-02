@@ -396,7 +396,10 @@
   },
   "signLicenseContract": {
     "title": "Smart Contract zur Bescheinigung von Lizenzen <strong>unterscheiben</strong>",
-    "inputs": {
+    "heading": {
+      "certificateText": "Zertifikatstext"
+    },
+    "input": {
       "licenseContract": {
         "title": "Smart Contract zur Bescheinigung von Lizenzen",
         "description": "Auswahl des Smart Contracts, den Sie unterzeichnen möchten"
@@ -408,6 +411,10 @@
       "privateKey": {
         "title": "Privater Schlüssel Ihres SSL-Zertifikats",
         "description": "Eingabe des privaten Schlüssels des SSL-Zertifikats, das Sie bei der Generierung Ihres Smart Contract zur Bescheinigung von Lizenzen angegeben haben (der Schlüssel wird niemals irgendwohin übertragen, sondern nur lokal genutzt, um die Elektronische Signatur zu generieren, alternativ können Sie den Bestätigungstext in einer anderen Anwendung unterzeichnen und die elektronische Signatur direkt eingeben)"
+      },
+      "confirmCertificateText": {
+        "title": "Ich bestätige hiermit, dass ich den oben abgedruckten Zertifikatstext gelesen und verstanden habe und diesen mit meinem privaten Schlüssel legal bindend unterzeichnen möchte",
+        "description": "Um Lizenzen ausstellen zu können, müssen Sie den oben abgedruckten Zertifikatstext mit Ihrem privaten SSL-Schlüssel signieren, so dass Lizenznehmer wissen, wer Sie sind"
       }
     },
     "button": {
@@ -424,7 +431,8 @@
       "privateKey_empty": "Sie müssen den privaten Schlüssel Ihres SSL-Zertifikats eingeben",
       "signature_not_valid": "Die elektronische Signatur ist nicht gültig",
       "signature_verification_data_not_loaded_yet": "Zur Überprüfung der elektronischen Signatur ist ein Zugriff auf die Ethereum-Blockchain erforderlich, der noch nicht erfolgen konnte. Bitte warten Sie einen Moment und versuchen Sie es dann erneut",
-      "privateKey_verification_data_not_loaded_yet": "Zur Erstellung der elektronischen Signatur ist ein Zugriff auf die Ethereum-Blockchain erforderlich, der noch nicht erfolgen konnte. Bitte warten Sie einen Moment und versuchen Sie es dann erneut"
+      "privateKey_verification_data_not_loaded_yet": "Zur Erstellung der elektronischen Signatur ist ein Zugriff auf die Ethereum-Blockchain erforderlich, der noch nicht erfolgen konnte. Bitte warten Sie einen Moment und versuchen Sie es dann erneut",
+      "confirmCertificateText_not_ticked": "Sie müssen bestätigen, dass Si den oben abgedruckten Zertifikatstext legal bindend unterzeichnen möchten"
     }
   },
   "issueLicense": {

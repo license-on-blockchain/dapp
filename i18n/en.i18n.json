@@ -396,6 +396,9 @@
   },
   "signLicenseContract": {
     "title": "<strong>Sign</strong> license contract",
+    "heading": {
+      "certificateText": "Certificate Text"
+    },
     "input": {
       "licenseContract": {
         "title": "License Contract",
@@ -408,6 +411,10 @@
       "privateKey": {
         "title": "Private SSL key",
         "description": "The private key for the SSL certificate you provided when creating the license contract. The key will never be transmitted anywhere but only be used to generate the signature."
+      },
+      "confirmCertificateText": {
+        "title": "I hereby confirm that I have read and understood the above certificate text and want to legally bindingly sign it with my private key",
+        "description": "In order for you to be able to issue licenses, you need to sign the above text with your private SSL key, so that licensees know who you are"
       }
     },
     "button": {
@@ -424,7 +431,8 @@
       "privateKey_empty": "Private key must not be empty",
       "signature_not_valid": "Signature is not valid",
       "signature_verification_data_not_loaded_yet": "Data necessary to verify the signature not loaded from the blockchain yet. Please wait a moment and try again",
-      "privateKey_verification_data_not_loaded_yet": "Data necessary to generate the signature not loaded from the blockchain yet. Please wait a moment and try again"
+      "privateKey_verification_data_not_loaded_yet": "Data necessary to generate the signature not loaded from the blockchain yet. Please wait a moment and try again",
+      "confirmCertificateText_not_ticked": "You need to confirm that you want to legally bindingly sign the above certificate text"
     }
   },
   "issueLicense": {

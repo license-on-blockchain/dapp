@@ -15,6 +15,17 @@
                 {{else}}
                     <div class="row clear">
                         <div class="col col-12 mobile-full">
+                            <h4>{{_ "signLicenseContract.heading.certificateText"}}</h4>
+                            <p>
+                            {{#each certificateText}}
+                                {{this}}<br>
+                            {{/each}}
+                            </p>
+                        </div>
+                        <div class="dapp-clear-fix"></div>
+                    </div>
+                    <div class="row clear">
+                        <div class="col col-12 mobile-full">
                             <div class="dapp-segmented-control dapp-small">
                                 <input type="radio" value="privateKey" id="privateKey" name="signMethod" checked>
                                 <label for="privateKey">{{_ "signLicenseContract.signMethod.privateKey"}}</label>
@@ -34,6 +45,16 @@
                         </div>
                         <div class="dapp-clear-fix"></div>
                     </div>
+                    {{#unless manualSignature}}
+                        <div class="row clear">
+                            <div class="col col-12 mobile-full">
+                                <h4>{{_ "signLicenseContract.input.confirmCertificateText.title"}}</h4>
+                                <input type="checkbox" name="confirmCertificateText" title="{{_ "signLicenseContract.input.confirmCertificateText.description"}}">
+                                <div class="lob-error-message" data-for="confirmCertificateText"></div>
+                            </div>
+                            <div class="dapp-clear-fix"></div>
+                        </div>
+                    {{/unless}}
                     <div class="row clear">
                         <div class="col col-4 mobile-full">
                             <h4>{{_ "generic.input.gas.title"}}</h4>
