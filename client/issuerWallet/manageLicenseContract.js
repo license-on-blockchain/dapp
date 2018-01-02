@@ -6,9 +6,6 @@ Template.manageLicenseContract.helpers({
     issuances() {
         return lob.issuances.getIssuancesOfLicenseContract(this.address);
     },
-    contractName() {
-        return lob.licenseContracts.getDisplayName(this.address);
-    },
     disabled() {
         return lob.licenseContracts.isDisabled(this.address);
     }

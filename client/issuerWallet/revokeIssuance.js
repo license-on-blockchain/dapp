@@ -86,7 +86,6 @@ Template.revokeIssuance.helpers({
             .map((licenseContract) => {
                 return {
                     address: licenseContract,
-                    name: lob.licenseContracts.getDisplayName(licenseContract),
                     selected: Template.instance().data.licenseContract === licenseContract
                 }
             });

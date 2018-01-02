@@ -38,9 +38,6 @@ Template.managedLicenseContractList.events({
 });
 
 Template.licenseContractRow.helpers({
-    name() {
-        return lob.licenseContracts.getDisplayName(this.address);
-    },
     address() {
         return this.address;
     },

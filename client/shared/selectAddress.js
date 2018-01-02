@@ -1,3 +1,5 @@
+import {Accounts} from "../../lib/Accounts";
+
 Template.selectAddress.onCreated(function() {
     if (!TemplateVar.get('value')) {
         TemplateVar.set('value', '');
@@ -39,5 +41,16 @@ Template.selectAddress.events({
 Template.selectAddressOption.helpers({
     preselected() {
         return this.selected ? 'selected' : '';
+    },
+    name() {
+        if (this.name) {
+            return this.name;
+        } else {
+            const licenseContractName = lob.licenseContracts.getDisplayName(this.address);
+            if (licenseContractName !== this.address) {
+                return licenseContractName;
+            }
+            return Accounts.getDisplayName(this.address);
+        }
     }
 });

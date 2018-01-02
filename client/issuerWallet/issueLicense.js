@@ -120,7 +120,6 @@ Template.issueLicense.helpers({
         return Template.instance().licenseContracts.get().map((licenseContract) => {
             return {
                 address: licenseContract,
-                name: lob.licenseContracts.getDisplayName(licenseContract),
                 selected: licenseContract.toLowerCase() === preselectedLicenseContract
             }
         });

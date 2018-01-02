@@ -9,11 +9,11 @@
             <tbody>
             <tr>
                 <td><strong>{{_ "licenseContractSigningTransactionInfo.field.licenseContract"}}</strong></td>
-                <td><a href="#" class="showLicenseContractInfo"><i>{{> dapp_identicon identity=licenseContract class="dapp-tiny"}} {{licenseContractName}}</i></a></td>
+                <td><a href="#" class="showLicenseContractInfo">{{> dapp_address address=licenseContract}}</a></td>
             </tr>
             <tr>
                 <td><strong>{{_ "licenseContractSigningTransactionInfo.field.from"}}</strong></td>
-                <td><i>{{> dapp_identicon identity=from class="dapp-tiny"}} {{from}}</i></td>
+                <td>{{> dapp_address address=from}}</td>
             </tr>
             {{> generalTransactionInfo transaction=transaction}}
             </tbody>

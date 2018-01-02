@@ -48,7 +48,7 @@
         </tr>
         <tr>
             <td><strong>{{_ "licenseContractInfo.field.issuerAddress"}}</strong></td>
-            <td><i>{{> dapp_identicon identity=issuerAddress class="dapp-tiny"}} {{issuerAddress}}</i></td>
+            <td>{{> dapp_address address=issuerAddress}}</td>
         </tr>
         <tr>
             <td><strong>{{_ "licenseContractInfo.field.signed"}}</strong></td>
@@ -66,7 +66,7 @@
         </tr>
         <tr>
             <td><strong>{{_ "licenseContractInfo.field.rootContract"}}</strong></td>
-            <td><i>{{> dapp_identicon identity=rootContract class="dapp-tiny"}} {{rootContract}}</i></td>
+            <td>{{> dapp_address address=rootContract}}</td>
         </tr>
         <tr>
             <td><strong>{{_ "licenseContractInfo.field.disabled"}}</strong></td>

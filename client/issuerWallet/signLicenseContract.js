@@ -219,7 +219,6 @@ Template.signLicenseContract.helpers({
             .map((licenseContract) => {
                 return {
                     address: licenseContract,
-                    name: lob.licenseContracts.getDisplayName(licenseContract),
                     selected: licenseContract.toLowerCase() === preselectedLicenseContract
                 }
             })

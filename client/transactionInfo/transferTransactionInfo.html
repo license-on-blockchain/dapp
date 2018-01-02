@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td><strong>{{_ "transferTransactionInfo.field.from"}}</strong></td>
-                <td><i>{{> dapp_identicon identity=from class="dapp-tiny"}} {{from}}</i></td>
+                <td>{{> dapp_address address=from}}</td>
             </tr>
             <tr>
                 <td><strong>
@@ -29,7 +29,7 @@
                         {{_ "transferTransactionInfo.field.to"}}
                     {{/if}}
                 </strong></td>
-                <td><i>{{> dapp_identicon identity=to class="dapp-tiny"}} {{to}}</i></td>
+                <td>{{> dapp_address address=to}}</td>
             </tr>
             <tr>
                 <td><strong>{{_ "transferTransactionInfo.field.amount"}}</strong></td>

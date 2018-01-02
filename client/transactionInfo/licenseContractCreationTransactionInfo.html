@@ -9,13 +9,13 @@
             <tbody>
             <tr>
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.rootContract"}}</strong></td>
-                <td><i>{{> dapp_identicon identity=rootContract class="dapp-tiny"}} {{rootContract}}</i></td>
+                <td>{{> dapp_address address=rootContract}}</td>
             </tr>
             <tr>
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.licenseContractAddress"}}</strong></td>
                 <td>
                     {{#if licenseContract}}
-                        <i>{{> dapp_identicon identity=licenseContract class="dapp-tiny"}} {{licenseContractName}}</i>
+                        <i>{{> dapp_address address=licenseContract}}</i>
                     {{else}}
                         <i>{{_ "licenseContractCreationTransactionInfo.not_determined_yet"}}</i>
                     {{/if}}
@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.issuerAddress"}}</strong></td>
-                <td><i>{{> dapp_identicon identity=issuerAddress class="dapp-tiny"}} {{issuerAddress}}</i></td>
+                <td>{{> dapp_address address=issuerAddress}}</td>
             </tr>
             <tr>
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.issuerName"}}</strong></td>

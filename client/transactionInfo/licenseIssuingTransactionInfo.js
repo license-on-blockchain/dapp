@@ -21,10 +21,6 @@ Template.licenseIssuingTransactionInfo.helpers({
     licenseContract() {
         return lob.transactions.getTransaction(this.transactionHash).licenseContract;
     },
-    licenseContractName() {
-        const address = lob.transactions.getTransaction(this.transactionHash).licenseContract;
-        return lob.licenseContracts.getDisplayName(address);
-    },
     issuer() {
         return lob.transactions.getTransaction(this.transactionHash).from;
     },

@@ -68,7 +68,7 @@ Template.pendingTransactionRow.helpers({
             case TransactionType.LicenseContractDisabling:
             case TransactionType.LicenseIssuing:
             case TransactionType.IssuanceRevoke:
-                return lob.licenseContracts.getDisplayName(this.licenseContract);
+                return this.licenseContract;
         }
     },
     confirmationStatus() {

@@ -7,16 +7,10 @@
         <td>
             <h2>{{type}}</h2>
             <p>
-                <span class="address">
-                    {{> dapp_identicon identity=from class="dapp-tiny"}}
-                    {{from}}
-                </span>
+                {{> dapp_address address=from}}
                 {{#if to}}
                     <span class="arrow">➔</span>
-                    <span class="address">
-                        {{> dapp_identicon identity=to class="dapp-tiny"}}
-                        {{to}}
-                    </span>
+                    {{> dapp_address address=to}}
                 {{/if}}
             </p>
         </td>

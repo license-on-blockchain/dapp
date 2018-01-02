@@ -23,10 +23,6 @@ Template.licenseContractCreationTransactionInfo.helpers({
     licenseContract() {
         return lob.transactions.getTransaction(this.transactionHash).licenseContract;
     },
-    licenseContractName() {
-        const address = lob.transactions.getTransaction(this.transactionHash).licenseContract;
-        return lob.licenseContracts.getDisplayName(address);
-    },
     issuerAddress() {
         return lob.transactions.getTransaction(this.transactionHash).issuerAddress;
     },
