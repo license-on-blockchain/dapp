@@ -61,19 +61,19 @@ function onFormUpdate() {
     setTimeout(() => this.validate(), 0);
 }
 
-function validate(errorOnEmpty = false) {
+function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
     const {sender, issuanceID, issuanceLocation, recipient, amount} = this.getValues();
     let noErrors = true;
 
-    noErrors &= validateField('sender', web3.isAddress(sender), true);
-    noErrors &= validateField('recipient', web3.isAddress(recipient), errorOnEmpty, TAPi18n.__('transfer.error.recipient_not_valid_address'));
-    noErrors &= validateField('recipient', () => recipient.toLowerCase() !== sender.toLowerCase(), recipient && sender, TAPi18n.__('transfer.error.recipient_equal_to_sender'));
-    noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'));
-    noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'));
-    noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('transfer.error.amount_zero'));
-    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'));
+    noErrors &= validateField('sender', web3.isAddress(sender), true, null, errorMessages);
+    noErrors &= validateField('recipient', web3.isAddress(recipient), errorOnEmpty, TAPi18n.__('transfer.error.recipient_not_valid_address'), errorMessages);
+    noErrors &= validateField('recipient', () => recipient.toLowerCase() !== sender.toLowerCase(), recipient && sender, TAPi18n.__('transfer.error.recipient_equal_to_sender'), errorMessages);
+    noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'), errorMessages);
+    noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'), errorMessages);
+    noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('transfer.error.amount_zero'), errorMessages);
+    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
     return noErrors;
 }
@@ -162,7 +162,12 @@ Template.transfer.events({
     },
     'click button#transfer'(event) {
         event.preventDefault();
-        if (!Template.instance().validate(true)) {
+
+        const errorMessages = [];
+        if (!Template.instance().validate(true, errorMessages)) {
+            for (const errorMessage of errorMessages) {
+                NotificationCenter.showError(errorMessage);
+            }
             return;
         }
 

@@ -31,16 +31,16 @@ function onFormUpdate() {
     setTimeout(() => this.validate(), 0);
 }
 
-function validate(errorOnEmpty = false) {
+function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
     const {licenseContract, issuanceID} = this.getValues();
 
     let noErrors = true;
 
-    noErrors &= validateField('licenseContract', licenseContract, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_licenseContract_selected'));
-    noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_issuanceID_selected'));
-    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'));
+    noErrors &= validateField('licenseContract', licenseContract, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_licenseContract_selected'), errorMessages);
+    noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_issuanceID_selected'), errorMessages);
+    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
     return noErrors;
 }
@@ -125,7 +125,11 @@ Template.revokeIssuance.events({
     'click button#revoke'(event) {
         event.preventDefault();
 
-        if (!Template.instance().validate(true)) {
+        const errorMessages = [];
+        if (!Template.instance().validate(true, errorMessages)) {
+            for (const errorMessage of errorMessages) {
+                NotificationCenter.showError(errorMessage);
+            }
             return;
         }
 

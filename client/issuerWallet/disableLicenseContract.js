@@ -24,15 +24,15 @@ function onFormUpdate() {
     setTimeout(() => this.validate(), 0);
 }
 
-function validate(errorOnEmpty = false) {
+function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
     const {licenseContract} = this.getValues();
 
     let noErrors = true;
 
-    noErrors &= validateField('licenseContract', web3.isAddress(licenseContract), true);
-    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'));
+    noErrors &= validateField('licenseContract', web3.isAddress(licenseContract), true, null, errorMessages);
+    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
     return noErrors;
 }
@@ -101,7 +101,11 @@ Template.disableLicenseContract.helpers({
 Template.disableLicenseContract.events({
     'click button#disable'(event) {
         event.preventDefault();
-        if (!Template.instance().validate(true)) {
+        const errorMessages = [];
+        if (!Template.instance().validate(true, errorMessages)) {
+            for (const errorMessage of errorMessages) {
+                NotificationCenter.showError(errorMessage);
+            }
             return;
         }
 

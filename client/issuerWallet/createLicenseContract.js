@@ -37,29 +37,29 @@ function onFormUpdate() {
     setTimeout(() => this.validate(), 0);
 }
 
-function validate(errorOnEmpty = false) {
+function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
     const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, privateKey} = this.getValues();
     let noErrors = true;
 
-    noErrors &= validateField('rootContract', rootContractAddress, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_root_contract_selected'));
-    noErrors &= validateField('issuerAddress', web3.isAddress(issuerAddress), true, TAPi18n.__('createLicenseContract.error.no_issuer_address_selected'));
-    noErrors &= validateField('issuerName', issuerName, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_issuerName_entered'));
-    noErrors &= validateField('safekeepingPeriod', safekeepingPeriod, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_safekeepingPeriod_entered'));
-    noErrors &= validateField('sslCertificate', certificate, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_sslCertificate_entered'));
+    noErrors &= validateField('rootContract', rootContractAddress, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_root_contract_selected'), errorMessages);
+    noErrors &= validateField('issuerAddress', web3.isAddress(issuerAddress), true, TAPi18n.__('createLicenseContract.error.no_issuer_address_selected'), errorMessages);
+    noErrors &= validateField('issuerName', issuerName, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_issuerName_entered'), errorMessages);
+    noErrors &= validateField('safekeepingPeriod', safekeepingPeriod, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_safekeepingPeriod_entered'), errorMessages);
+    noErrors &= validateField('sslCertificate', certificate, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_sslCertificate_entered'), errorMessages);
     noErrors &= validateField('sslCertificate', () => {
         const certificateChain = new CertificateChain(certificate);
         return certificateChain.verifyCertificateChain();
-    }, certificate, TAPi18n.__('createLicenseContract.error.sslCertificate_not_valid'));
+    }, certificate, TAPi18n.__('createLicenseContract.error.sslCertificate_not_valid'), errorMessages);
     noErrors &= validateField('sslPrivateKey', () => {
         const textToSign = 'Test';
         // Sign some arbitrary text and check that the signature can be verified
         const signature = CertificateChain.generateSignature(textToSign, privateKey);
         const certificateChain = new CertificateChain(certificate);
         return certificateChain.verifySignature(textToSign, signature);
-    }, privateKey && certificate, TAPi18n.__('createLicenseContract.error.sslPrivateKey_does_not_match'));
-    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'));
+    }, privateKey && certificate, TAPi18n.__('createLicenseContract.error.sslPrivateKey_does_not_match'), errorMessages);
+    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
     return noErrors;
 }
@@ -113,7 +113,11 @@ Template.createLicenseContract.events({
     'click button#submit'(event) {
         event.preventDefault();
 
-        if (!Template.instance().validate(true)) {
+        const errorMessages = [];
+        if (!Template.instance().validate(true, errorMessages)) {
+            for (const errorMessage of errorMessages) {
+                NotificationCenter.showError(errorMessage);
+            }
             return;
         }
 

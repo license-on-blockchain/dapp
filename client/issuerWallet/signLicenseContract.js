@@ -117,7 +117,7 @@ function onFormUpdate() {
     setTimeout(() => this.validate(), 0);
 }
 
-function validate(errorOnEmpty = false) {
+function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
     let noErrors = true;
@@ -129,11 +129,11 @@ function validate(errorOnEmpty = false) {
     switch (signMethod) {
         case 'manual':
             fieldToValidate = 'manualSignature';
-            noErrors &= validateField('manualSignature', manualSignature, errorOnEmpty, TAPi18n.__('signLicenseContract.error.signature_empty'));
+            noErrors &= validateField('manualSignature', manualSignature, errorOnEmpty, TAPi18n.__('signLicenseContract.error.signature_empty'), errorMessages);
             break;
         case 'privateKey':
             fieldToValidate = 'privateKey';
-            noErrors &= validateField('privateKey', privateKey, errorOnEmpty, TAPi18n.__('signLicenseContract.error.privateKey_empty'));
+            noErrors &= validateField('privateKey', privateKey, errorOnEmpty, TAPi18n.__('signLicenseContract.error.privateKey_empty'), errorMessages);
             break;
         default:
             console.error("Unknown signing method: " + signMethod);
@@ -155,13 +155,13 @@ function validate(errorOnEmpty = false) {
                     return verifySignature(signature, certificateText, certificateChain);
                 }, true, TAPi18n.__('signLicenseContract.error.signature_not_valid'));
             } else {
-                noErrors &= validateField('manualSignature', false, errorOnEmpty, TAPi18n.__('signLicenseContract.error.signature_verification_data_not_loaded_yet'));
-                noErrors &= validateField('privateKey', false, errorOnEmpty, TAPi18n.__('signLicenseContract.error.privateKey_verification_data_not_loaded_yet'));
+                noErrors &= validateField('manualSignature', false, errorOnEmpty, TAPi18n.__('signLicenseContract.error.signature_verification_data_not_loaded_yet'), errorMessages);
+                noErrors &= validateField('privateKey', false, errorOnEmpty, TAPi18n.__('signLicenseContract.error.privateKey_verification_data_not_loaded_yet'), errorMessages);
             }
         }
     }
-    noErrors &= validateField('confirmCertificateText', confirmCertificateText, signMethod === 'privateKey' && errorOnEmpty, TAPi18n.__('signLicenseContract.error.confirmCertificateText_not_ticked'));
-    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'));
+    noErrors &= validateField('confirmCertificateText', confirmCertificateText, signMethod === 'privateKey' && errorOnEmpty, TAPi18n.__('signLicenseContract.error.confirmCertificateText_not_ticked'), errorMessages);
+    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
     return noErrors;
 }
@@ -269,7 +269,11 @@ Template.signLicenseContract.events({
     'click button#sign'(event) {
         event.preventDefault();
 
-        if (!Template.instance().validate(true)) {
+        const errorMessages = [];
+        if (!Template.instance().validate(true, errorMessages)) {
+            for (const errorMessage of errorMessages) {
+                NotificationCenter.showError(errorMessage);
+            }
             return;
         }
 

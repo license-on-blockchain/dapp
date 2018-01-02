@@ -45,7 +45,7 @@ function onFormUpdate() {
     setTimeout(() => this.validate(), 0);
 }
 
-function validate(errorOnEmpty = false) {
+function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
     let noErrors = true;
@@ -53,17 +53,17 @@ function validate(errorOnEmpty = false) {
     let {licenseContractAddress, code, description, amount, auditTime, auditRemark, initialOwnerAddress, initialOwnerName} = this.getValues();
 
 
-    noErrors &= validateField('licenseContract', web3.isAddress(licenseContractAddress), errorOnEmpty, TAPi18n.__('issueLicense.error.licenseContract_not_valid'));
-    noErrors &= validateField('code', code, errorOnEmpty, TAPi18n.__('issueLicense.error.code_empty'));
-    noErrors &= validateField('description', description, errorOnEmpty, TAPi18n.__('issueLicense.error.description_empty'));
-    noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('issueLicense.error.amount_empty'));
-    noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('issueLicense.error.amount_zero'));
-    noErrors &= validateField('auditTime', auditTime, errorOnEmpty, TAPi18n.__('issueLicense.error.auditTime_empty'));
-    noErrors &= validateField('auditTime', auditTime <= new Date(), auditTime, TAPi18n.__('issueLicense.error.auditTime_in_future'));
-    noErrors &= validateField('initialOwnerAddress', web3.isAddress(initialOwnerAddress), errorOnEmpty, TAPi18n.__('issueLicense.error.initialOwnerAddress_not_valid'));
-    noErrors &= validateField('initialOwnerName', initialOwnerName, errorOnEmpty, TAPi18n.__('issueLicense.error.initialOwnerName_empty'));
-    noErrors &= validateField('fee', this.selectedLicenseContract.get() && lob.licenseContracts.getFee(this.selectedLicenseContract.get()) !== null, errorOnEmpty, TAPi18n.__('issueLicense.error.fee_not_fetched'));
-    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'));
+    noErrors &= validateField('licenseContract', web3.isAddress(licenseContractAddress), errorOnEmpty, TAPi18n.__('issueLicense.error.licenseContract_not_valid'), errorMessages);
+    noErrors &= validateField('code', code, errorOnEmpty, TAPi18n.__('issueLicense.error.code_empty'), errorMessages);
+    noErrors &= validateField('description', description, errorOnEmpty, TAPi18n.__('issueLicense.error.description_empty'), errorMessages);
+    noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('issueLicense.error.amount_empty'), errorMessages);
+    noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('issueLicense.error.amount_zero'), errorMessages);
+    noErrors &= validateField('auditTime', auditTime, errorOnEmpty, TAPi18n.__('issueLicense.error.auditTime_empty'), errorMessages);
+    noErrors &= validateField('auditTime', auditTime <= new Date(), auditTime, TAPi18n.__('issueLicense.error.auditTime_in_future'), errorMessages);
+    noErrors &= validateField('initialOwnerAddress', web3.isAddress(initialOwnerAddress), errorOnEmpty, TAPi18n.__('issueLicense.error.initialOwnerAddress_not_valid'), errorMessages);
+    noErrors &= validateField('initialOwnerName', initialOwnerName, errorOnEmpty, TAPi18n.__('issueLicense.error.initialOwnerName_empty'), errorMessages);
+    noErrors &= validateField('fee', this.selectedLicenseContract.get() && lob.licenseContracts.getFee(this.selectedLicenseContract.get()) !== null, errorOnEmpty, TAPi18n.__('issueLicense.error.fee_not_fetched'), errorMessages);
+    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
     return noErrors;
 }
@@ -179,7 +179,11 @@ Template.issueLicense.events({
     'click button#issueLicense'(event) {
         event.preventDefault();
 
-        if (!Template.instance().validate(true)) {
+        const errorMessages = [];
+        if (!Template.instance().validate(true, errorMessages)) {
+            for (const errorMessage of errorMessages) {
+                NotificationCenter.showError(errorMessage);
+            }
             return;
         }
 

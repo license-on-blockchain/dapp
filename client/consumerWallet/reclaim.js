@@ -28,21 +28,21 @@ function onFormUpdate() {
     setTimeout(() => this.validate(), 0);
 }
 
-function validate(errorOnEmpty = false) {
+function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
     const {reclaimer, issuanceLocation, from, amount} = this.getValues();
     let noErrors = true;
 
-    noErrors &= validateField('reclaimer', web3.isAddress(reclaimer), true);
-    noErrors &= validateField('issuance', issuanceLocation, errorOnEmpty, TAPi18n.__('reclaim.error.no_license_selected'));
-    noErrors &= validateField('from', web3.isAddress(from), errorOnEmpty && from, TAPi18n.__("reclaim.error.from_not_valid"));
-    noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__("reclaim.error.amount_not_specified"));
+    noErrors &= validateField('reclaimer', web3.isAddress(reclaimer), true, null, errorMessages);
+    noErrors &= validateField('issuance', issuanceLocation, errorOnEmpty, TAPi18n.__('reclaim.error.no_license_selected'), errorMessages);
+    noErrors &= validateField('from', web3.isAddress(from), errorOnEmpty && from, TAPi18n.__("reclaim.error.from_not_valid"), errorMessages);
+    noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__("reclaim.error.amount_not_specified"), errorMessages);
     if (issuanceLocation) {
         const reclaimableBalance = lob.balances.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from);
-        noErrors &= validateField('amount', amount <= reclaimableBalance, amount, TAPi18n.__("reclaim.error.amount_less_than_balance", reclaimableBalance));
+        noErrors &= validateField('amount', amount <= reclaimableBalance, amount, TAPi18n.__("reclaim.error.amount_less_than_balance", reclaimableBalance), errorMessages);
     }
-    noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__("reclaim.error.amount_zero"));
+    noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__("reclaim.error.amount_zero"), errorMessages);
 
     return noErrors;
 }
@@ -158,7 +158,11 @@ Template.reclaim.events({
     },
     'click button#reclaim'(event) {
         event.preventDefault();
-        if (!Template.instance().validate(true)) {
+        const errorMessages = [];
+        if (!Template.instance().validate(true, errorMessages)) {
+            for (const errorMessage of errorMessages) {
+                NotificationCenter.showError(errorMessage);
+            }
             return;
         }
 
