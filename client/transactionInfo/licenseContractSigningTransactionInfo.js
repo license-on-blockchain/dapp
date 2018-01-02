@@ -20,6 +20,10 @@ Template.licenseContractSigningTransactionInfo.helpers({
     licenseContract() {
         return lob.transactions.getTransaction(this.transactionHash).licenseContract;
     },
+    licenseContractName() {
+        const address = lob.transactions.getTransaction(this.transactionHash).licenseContract;
+        return lob.licenseContracts.getDisplayName(address);
+    },
     from() {
         return lob.transactions.getTransaction(this.transactionHash).from;
     },
@@ -35,4 +39,7 @@ Template.licenseContractSigningTransactionInfo.events({
     'click button.hideModal'() {
         EthElements.Modal.hide();
     },
+    'click .showLicenseContractInfo'() {
+        LicenseContractInfo.show(lob.transactions.getTransaction(this.transactionHash).licenseContract);
+    }
 });

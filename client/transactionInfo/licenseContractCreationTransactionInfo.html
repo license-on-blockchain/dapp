@@ -15,7 +15,7 @@
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.licenseContractAddress"}}</strong></td>
                 <td>
                     {{#if licenseContract}}
-                        <i>{{> dapp_identicon identity=licenseContract class="dapp-tiny"}} {{licenseContract}}</i>
+                        <i>{{> dapp_identicon identity=licenseContract class="dapp-tiny"}} {{licenseContractName}}</i>
                     {{else}}
                         <i>{{_ "licenseContractCreationTransactionInfo.not_determined_yet"}}</i>
                     {{/if}}

@@ -25,7 +25,12 @@ Template.issuanceRevokeTransactionInfo.helpers({
         const licenseContract = transaction.licenseContract;
         const issuanceID = transaction.issuanceID;
         const issuanceLocation = IssuanceLocation.fromComponents(licenseContract, issuanceID);
-        return lob.issuances.getIssuance(issuanceLocation).description;
+        const issuance = lob.issuances.getIssuance(issuanceLocation);
+        if (issuance) {
+            return issuance.description;
+        } else {
+            return "";
+        }
     },
     revokedBy() {
         return lob.transactions.getTransaction(this.transactionHash).from;

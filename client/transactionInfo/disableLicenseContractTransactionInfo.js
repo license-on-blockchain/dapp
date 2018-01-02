@@ -5,6 +5,7 @@ import {formatDate} from "../../lib/utils";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {Etherscan} from "../../lib/Etherscan";
+import {LicenseContractInfo} from "../shared/licenseContractInfo";
 
 export const DisableLicenseContractTransactionInfo = {
     show(transactionHash) {
@@ -19,6 +20,10 @@ export const DisableLicenseContractTransactionInfo = {
 Template.disableLicenseContractTransactionInfo.helpers({
     licenseContract() {
         return lob.transactions.getTransaction(this.transactionHash).licenseContract;
+    },
+    licenseContractName() {
+        const address = lob.transactions.getTransaction(this.transactionHash).licenseContract;
+        return lob.licenseContracts.getDisplayName(address);
     },
     from() {
         return lob.transactions.getTransaction(this.transactionHash).from;
@@ -35,4 +40,7 @@ Template.disableLicenseContractTransactionInfo.events({
     'click button.hideModal'() {
         EthElements.Modal.hide();
     },
+    'click .showLicenseContractInfo'() {
+        LicenseContractInfo.show(lob.transactions.getTransaction(this.transactionHash).licenseContract);
+    }
 });
