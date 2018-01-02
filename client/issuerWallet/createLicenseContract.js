@@ -59,17 +59,35 @@ function validate(errorOnEmpty = false) {
         const certificateChain = new CertificateChain(certificate);
         return certificateChain.verifySignature(textToSign, signature);
     }, privateKey && certificate, TAPi18n.__('createLicenseContract.error.sslPrivateKey_does_not_match'));
+    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'));
 
     return noErrors;
 }
 
 Template.createLicenseContract.onCreated(function() {
-    this.estimatedGasConsumption = new ReactiveVar(0);
+    this.computations = new Set();
+
+    this.estimatedGasConsumption = new ReactiveVar(null);
 
     this.getValues = getValues;
     this.resetErrors = resetErrors;
     this.onFormUpdate = onFormUpdate;
     this.validate = validate;
+});
+
+Template.createLicenseContract.onRendered(function() {
+    const validateGasEstimate = Tracker.autorun(() => {
+        // Trigger a form validation when the estimatedGasConsumption changes
+        this.estimatedGasConsumption.get();
+        this.validate();
+    });
+    this.computations.add(validateGasEstimate);
+});
+
+Template.createLicenseContract.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
 });
 
 Template.createLicenseContract.helpers({

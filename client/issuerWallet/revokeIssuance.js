@@ -40,6 +40,7 @@ function validate(errorOnEmpty = false) {
 
     noErrors &= validateField('licenseContract', licenseContract, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_licenseContract_selected'));
     noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_issuanceID_selected'));
+    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'));
 
     return noErrors;
 }
@@ -49,7 +50,7 @@ Template.revokeIssuance.onCreated(function() {
 
     this.licenseContracts = new ReactiveVar([]);
     this.selectedLicenseContract = new ReactiveVar(null);
-    this.estimatedGasConsumption = new ReactiveVar(0);
+    this.estimatedGasConsumption = new ReactiveVar(null);
 
     this.getValues = getValues;
     this.resetErrors = resetErrors;
@@ -63,6 +64,13 @@ Template.revokeIssuance.onRendered(function() {
         setTimeout(() => this.onFormUpdate(), 0);
     });
     this.computations.add(licenseContractsComputation);
+
+    const validateGasEstimate = Tracker.autorun(() => {
+        // Trigger a form validation when the estimatedGasConsumption changes
+        this.estimatedGasConsumption.get();
+        this.validate();
+    });
+    this.computations.add(validateGasEstimate);
 });
 
 Template.revokeIssuance.onDestroyed(function() {

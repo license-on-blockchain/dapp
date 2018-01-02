@@ -155,6 +155,7 @@ function validate(errorOnEmpty = false) {
             }
         }
     }
+    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'));
 
     return noErrors;
 }
@@ -164,7 +165,7 @@ Template.signLicenseContract.onCreated(function() {
 
     this.manualSigning = new ReactiveVar(false);
     this.selectedLicenseContract = new ReactiveVar(undefined);
-    this.estimatedGasConsumption = new ReactiveVar(0);
+    this.estimatedGasConsumption = new ReactiveVar(null);
     this.licenseContracts = new ReactiveVar([]);
 
     this.getValues = getValues;
@@ -184,6 +185,13 @@ Template.signLicenseContract.onRendered(function() {
         setTimeout(() => this.onFormUpdate(), 0);
     });
     this.computations.add(licenseContractsComputation);
+
+    const validateGasEstimate = Tracker.autorun(() => {
+        // Trigger a form validation when the estimatedGasConsumption changes
+        this.estimatedGasConsumption.get();
+        this.validate();
+    });
+    this.computations.add(validateGasEstimate);
 });
 
 Template.signLicenseContract.onDestroyed(function() {

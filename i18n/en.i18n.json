@@ -18,7 +18,8 @@
     "unconfirmed": "Unconfirmed",
     "year": "__count__ year",
     "year_plural": "__count__ years",
-    "viewOnEtherscan": "View on Etherscan.io"
+    "viewOnEtherscan": "View on Etherscan.io",
+    "transactionWillFail": "This transaction will most likely fail"
   },
   "tab": {
     "title": {

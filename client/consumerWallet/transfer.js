@@ -73,7 +73,7 @@ function validate(errorOnEmpty = false) {
     noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'));
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'));
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('transfer.error.amount_zero'));
-    noErrors &= validateField('amount', () => amount <= lob.balances.getOwnedBalance(issuanceLocation, sender), issuanceLocation && amount, TAPi18n.__('transfer.error.amount_less_than_balance'));
+    noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'));
 
     return noErrors;
 }
@@ -86,7 +86,7 @@ Template.transfer.onCreated(function() {
     this.onFormUpdate = onFormUpdate;
     this.validate = validate;
 
-    this.estimatedGasConsumption = new ReactiveVar(0);
+    this.estimatedGasConsumption = new ReactiveVar(null);
     this.destroyLink = new ReactiveVar('/destroy');
     this.issuanceLocations = new ReactiveVar([]);
 
@@ -117,6 +117,13 @@ Template.transfer.onRendered(function() {
         setTimeout(() => this.onFormUpdate(), 0);
     });
     this.computations.add(issuanceLocationsComputation);
+
+    const validateGasEstimate = Tracker.autorun(() => {
+        // Trigger a form validation when the estimatedGasConsumption changes
+        this.estimatedGasConsumption.get();
+        this.validate();
+    });
+    this.computations.add(validateGasEstimate);
 });
 
 Template.transfer.onDestroyed(function() {
