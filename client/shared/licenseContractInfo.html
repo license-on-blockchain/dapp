@@ -68,6 +68,16 @@
             <td><strong>{{_ "licenseContractInfo.field.rootContract"}}</strong></td>
             <td><i>{{> dapp_identicon identity=rootContract class="dapp-tiny"}} {{rootContract}}</i></td>
         </tr>
+        <tr>
+            <td><strong>{{_ "licenseContractInfo.field.disabled"}}</strong></td>
+            <td>
+                {{#if disabled}}
+                    {{_ "generic.yes"}}
+                {{else}}
+                    {{_ "generic.no"}}
+                {{/if}}
+            </td>
+        </tr>
         </tbody>
     </table>
 </template>

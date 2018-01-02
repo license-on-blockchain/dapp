@@ -181,6 +181,16 @@ Router.route('/licensecontracts/manage/:address', function() {
     name: 'manageLicenseContract'
 });
 
+Router.route('/licensecontracts/disable/:address', function() {
+    this.render('disableLicenseContract', {
+        data: {
+            address: this.params.address
+        }
+    })
+}, {
+    name: 'licenseContract.disable'
+});
+
 Router.route('/browsercheck', function() {
     this.render('browsercheck');
 }, {

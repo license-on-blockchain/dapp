@@ -154,7 +154,8 @@
       "issuerAddress": "Adresse des Ausstellers",
       "signed": "Signiert",
       "fee": "Ausstellungsgebühr",
-      "rootContract": "LOB Root Contract"
+      "rootContract": "LOB Root Contract",
+      "disabled": "Deaktiviert"
     }
   },
   "issuanceInfo": {
@@ -277,7 +278,8 @@
       "createLicenseContract": "Neuen Smart Contract zur Bescheinigung von Lizenzen erstellen",
       "showAll": "Alle anzeigen"
     },
-    "signature_pending": "Signatur wird verarbeitet"
+    "signature_pending": "Signatur wird verarbeitet",
+    "licenseContractDisabled": "Deaktiviert"
   },
   "manageLicenseContract": {
     "title": "Smart Contracts zur Bescheinigung von Lizenzen <strong>verwalten</strong>",
@@ -288,7 +290,11 @@
       "issuances": "Lizenzausstellungen"
     },
     "button": {
-      "revokeIssuance": "Lizenzausstellung widerrufen"
+      "revokeIssuance": "Lizenzausstellung widerrufen",
+      "disable": "Smart Contract Deaktivieren"
+    },
+    "error": {
+      "disabled": "Dieser Smart Contracts zur Bescheinigung von Lizenzen wurder deaktiviert"
     }
   },
   "revokeIssuance": {
@@ -309,6 +315,18 @@
     "error": {
       "no_licenseContract_selected": "Sie müssen den Smart Contract, unter dem die Lizenzbescheinigung widerrufen werden soll, angeben",
       "no_issuanceID_selected": "Sie müssen die Lizenzbescheinigung, die Sie widerrufen möchten, angeben"
+    }
+  },
+  "disableLicenseContract": {
+    "title": "Smart Contract zur Bescheinigung von Lizenzen <strong>deaktivieren</strong>",
+    "input": {
+      "licenseContract": {
+        "title": "Smart Contract zur Bescheinigung von Lizenzen",
+        "description": "Auswahl des Smart Contracts, den Sie unterzeichnen möchten"
+      }
+    },
+    "button": {
+      "disable": "Deaktivieren"
     }
   },
   "createLicenseContract": {

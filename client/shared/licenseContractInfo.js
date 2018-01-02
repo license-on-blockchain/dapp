@@ -60,6 +60,9 @@ Template.licenseContractDetails.helpers({
     rootContract() {
         return lob.licenseContracts.getRootContract(this.address);
     },
+    disabled() {
+        return lob.licenseContracts.isDisabled(this.address);
+    }
 });
 
 Template.licenseContractDetails.events({

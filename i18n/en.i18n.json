@@ -154,7 +154,8 @@
       "issuerAddress": "Issuer Address",
       "signed": "Signed",
       "fee": "Issuing Fee",
-      "rootContract": "LOB Root Contract"
+      "rootContract": "LOB Root Contract",
+      "disabled": "Disabled"
     }
   },
   "issuanceInfo": {
@@ -277,7 +278,8 @@
       "createLicenseContract": "Create a new license contract",
       "showAll": "Show All"
     },
-    "signature_pending": "Signature Pending"
+    "signature_pending": "Signature Pending",
+    "licenseContractDisabled": "Disabled"
   },
   "manageLicenseContract": {
     "title": "<strong>Manage</strong> license contract",
@@ -288,7 +290,11 @@
       "issuances": "Issuances"
     },
     "button": {
-      "revokeIssuance": "Revoke"
+      "revokeIssuance": "Revoke",
+      "disable": "Disable License Contract"
+    },
+    "error": {
+      "disabled": "This license contract has been disabled"
     }
   },
   "revokeIssuance": {
@@ -309,6 +315,18 @@
     "error": {
       "no_licenseContract_selected": "You need to select a license contract under which licenses shall be revoked",
       "no_issuanceID_selected": "You need to select a license to revoke"
+    }
+  },
+  "disableLicenseContract": {
+    "title": "<strong>Disable</strong> license contract",
+    "input": {
+      "licenseContract": {
+        "title": "License Contract",
+        "description": "The license contract you want to sign"
+      }
+    },
+    "button": {
+      "disable": "Disable"
     }
   },
   "createLicenseContract": {

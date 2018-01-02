@@ -37,7 +37,9 @@
             <strong>{{> dapp_identicon identity=address class="dapp-tiny"}} {{name}}</strong>
         </td>
         <td class="buttonColumn">
-            {{#if signed}}
+            {{#if disabled}}
+                <i>{{_ "managedLicenseContractList.licenseContractDisabled"}}</i>
+            {{else if signed}}
                 <a href="/licensecontracts/issue/{{address}}"><i class="icon-plus"></i> {{_ "managedLicenseContractList.button.issue"}}</a>
             {{else if signaturePending}}
                 <i>{{_ "managedLicenseContractList.signature_pending"}}</i>
@@ -47,7 +49,9 @@
         </td>
         <td class="buttonColumn">
             {{#if signed}}
-                <a href="/licensecontracts/manage/{{address}}"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.manage"}}</a>
+                {{#unless disabled}}
+                    <a href="/licensecontracts/manage/{{address}}"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.manage"}}</a>
+                {{/unless}}
             {{/if}}
         </td>
     </tr>
