@@ -19,7 +19,18 @@
                         <h4>{{_ "settings.input.language.title"}}</h4>
                         <select name="language" title="{{_ "settings.input.language.description"}}">
                             <option value="de" {{selectedLanguage "de"}}>Deutsch</option>
-                            <option value="en" {{selectedLanguage "en"}}>Englisch</option>
+                            <option value="en" {{selectedLanguage "en"}}>English</option>
+                        </select>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "settings.input.web3LoggingLevel.title"}}</h4>
+                        <select name="web3LoggingLevel" title="{{_ "settings.input.web3LoggingLevel.description"}}">
+                            <option value="0" {{selectedWeb3LoggingLevel 0}}>{{_ "settings.input.web3LoggingLevel.option.none"}}</option>
+                            <option value="1" {{selectedWeb3LoggingLevel 1}}>{{_ "settings.input.web3LoggingLevel.option.duplicate"}}</option>
+                            <option value="2" {{selectedWeb3LoggingLevel 2}}>{{_ "settings.input.web3LoggingLevel.option.all"}}</option>
                         </select>
                     </div>
                     <div class="col col-6 mobile-full">

@@ -10,7 +10,10 @@ Template.settings.helpers({
     },
     selectedLanguage(languageCode) {
         return Settings.language.get() === languageCode ? "selected" : "";
-    }
+    },
+    selectedWeb3LoggingLevel(loggingLevel) {
+        return Settings.web3LoggingLevel.get() === loggingLevel ? "selected" : "";
+    },
 });
 
 Template.settings.events({
@@ -22,6 +25,10 @@ Template.settings.events({
     },
     'change [name=language]'(event) {
         Settings.language.set(event.currentTarget.value);
+    },
+    'change [name=web3LoggingLevel]'(event) {
+        Settings.web3LoggingLevel.set(Number(event.currentTarget.value));
+        location.reload();
     },
     'click button.clearCaches'(event) {
         event.preventDefault();

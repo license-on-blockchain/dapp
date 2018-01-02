@@ -57,6 +57,15 @@
       "clearCaches": {
         "title": "Clear Caches",
         "buttonTitle": "Clear Caches"
+      },
+      "web3LoggingLevel": {
+        "title": "Web3 Logging Level",
+        "description": "",
+        "option": {
+          "none": "No logging",
+          "duplicate": "Log duplicate calls",
+          "all": "Log all calls"
+        }
       }
     },
     "confirmation": {
