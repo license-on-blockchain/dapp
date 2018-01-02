@@ -9,14 +9,32 @@ import {arraysEqual} from "../lib/utils";
 
 let __lastAccounts = null;
 function onAccountsChange(callback) {
-    const newAccounts = web3.eth.accounts;
-    if (__lastAccounts !== null) {
-        if (!arraysEqual(__lastAccounts, newAccounts)) {
-            callback();
+    web3.eth.getAccounts((error, newAccounts) => {
+        if (!error) {
+            if (__lastAccounts !== null) {
+                if (!arraysEqual(__lastAccounts, newAccounts)) {
+                    callback();
+                }
+            }
+            __lastAccounts = newAccounts;
         }
-    }
-    __lastAccounts = newAccounts;
-    setTimeout(() => onAccountsChange(callback), 1000);
+        setTimeout(() => onAccountsChange(callback), 1000);
+    });
+}
+
+let __lastNetwork = null;
+function onNetworkChange(callback) {
+    web3.version.getNetwork((error, newNetwork) => {
+        if (!error) {
+            if (__lastNetwork !== null) {
+                if (!arraysEqual(__lastNetwork, newNetwork)) {
+                    callback();
+                }
+            }
+            __lastNetwork = newNetwork;
+        }
+        setTimeout(() => onAccountsChange(callback), 1000);
+    });
 }
 
 Template.body.onCreated(function() {
@@ -84,7 +102,11 @@ Meteor.startup(function() {
                 onAccountsChange(() => {
                     // Reload the dapp on accounts change since this is the easiest way to clear all non-persistent caches
                     location.reload();
-                })
+                });
+                onNetworkChange(() => {
+                    // Reload the dapp on accounts change since this is the easiest way to clear all non-persistent caches
+                    location.reload();
+                });
             }
         });
     }
