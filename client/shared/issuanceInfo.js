@@ -28,7 +28,7 @@ Template.issuanceInfo.onCreated(function() {
         lob.balances.getLicenseTransfers(this.data.issuanceLocation, (error, transfers) => {
             if (error) { handleUnknownEthereumError(error); return; }
             const snapshots = lob.computeBalanceSnapshots(transfers);
-            const lastSnapshot = snapshots[snapshots.length - 1];
+            const lastSnapshot = snapshots[snapshots.length - 1].balances;
             const balances = Object.entries(lastSnapshot)
                 .map(([address, balance]) => {
                     return {address, balance}

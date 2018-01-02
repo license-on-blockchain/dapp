@@ -153,7 +153,7 @@ function transferDescription(transfers) {
             }
         default:
             const snapshots = lob.computeBalanceSnapshots(transfers);
-            const latestSnapshot = snapshots[snapshots.length - 1];
+            const latestSnapshot = snapshots[snapshots.length - 1].balances;
             let userBalance = 0;
             for (const address of Object.keys(latestSnapshot)) {
                 if (Accounts.get().indexOf(address) !== -1) {
