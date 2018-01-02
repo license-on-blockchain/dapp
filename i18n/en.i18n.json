@@ -19,7 +19,12 @@
     "year": "__count__ year",
     "year_plural": "__count__ years",
     "viewOnEtherscan": "View on Etherscan.io",
-    "transactionWillFail": "This transaction will most likely fail"
+    "transactionWillFail": "This transaction will most likely fail",
+    "transactionStatus": {
+      "success": "Success",
+      "failed": "Failed",
+      "pending": "Pending"
+    }
   },
   "tab": {
     "title": {
@@ -186,7 +191,8 @@
       "amount": "Transferred Licenses",
       "submissionDate": "Submission Date",
       "blockNumber": "Mined in Block",
-      "transactionFee": "Transaction Fee"
+      "transactionFee": "Transaction Fee",
+      "transactionStatus": "Status"
     }
   },
   "reclaim": {
@@ -361,7 +367,8 @@
       "safekeepingPeriod": "Safekeeping Period",
       "submissionDate": "Submission Date",
       "blockNumber": "Mined in Block",
-      "transactionFee": "Transaction Fee"
+      "transactionFee": "Transaction Fee",
+      "transactionStatus": "Status"
     },
     "not_determined_yet": "Not determined yet"
   },
@@ -372,7 +379,8 @@
       "from": "From",
       "submissionDate": "Submission Date",
       "blockNumber": "Mined in Block",
-      "transactionFee": "Transaction Fee"
+      "transactionFee": "Transaction Fee",
+      "transactionStatus": "Status"
     },
     "not_determined_yet": "Not determined yet"
   },
