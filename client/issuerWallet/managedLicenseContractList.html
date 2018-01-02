@@ -39,6 +39,8 @@
         <td class="buttonColumn">
             {{#if disabled}}
                 <i>{{_ "managedLicenseContractList.licenseContractDisabled"}}</i>
+            {{else if disablingPending}}
+                <i>{{_ "managedLicenseContractList.disablingPending"}}</i>
             {{else if signed}}
                 <a href="/licensecontracts/issue/{{address}}"><i class="icon-plus"></i> {{_ "managedLicenseContractList.button.issue"}}</a>
             {{else if signaturePending}}
@@ -50,7 +52,9 @@
         <td class="buttonColumn">
             {{#if signed}}
                 {{#unless disabled}}
-                    <a href="/licensecontracts/manage/{{address}}"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.manage"}}</a>
+                    {{#unless disablingPending}}
+                        <a href="/licensecontracts/manage/{{address}}"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.manage"}}</a>
+                    {{/unless}}
                 {{/unless}}
             {{/if}}
         </td>

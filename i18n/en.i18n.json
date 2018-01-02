@@ -287,7 +287,8 @@
       "showAll": "Show All"
     },
     "signature_pending": "Signature Pending",
-    "licenseContractDisabled": "Disabled"
+    "licenseContractDisabled": "Disabled",
+    "disablingPending": "Disabling Pending"
   },
   "manageLicenseContract": {
     "title": "<strong>Manage</strong> license contract",

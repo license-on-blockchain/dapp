@@ -287,7 +287,8 @@
       "showAll": "Alle anzeigen"
     },
     "signature_pending": "Signatur wird verarbeitet",
-    "licenseContractDisabled": "Deaktiviert"
+    "licenseContractDisabled": "Deaktiviert",
+    "disablingPending": "Deaktivierung wird verarbeitet"
   },
   "manageLicenseContract": {
     "title": "Smart Contracts zur Bescheinigung von Lizenzen <strong>verwalten</strong>",
