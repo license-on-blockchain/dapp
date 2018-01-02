@@ -1,0 +1,25 @@
+<template name="generalTransactionInfo">
+    <tr>
+        <td><strong>{{_ "generalTransactionInfo.field.submissionDate"}}</strong></td>
+        <td>{{submissionDate}}</td>
+    </tr>
+    <tr>
+        <td><strong>{{_ "generalTransactionInfo.field.blockNumber"}}</strong></td>
+        <td>
+            {{#if blockNumber}}
+                {{blockNumber}}
+                ({{_ "generic.confirmation" count=confirmations}})
+            {{else}}
+                <i>{{_ "generic.unconfirmed"}}</i>
+            {{/if}}
+        </td>
+    </tr>
+    <tr>
+        <td><strong>{{_ "generalTransactionInfo.field.transactionStatus"}}</strong></td>
+        <td><i>{{transactionStatus}}</i></td>
+    </tr>
+    <tr>
+        <td><strong>{{_ "generalTransactionInfo.field.transactionFee"}}</strong></td>
+        <td>{{transactionFee}} Ether</td>
+    </tr>
+</template>

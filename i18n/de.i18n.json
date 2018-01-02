@@ -88,30 +88,33 @@
       "licenses_completely_transferred_indirectly": "Die Lizenzen wurden Ihnen vollständig, aber (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.",
       "licenses_partially_transferred_indirectly": "%s Lizenzen wurden Ihnen (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.",
       "no_owned_licenses": "Sie besitzen aktuell keine Lizenzen dieser Bescheinigung."
+    }
+  },
+  "pendingTransactionRow": {
+    "transactionType": {
+      "transfer": "Übertragung",
+      "reclaimableTransfer": "Übertragung mit Rückforderungsrecht",
+      "reclaim": "Rückforderung",
+      "licenseContractCreation": "Erzeugung eines Smart Contracts zur Bescheinigung von Lizenzen",
+      "licenseContractSigning": "Signatur eines Smart Contracts zur Bescheinigung von Lizenzen",
+      "licenseContractDisabling": "Deaktivierung eines Smart Contracts zur Bescheinigung von Lizenzen",
+      "licenseIssuing": "Lizenzausstellung",
+      "issuanceRevoke": "Lizenzwiderrufung"
     },
-    "pendingTransactionRow": {
-      "transactionType": {
-        "transfer": "Übertragung",
-        "reclaimableTransfer": "Übertragung mit Rückforderungsrecht",
-        "reclaim": "Rückforderung",
-        "licenseContractCreation": "Erzeugung eines Smart Contracts zur Bescheinigung von Lizenzen",
-        "licenseContractSigning": "Signatur eines Smart Contracts zur Bescheinigung von Lizenzen"
-      },
-      "unconfirmed": "unbestätigt",
-      "monthAbbrevations": {
-        "1": "Jan",
-        "2": "Feb",
-        "3": "Mär",
-        "4": "Apr",
-        "5": "Mai",
-        "6": "Jun",
-        "7": "Jul",
-        "8": "Aug",
-        "9": "Sep",
-        "10": "Okt",
-        "11": "Nov",
-        "12": "Dez"
-      }
+    "unconfirmed": "unbestätigt",
+    "monthAbbrevations": {
+      "1": "Jan",
+      "2": "Feb",
+      "3": "Mär",
+      "4": "Apr",
+      "5": "Mai",
+      "6": "Jun",
+      "7": "Jul",
+      "8": "Aug",
+      "9": "Sep",
+      "10": "Okt",
+      "11": "Nov",
+      "12": "Dez"
     }
   },
   "licenseCertificate": {
@@ -189,11 +192,7 @@
       "from": "Von",
       "to": "An",
       "reclaimer": "Rückforderer",
-      "amount": "Übertragene Lizenzen",
-      "submissionDate": "Datum",
-      "blockNumber": "Gemined in Block",
-      "transactionFee": "Transaktionsgebühr",
-      "transactionStatus": "Status"
+      "amount": "Übertragene Lizenzen"
     }
   },
   "reclaim": {
@@ -382,11 +381,7 @@
       "issuerAddress": "Adresse des Ausstellers",
       "issuerName": "Name des Ausstellers",
       "liability": "Haftung",
-      "safekeepingPeriod": "Aufbewahrungsfrist",
-      "submissionDate": "Datum",
-      "blockNumber": "Gemined in Block",
-      "transactionFee": "Transaktionsgebühr",
-      "transactionStatus": "Status"
+      "safekeepingPeriod": "Aufbewahrungsfrist"
     },
     "not_determined_yet": "Noch nicht bestimmt"
   },
@@ -394,13 +389,45 @@
     "title": "Transaktion zur Signatur eines Smart Contracts zur Bescheinigung von Lizenzen",
     "field": {
       "licenseContract": "Zu signierender Smart Contract",
-      "from": "Absender",
+      "from": "Absender"
+    },
+    "not_determined_yet": "Not determined yet"
+  },
+  "disableLicenseContractTransactionInfo": {
+    "title": "Transaktion zur Deaktivierung eines Smart Contracts zur Bescheinigung von Lizenzen",
+    "field": {
+      "licenseContract": "Zu deaktivierender Smart Contract",
+      "from": "Absender"
+    }
+  },
+  "licenseIssuingTransactionInfo": {
+    "title": "Transaktion zur Lizenzausstellung",
+    "field": {
+      "licenseContract": "Smart Contract zur Bescheinigung der Lizenzen",
+      "issuer": "Lizenzaussteller",
+      "description": "Beschreibung",
+      "code": "Code",
+      "amount": "Anzahl",
+      "initialOwnerAddress": "Öffentliche Ethereum-Adresse des ersten Lizenz-Inhabers",
+      "initialOwnerName": "Erster Lizenz-Inhaber",
+      "auditRemark": "Anmerkung zum Lizenz-Audit",
+      "auditTime": "Datum des Lizenz-Audits"
+    }
+  },
+  "issuanceRevokeTransactionInfo": {
+    "title": "Transaktion zum Widerrufen einer Lizenz",
+    "field": {
+      "issuance": "Lizenz",
+      "revokedBy": "Widerrufen durch"
+    }
+  },
+  "generalTransactionInfo": {
+    "field": {
       "submissionDate": "Datum",
       "blockNumber": "Gemined in Block",
       "transactionFee": "Transaktionsgebühr",
       "transactionStatus": "Status"
-    },
-    "not_determined_yet": "Not determined yet"
+    }
   },
   "waitForContractCreationMining": {
     "title": "<strong>Warten</strong> auf Bestätigung Ihres Smart Contracts zur Bescheinigung von Lizenzen auf der Ethereum-Blockchain",
@@ -485,7 +512,7 @@
         "description": "Text, der Ihre Prüfhandlungen und spezifische Ergebnisse Ihres Lizenzaudits näher spezifiziert (bspw. Angabe der Unterlagen, die Ihnen vorliegen)"
       },
       "initialOwnerAddress": {
-        "title": "öffentliche Ethereum-Adresse des Lizenz-Inhabers",
+        "title": "Öffentliche Ethereum-Adresse des Lizenz-Inhabers",
         "description": "öffentliche Ethereum-Adresse der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen"
       },
       "initialOwnerName": {

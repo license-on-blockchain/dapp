@@ -1,0 +1,28 @@
+<template name="issuanceRevokeTransactionInfo">
+    <div class="issuanceRevokeTransactionInfo">
+        <h1>
+            {{_ "issuanceRevokeTransactionInfo.title"}}
+        </h1>
+        <h2>{{transactionHash}}</h2>
+
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td><strong>{{_ "issuanceRevokeTransactionInfo.field.issuance"}}</strong></td>
+                <td><a href="#" class="showIssuanceInfo">{{issuanceDescription}}</a></td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "issuanceRevokeTransactionInfo.field.revokedBy"}}</strong></td>
+                <td><i>{{> dapp_identicon identity=revokedBy class="dapp-tiny"}} {{revokedBy}}</i></td>
+            </tr>
+            {{> generalTransactionInfo transaction=transaction}}
+            </tbody>
+        </table>
+        {{#if etherscanUrl}}
+            <div class="etherscanLink"><a target="_blank" href="{{etherscanUrl}}">{{_ "generic.viewOnEtherscan"}}</a></div>
+        {{/if}}
+    </div>
+    <div class="dapp-modal-buttons">
+        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
+    </div>
+</template>

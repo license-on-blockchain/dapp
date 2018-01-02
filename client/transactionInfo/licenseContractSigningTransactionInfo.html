@@ -15,29 +15,7 @@
                 <td><strong>{{_ "licenseContractSigningTransactionInfo.field.from"}}</strong></td>
                 <td><i>{{> dapp_identicon identity=from class="dapp-tiny"}} {{from}}</i></td>
             </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractSigningTransactionInfo.field.submissionDate"}}</strong></td>
-                <td>{{submissionDate}}</td>
-            </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractSigningTransactionInfo.field.blockNumber"}}</strong></td>
-                <td>
-                    {{#if blockNumber}}
-                        {{blockNumber}}
-                        ({{_ "generic.confirmation" count=confirmations}})
-                    {{else}}
-                        <i>{{_ "generic.unconfirmed"}}</i>
-                    {{/if}}
-                </td>
-            </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractSigningTransactionInfo.field.transactionStatus"}}</strong></td>
-                <td><i>{{transactionStatus}}</i></td>
-            </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractSigningTransactionInfo.field.transactionFee"}}</strong></td>
-                <td>{{transactionFee}} Ether</td>
-            </tr>
+            {{> generalTransactionInfo transaction=transaction}}
             </tbody>
         </table>
         {{#if etherscanUrl}}

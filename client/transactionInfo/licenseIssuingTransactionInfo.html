@@ -1,0 +1,56 @@
+<template name="licenseIssuingTransactionInfo">
+    <div class="licenseIssuingTransactionInfo">
+        <h1>
+            {{_ "licenseIssuingTransactionInfo.title"}}
+        </h1>
+        <h2>{{transactionHash}}</h2>
+
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td><strong>{{_ "licenseIssuingTransactionInfo.field.licenseContract"}}</strong></td>
+                <td><i>{{> dapp_identicon identity=licenseContract class="dapp-tiny"}} {{licenseContract}}</i></td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseIssuingTransactionInfo.field.issuer"}}</strong></td>
+                <td><i>{{> dapp_identicon identity=issuer class="dapp-tiny"}} {{issuer}}</i></td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseIssuingTransactionInfo.field.description"}}</strong></td>
+                <td>{{description}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseIssuingTransactionInfo.field.code"}}</strong></td>
+                <td>{{code}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseIssuingTransactionInfo.field.amount"}}</strong></td>
+                <td>{{amount}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseIssuingTransactionInfo.field.initialOwnerAddress"}}</strong></td>
+                <td><i>{{> dapp_identicon identity=initialOwnerAddress class="dapp-tiny"}} {{initialOwnerAddress}}</i></td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseIssuingTransactionInfo.field.initialOwnerName"}}</strong></td>
+                <td>{{initialOwnerName}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseIssuingTransactionInfo.field.auditRemark"}}</strong></td>
+                <td>{{auditRemark}}</td>
+            </tr>
+            <tr>
+                <td><strong>{{_ "licenseIssuingTransactionInfo.field.auditTime"}}</strong></td>
+                <td>{{auditTime}}</td>
+            </tr>
+            {{> generalTransactionInfo transaction=transaction}}
+            </tbody>
+        </table>
+        {{#if etherscanUrl}}
+            <div class="etherscanLink"><a target="_blank" href="{{etherscanUrl}}">{{_ "generic.viewOnEtherscan"}}</a></div>
+        {{/if}}
+    </div>
+    <div class="dapp-modal-buttons">
+        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
+    </div>
+</template>

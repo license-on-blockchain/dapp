@@ -1,9 +1,12 @@
 import {formatDate} from "../../lib/utils";
 import {IssuanceLocation} from "../../lib/IssuanceLocation";
 import {TransactionType} from "../../lib/lob/Transactions";
-import {TransferTransactionInfo} from "../consumerWallet/transferTransactionInfo";
-import {LicenseContractCreationTransactionInfo} from "../issuerWallet/licenseContractCreationTransactionInfo";
-import {LicenseContractSigningTransactionInfo} from "../issuerWallet/licenseContractSigningTransactionInfo";
+import {TransferTransactionInfo} from "../transactionInfo/transferTransactionInfo";
+import {LicenseContractCreationTransactionInfo} from "../transactionInfo/licenseContractCreationTransactionInfo";
+import {LicenseContractSigningTransactionInfo} from "../transactionInfo/licenseContractSigningTransactionInfo";
+import {DisableLicenseContractTransactionInfo} from "../transactionInfo/disableLicenseContractTransactionInfo";
+import {LicenseIssuingTransactionInfo} from "../transactionInfo/licenseIssuingTransactionInfo";
+import {IssuanceRevokeTransactionInfo} from "../transactionInfo/issuanceRevokeTransactionInfo";
 
 Template.pendingTransactionRow.helpers({
     fullDate() {
@@ -11,51 +14,49 @@ Template.pendingTransactionRow.helpers({
     },
     month() {
         const month = new Date(this.timestamp).getMonth() + 1;
-        return TAPi18n.__('licenses.pendingTransactionRow.monthAbbrevations.' + month);
+        return TAPi18n.__('pendingTransactionRow.monthAbbrevations.' + month);
     },
     day() {
         return new Date(this.timestamp).getDate();
     },
     type() {
-        if (this.transactionType === TransactionType.LicenseContractCreation) {
-            return TAPi18n.__('licenses.pendingTransactionRow.transactionType.licenseContractCreation')
-        } else if (this.transactionType === TransactionType.LicenseContractSigning) {
-            return TAPi18n.__('licenses.pendingTransactionRow.transactionType.licenseContractSigning')
-        } else if ([TransactionType.Transfer, TransactionType.Reclaim].indexOf(this.transactionType) !== -1) {
-            let transactionType;
-            switch (this.transactionType) {
-                case TransactionType.Transfer:
-                    if (this.reclaimable) {
-                        transactionType = TAPi18n.__('licenses.pendingTransactionRow.transactionType.reclaimableTransfer');
-                    } else {
-                        transactionType = TAPi18n.__('licenses.pendingTransactionRow.transactionType.transfer');
-                    }
-                    break;
-                case TransactionType.Reclaim:
-                    transactionType = TAPi18n.__('licenses.pendingTransactionRow.transactionType.reclaim');
-                    break;
-            }
-            const issuanceLocation = IssuanceLocation.fromComponents(this.licenseContract, this.issuanceID);
-            let issuanceDescription = "…";
-            const issuance = lob.issuances.getIssuance(issuanceLocation);
-            if (issuance) {
-                issuanceDescription = issuance.description;
-            }
-            return transactionType + " (" + issuanceDescription + ")";
-        } else {
-            return "";
-        }
-    },
-    from() {
         switch (this.transactionType) {
             case TransactionType.Transfer:
             case TransactionType.Reclaim:
-                return this.from;
+                let transactionType;
+                switch (this.transactionType) {
+                    case TransactionType.Transfer:
+                        if (this.reclaimable) {
+                            transactionType = TAPi18n.__('pendingTransactionRow.transactionType.reclaimableTransfer');
+                        } else {
+                            transactionType = TAPi18n.__('pendingTransactionRow.transactionType.transfer');
+                        }
+                        break;
+                    case TransactionType.Reclaim:
+                        transactionType = TAPi18n.__('pendingTransactionRow.transactionType.reclaim');
+                        break;
+                }
+                const issuanceLocation = IssuanceLocation.fromComponents(this.licenseContract, this.issuanceID);
+                let issuanceDescription = "…";
+                const issuance = lob.issuances.getIssuance(issuanceLocation);
+                if (issuance) {
+                    issuanceDescription = issuance.description;
+                }
+                return transactionType + " (" + issuanceDescription + ")";
             case TransactionType.LicenseContractCreation:
-                return this.issuerAddress;
+                return TAPi18n.__('pendingTransactionRow.transactionType.licenseContractCreation');
             case TransactionType.LicenseContractSigning:
-                return this.from;
+                return TAPi18n.__('pendingTransactionRow.transactionType.licenseContractSigning');
+            case TransactionType.LicenseContractDisabling:
+                return TAPi18n.__('pendingTransactionRow.transactionType.licenseContractDisabling');
+            case TransactionType.LicenseIssuing:
+                return TAPi18n.__('pendingTransactionRow.transactionType.licenseIssuing');
+            case TransactionType.IssuanceRevoke:
+                return TAPi18n.__('pendingTransactionRow.transactionType.issuanceRevoke');
         }
+    },
+    from() {
+        return this.submittedBy;
     },
     to() {
         switch (this.transactionType) {
@@ -63,8 +64,10 @@ Template.pendingTransactionRow.helpers({
             case TransactionType.Reclaim:
                 return this.to;
             case TransactionType.LicenseContractCreation:
-                return this.licenseContract;
             case TransactionType.LicenseContractSigning:
+            case TransactionType.LicenseContractDisabling:
+            case TransactionType.LicenseIssuing:
+            case TransactionType.IssuanceRevoke:
                 return this.licenseContract;
         }
     },
@@ -78,7 +81,7 @@ Template.pendingTransactionRow.helpers({
                 return TAPi18n.__('generic.confirmation', {count: confirmations});
             }
         } else {
-            return TAPi18n.__('licenses.pendingTransactionRow.unconfirmed');
+            return TAPi18n.__('pendingTransactionRow.unconfirmed');
         }
     }
 });
@@ -95,6 +98,15 @@ Template.pendingTransactionRow.events({
                 break;
             case TransactionType.LicenseContractSigning:
                 LicenseContractSigningTransactionInfo.show(this.transactionHash);
+                break;
+            case TransactionType.LicenseContractDisabling:
+                DisableLicenseContractTransactionInfo.show(this.transactionHash);
+                break;
+            case TransactionType.LicenseIssuing:
+                LicenseIssuingTransactionInfo.show(this.transactionHash);
+                break;
+            case TransactionType.IssuanceRevoke:
+                IssuanceRevokeTransactionInfo.show(this.transactionHash);
                 break;
         }
     }

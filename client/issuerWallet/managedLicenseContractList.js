@@ -20,10 +20,10 @@ Template.managedLicenseContractList.helpers({
     },
     latestLicenseContractCreations() {
         const limit = Template.instance().showAllTransactions.get() ? 0 : defaultTransactionLimit;
-        return lob.transactions.getLatestLicenseContractCreations(limit);
+        return lob.transactions.getLatestLicenseContractTransactions(limit);
     },
     showingAllTransactions() {
-        return Template.instance().showAllTransactions.get() || lob.transactions.getLatestLicenseContractCreations(0).count() <= defaultTransactionLimit;
+        return Template.instance().showAllTransactions.get() || lob.transactions.getLatestLicenseContractTransactions(0).count() <= defaultTransactionLimit;
     }
 });
 

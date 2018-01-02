@@ -37,29 +37,7 @@
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.safekeepingPeriod"}}</strong></td>
                 <td>{{_ "generic.year" count=safekeepingPeriod}} </td>
             </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.submissionDate"}}</strong></td>
-                <td>{{submissionDate}}</td>
-            </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.blockNumber"}}</strong></td>
-                <td>
-                    {{#if blockNumber}}
-                        {{blockNumber}}
-                        ({{_ "generic.confirmation" count=confirmations}})
-                    {{else}}
-                        <i>{{_ "generic.unconfirmed"}}</i>
-                    {{/if}}
-                </td>
-            </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.transactionStatus"}}</strong></td>
-                <td><i>{{transactionStatus}}</i></td>
-            </tr>
-            <tr>
-                <td><strong>{{_ "licenseContractCreationTransactionInfo.field.transactionFee"}}</strong></td>
-                <td>{{transactionFee}} Ether</td>
-            </tr>
+            {{> generalTransactionInfo transaction=transaction}}
             </tbody>
         </table>
         {{#if etherscanUrl}}

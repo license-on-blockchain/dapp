@@ -88,30 +88,33 @@
       "licenses_completely_transferred_indirectly": "The licenses have been completely transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
       "licenses_partially_transferred_indirectly": "%s licenses have been transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
       "no_owned_licenses": "You do not currently own any licenses of this issuing."
+    }
+  },
+  "pendingTransactionRow": {
+    "transactionType": {
+      "transfer": "Transfer",
+      "reclaimableTransfer": "Reclaimable Transfer",
+      "reclaim": "Reclaim",
+      "licenseContractCreation": "License Contract Creation",
+      "licenseContractSigning": "License Contract Signing",
+      "licenseContractDisabling": "License Contract Disabling",
+      "licenseIssuing": "License Issuing",
+      "issuanceRevoke": "License Revoke"
     },
-    "pendingTransactionRow": {
-      "transactionType": {
-        "transfer": "Transfer",
-        "reclaimableTransfer": "Reclaimable Transfer",
-        "reclaim": "Reclaim",
-        "licenseContractCreation": "License Contract Creation",
-        "licenseContractSigning": "License Contract Signing"
-      },
-      "unconfirmed": "unconfirmed",
-      "monthAbbrevations": {
-        "1": "Jan",
-        "2": "Feb",
-        "3": "Mar",
-        "4": "Apr",
-        "5": "May",
-        "6": "Jun",
-        "7": "Jul",
-        "8": "Aug",
-        "9": "Sep",
-        "10": "Oct",
-        "11": "Nov",
-        "12": "Dez"
-      }
+    "unconfirmed": "unconfirmed",
+    "monthAbbrevations": {
+      "1": "Jan",
+      "2": "Feb",
+      "3": "Mar",
+      "4": "Apr",
+      "5": "May",
+      "6": "Jun",
+      "7": "Jul",
+      "8": "Aug",
+      "9": "Sep",
+      "10": "Oct",
+      "11": "Nov",
+      "12": "Dez"
     }
   },
   "licenseCertificate": {
@@ -189,11 +192,7 @@
       "from": "From",
       "to": "To",
       "reclaimer": "Reclaimer",
-      "amount": "Transferred Licenses",
-      "submissionDate": "Submission Date",
-      "blockNumber": "Mined in Block",
-      "transactionFee": "Transaction Fee",
-      "transactionStatus": "Status"
+      "amount": "Transferred Licenses"
     }
   },
   "reclaim": {
@@ -382,11 +381,7 @@
       "issuerAddress": "Issuer Address",
       "issuerName": "Issuer Name",
       "liability": "Liability",
-      "safekeepingPeriod": "Safekeeping Period",
-      "submissionDate": "Submission Date",
-      "blockNumber": "Mined in Block",
-      "transactionFee": "Transaction Fee",
-      "transactionStatus": "Status"
+      "safekeepingPeriod": "Safekeeping Period"
     },
     "not_determined_yet": "Not determined yet"
   },
@@ -394,13 +389,45 @@
     "title": "License Contract Singing Transaction",
     "field": {
       "licenseContract": "License Contract Address",
-      "from": "From",
+      "from": "From"
+    },
+    "not_determined_yet": "Not determined yet"
+  },
+  "disableLicenseContractTransactionInfo": {
+    "title": "License Contract Disabling Transaction",
+    "field": {
+      "licenseContract": "License Contract Address",
+      "from": "From"
+    }
+  },
+  "licenseIssuingTransactionInfo": {
+    "title": "Issue License Transaction",
+    "field": {
+      "licenseContract": "License Contract Address",
+      "issuer": "Issuer",
+      "description": "Description",
+      "code": "Code",
+      "amount": "Amount",
+      "initialOwnerAddress": "Initial Owner Address",
+      "initialOwnerName": "Initial Owner Name",
+      "auditRemark": "Audit Remark",
+      "auditTime": "Audit Date"
+    }
+  },
+  "issuanceRevokeTransactionInfo": {
+    "title": "License Revoke Transaction",
+    "field": {
+      "issuance": "License",
+      "revokedBy": "Revoked By"
+    }
+  },
+  "generalTransactionInfo": {
+    "field": {
       "submissionDate": "Submission Date",
       "blockNumber": "Mined in Block",
       "transactionFee": "Transaction Fee",
       "transactionStatus": "Status"
-    },
-    "not_determined_yet": "Not determined yet"
+    }
   },
   "waitForContractCreationMining": {
     "title": "<strong>Waiting</strong> for contract creation to be mined",

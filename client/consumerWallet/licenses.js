@@ -7,7 +7,7 @@ import {TransactionType} from "../../lib/lob/Transactions";
 import {IssuanceLocation} from "../../lib/IssuanceLocation";
 import {formatDate} from "../../lib/utils";
 import {IssuanceInfo} from "../shared/issuanceInfo";
-import {TransferTransactionInfo} from "./transferTransactionInfo";
+import {TransferTransactionInfo} from "../transactionInfo/transferTransactionInfo";
 
 const defaultTransactionLimit = 3; // Should be odd so that show all row is white
 
