@@ -72,11 +72,9 @@
       "clearCaches": "Sind Sie sich sicher, dass Sie alle lokal gespeicherten Daten löschen möchen? Dies betrifft keine auf der Blockchain gespeicherten Daten."
     }
   },
-  "licenses": {
-    "title": "<strong>Lizenzen</strong>",
+  "accountBalance": {
     "heading": {
-      "revokedLicenses": "Widerrufene Lizenzbescheinigungen",
-      "latestTransfers": "Letzte Übertragungen"
+      "revokedLicenses": "Widerrufene Lizenzbescheinigungen"
     },
     "hover": {
       "ownedBalance": "Ihre Lizenzen",
@@ -87,16 +85,24 @@
       "transfer": "Übertragen",
       "reclaim": "Zurückfordern",
       "certificate": "Zertifikat",
-      "history": "Historie",
-      "showAll": "Alle anzeigen"
+      "history": "Historie"
+    }
+  },
+  "balance": {
+    "title": "<strong>Saldo</strong> fremder Adressen ansehen",
+    "input": {
+      "address": {
+        "title": "Adresse"
+      }
+    }
+  },
+  "licenses": {
+    "title": "<strong>Lizenzen</strong>",
+    "heading": {
+      "latestTransfers": "Letzte Übertragungen"
     },
-    "transferDescription": {
-      "licenses_not_transferred": "Die Lizenzen wurden noch nicht weiter übertragen.",
-      "licenses_completely_transferred": "Die Lizenzen wurden vollständig an %s übertragen.",
-      "licenses_partially_transferred": "%s Lizenzen wurden an %s übertragen.",
-      "licenses_completely_transferred_indirectly": "Die Lizenzen wurden Ihnen vollständig, aber (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.",
-      "licenses_partially_transferred_indirectly": "%s Lizenzen wurden Ihnen (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.",
-      "no_owned_licenses": "Sie besitzen aktuell keine Lizenzen dieser Bescheinigung."
+    "button": {
+      "showAll": "Alle anzeigen"
     }
   },
   "pendingTransactionRow": {
@@ -146,7 +152,15 @@
       "leafCertificateCommonName": "Zertifikat ausgestellt für",
       "certificateIssuer": "Zertifikataussteller"
     },
-    "auditRemarkIntro": "Vermerk aus dem Lizenzaudit:"
+    "auditRemarkIntro": "Vermerk aus dem Lizenzaudit:",
+    "transferDescription": {
+      "licenses_not_transferred": "Die Lizenzen wurden noch nicht weiter übertragen.",
+      "licenses_completely_transferred": "Die Lizenzen wurden vollständig an %s übertragen.",
+      "licenses_partially_transferred": "%s Lizenzen wurden an %s übertragen.",
+      "licenses_completely_transferred_indirectly": "Die Lizenzen wurden Ihnen vollständig, aber (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.",
+      "licenses_partially_transferred_indirectly": "%s Lizenzen wurden Ihnen (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.",
+      "no_owned_licenses": "Sie besitzen aktuell keine Lizenzen dieser Bescheinigung."
+    }
   },
   "licenseHistory": {
     "license_contract": "Smart Contract der Bescheinigungsstelle",

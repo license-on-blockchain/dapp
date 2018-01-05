@@ -72,11 +72,9 @@
       "clearCaches": "Are you sure you want to delete all locally stored data? This action will not affect any data stored on the blockchain."
     }
   },
-  "licenses": {
-    "title": "<strong>Licenses</strong>",
+  "accountBalance": {
     "heading": {
-      "revokedLicenses": "Revoked licenses",
-      "latestTransfers": "Latest transfers"
+      "revokedLicenses": "Revoked licenses"
     },
     "hover": {
       "ownedBalance": "Licenses owned by you",
@@ -87,16 +85,24 @@
       "transfer": "Transfer",
       "reclaim": "Reclaim",
       "certificate": "Certificate",
-      "history": "History",
-      "showAll": "Show All"
+      "history": "History"
+    }
+  },
+  "balance": {
+    "title": "View <strong>balance</strong> of foreign addresses",
+    "input": {
+      "address": {
+        "title": "Address"
+      }
+    }
+  },
+  "licenses": {
+    "title": "<strong>Licenses</strong>",
+    "heading": {
+      "latestTransfers": "Latest transfers"
     },
-    "transferDescription": {
-      "licenses_not_transferred": "The licenses have not been transferred on yet.",
-      "licenses_completely_transferred": "The licenses have all been transferred to %s.",
-      "licenses_partially_transferred": "%s have been transferred to %s.",
-      "licenses_completely_transferred_indirectly": "The licenses have been completely transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
-      "licenses_partially_transferred_indirectly": "%s licenses have been transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
-      "no_owned_licenses": "You do not currently own any licenses of this issuing."
+    "button": {
+      "showAll": "Show All"
     }
   },
   "pendingTransactionRow": {
@@ -146,7 +152,15 @@
       "leafCertificateCommonName": "Certificate issued to",
       "certificateIssuer": "Certificate issuer"
     },
-    "auditRemarkIntro": "Audit remark:"
+    "auditRemarkIntro": "Audit remark:",
+    "transferDescription": {
+      "licenses_not_transferred": "The licenses have not been transferred on yet.",
+      "licenses_completely_transferred": "The licenses have all been transferred to %s.",
+      "licenses_partially_transferred": "%s have been transferred to %s.",
+      "licenses_completely_transferred_indirectly": "The licenses have been completely transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
+      "licenses_partially_transferred_indirectly": "%s licenses have been transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
+      "no_owned_licenses": "You do not currently own any licenses of this issuing."
+    }
   },
   "licenseHistory": {
     "license_contract": "License contract",

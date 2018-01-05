@@ -6,6 +6,7 @@ import './main.html';
 import {PersistentCollections} from "../lib/PersistentCollections";
 import {checkBrowserSetup} from "./shared/browsercheck";
 import {arraysEqual} from "../lib/utils";
+import {Accounts} from "../lib/Accounts";
 
 let __lastAccounts = null;
 function onAccountsChange(callback) {
@@ -94,9 +95,10 @@ Meteor.startup(function() {
 
                 PersistentCollections.init();
                 PersistentCollections.afterAllInitialisations(() => {
-                    for (const rootContractAddress of RootContracts.getAddresses()) {
-                        lob.watchRootContract(rootContractAddress);
-                    }
+                    lob.watchRootContractsForManagedLicenseContracts(RootContracts.getAddresses());
+                    Accounts.fetch((accounts) => {
+                        lob.watchRootContractForBalances(RootContracts.getAddresses(), accounts);
+                    });
                 });
 
                 onAccountsChange(() => {

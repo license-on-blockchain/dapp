@@ -1,0 +1,63 @@
+<template name="licenseCertificate">
+    <div  class="certificateText">
+        <p>
+            {{#each certificateText}}
+                {{this}}<br>
+            {{/each}}
+        </p>
+
+        <p><i>{{_ "licenseCertificate.certificate_signed" sslCertificate}}</i></p>
+        <hr>
+        <p>
+            {{_ "licenseCertificate.licenseInfo.intro" issuerName}}
+        </p>
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td>{{_ "licenseCertificate.licenseInfo.description"}}</td><td><strong>{{licenseDescription}}</strong></td>
+            </tr>
+            <tr>
+                <td>{{_ "licenseCertificate.licenseInfo.code"}}</td><td><strong>{{licenseCode}}</strong></td>
+            </tr>
+            <tr>
+                <td>{{_ "licenseCertificate.licenseInfo.amount"}}</td><td><strong>{{originalSupply}}</strong></td>
+            </tr>
+            <tr>
+                <td>{{_ "licenseCertificate.licenseInfo.auditTime"}}</td><td><strong>{{auditTime}}</strong></td>
+            </tr>
+            <tr>
+                <td>{{_ "licenseCertificate.licenseInfo.originalOwner"}}</td><td><strong>{{originalOwner}}</strong></td>
+            </tr>
+            <tr>
+                <td>{{_ "licenseCertificate.licenseInfo.issuanceID"}}</td><td><strong>{{issuanceID}}</strong></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h4>{{_ "licenseCertificate.heading.certificateCheck"}}</h4>
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td>{{_ "licenseCertificate.certificateCheck.certificateValid"}}</td><td><strong>{{certificateValid}}</strong></td>
+            </tr>
+            <tr>
+                <td>{{_ "licenseCertificate.certificateCheck.signatureValid"}}</td><td><strong>{{signatureValid}}</strong></td>
+            </tr>
+            <tr>
+                <td>{{_ "licenseCertificate.certificateCheck.leafCertificateCommonName"}}</td><td><strong>{{leafCertificateCommonName}}</strong></td>
+            </tr>
+            <tr>
+                <td>{{_ "licenseCertificate.certificateCheck.certificateIssuer"}}</td><td><strong>{{rootCertificateCommonName}}</strong></td>
+            </tr>
+            </tbody>
+        </table>
+        {{#if auditRemark}}
+            <p><i>{{_ "licenseCertificate.auditRemarkIntro"}}</i> {{auditRemark}}</p>
+        {{/if}}
+        <hr>
+        <p>{{transferDescription}}</p>
+    </div>
+    <div class="dapp-modal-buttons">
+        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
+    </div>
+</template>

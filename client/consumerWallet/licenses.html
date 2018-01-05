@@ -2,23 +2,7 @@
     <div class="dapp-flex-content">
         <main class="dapp-content">
             <h1>{{{_ "licenses.title"}}}</h1>
-            <table class="dapp-zebra licensesTable">
-                <tbody>
-                {{#each licenses}}
-                    {{> licenseRow}}
-                {{/each}}
-                </tbody>
-            </table>
-            {{#if revokedLicenses}}
-                <h2>{{_ "licenses.heading.revokedLicenses"}}</h2>
-                <table class="dapp-zebra licensesTable">
-                    <tbody>
-                    {{#each revokedLicenses}}
-                        {{> licenseRow}}
-                    {{/each}}
-                    </tbody>
-                </table>
-            {{/if}}
+            {{> accountsBalance accounts=accounts}}
             {{#if hasPendingTransfers}}
                 <h2>{{_ "licenses.heading.latestTransfers"}}</h2>
                 <table class="dapp-zebra">
@@ -37,105 +21,5 @@
                 </table>
             {{/if}}
         </main>
-    </div>
-</template>
-
-<template name="licenseRow">
-    <tr class="clickable">
-        <td><strong>{{description}}</strong></td>
-        <td class="buttonColumn">
-            {{#if extendedBalanceInfo}}
-                <span class="simptip-position-bottom" data-tooltip="{{_ "licenses.hover.ownedBalance"}}">{{balance}}</span>
-                / <span class="simptip-position-bottom" data-tooltip="{{_ "licenses.hover.borrowedBalance"}}">{{borrowedBalance}}</span>
-                / <span class="simptip-position-bottom" data-tooltip="{{_ "licenses.hover.reclaimableBalance"}}">{{reclaimableBalance}}</span>
-            {{else}}
-                {{balance}}
-            {{/if}}
-        </td>
-        <td class="buttonColumn">
-        {{#if transferPossible}}
-            <a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> {{_ "licenses.button.transfer"}}</a>
-        {{/if}}
-        </td>
-        <td class="buttonColumn">
-        {{#if reclaimPossible}}
-            <a href="/reclaim/reclaimer/{{maxReclaimableBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-down"></i> {{_ "licenses.button.reclaim"}}</a>
-        {{/if}}
-        </td>
-        <td class="buttonColumn"><a class="showCertificate" href="#"><i class="icon-doc"></i> {{_ "licenses.button.certificate"}}</a></td>
-        <td class="buttonColumn"><a class="showHistory" href="#"><i class="icon-graph"></i> {{_ "licenses.button.history"}}</a></td>
-    </tr>
-</template>
-
-<template name="licenseCertificate">
-    <div  class="certificateText">
-        <p>
-            {{#each certificateText}}
-                {{this}}<br>
-            {{/each}}
-        </p>
-
-        <p><i>{{_ "licenseCertificate.certificate_signed" sslCertificate}}</i></p>
-        <hr>
-        <p>
-            {{_ "licenseCertificate.licenseInfo.intro" issuerName}}
-        </p>
-        <table class="dapp-zebra">
-            <tbody>
-            <tr>
-                <td>{{_ "licenseCertificate.licenseInfo.description"}}</td><td><strong>{{licenseDescription}}</strong></td>
-            </tr>
-            <tr>
-                <td>{{_ "licenseCertificate.licenseInfo.code"}}</td><td><strong>{{licenseCode}}</strong></td>
-            </tr>
-            <tr>
-                <td>{{_ "licenseCertificate.licenseInfo.amount"}}</td><td><strong>{{originalSupply}}</strong></td>
-            </tr>
-            <tr>
-                <td>{{_ "licenseCertificate.licenseInfo.auditTime"}}</td><td><strong>{{auditTime}}</strong></td>
-            </tr>
-            <tr>
-                <td>{{_ "licenseCertificate.licenseInfo.originalOwner"}}</td><td><strong>{{originalOwner}}</strong></td>
-            </tr>
-            <tr>
-                <td>{{_ "licenseCertificate.licenseInfo.issuanceID"}}</td><td><strong>{{issuanceID}}</strong></td>
-            </tr>
-            </tbody>
-        </table>
-
-        <h4>{{_ "licenseCertificate.heading.certificateCheck"}}</h4>
-        <table class="dapp-zebra">
-            <tbody>
-            <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.certificateValid"}}</td><td><strong>{{certificateValid}}</strong></td>
-            </tr>
-            <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.signatureValid"}}</td><td><strong>{{signatureValid}}</strong></td>
-            </tr>
-            <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.leafCertificateCommonName"}}</td><td><strong>{{leafCertificateCommonName}}</strong></td>
-            </tr>
-            <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.certificateIssuer"}}</td><td><strong>{{rootCertificateCommonName}}</strong></td>
-            </tr>
-            </tbody>
-        </table>
-        {{#if auditRemark}}
-            <p><i>{{_ "licenseCertificate.auditRemarkIntro"}}</i> {{auditRemark}}</p>
-        {{/if}}
-        <hr>
-        <p>{{transferDescription}}</p>
-    </div>
-    <div class="dapp-modal-buttons">
-        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
-    </div>
-</template>
-
-<template name="licenseHistory">
-    <div class="graphContainer">
-    <canvas id="graphCanvas"></canvas>
-    </div>
-    <div class="dapp-modal-buttons">
-        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
     </div>
 </template>

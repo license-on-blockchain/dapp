@@ -8,6 +8,21 @@ Router.route('/licenses', function() {
     name: 'licenses'
 });
 
+Router.route('/balance/', function() {
+    this.render('balance', {
+        data: {}
+    })
+});
+
+
+Router.route('/balance/:address', function() {
+   this.render('balance', {
+       data: {
+           address: this.params.address.toLowerCase()
+       }
+   })
+});
+
 // Transfer
 Router.route('/transfer', function() {
     this.render('transfer', {
