@@ -96,6 +96,15 @@
       }
     }
   },
+  "accountInfo": {
+    "title": "Account Info",
+    "heading": {
+      "balance": "Saldo"
+    },
+    "field": {
+      "internalName": "Interner Name"
+    }
+  },
   "licenses": {
     "title": "<strong>Lizenzen</strong>",
     "heading": {

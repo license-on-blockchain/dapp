@@ -67,6 +67,9 @@ Template.licenseContractDetails.helpers({
 
 Template.licenseContractDetails.events({
     'blur .internalName'(event) {
-        lob.licenseContracts.setInternalName(this.address, event.target.innerText.trim());
+        const name = event.target.innerText.trim();
+        setTimeout(() => {
+            lob.licenseContracts.setInternalName(this.address, name);
+        }, 100);
     }
 });

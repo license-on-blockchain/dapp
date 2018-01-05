@@ -1,0 +1,17 @@
+<template name="accountInfo">
+    <div class="accountInfo">
+        <h1>{{_ "accountInfo.title"}}</h1>
+        <h2>{{address}}</h2>
+
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td><strong>{{_ "accountInfo.field.internalName"}}</strong></td>
+                <td><span contenteditable="true" class="internalName">{{internalName}}</span></td>
+            </tr>
+            </tbody>
+        </table>
+        <h2>{{_ "accountInfo.heading.balance"}}</h2>
+        {{> accountsBalance accounts=accounts actionsEnabled=false}}
+    </div>
+</template>

@@ -1,9 +1,6 @@
 import {Accounts} from "../../lib/Accounts";
 import {IssuanceInfo} from "../shared/issuanceInfo";
-import {drawLicenseHistory} from "../../lib/licenseHistory";
-import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {lob} from "../../lib/LOB";
-import {CertificateChain} from "../../lib/CertificateChain";
 
 function getLicenseRows(accounts, revoked, actionsEnabled) {
     const issuanceLocations = lob.balances.getNonZeroBalanceIssuanceLocations(accounts)

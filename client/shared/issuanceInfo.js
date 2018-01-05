@@ -2,6 +2,7 @@ import {lob} from "../../lib/LOB";
 import {formatDate} from "../../lib/utils";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {LicenseContractInfo} from "./licenseContractInfo";
+import {AccountInfo} from "./accountInfo";
 
 export const IssuanceInfo = {
     show(issuanceLocation) {
@@ -103,5 +104,8 @@ Template.issuanceInfo.events({
             },
             class: 'wideModal'
         });
+    },
+    'click tr.balanceRow'() {
+        AccountInfo.show(this.address);
     }
 });
