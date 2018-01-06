@@ -97,7 +97,7 @@ Meteor.startup(function() {
                 PersistentCollections.afterAllInitialisations(() => {
                     lob.watchRootContractsForManagedLicenseContracts(RootContracts.getAddresses());
                     Accounts.fetch((accounts) => {
-                        lob.watchRootContractForBalances(RootContracts.getAddresses(), accounts);
+                        lob.watchAccountBalance(accounts);
                     });
                 });
 

@@ -1,4 +1,5 @@
 import {Accounts} from "../../lib/Accounts";
+import {lob} from "../../lib/LOB";
 
 function getName(address) {
     const licenseContractName = lob.licenseContracts.getDisplayName(address);

@@ -1,5 +1,6 @@
 import {RootContracts} from "../../lib/RootContracts";
 import {Accounts} from "../../lib/Accounts";
+import {lob} from "../../lib/LOB";
 
 export const AccountInfo = {
     show(address) {
@@ -14,7 +15,7 @@ export const AccountInfo = {
 };
 
 Template.accountInfo.onCreated(function() {
-    lob.watchRootContractForBalances(RootContracts.getAddresses(), [this.data.address]);
+    lob.watchAccountBalance(this.data.address);
 });
 
 Template.accountInfo.helpers({

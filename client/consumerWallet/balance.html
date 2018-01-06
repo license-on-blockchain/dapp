@@ -11,7 +11,11 @@
                     <div class="dapp-clear-fix"></div>
                 </div>
             </form>
-            {{> accountsBalance accounts=accounts actionsEnabled=false}}
+            {{#if loading}}
+                <p>Loading…</p>
+            {{else}}
+                {{> accountsBalance accounts=accounts actionsEnabled=false}}
+            {{/if}}
         </main>
     </div>
 </template>

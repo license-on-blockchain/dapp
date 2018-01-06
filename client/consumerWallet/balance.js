@@ -15,7 +15,10 @@ function onFormUpdate() {
 
     if (web3.isAddress(address)) {
         this.address.set(address);
-        lob.watchRootContractForBalances(RootContracts.getAddresses(), [address]);
+        this.loading.set(true);
+        lob.watchAccountBalance(address).then(() => {
+            this.loading.set(false);
+        });
     } else {
         this.address.set(null);
     }
@@ -23,6 +26,7 @@ function onFormUpdate() {
 
 Template.balance.onCreated(function() {
     this.address = new ReactiveVar(this.data.address || null);
+    this.loading = new ReactiveVar(false);
 
     this.getValues = getValues;
     this.onFormUpdate = onFormUpdate;
@@ -34,6 +38,9 @@ Template.balance.helpers({
     },
     accounts() {
         return [Template.instance().address.get()];
+    },
+    loading() {
+        return Template.instance().loading.get();
     }
 });
 
