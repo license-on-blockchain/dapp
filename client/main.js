@@ -7,6 +7,7 @@ import {PersistentCollections} from "../lib/PersistentCollections";
 import {checkBrowserSetup} from "./shared/browsercheck";
 import {arraysEqual} from "../lib/utils";
 import {Accounts} from "../lib/Accounts";
+import {handleUnknownEthereumError} from "../lib/ErrorHandling";
 
 let __lastAccounts = null;
 function onAccountsChange(callback) {
@@ -95,9 +96,11 @@ Meteor.startup(function() {
 
                 PersistentCollections.init();
                 PersistentCollections.afterAllInitialisations(() => {
-                    lob.watchRootContractsForManagedLicenseContracts(RootContracts.getAddresses());
+                    lob.watchRootContractsForManagedLicenseContracts(lob.rootContracts.getAddresses());
                     Accounts.fetch((accounts) => {
-                        lob.watchAccountBalance(accounts);
+                        lob.watchAccountBalance(accounts).catch((error) => {
+                            handleUnknownEthereumError(error);
+                        });
                     });
                 });
 

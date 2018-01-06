@@ -94,7 +94,7 @@ Template.createLicenseContract.helpers({
     myAccounts() {
         return EthAccounts.find().fetch();
     },
-    rootContracts: RootContracts.getAddressesAndNames(),
+    rootContracts: lob.rootContracts.getAddressesAndNames(),
     gasPrice() {
         return EthBlocks.latest.gasPrice;
     },
