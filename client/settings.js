@@ -14,6 +14,9 @@ Template.settings.helpers({
     selectedWeb3LoggingLevel(loggingLevel) {
         return Settings.web3LoggingLevel.get() === loggingLevel ? "selected" : "";
     },
+    selectedWeb3Latency(latency) {
+        return Settings.web3Latency.get() === latency ? "selected" : "";
+    },
 });
 
 Template.settings.events({
@@ -28,6 +31,10 @@ Template.settings.events({
     },
     'change [name=web3LoggingLevel]'(event) {
         Settings.web3LoggingLevel.set(Number(event.currentTarget.value));
+        location.reload();
+    },
+    'change [name=web3Latency]'(event) {
+        Settings.web3Latency.set(Number(event.currentTarget.value));
         location.reload();
     },
     'click button.clearCaches'(event) {

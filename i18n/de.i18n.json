@@ -41,6 +41,9 @@
   },
   "settings": {
     "title": "<strong>Settings</strong>",
+    "heading": {
+      "debugSettings": "Debug Einstellungen"
+    },
     "input": {
       "enableInstallation": {
         "title": "Aktionen zur Softwareinstallation anzeigen",
@@ -66,6 +69,10 @@
           "duplicate": "Dopplete Web3-Aufrufe loggen",
           "all": "Alle Web3-Aufrufe loggen"
         }
+      },
+      "web3Latency": {
+        "title": "Web3 Latency",
+        "description": "Artifical latency introduced to every web3 call"
       }
     },
     "confirmation": {

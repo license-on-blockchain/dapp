@@ -41,6 +41,9 @@
   },
   "settings": {
     "title": "<strong>Settings</strong>",
+    "heading": {
+      "debugSettings": "Debug Settings"
+    },
     "input": {
       "enableInstallation": {
         "title": "Show installation actions",
@@ -66,6 +69,10 @@
           "duplicate": "Log duplicate calls",
           "all": "Log all calls"
         }
+      },
+      "web3Latency": {
+        "title": "Web3 Latency",
+        "description": "Artifical latency introduced to every web3 call"
       }
     },
     "confirmation": {
