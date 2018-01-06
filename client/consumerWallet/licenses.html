@@ -2,7 +2,11 @@
     <div class="dapp-flex-content">
         <main class="dapp-content">
             <h1>{{{_ "licenses.title"}}}</h1>
-            {{> accountsBalance accounts=accounts}}
+            {{#if loading}}
+                <h1 class="spinner"></h1>
+            {{else}}
+                {{> accountsBalance accounts=accounts ownedAccounts=true}}
+            {{/if}}
             {{#if hasPendingTransfers}}
                 <h2>{{_ "licenses.heading.latestTransfers"}}</h2>
                 <table class="dapp-zebra">

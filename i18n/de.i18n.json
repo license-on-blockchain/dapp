@@ -63,8 +63,8 @@
         "description": "",
         "option": {
           "none": "Kein logging",
-          "duplicate": "Log dopplete Web3-Aufrufe",
-          "all": "Log alle Web3-Aufrufe"
+          "duplicate": "Dopplete Web3-Aufrufe loggen",
+          "all": "Alle Web3-Aufrufe loggen"
         }
       }
     },
@@ -86,6 +86,12 @@
       "reclaim": "Zurückfordern",
       "certificate": "Zertifikat",
       "history": "Historie"
+    },
+    "error": {
+      "noLicenses": {
+        "ownedAccounts": "Sie besitzen aktuell keine Lizenzen",
+        "otherAccounts": "Diese Adresse besitzt zur Zeit keine Lizenzen"
+      }
     }
   },
   "balance": {

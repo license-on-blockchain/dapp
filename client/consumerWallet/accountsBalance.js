@@ -25,6 +25,9 @@ Template.accountsBalance.onCreated(function() {
     if (this.data.actionsEnabled === undefined) {
         this.data.actionsEnabled = true;
     }
+    if (this.data.ownedAccounts === undefined) {
+        this.data.ownedAccounts = false;
+    }
 });
 
 Template.accountsBalance.helpers({
@@ -32,7 +35,10 @@ Template.accountsBalance.helpers({
         return getLicenseRows(this.accounts, /*revoked*/false, this.actionsEnabled);
     },
     revokedLicenses() {
-        return getLicenseRows(this.accounts, /*revoked*/true);
+        return getLicenseRows(this.accounts, /*revoked*/true, this.actionsEnabled);
+    },
+    ownedAccounts() {
+        return this.ownedAccounts;
     }
 });
 

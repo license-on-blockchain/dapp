@@ -3,6 +3,14 @@
         <tbody>
         {{#each licenses}}
             {{> licenseRow}}
+        {{else}}
+            <tr>
+                {{#if ownedAccounts}}
+                    <td><strong>{{_ "accountBalance.error.noLicenses.ownedAccounts"}}</strong></td>
+                {{else}}
+                    <td><strong>{{_ "accountBalance.error.noLicenses.otherAccounts"}}</strong></td>
+                {{/if}}
+            </tr>
         {{/each}}
         </tbody>
     </table>

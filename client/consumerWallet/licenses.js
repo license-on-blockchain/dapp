@@ -8,6 +8,7 @@ import {IssuanceLocation} from "../../lib/IssuanceLocation";
 import {formatDate} from "../../lib/utils";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {TransferTransactionInfo} from "../transactionInfo/transferTransactionInfo";
+import {InitialLoadingStatus} from "../../lib/InitialLoadingStatus";
 
 const defaultTransactionLimit = 3; // Should be odd so that show all row is white
 
@@ -16,6 +17,9 @@ Template.licenses.onCreated(function() {
 });
 
 Template.licenses.helpers({
+    loading() {
+        return !InitialLoadingStatus.hasFinishedLoading();
+    },
     accounts() {
         return Accounts.get()
     },

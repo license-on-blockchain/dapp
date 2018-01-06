@@ -12,7 +12,7 @@
                 </div>
             </form>
             {{#if loading}}
-                <p>Loading…</p>
+                <h1 class="spinner"></h1>
             {{else}}
                 {{> accountsBalance accounts=accounts actionsEnabled=false}}
             {{/if}}

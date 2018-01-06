@@ -86,6 +86,12 @@
       "reclaim": "Reclaim",
       "certificate": "Certificate",
       "history": "History"
+    },
+    "error": {
+      "noLicenses": {
+        "ownedAccounts": "You don't currently own any licenses",
+        "otherAccounts": "This address does not currently own any licenses"
+      }
     }
   },
   "balance": {
