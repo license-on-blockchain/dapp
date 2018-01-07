@@ -12,17 +12,7 @@
                 <table class="dapp-zebra">
                     <tbody>
                     {{#each issuances}}
-                        <tr class="clickable issuancesRow">
-                            <td><strong>{{description}}</strong></td>
-                            <td><strong>{{code}}</strong></td>
-                            <td class="wideButtonColumn">
-                                {{#if revoked}}
-                                    <i>{{_ "manageLicenseContract.revoked"}}</i>
-                                {{else}}
-                                    <a href="/licensecontracts/revoke/{{licenseContract}}/{{issuanceID}}"><i class="icon-ban"></i> {{_ "manageLicenseContract.button.revokeIssuance"}}</a>
-                                {{/if}}
-                            </td>
-                        </tr>
+                        {{> issuanceRow}}
                     {{else}}
                         <tr><td><strong>{{_ "manageLicenseContract.no_issuances"}}</strong></td></tr>
                     {{/each}}
@@ -54,4 +44,21 @@
             {{/if}}
         </main>
     </div>
+</template>
+
+<template name="issuanceRow">
+    <tr class="clickable issuancesRow">
+        <td><strong>{{issuanceID}}</strong></td>
+        <td><strong>{{description}}</strong></td>
+        <td>{{originalOwner}}</td>
+        <td>{{originalSupply}}</td>
+        <td>{{auditTime}}</td>
+        <td class="wideButtonColumn">
+            {{#if revoked}}
+                <i>{{_ "manageLicenseContract.revoked"}}</i>
+            {{else}}
+                <a href="/licensecontracts/revoke/{{licenseContract}}/{{issuanceID}}"><i class="icon-ban"></i> {{_ "manageLicenseContract.button.revokeIssuance"}}</a>
+            {{/if}}
+        </td>
+    </tr>
 </template>

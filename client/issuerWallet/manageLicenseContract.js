@@ -1,6 +1,7 @@
 import {lob} from "../../lib/LOB";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {IssuanceLocation} from "../../lib/IssuanceLocation";
+import {formatDate} from "../../lib/utils";
 
 const defaultTransactionLimit = 3; // Should be odd so that show all row is white
 
@@ -41,5 +42,15 @@ Template.manageLicenseContract.events({
     },
     'click tr.showAllRow'() {
         Template.instance().showAllTransactions.set(true);
+    }
+});
+
+Template.issuanceRow.helpers({
+    auditTime() {
+        if (this.auditTime) {
+            return formatDate(new Date(this.auditTime * 1000));
+        } else {
+            return this.auditTime;
+        }
     }
 });
