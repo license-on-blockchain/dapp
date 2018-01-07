@@ -5,6 +5,7 @@ import {formatDate} from "../../lib/utils";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {Etherscan} from "../../lib/Etherscan";
+import {AccountInfo} from "../shared/accountInfo";
 
 export const TransferTransactionInfo = {
     show(transactionHash) {
@@ -56,6 +57,14 @@ Template.transferTransactionInfo.events({
         const transaction = lob.transactions.getTransaction(this.transactionHash);
         const issuanceLocation = IssuanceLocation.fromComponents(transaction.licenseContract, transaction.issuanceID);
         IssuanceInfo.show(issuanceLocation);
+    },
+    'click a.showFromAccountInfo'() {
+        const from = lob.transactions.getTransaction(this.transactionHash).from;
+        AccountInfo.show(from);
+    },
+    'click a.showToAccountInfo'() {
+        const from = lob.transactions.getTransaction(this.transactionHash).from;
+        AccountInfo.show(from);
     },
     'click button.hideModal'() {
         EthElements.Modal.hide();

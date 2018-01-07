@@ -14,16 +14,18 @@
             <tr>
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.licenseContractAddress"}}</strong></td>
                 <td>
+                    <a href="#" class="showLicenseContractInfo">
                     {{#if licenseContract}}
                         <i>{{> dapp_address address=licenseContract}}</i>
                     {{else}}
                         <i>{{_ "licenseContractCreationTransactionInfo.not_determined_yet"}}</i>
                     {{/if}}
+                    </a>
                 </td>
             </tr>
             <tr>
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.issuerAddress"}}</strong></td>
-                <td>{{> dapp_address address=issuerAddress}}</td>
+                <td><a href="#" class="showIssuerAccountInfo">{{> dapp_address address=issuerAddress}}</a></td>
             </tr>
             <tr>
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.issuerName"}}</strong></td>

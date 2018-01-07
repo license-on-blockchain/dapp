@@ -5,6 +5,8 @@ import {formatDate} from "../../lib/utils";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {Etherscan} from "../../lib/Etherscan";
+import {LicenseContractInfo} from "../shared/licenseContractInfo";
+import {AccountInfo} from "../shared/accountInfo";
 
 export const LicenseContractCreationTransactionInfo = {
     show(transactionHash) {
@@ -47,4 +49,12 @@ Template.licenseContractCreationTransactionInfo.events({
     'click button.hideModal'() {
         EthElements.Modal.hide();
     },
+    'click .showLicenseContractInfo'() {
+        const licenseContract = lob.transactions.getTransaction(this.transactionHash).licenseContract;
+        LicenseContractInfo.show(licenseContract);
+    },
+    'click .showIssuerAccountInfo'() {
+        const issuerAddress = lob.transactions.getTransaction(this.transactionHash).issuerAddress;
+        AccountInfo.show(issuerAddress);
+    }
 });

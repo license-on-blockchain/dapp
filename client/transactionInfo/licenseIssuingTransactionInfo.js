@@ -1,11 +1,8 @@
 import {lob} from "../../lib/LOB";
-import {TransactionType} from "../../lib/lob/Transactions";
-import {IssuanceLocation} from "../../lib/IssuanceLocation";
 import {formatDate} from "../../lib/utils";
-import {IssuanceInfo} from "../shared/issuanceInfo";
-import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {Etherscan} from "../../lib/Etherscan";
 import {LicenseContractInfo} from "../shared/licenseContractInfo";
+import {AccountInfo} from "../shared/accountInfo";
 
 export const LicenseIssuingTransactionInfo = {
     show(transactionHash) {
@@ -59,5 +56,13 @@ Template.licenseIssuingTransactionInfo.events({
     },
     'click .showLicenseContractInfo'() {
         LicenseContractInfo.show(lob.transactions.getTransaction(this.transactionHash).licenseContract);
+    },
+    'click .showIssuerAccountInfo'() {
+        const issuerAddress = lob.transactions.getTransaction(this.transactionHash).from;
+        AccountInfo.show(issuerAddress);
+    },
+    'click .showInitialOwnerAccountInfo'() {
+        const initialOwnerAddress = lob.transactions.getTransaction(this.transactionHash).initialOwnerAddress;
+        AccountInfo.show(initialOwnerAddress);
     }
 });
