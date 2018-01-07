@@ -2,9 +2,10 @@ import {Accounts} from "../../lib/Accounts";
 import {lob} from "../../lib/LOB";
 
 function getName(address) {
-    if (address) {
-        address = address.toLowerCase();
+    if (typeof address !== 'string') {
+        return address;
     }
+    address = address.toLowerCase();
     const licenseContractName = lob.licenseContracts.getDisplayName(address);
     if (licenseContractName !== address) {
         return licenseContractName;
@@ -21,7 +22,11 @@ Template.dapp_address.helpers({
         return getName(this.address);
     },
     address() {
-        return web3.toChecksumAddress(this.address);
+        if (typeof this.address === 'string') {
+            return web3.toChecksumAddress(this.address);
+        } else {
+            return this.address;
+        }
     },
     italic() {
         if (this.italic === undefined) {
