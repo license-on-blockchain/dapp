@@ -31,6 +31,9 @@ Template.accountInfo.helpers({
 });
 
 Template.accountInfo.events({
+    'click button.hideModal'() {
+        EthElements.Modal.hide();
+    },
     'blur .internalName'(event) {
         const name = event.target.innerText.trim();
         setTimeout(() => {
