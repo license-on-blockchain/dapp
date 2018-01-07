@@ -372,10 +372,17 @@
       "licenseContract": {
         "title": "Smart Contract zur Bescheinigung von Lizenzen",
         "description": "Auswahl des Smart Contracts, den Sie unterzeichnen möchten"
+      },
+      "warning": {
+        "title": "Mir ist bewusst, dass unter diesem Smart Contract keine Lizenzen mehr bescheinigt werden können, wenn er deaktiviert ist, und dass es keine Möglichkeit gibt, den Smart Contract wieder zu aktivieren",
+        "description": ""
       }
     },
     "button": {
       "disable": "Deaktivieren"
+    },
+    "error": {
+      "warning_not_checked": "Sie müssen die Folgen der Deaktivierung des Smart Contracts bestätigen"
     }
   },
   "createLicenseContract": {

@@ -7,7 +7,8 @@ import {NotificationCenter} from "../../lib/NotificationCenter";
 function getValues() {
     const licenseContract = TemplateVar.getFrom(this.find('.licenseContract'), 'value');
     const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
-    return {licenseContract, gasPrice};
+    const warningChecked = this.find('[name=warning]').checked;
+    return {licenseContract, gasPrice, warningChecked};
 }
 
 function onFormUpdate() {
@@ -27,11 +28,12 @@ function onFormUpdate() {
 function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
-    const {licenseContract} = this.getValues();
+    const {licenseContract, warningChecked} = this.getValues();
 
     let noErrors = true;
 
     noErrors &= validateField('licenseContract', web3.isAddress(licenseContract), true, null, errorMessages);
+    noErrors &= validateField('warning', warningChecked, errorOnEmpty, TAPi18n.__('disableLicenseContract.error.warning_not_checked'), errorMessages);
     noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
     return noErrors;

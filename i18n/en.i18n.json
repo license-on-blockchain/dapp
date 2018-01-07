@@ -372,10 +372,17 @@
       "licenseContract": {
         "title": "License Contract",
         "description": "The license contract you want to sign"
+      },
+      "warning": {
+        "title": "I understand that I will not be able to issue any more licenses under this license contract after it has been disabled and that there is no way to enable the contract again",
+        "description": ""
       }
     },
     "button": {
       "disable": "Disable"
+    },
+    "error": {
+      "warning_not_checked": "You need to acknowledge the consequences of disabling the license contract"
     }
   },
   "createLicenseContract": {

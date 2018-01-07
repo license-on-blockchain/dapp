@@ -12,6 +12,14 @@
                     <div class="dapp-clear-fix"></div>
                 </div>
                 <div class="row clear">
+                    <div class="col col-12 mobile-full">
+                        <h4>{{_ "disableLicenseContract.input.warning.title"}}</h4>
+                        <input type="checkbox" name="warning" title="{{_ "signLicenseContract.input.warning.description"}}">
+                        <div class="lob-error-message" data-for="warning"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
                     <div class="col col-4 mobile-full">
                         <h4>{{_ "generic.input.gas.title"}}</h4>
                         {{> dapp_selectGasPrice gas=gasEstimate gasPrice=gasPrice unit="ether"}}
