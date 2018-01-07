@@ -135,7 +135,7 @@
       "licenseContractCreation": "Erzeugung eines Smart Contracts zur Bescheinigung von Lizenzen",
       "licenseContractSigning": "Signatur eines Smart Contracts zur Bescheinigung von Lizenzen",
       "licenseContractDisabling": "Deaktivierung eines Smart Contracts zur Bescheinigung von Lizenzen",
-      "licenseIssuing": "Lizenzausstellung",
+      "licenseIssuing": "Lizenzbescheinigun",
       "issuanceRevoke": "Lizenzwiderrufung"
     },
     "unconfirmed": "unbestätigt",
@@ -157,7 +157,7 @@
   "licenseCertificate": {
     "certificate_signed": "Diese Erklärung wurde mit SSL-Zertifikat mit Public-Key-Fingerprint %s unterzeichnet.",
     "heading": {
-      "certificateCheck": "Zertifikatinformationen"
+      "certificateCheck": "Zertifikatsinformationen"
     },
     "licenseInfo": {
       "intro": "%s hat unter diesem LOB-License-Contract folgende Software-Lizenz bescheinigt:",
@@ -190,10 +190,10 @@
   },
   "licenseContractInfo": {
     "title": "Smart Contract zur Bescheinigung der Lizenzen",
-    "no_issuances": "Keine Lizenzausstellungen",
+    "no_issuances": "Keine Lizenzbescheinigungen",
     "heading": {
       "details": "Details",
-      "issuances": "Lizenausstellungen",
+      "issuances": "Lizenzbescheinigungen",
       "certificateText": "Zertifikatstext"
     },
     "field": {
@@ -332,13 +332,13 @@
   "manageLicenseContract": {
     "title": "Smart Contracts zur Bescheinigung von Lizenzen <strong>verwalten</strong>",
     "revoked": "Bereits widerrufen",
-    "no_issuances": "Keine Lizenzausstellungen",
+    "no_issuances": "Keine Lizenzbescheinigungen",
     "heading": {
       "details": "Details",
-      "issuances": "Lizenzausstellungen"
+      "issuances": "Lizenzbescheinigungen"
     },
     "button": {
-      "revokeIssuance": "Lizenzausstellung widerrufen",
+      "revokeIssuance": "Lizenzbescheinigung widerrufen",
       "issueLicense": "Neue Lizenz ausstellen",
       "disable": "Smart Contract Deaktivieren"
     },
@@ -451,7 +451,7 @@
     }
   },
   "licenseIssuingTransactionInfo": {
-    "title": "Transaktion zur Lizenzausstellung",
+    "title": "Transaktion zur Lizenzbescheinigung",
     "field": {
       "licenseContract": "Smart Contract zur Bescheinigung der Lizenzen",
       "issuer": "Lizenzaussteller",
