@@ -117,10 +117,10 @@ Template.licenseCertificate.helpers({
     },
     certificateValid() {
         const certificateChain = Template.instance().certificateChain.get();
-        if (certificateChain && certificateChain.verifyCertificateChain()) {
-            return "✔"
-        } else {
-            return "❌";
+        try {
+            return certificateChain && certificateChain.verifyCertificateChain();
+        } catch (error) {
+            return false;
         }
     },
     signatureValid() {
@@ -128,11 +128,7 @@ Template.licenseCertificate.helpers({
         const signature = lob.licenseContracts.getSignature(Template.instance().licenseContract);
         const certificateChain = Template.instance().certificateChain.get();
 
-        if (certificateChain && certificateChain.verifySignature(certificateText, signature)) {
-            return "✔"
-        } else {
-            return "❌";
-        }
+        return certificateChain && certificateChain.verifySignature(certificateText, signature);
     },
     leafCertificateCommonName() {
         const certificateChain = Template.instance().certificateChain.get();

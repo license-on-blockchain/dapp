@@ -38,16 +38,24 @@
         <table class="dapp-zebra">
             <tbody>
             <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.certificateValid"}}</td><td><strong>{{certificateValid}}</strong></td>
+                <td>{{_ "licenseCertificate.certificateCheck.certificateValid"}}</td>
+                <td><strong>
+                    {{#if certificateValid}}✔{{else}}❌{{/if}}
+                </strong></td>
             </tr>
             <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.signatureValid"}}</td><td><strong>{{signatureValid}}</strong></td>
+                <td>{{_ "licenseCertificate.certificateCheck.signatureValid"}}</td>
+                <td><strong>
+                    {{#if signatureValid}}✔{{else}}❌{{/if}}
+                </strong></td>
             </tr>
             <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.leafCertificateCommonName"}}</td><td><strong>{{leafCertificateCommonName}}</strong></td>
+                <td>{{_ "licenseCertificate.certificateCheck.leafCertificateCommonName"}}</td>
+                <td><strong>{{leafCertificateCommonName}}</strong></td>
             </tr>
             <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.certificateIssuer"}}</td><td><strong>{{rootCertificateCommonName}}</strong></td>
+                <td>{{_ "licenseCertificate.certificateCheck.certificateIssuer"}}</td>
+                <td><strong>{{rootCertificateCommonName}}</strong></td>
             </tr>
             </tbody>
         </table>
