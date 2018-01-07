@@ -1,4 +1,5 @@
 import {Accounts} from "../../lib/Accounts";
+import {lob} from "../../lib/LOB";
 
 Template.selectAddress.onCreated(function() {
     if (!TemplateVar.get('value')) {

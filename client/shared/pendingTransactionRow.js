@@ -7,6 +7,7 @@ import {LicenseContractSigningTransactionInfo} from "../transactionInfo/licenseC
 import {DisableLicenseContractTransactionInfo} from "../transactionInfo/disableLicenseContractTransactionInfo";
 import {LicenseIssuingTransactionInfo} from "../transactionInfo/licenseIssuingTransactionInfo";
 import {IssuanceRevokeTransactionInfo} from "../transactionInfo/issuanceRevokeTransactionInfo";
+import {lob} from "../../lib/LOB";
 
 Template.pendingTransactionRow.helpers({
     fullDate() {
