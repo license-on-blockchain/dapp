@@ -5,7 +5,7 @@
             {{#if loading}}
                 <h1 class="spinner"></h1>
             {{else}}
-                {{> accountsBalance accounts=accounts ownedAccounts=true}}
+                {{> accountsBalance accounts=accounts actionsEnabled=true ownedAccounts=true}}
             {{/if}}
             {{#if hasPendingTransfers}}
                 <h2>{{_ "licenses.heading.latestTransfers"}}</h2>

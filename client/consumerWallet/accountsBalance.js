@@ -21,15 +21,6 @@ function getLicenseRows(accounts, revoked, actionsEnabled) {
         });
 }
 
-Template.accountsBalance.onCreated(function() {
-    if (this.data.actionsEnabled === undefined) {
-        this.data.actionsEnabled = true;
-    }
-    if (this.data.ownedAccounts === undefined) {
-        this.data.ownedAccounts = false;
-    }
-});
-
 Template.accountsBalance.helpers({
     licenses() {
         return getLicenseRows(this.accounts, /*revoked*/false, this.actionsEnabled);
