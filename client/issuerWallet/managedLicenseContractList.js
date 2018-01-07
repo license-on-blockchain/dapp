@@ -19,15 +19,14 @@ Template.managedLicenseContractList.helpers({
             });
     },
     hasTransactions() {
-        const limit = Template.instance().showAllTransactions.get() ? 0 : defaultTransactionLimit;
-        return lob.transactions.getLatestLicenseContractTransactions(limit).count() > 0;
+        return lob.transactions.getAllLatestLicenseContractTransactions(1).count() > 0;
     },
     latestLicenseContractTransactions() {
         const limit = Template.instance().showAllTransactions.get() ? 0 : defaultTransactionLimit;
-        return lob.transactions.getLatestLicenseContractTransactions(limit);
+        return lob.transactions.getAllLatestLicenseContractTransactions(limit);
     },
     showingAllTransactions() {
-        return Template.instance().showAllTransactions.get() || lob.transactions.getLatestLicenseContractTransactions(0).count() <= defaultTransactionLimit;
+        return Template.instance().showAllTransactions.get() || lob.transactions.getAllLatestLicenseContractTransactions(0).count() <= defaultTransactionLimit;
     }
 });
 

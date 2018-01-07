@@ -339,6 +339,7 @@
     },
     "button": {
       "revokeIssuance": "Lizenzausstellung widerrufen",
+      "issueLicense": "Neue Lizenz ausstellen",
       "disable": "Smart Contract Deaktivieren"
     },
     "error": {

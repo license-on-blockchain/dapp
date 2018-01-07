@@ -28,7 +28,29 @@
                     {{/each}}
                     </tbody>
                 </table>
-                <button class="dapp-block-button disableLicenseContract">{{_ "manageLicenseContract.button.disable"}}</button>
+                <div>
+                    <button class="dapp-block-button issueLicense">{{_ "manageLicenseContract.button.issueLicense"}}</button>
+                </div>
+                {{#if hasTransactions}}
+                    <h2>{{_ "managedLicenseContractList.heading.latestTransactions"}}</h2>
+                    <table class="dapp-zebra">
+                        <tbody>
+                        {{#each latestTransactions}}
+                            {{> pendingTransactionRow}}
+                        {{/each}}
+                        {{#unless showingAllTransactions}}
+                            <tr class="showAllRow clickable">
+                                <td colspan="3">
+                                    {{_ "managedLicenseContractList.button.showAll"}}
+                                </td>
+                            </tr>
+                        {{/unless}}
+                        </tbody>
+                    </table>
+                {{/if}}
+                <div>
+                    <button class="dapp-block-button disableLicenseContract">{{_ "manageLicenseContract.button.disable"}}</button>
+                </div>
             {{/if}}
         </main>
     </div>

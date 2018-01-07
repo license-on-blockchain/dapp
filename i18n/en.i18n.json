@@ -339,6 +339,7 @@
     },
     "button": {
       "revokeIssuance": "Revoke",
+      "issueLicense": "Issue New License",
       "disable": "Disable License Contract"
     },
     "error": {
