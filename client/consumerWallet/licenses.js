@@ -24,7 +24,8 @@ Template.licenses.helpers({
         return Accounts.get()
     },
     hasPendingTransfers() {
-        return lob.transactions.getLatestTransfers().count() > 0;
+        const limit = Template.instance().showAllTransactions.get() ? 0 : defaultTransactionLimit;
+        return lob.transactions.getLatestTransfers(limit).count() > 0;
     },
     recentTransfers() {
         const limit = Template.instance().showAllTransactions.get() ? 0 : defaultTransactionLimit;
