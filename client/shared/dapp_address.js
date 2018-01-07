@@ -2,6 +2,9 @@ import {Accounts} from "../../lib/Accounts";
 import {lob} from "../../lib/LOB";
 
 function getName(address) {
+    if (address) {
+        address = address.toLowerCase();
+    }
     const licenseContractName = lob.licenseContracts.getDisplayName(address);
     if (licenseContractName !== address) {
         return licenseContractName;
@@ -11,7 +14,7 @@ function getName(address) {
 
 Template.dapp_address.helpers({
     name() {
-        return getName(this.address)
+        return getName(this.address);
     },
     address() {
         return this.address;
