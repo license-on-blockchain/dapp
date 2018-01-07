@@ -2,7 +2,6 @@ import {EthAccounts} from 'meteor/ethereum:accounts';
 import {CertificateChain} from "../../lib/CertificateChain";
 import {lob} from "../../lib/LOB";
 import {hexToBytes} from "../../lib/utils";
-import {RootContracts} from "../../lib/RootContracts";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
@@ -68,6 +67,11 @@ Template.createLicenseContract.onCreated(function() {
     this.computations = new Set();
 
     this.estimatedGasConsumption = new ReactiveVar(null);
+    this.rootContracts = new ReactiveVar([]);
+
+    lob.rootContracts.getAddressesAndNames().then((rootContracts) => {
+        this.rootContracts.set(rootContracts);
+    });
 
     this.getValues = getValues;
     this.resetErrors = resetErrors;
@@ -94,7 +98,9 @@ Template.createLicenseContract.helpers({
     myAccounts() {
         return EthAccounts.find().fetch();
     },
-    rootContracts: lob.rootContracts.getAddressesAndNames(),
+    rootContracts() {
+        return Template.instance().rootContracts.get();
+    },
     gasPrice() {
         return EthBlocks.latest.gasPrice;
     },

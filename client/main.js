@@ -99,7 +99,7 @@ Meteor.startup(function() {
 
                 PersistentCollections.init();
                 PersistentCollections.afterAllInitialisations(() => {
-                    lob.watchRootContractsForManagedLicenseContracts(lob.rootContracts.getAddresses());
+                    lob.watchRootContractsForManagedLicenseContracts();
                     Accounts.fetch((accounts) => {
                         lob.watchAccountBalance(accounts).then(() => {
                             InitialLoadingStatus.setHasFinishedLoading(true);
