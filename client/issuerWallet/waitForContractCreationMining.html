@@ -27,6 +27,9 @@
                 </tr>
                 </tbody>
             </table>
+            {{#if etherscanUrl}}
+                <div class="etherscanLink"><a target="_blank" href="{{etherscanUrl}}">{{_ "generic.viewOnEtherscan"}}</a></div>
+            {{/if}}
         </main>
     </div>
 </template>

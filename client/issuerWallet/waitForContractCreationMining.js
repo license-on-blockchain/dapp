@@ -1,6 +1,7 @@
 import {privateKeyCache} from "../../lib/PrivateKeyCache";
 import {lob} from "../../lib/LOB";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
+import {Etherscan} from "../../lib/Etherscan";
 
 Template.waitForContractCreationMining.onCreated(function() {
     this.computations = new Set();
@@ -47,5 +48,8 @@ Template.waitForContractCreationMining.helpers({
     },
     transactionHash() {
         return this.transactionHash;
+    },
+    etherscanUrl() {
+        return Etherscan.getUrlForTransaction(this.transactionHash);
     }
 });
