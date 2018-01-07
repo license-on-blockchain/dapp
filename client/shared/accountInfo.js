@@ -32,7 +32,6 @@ Template.accountInfo.helpers({
 
 Template.accountInfo.events({
     'blur .internalName'(event) {
-        debugger;
         const name = event.target.innerText.trim();
         setTimeout(() => {
             Accounts.setInternalName(this.address, name);
