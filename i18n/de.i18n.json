@@ -102,7 +102,7 @@
     }
   },
   "balance": {
-    "title": "<strong>Saldo</strong> fremder Adressen ansehen",
+    "title": "<strong>Lizenzen</strong> fremder Adressen ansehen",
     "input": {
       "address": {
         "title": "Adresse"
@@ -112,14 +112,14 @@
   "accountInfo": {
     "title": "Account Info",
     "heading": {
-      "balance": "Saldo"
+      "balance": "Lizenzen"
     },
     "field": {
       "internalName": "Interner Name"
     }
   },
   "licenses": {
-    "title": "<strong>Lizenzen</strong>",
+    "title": "<strong>Lizenzen</strong>, über die Sie verfügen",
     "heading": {
       "latestTransfers": "Letzte Übertragungen"
     },
@@ -209,7 +209,7 @@
   "issuanceInfo": {
     "heading": {
       "details": "Details",
-      "balances": "Saldo"
+      "balances": "Lizenzen"
     },
     "field": {
       "code": "Lizenzcode",
@@ -331,7 +331,7 @@
   },
   "manageLicenseContract": {
     "title": "Smart Contracts zur Bescheinigung von Lizenzen <strong>verwalten</strong>",
-    "revoked": "Bereits widerrufen",
+    "revoked": "Lizenzbescheinigung wurde widerrufen",
     "no_issuances": "Keine Lizenzbescheinigungen",
     "heading": {
       "details": "Details",
