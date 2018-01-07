@@ -198,6 +198,11 @@ Template.signLicenseContract.onRendered(function() {
         this.validate();
     });
     this.computations.add(validateGasEstimate);
+
+    this.find('[name=privateKey]').placeholder = "-----BEGIN PRIVATE KEY-----\n" +
+        "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDIR0QpHOgJadA3\n" +
+        "...\n" +
+        "-----END PRIVATE KEY-----";
 });
 
 Template.signLicenseContract.onDestroyed(function() {

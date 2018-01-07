@@ -86,6 +86,16 @@ Template.createLicenseContract.onRendered(function() {
         this.validate();
     });
     this.computations.add(validateGasEstimate);
+
+    this.find('[name=sslCertificate]').placeholder = "-----BEGIN CERTIFICATE-----\n" +
+        "MIIDbDCCAlSgAwIBAgIBAzANBgkqhkiG9w0BAQsFADB0MRQwEgYDVQQDDAtMT0Ig\n" +
+        "...\n" +
+        "-----END CERTIFICATE-----";
+
+    this.find('[name=sslPrivateKey]').placeholder = "-----BEGIN PRIVATE KEY-----\n" +
+        "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDIR0QpHOgJadA3\n" +
+        "...\n" +
+        "-----END PRIVATE KEY-----";
 });
 
 Template.createLicenseContract.onDestroyed(function() {
