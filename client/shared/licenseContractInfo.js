@@ -1,6 +1,7 @@
 import {lob} from "../../lib/LOB";
 import {IssuanceLocation} from "../../lib/IssuanceLocation";
 import {IssuanceInfo} from "./issuanceInfo";
+import {AccountInfo} from "./accountInfo";
 
 export const LicenseContractInfo = {
     show(licenseContractAddress) {
@@ -68,8 +69,13 @@ Template.licenseContractDetails.helpers({
 Template.licenseContractDetails.events({
     'blur .internalName'(event) {
         const name = event.target.innerText.trim();
+        // Allow some time for the focus to leave the field. Otherwise the text sometimes duplicates
         setTimeout(() => {
             lob.licenseContracts.setInternalName(this.address, name);
         }, 100);
+    },
+    'click .showIssuerAccountInfo'() {
+        const issuerAddress = lob.licenseContracts.getIssuerAddress(this.address);
+        AccountInfo.show(issuerAddress);
     }
 });
