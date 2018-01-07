@@ -322,6 +322,9 @@
       "createLicenseContract": "Neuen Smart Contract zur Bescheinigung von Lizenzen erstellen",
       "showAll": "Alle anzeigen"
     },
+    "error": {
+      "noLicenseContract": "Sie besitzen noch keinen Smart Contract zur Bescheinigung von Lizenzen"
+    },
     "signature_pending": "Signatur wird verarbeitet",
     "licenseContractDisabled": "Deaktiviert",
     "disablingPending": "Deaktivierung wird verarbeitet"

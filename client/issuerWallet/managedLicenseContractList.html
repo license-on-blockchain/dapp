@@ -6,24 +6,32 @@
                 <tbody>
                 {{#each licenseContracts}}
                     {{> licenseContractRow}}
-                {{/each}}
-                </tbody>
-            </table>
-            <h2>{{_ "managedLicenseContractList.heading.latestTransactions"}}</h2>
-            <table class="dapp-zebra">
-                <tbody>
-                {{#each latestLicenseContractCreations}}
-                    {{> pendingTransactionRow}}
-                {{/each}}
-                {{#unless showingAllTransactions}}
-                    <tr class="showAllRow clickable">
-                        <td colspan="3">
-                            {{_ "managedLicenseContractList.button.showAll"}}
+                {{else}}
+                    <tr>
+                        <td>
+                            <strong>{{_ "managedLicenseContractList.error.noLicenseContract"}}</strong>
                         </td>
                     </tr>
-                {{/unless}}
+                {{/each}}
                 </tbody>
             </table>
+            {{#if hasTransactions}}
+                <h2>{{_ "managedLicenseContractList.heading.latestTransactions"}}</h2>
+                <table class="dapp-zebra">
+                    <tbody>
+                    {{#each latestLicenseContractTransactions}}
+                        {{> pendingTransactionRow}}
+                    {{/each}}
+                    {{#unless showingAllTransactions}}
+                        <tr class="showAllRow clickable">
+                            <td colspan="3">
+                                {{_ "managedLicenseContractList.button.showAll"}}
+                            </td>
+                        </tr>
+                    {{/unless}}
+                    </tbody>
+                </table>
+            {{/if}}
             <button class="dapp-block-button createLicenseContract">
                 {{_ "managedLicenseContractList.button.createLicenseContract"}}
             </button>

@@ -18,7 +18,11 @@ Template.managedLicenseContractList.helpers({
                 }
             });
     },
-    latestLicenseContractCreations() {
+    hasTransactions() {
+        const limit = Template.instance().showAllTransactions.get() ? 0 : defaultTransactionLimit;
+        return lob.transactions.getLatestLicenseContractTransactions(limit).count() > 0;
+    },
+    latestLicenseContractTransactions() {
         const limit = Template.instance().showAllTransactions.get() ? 0 : defaultTransactionLimit;
         return lob.transactions.getLatestLicenseContractTransactions(limit);
     },

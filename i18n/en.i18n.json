@@ -322,6 +322,9 @@
       "createLicenseContract": "Create a new license contract",
       "showAll": "Show All"
     },
+    "error": {
+      "noLicenseContract": "You don't have a license contract to issue licenses with yet"
+    },
     "signature_pending": "Signature Pending",
     "licenseContractDisabled": "Disabled",
     "disablingPending": "Disabling Pending"
