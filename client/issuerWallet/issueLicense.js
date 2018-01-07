@@ -90,7 +90,8 @@ Template.issueLicense.onRendered(function() {
             return lob.licenseContracts.isSigned(licenseContract) && !lob.licenseContracts.isDisabled(licenseContract);
         });
         this.licenseContracts.set(licenseContracts);
-        setTimeout(() => this.onFormUpdate(), 0);
+        // Give selectAddress time to set its value
+        setTimeout(() => this.onFormUpdate(), 10);
     });
     this.computations.add(licenseContractsComputation);
 
@@ -199,6 +200,7 @@ Template.issueLicense.events({
                 return;
             }
             NotificationCenter.showTransactionSubmitted();
+            Router.go('manageLicenseContract', {address: licenseContractAddress});
         });
     }
 });
