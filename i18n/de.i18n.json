@@ -32,7 +32,7 @@
       "transfer": "Übertragen",
       "install": "Installieren",
       "reclaim": "Zurückfordern",
-      "licenseContracts": "Ausstellen",
+      "licenseContracts": "Bescheinigen",
       "settings": "Einstellungen"
     }
   },
@@ -135,8 +135,8 @@
       "licenseContractCreation": "Erzeugung eines Smart Contracts zur Bescheinigung von Lizenzen",
       "licenseContractSigning": "Signatur eines Smart Contracts zur Bescheinigung von Lizenzen",
       "licenseContractDisabling": "Deaktivierung eines Smart Contracts zur Bescheinigung von Lizenzen",
-      "licenseIssuing": "Lizenzbescheinigun",
-      "issuanceRevoke": "Lizenzwiderrufung"
+      "licenseIssuing": "Lizenzbescheinigung",
+      "issuanceRevoke": "Lizenz-Widerruf"
     },
     "unconfirmed": "unbestätigt",
     "monthAbbrevations": {
@@ -198,8 +198,8 @@
     },
     "field": {
       "internalName": "Interner Name",
-      "issuerName": "Name des Ausstellers",
-      "issuerAddress": "Adresse des Ausstellers",
+      "issuerName": "Name der Bescheinigungsstelle",
+      "issuerAddress": "Adresse der Bescheinigungsstelle",
       "signed": "Signiert",
       "fee": "Ausstellungsgebühr",
       "rootContract": "LOB Root Contract",
@@ -317,7 +317,7 @@
     },
     "button": {
       "sign": "Unterzeichnen",
-      "issue": "Ausstellen",
+      "issue": "Lizenzbescheinigung ausstellen",
       "manage": "Verwalten",
       "createLicenseContract": "Neuen Smart Contract zur Bescheinigung von Lizenzen erstellen",
       "showAll": "Alle anzeigen"
@@ -339,7 +339,7 @@
     },
     "button": {
       "revokeIssuance": "Lizenzbescheinigung widerrufen",
-      "issueLicense": "Neue Lizenz ausstellen",
+      "issueLicense": "Neue Lizenz bescheinigen",
       "disable": "Smart Contract Deaktivieren"
     },
     "error": {
@@ -435,8 +435,8 @@
     "field": {
       "rootContract": "Root Contract",
       "licenseContractAddress": "Adresse des neuen Smart Contracts",
-      "issuerAddress": "Adresse des Ausstellers",
-      "issuerName": "Name des Ausstellers",
+      "issuerAddress": "Adresse der Bescheinigungsstelle",
+      "issuerName": "Name der Bescheinigungsstelle",
       "liability": "Haftung",
       "safekeepingPeriod": "Aufbewahrungsfrist"
     },
@@ -461,7 +461,7 @@
     "title": "Transaktion zur Lizenzbescheinigung",
     "field": {
       "licenseContract": "Smart Contract zur Bescheinigung der Lizenzen",
-      "issuer": "Lizenzaussteller",
+      "issuer": "Bescheinigungsstelle",
       "description": "Beschreibung",
       "code": "Code",
       "amount": "Anzahl",
@@ -516,7 +516,7 @@
       },
       "confirmCertificateText": {
         "title": "Ich bestätige hiermit, dass ich den oben abgedruckten Zertifikatstext gelesen und verstanden habe und diesen mit meinem privaten Schlüssel legal bindend unterzeichnen möchte",
-        "description": "Um Lizenzen ausstellen zu können, müssen Sie den oben abgedruckten Zertifikatstext mit Ihrem privaten SSL-Schlüssel signieren, so dass Lizenznehmer wissen, wer Sie sind"
+        "description": "Um Lizenzbescheinigungen ausstellen zu können, müssen Sie den oben abgedruckten Zertifikatstext mit Ihrem privaten SSL-Schlüssel signieren, so dass Lizenznehmer wissen, wer Sie sind"
       }
     },
     "button": {
