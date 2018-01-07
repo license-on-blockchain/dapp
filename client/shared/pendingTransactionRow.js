@@ -60,7 +60,17 @@ Template.pendingTransactionRow.helpers({
         }
     },
     from() {
-        return this.submittedBy;
+        switch (this.transactionType) {
+            case TransactionType.Transfer:
+            case TransactionType.Reclaim:
+                return this.from;
+            case TransactionType.LicenseContractCreation:
+            case TransactionType.LicenseContractSigning:
+            case TransactionType.LicenseContractDisabling:
+            case TransactionType.LicenseIssuing:
+            case TransactionType.IssuanceRevoke:
+                return this.submittedBy;
+        }
     },
     to() {
         switch (this.transactionType) {
