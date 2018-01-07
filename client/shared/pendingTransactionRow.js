@@ -23,7 +23,7 @@ Template.pendingTransactionRow.helpers({
     type() {
         switch (this.transactionType) {
             case TransactionType.Transfer:
-            case TransactionType.Reclaim:
+            case TransactionType.Reclaim: {
                 let transactionType;
                 switch (this.transactionType) {
                     case TransactionType.Transfer:
@@ -44,14 +44,17 @@ Template.pendingTransactionRow.helpers({
                     issuanceDescription = issuance.description;
                 }
                 return transactionType + " (" + issuanceDescription + ")";
+            }
             case TransactionType.LicenseContractCreation:
                 return TAPi18n.__('pendingTransactionRow.transactionType.licenseContractCreation');
             case TransactionType.LicenseContractSigning:
                 return TAPi18n.__('pendingTransactionRow.transactionType.licenseContractSigning');
             case TransactionType.LicenseContractDisabling:
                 return TAPi18n.__('pendingTransactionRow.transactionType.licenseContractDisabling');
-            case TransactionType.LicenseIssuing:
-                return TAPi18n.__('pendingTransactionRow.transactionType.licenseIssuing');
+            case TransactionType.LicenseIssuing: {
+                const transactionType = TAPi18n.__('pendingTransactionRow.transactionType.licenseIssuing');
+                return transactionType + " (" + this.description + ", " + this.initialOwnerName + ")";
+            }
             case TransactionType.IssuanceRevoke:
                 return TAPi18n.__('pendingTransactionRow.transactionType.issuanceRevoke');
         }
