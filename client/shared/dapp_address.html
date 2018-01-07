@@ -1,15 +1,15 @@
 <template name="dapp_address">
     {{#if italic}}
         {{#if showTooltip}}
-            <i data-tooltip="{{address}}" class="simptip-position-bottom">{{> dapp_identicon identity=address class="dapp-tiny"}} {{name}}</i>
+            <i class="dapp_address simptip-position-bottom" data-tooltip="{{address}}">{{> dapp_identicon identity=address class="dapp-tiny"}} {{name}}</i>
         {{else}}
-            <i>{{> dapp_identicon identity=address class="dapp-tiny"}} {{name}}</i>
+            <i class="dapp_address">{{> dapp_identicon identity=address class="dapp-tiny"}} {{name}}</i>
         {{/if}}
     {{else}}
         {{#if showTooltip}}
-            <span data-tooltip="{{address}}" class="simptip-position-bottom">{{> dapp_identicon identity=address class="dapp-tiny"}} {{name}}</span>
+            <span  class="dapp_address simptip-position-bottom" data-tooltip="{{address}}">{{> dapp_identicon identity=address class="dapp-tiny"}} {{name}}</span>
         {{else}}
-            <span>{{> dapp_identicon identity=address class="dapp-tiny"}} {{name}}</span>
+            <span class="dapp_address">{{> dapp_identicon identity=address class="dapp-tiny"}} {{name}}</span>
         {{/if}}
     {{/if}}
 </template>
