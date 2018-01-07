@@ -11,7 +11,7 @@ Template.manageLicenseContract.onCreated(function() {
 
 Template.manageLicenseContract.helpers({
     issuances() {
-        return lob.issuances.getIssuancesOfLicenseContract(this.address);
+        return lob.issuances.getIssuancesOfLicenseContract(this.address).fetch().reverse();
     },
     disabled() {
         return lob.licenseContracts.isDisabled(this.address);
