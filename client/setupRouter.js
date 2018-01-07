@@ -175,6 +175,8 @@ Router.route('/licensecontracts/issue/:licenseContractAddress', function() {
             licenseContractAddress: this.params.licenseContractAddress
         }
     });
+}, {
+    name: 'licensecontracts.issue.withAddress'
 });
 
 Router.route('/licensecontracts/revoke/:licenseContractAddress/:issuanceID', function() {

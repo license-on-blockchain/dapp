@@ -40,6 +40,10 @@ Template.manageLicenseContract.events({
         event.preventDefault();
         Router.go('licenseContract.disable', {address: this.address});
     },
+    'click button.issueLicense'(event) {
+        event.preventDefault();
+        Router.go('licensecontracts.issue.withAddress', {licenseContractAddress: this.address});
+    },
     'click tr.showAllRow'() {
         Template.instance().showAllTransactions.set(true);
     }
