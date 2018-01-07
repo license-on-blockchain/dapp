@@ -178,7 +178,7 @@
     "transferDescription": {
       "licenses_not_transferred": "The licenses have not been transferred on yet.",
       "licenses_completely_transferred": "The licenses have all been transferred to %s.",
-      "licenses_partially_transferred": "%s have been transferred to %s.",
+      "licenses_partially_transferred": "__numLicenses__ have been transferred to __recipient__.",
       "licenses_completely_transferred_indirectly": "The licenses have been completely transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
       "licenses_partially_transferred_indirectly": "%s licenses have been transferred to you, but these transfers may have been partially indirect (with other intermediate owners).",
       "no_owned_licenses": "You do not currently own any licenses of this issuing."

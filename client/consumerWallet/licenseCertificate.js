@@ -13,7 +13,7 @@ function transferDescription(transfers) {
             if (transfers[0].args.amount === transfers[1].args.amount) {
                 return TAPi18n.__('licenseCertificate.transferDescription.licenses_completely_transferred', recipient);
             } else {
-                return TAPi18n.__("licenseCertificate.transferDescription.licenses_partially_transferred", transfers[1].args.amount, recipient);
+                return TAPi18n.__("licenseCertificate.transferDescription.licenses_partially_transferred", {numLicenses: String(transfers[1].args.amount), recipient});
             }
         default:
             const snapshots = lob.computeBalanceSnapshots(transfers);
