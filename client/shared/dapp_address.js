@@ -9,7 +9,11 @@ function getName(address) {
     if (licenseContractName !== address) {
         return licenseContractName;
     }
-    return Accounts.getDisplayName(address);
+    const accountName = Accounts.getDisplayName(address);
+    if (accountName !== address) {
+        return accountName;
+    }
+    return web3.toChecksumAddress(address);
 }
 
 Template.dapp_address.helpers({
@@ -17,7 +21,7 @@ Template.dapp_address.helpers({
         return getName(this.address);
     },
     address() {
-        return this.address;
+        return web3.toChecksumAddress(this.address);
     },
     italic() {
         if (this.italic === undefined) {
