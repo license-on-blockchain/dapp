@@ -50,18 +50,18 @@
             {{else if disablingPending}}
                 <i>{{_ "managedLicenseContractList.disablingPending"}}</i>
             {{else if signed}}
-                <a href="/licensecontracts/issue/{{address}}"><i class="icon-plus"></i> {{_ "managedLicenseContractList.button.issue"}}</a>
+                <a href="/licensecontracts/issue/{{address}}" class="tableRowButton"><i class="icon-plus"></i> {{_ "managedLicenseContractList.button.issue"}}</a>
             {{else if signaturePending}}
                 <i>{{_ "managedLicenseContractList.signature_pending"}}</i>
             {{else}}
-                <a href="/licensecontracts/sign/{{address}}"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.sign"}}</a>
+                <a href="/licensecontracts/sign/{{address}}" class="tableRowButton"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.sign"}}</a>
             {{/if}}
         </td>
         <td class="buttonColumn">
             {{#if signed}}
                 {{#unless disabled}}
                     {{#unless disablingPending}}
-                        <a href="/licensecontracts/manage/{{address}}"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.manage"}}</a>
+                        <a href="/licensecontracts/manage/{{address}}" class="tableRowButton"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.manage"}}</a>
                     {{/unless}}
                 {{/unless}}
             {{/if}}

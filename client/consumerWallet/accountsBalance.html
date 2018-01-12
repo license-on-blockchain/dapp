@@ -41,16 +41,16 @@
         {{#if actionsEnabled}}
             <td class="buttonColumn">
                 {{#if transferPossible}}
-                    <a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-up"></i> {{_ "accountBalance.button.transfer"}}</a>
+                    <a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}" class="tableRowButton"><i class="icon-arrow-up"></i> {{_ "accountBalance.button.transfer"}}</a>
                 {{/if}}
             </td>
             <td class="buttonColumn">
                 {{#if reclaimPossible}}
-                    <a href="/reclaim/reclaimer/{{maxReclaimableBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}"><i class="icon-arrow-down"></i> {{_ "accountBalance.button.reclaim"}}</a>
+                    <a href="/reclaim/reclaimer/{{maxReclaimableBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}" class="tableRowButton"><i class="icon-arrow-down"></i> {{_ "accountBalance.button.reclaim"}}</a>
                 {{/if}}
             </td>
         {{/if}}
-        <td class="buttonColumn"><a class="showCertificate" href="#"><i class="icon-doc"></i> {{_ "accountBalance.button.certificate"}}</a></td>
-        <td class="buttonColumn"><a class="showHistory" href="#"><i class="icon-graph"></i> {{_ "accountBalance.button.history"}}</a></td>
+        <td class="buttonColumn"><a class="showCertificate tableRowButton" href="#"><i class="icon-doc"></i> {{_ "accountBalance.button.certificate"}}</a></td>
+        <td class="buttonColumn"><a class="showHistory tableRowButton" href="#"><i class="icon-graph"></i> {{_ "accountBalance.button.history"}}</a></td>
     </tr>
 </template>
