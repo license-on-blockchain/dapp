@@ -36,9 +36,6 @@
       "settings": "Settings"
     }
   },
-  "footer": {
-    "copyright": "© 2017 LOB, Alex Hoppen"
-  },
   "settings": {
     "title": "<strong>Settings</strong>",
     "heading": {
