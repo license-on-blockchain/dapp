@@ -25,6 +25,7 @@ function metamaskLocked() {
 export function checkBrowserSetup(callback) {
     if (typeof web3 === 'undefined') {
         callback(false);
+        return;
     }
     web3.eth.getAccounts((error, accounts) => {
         if (error) { handleUnknownEthereumError(error); return; }
