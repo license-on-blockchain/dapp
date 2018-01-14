@@ -89,7 +89,7 @@ Template.licenseCertificate.helpers({
         return certificateChain.getLeafCertificatePublicKeyFingerprint();
     },
     issuanceID() {
-        return Template.instance().data.issuanceID;
+        return Template.instance().data.issuanceLocation.issuanceID;
     },
     issuerName() {
         return lob.licenseContracts.getIssuerName(Template.instance().licenseContract);
