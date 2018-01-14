@@ -39,7 +39,7 @@ Template.generalTransactionInfo.helpers({
         return this.transaction.blockNumber;
     },
     confirmations() {
-        return EthBlocks.latest.number - this.transaction.blockNumber;
+        return EthBlocks.latest.number - this.transaction.blockNumber + 1;
     },
     transactionStatus() {
         const web3Transaction = this.web3TransactionReceipt.get();

@@ -88,7 +88,7 @@ Template.pendingTransactionRow.helpers({
     confirmationStatus() {
         const currentBlock = EthBlocks.latest.number;
         if (this.blockNumber) {
-            const confirmations = currentBlock - this.blockNumber;
+            const confirmations = currentBlock - this.blockNumber + 1;
             if (confirmations > 12) {
                 return '';
             } else {
