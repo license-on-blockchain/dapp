@@ -14,13 +14,11 @@
             <tr>
                 <td><strong>{{_ "licenseContractCreationTransactionInfo.field.licenseContractAddress"}}</strong></td>
                 <td>
-                    <a href="#" class="showLicenseContractInfo">
                     {{#if licenseContract}}
-                        <i>{{> dapp_address address=licenseContract}}</i>
+                        <a href="#" class="showLicenseContractInfo"><i>{{> dapp_address address=licenseContract}}</i></a>
                     {{else}}
                         <i>{{_ "licenseContractCreationTransactionInfo.not_determined_yet"}}</i>
                     {{/if}}
-                    </a>
                 </td>
             </tr>
             <tr>
