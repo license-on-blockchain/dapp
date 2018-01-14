@@ -9,14 +9,7 @@ const selectedSenderAccount = new ReactiveVar();
 
 function getValues() {
     const sender = TemplateVar.getFrom(this.find('[name=sender]'), 'value').toLowerCase();
-    let [issuanceID, licenseContract] = this.find('[name=issuance]').value.split("|");
-    if (licenseContract) {
-        licenseContract = licenseContract.toLowerCase();
-    }
-    let issuanceLocation = null;
-    if (issuanceID && licenseContract) {
-        issuanceLocation = IssuanceLocation.fromComponents(licenseContract, issuanceID);
-    }
+    const issuanceLocation = IssuanceLocation.fromString(this.find('[name=issuance]').value);
     let recipient;
     if (this.data && this.data.destroy) {
         recipient = "0x0000000000000000000000000000000000000000";
@@ -25,7 +18,7 @@ function getValues() {
     }
     const amount = this.find('[name=amount]').value;
     const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
-    return {sender, issuanceID, licenseContract, recipient, amount, gasPrice, issuanceLocation};
+    return {sender, recipient, amount, gasPrice, issuanceLocation};
 }
 
 function onFormUpdate() {
@@ -64,13 +57,13 @@ function onFormUpdate() {
 function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
-    const {sender, issuanceID, issuanceLocation, recipient, amount} = this.getValues();
+    const {sender, issuanceLocation, recipient, amount} = this.getValues();
     let noErrors = true;
 
     noErrors &= validateField('sender', web3.isAddress(sender), true, null, errorMessages);
     noErrors &= validateField('recipient', web3.isAddress(recipient), errorOnEmpty, TAPi18n.__('transfer.error.recipient_not_valid_address'), errorMessages);
     noErrors &= validateField('recipient', () => recipient.toLowerCase() !== sender.toLowerCase(), recipient && sender, TAPi18n.__('transfer.error.recipient_equal_to_sender'), errorMessages);
-    noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'), errorMessages);
+    noErrors &= validateField('issuance', issuanceLocation, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'), errorMessages);
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'), errorMessages);
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('transfer.error.amount_zero'), errorMessages);
     noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
@@ -196,11 +189,8 @@ Template.transfer.events({
 });
 
 Template.issuanceOption.helpers({
-    issuanceID() {
-        return this.issuanceLocation.issuanceID;
-    },
-    licenseContract() {
-        return this.issuanceLocation.licenseContractAddress;
+    issuanceLocation() {
+        return this.issuanceLocation;
     },
     preselected() {
         return this.selected ? 'selected' : '';
