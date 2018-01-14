@@ -34,34 +34,11 @@
             </tbody>
         </table>
 
-        <h4>{{_ "licenseCertificate.heading.certificateCheck"}}</h4>
-        <table class="dapp-zebra">
-            <tbody>
-            <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.certificateValid"}}</td>
-                <td><strong>
-                    {{#if certificateValid}}✔{{else}}❌{{/if}}
-                </strong></td>
-            </tr>
-            <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.signatureValid"}}</td>
-                <td><strong>
-                    {{#if signatureValid}}✔{{else}}❌{{/if}}
-                </strong></td>
-            </tr>
-            <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.leafCertificateCommonName"}}</td>
-                <td><strong>{{leafCertificateCommonName}}</strong></td>
-            </tr>
-            <tr>
-                <td>{{_ "licenseCertificate.certificateCheck.certificateIssuer"}}</td>
-                <td><strong>{{rootCertificateCommonName}}</strong></td>
-            </tr>
-            </tbody>
-        </table>
         {{#if auditRemark}}
             <p><i>{{_ "licenseCertificate.auditRemarkIntro"}}</i> {{auditRemark}}</p>
         {{/if}}
+        <hr>
+        {{> sslCertificateInformation licenseContract=licenseContract}}
         <hr>
         <p>{{transferDescription}}</p>
     </div>

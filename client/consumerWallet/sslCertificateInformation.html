@@ -1,0 +1,128 @@
+<template name="sslCertificateInformation">
+    <h4>{{_ "sslCertificateInformation.heading.certificateCheck"}}</h4>
+    <table class="dapp-zebra">
+        <tbody>
+        <tr>
+            <td>{{_ "sslCertificateInformation.certificateValid"}}</td>
+            <td><strong>
+                {{#if certificateValid}}✔{{else}}❌{{/if}}
+            </strong></td>
+        </tr>
+        <tr>
+            <td>{{_ "sslCertificateInformation.signatureValid"}}</td>
+            <td><strong>
+                {{#if signatureValid}}✔{{else}}❌{{/if}}
+            </strong></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h4>{{_ "sslCertificateInformation.heading.certificateChain"}}</h4>
+    <table class="dapp-zebra">
+        <tbody>
+        {{#each certificates}}
+            {{> certificateRow}}
+        {{/each}}
+        </tbody>
+    </table>
+
+    <h4>{{_ "sslCertificateInformation.heading.detailedCertificateInformation"}}</h4>
+    {{#if selectedCertificate}}
+        {{> detailedCertificateInfo certificate=selectedCertificate}}
+    {{/if}}
+</template>
+
+<template name="certificateRow">
+    <tr class="certificateRow clickable {{selected}}">
+        <td><strong>
+            {{#unless isRoot}}
+                <span style="margin-left: {{indentation}}em">↳</span>
+            {{/unless}}
+            {{commonName}}
+        </strong></td>
+    </tr>
+</template>
+
+<template name="detailedCertificateInfo">
+    <table class="dapp-zebra">
+        <tbody>
+        {{#if subjectField "CN"}}
+            <tr>
+                <td>{{_ "sslCertificateInformation.field.commonName"}}</td>
+                <td><strong>{{subjectField "CN"}}</strong></td>
+            </tr>
+        {{/if}}
+        {{#if subjectField "O"}}
+            <tr>
+                <td>{{_ "sslCertificateInformation.field.organization"}}</td>
+                <td><strong>{{subjectField "O"}}</strong></td>
+            </tr>
+        {{/if}}
+        {{#if subjectField "OU"}}
+            <tr>
+                <td>{{_ "sslCertificateInformation.field.organizationalUnit"}}</td>
+                <td><strong>{{subjectField "OU"}}</strong></td>
+            </tr>
+        {{/if}}
+        {{#if subjectField "C"}}
+            <tr>
+                <td>{{_ "sslCertificateInformation.field.country"}}</td>
+                <td><strong>{{subjectField "C"}}</strong></td>
+            </tr>
+        {{/if}}
+        {{#if subjectField "ST"}}
+            <tr>
+                <td>{{_ "sslCertificateInformation.field.state"}}</td>
+                <td><strong>{{subjectField "ST"}}</strong></td>
+            </tr>
+        {{/if}}
+        {{#if subjectField "L"}}
+            <tr>
+                <td>{{_ "sslCertificateInformation.field.locality"}}</td>
+                <td><strong>{{subjectField "L"}}</strong></td>
+            </tr>
+        {{/if}}
+        {{#if subjectField "E"}}
+            <tr>
+                <td>{{_ "sslCertificateInformation.field.eail"}}</td>
+                <td><strong>{{subjectField "E"}}</strong></td>
+            </tr>
+        {{/if}}
+
+        <tr>
+            <td>{{_ "sslCertificateInformation.field.serialNumber"}}</td>
+            <td><strong>{{serialNumber}}</strong></td>
+        </tr>
+        <tr>
+            <td>{{_ "sslCertificateInformation.field.version"}}</td>
+            <td><strong>{{version}}</strong></td>
+        </tr>
+        <tr>
+            <td>{{_ "sslCertificateInformation.field.signatureAlgorithm"}}</td>
+            <td><strong>{{signatureAlgorithm}}</strong></td>
+        </tr>
+        <tr>
+            <td>{{_ "sslCertificateInformation.field.notValidBefore"}}</td>
+            <td><strong>{{notValidBefore}}</strong></td>
+        </tr>
+        <tr>
+            <td>{{_ "sslCertificateInformation.field.notValidAfter"}}</td>
+            <td><strong>{{notValidAfter}}</strong></td>
+        </tr>
+
+        <tr>
+            <td>{{_ "sslCertificateInformation.field.publicKey"}}</td>
+            <td><div style="width: 500px"><strong>{{publicKey}}</strong></div></td>
+        </tr>
+        <tr>
+            <td>{{_ "sslCertificateInformation.field.exponent"}}</td>
+            <td><strong>{{exponent}}</strong></td>
+        </tr>
+        <tr>
+            <td>{{_ "sslCertificateInformation.field.keyLength"}}</td>
+            <td><strong>{{keyLength}} bits</strong></td>
+        </tr>
+
+        </tbody>
+    </table>
+</template>

@@ -57,19 +57,6 @@ Template.licenseCertificate.onCreated(function() {
         if (error) { handleUnknownEthereumError(error); return; }
         this.transferDescription.set(transferDescription(transfers));
     });
-
-    this.certificateChain = new ReactiveVar(null);
-    const certificateChainComputation = Tracker.autorun(() => {
-        const sslCertificate = lob.licenseContracts.getSSLCertificate(licenseContractAddress);
-        if (sslCertificate) {
-            try {
-                this.certificateChain.set(new CertificateChain(sslCertificate))
-            } catch (error) {
-                this.certificateChain.set(null);
-            }
-        }
-    });
-    this.computations.add(certificateChainComputation);
 });
 
 Template.licenseCertificate.onDestroyed(function() {
@@ -115,28 +102,8 @@ Template.licenseCertificate.helpers({
     transferDescription() {
         return Template.instance().transferDescription.get();
     },
-    certificateValid() {
-        const certificateChain = Template.instance().certificateChain.get();
-        try {
-            return certificateChain && certificateChain.verifyCertificateChain();
-        } catch (error) {
-            return false;
-        }
-    },
-    signatureValid() {
-        const certificateText = Template.instance().certificateText.get();
-        const signature = lob.licenseContracts.getSignature(Template.instance().licenseContract);
-        const certificateChain = Template.instance().certificateChain.get();
-
-        return certificateChain && certificateChain.verifySignature(certificateText, signature);
-    },
-    leafCertificateCommonName() {
-        const certificateChain = Template.instance().certificateChain.get();
-        return certificateChain ? certificateChain.getLeafCertificateCommonName() : "–";
-    },
-    rootCertificateCommonName() {
-        const certificateChain = Template.instance().certificateChain.get();
-        return certificateChain ? certificateChain.getRootCertificateCommonName() : "–";
+    licenseContract() {
+        return Template.instance().licenseContract;
     }
 });
 

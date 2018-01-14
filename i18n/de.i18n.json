@@ -153,9 +153,6 @@
   },
   "licenseCertificate": {
     "certificate_signed": "Diese Erklärung wurde mit SSL-Zertifikat mit Public-Key-Fingerprint %s unterzeichnet.",
-    "heading": {
-      "certificateCheck": "Zertifikatsinformationen"
-    },
     "licenseInfo": {
       "intro": "%s hat unter diesem LOB-License-Contract folgende Software-Lizenz bescheinigt:",
       "description": "Lizenztyp",
@@ -165,12 +162,6 @@
       "originalOwner": "Empfänger der Bescheinigung",
       "issuanceID": "Bescheinigungs-ID"
     },
-    "certificateCheck": {
-      "certificateValid": "Zertifikat gültig",
-      "signatureValid": "Signatur gültig",
-      "leafCertificateCommonName": "Zertifikat ausgestellt für",
-      "certificateIssuer": "Zertifikataussteller"
-    },
     "auditRemarkIntro": "Vermerk aus dem Lizenzaudit:",
     "transferDescription": {
       "licenses_not_transferred": "Die Lizenzen wurden noch nicht weiter übertragen.",
@@ -179,6 +170,32 @@
       "licenses_completely_transferred_indirectly": "Die Lizenzen wurden Ihnen vollständig, aber (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.",
       "licenses_partially_transferred_indirectly": "%s Lizenzen wurden Ihnen (teilweise) indirekt, d.h. über andere zwischenzeitliche Empfänger, übertragen.",
       "no_owned_licenses": "Sie besitzen aktuell keine Lizenzen dieser Bescheinigung."
+    }
+  },
+  "sslCertificateInformation": {
+    "heading": {
+      "certificateCheck": "SSL Zertifikatsinformationen",
+      "certificateChain": "SSL Zertifikatskette",
+      "detailedCertificateInformation": "Detaillierte Zertifikatsinformationen"
+    },
+    "certificateValid": "Zertifikat gültig",
+    "signatureValid": "Signatur gültig",
+    "field": {
+      "commonName": "Gebräuchlicher Name",
+      "organization": "Organisation",
+      "organizationalUnit": "Organisationseinheit",
+      "country": "Land/Region",
+      "state": "Bundesland/Kanton",
+      "locality": "Ort",
+      "email": "E-Mail",
+      "serialNumber": "Seriennummer",
+      "version": "Version",
+      "signatureAlgorithm": "Signaturalgorithmus",
+      "notValidBefore": "Nicht gültig vor",
+      "notValidAfter": "Nicht gültig nach",
+      "publicKey": "Öffentlicher Schlüssel",
+      "exponent": "Exponent",
+      "keyLength": "Schlüssellänge"
     }
   },
   "licenseHistory": {
@@ -249,11 +266,11 @@
         "description": "Öffentliche Ethereum-Adresse, an die die Lizenz übertragen wurde"
       },
       "issuance": {
-        "title": "License",
+        "title": "Lizenz",
         "description": "Zurückforderbare Lizenz"
       },
       "amount": {
-        "title": "Amount",
+        "title": "Menge",
         "description": "Anzahl der rückforderbaren Lizenzen"
       }
     },
