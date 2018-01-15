@@ -4,7 +4,7 @@ import {CertificateChain} from "../../lib/CertificateChain";
 import {formatDate} from "../../lib/utils";
 import {Accounts} from "../../lib/Accounts";
 
-function transferDescription(transfers) {
+function transferDescription(transfers, issuanceLocation) {
     switch (transfers.length) {
         case 1:
             return TAPi18n.__('licenseCertificate.transferDescription.licenses_not_transferred');
@@ -16,7 +16,12 @@ function transferDescription(transfers) {
                 return TAPi18n.__("licenseCertificate.transferDescription.licenses_partially_transferred", {numLicenses: String(transfers[1].args.amount), recipient});
             }
         default:
-            const snapshots = lob.computeBalanceSnapshots(transfers);
+            let snapshots;
+            try {
+                snapshots = lob.computeBalanceSnapshots(transfers, issuanceLocation);
+            } catch (error) {
+                return '';
+            }
             const latestSnapshot = snapshots[snapshots.length - 1].balances;
             let userBalance = 0;
             for (const address of Object.keys(latestSnapshot)) {
@@ -62,7 +67,7 @@ Template.licenseCertificate.onCreated(function() {
     this.transferDescription = new ReactiveVar("…");
     lob.balances.getLicenseTransfers(issuanceLocation, (error, transfers) => {
         if (error) { handleUnknownEthereumError(error); return; }
-        this.transferDescription.set(transferDescription(transfers));
+        this.transferDescription.set(transferDescription(transfers, issuanceLocation));
     });
 });
 

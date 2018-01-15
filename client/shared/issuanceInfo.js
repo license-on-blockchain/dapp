@@ -28,14 +28,18 @@ Template.issuanceInfo.onCreated(function() {
     const balancesComputation = Tracker.autorun(() => {
         lob.balances.getLicenseTransfers(this.data.issuanceLocation, (error, transfers) => {
             if (error) { handleUnknownEthereumError(error); return; }
-            const snapshots = lob.computeBalanceSnapshots(transfers);
-            const lastSnapshot = snapshots[snapshots.length - 1].balances;
-            const balances = Object.entries(lastSnapshot)
-                .map(([address, balance]) => {
-                    return {address, balance}
-                })
-                .filter((entry) => entry.balance > 0);
-            this.data.balances.set(balances);
+            try {
+                const snapshots = lob.computeBalanceSnapshots(transfers, issuanceLocation);
+                const lastSnapshot = snapshots[snapshots.length - 1].balances;
+                const balances = Object.entries(lastSnapshot)
+                    .map(([address, balance]) => {
+                        return {address, balance}
+                    })
+                    .filter((entry) => entry.balance > 0);
+                this.data.balances.set(balances);
+            } catch (error) {
+                this.data.balances.set([]);
+            }
         })
     });
     this.computations.add(balancesComputation);

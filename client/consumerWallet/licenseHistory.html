@@ -1,7 +1,11 @@
 <template name="licenseHistory">
+    {{#if error}}
+        <p class="lob-error-message">An error occurred while computing the license history. Please try again later.</p>
+    {{else}}
     <div class="graphContainer">
         <canvas id="graphCanvas"></canvas>
     </div>
+    {{/if}}
     <div class="dapp-modal-buttons">
         <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
     </div>

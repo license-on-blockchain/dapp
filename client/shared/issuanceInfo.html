@@ -48,17 +48,19 @@
             </tbody>
         </table>
 
-        <h3>{{_ "issuanceInfo.heading.balances"}}</h3>
-        <table class="dapp-zebra">
-            <tbody>
-            {{#each balances}}
-                <tr class="balanceRow clickable">
-                    <td><strong>{{> dapp_address address=address italic=false}}</strong></td>
-                    <td>{{balance}}</td>
-                </tr>
-            {{/each}}
-            </tbody>
-        </table>
+        {{#if balances}}
+            <h3>{{_ "issuanceInfo.heading.balances"}}</h3>
+            <table class="dapp-zebra">
+                <tbody>
+                {{#each balances}}
+                    <tr class="balanceRow clickable">
+                        <td><strong>{{> dapp_address address=address italic=false}}</strong></td>
+                        <td>{{balance}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        {{/if}}
     </div>
 
     <div class="dapp-modal-buttons">
