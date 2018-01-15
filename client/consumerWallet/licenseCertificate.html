@@ -6,7 +6,7 @@
             {{/each}}
         </p>
 
-        <p><i>{{_ "licenseCertificate.certificate_signed" sslCertificate}}</i></p>
+        <p><i>{{_ "licenseCertificate.certificate_signed" signDate=signDate sslFingerprint=sslCertificate}}</i></p>
         <hr>
         <p>
             {{_ "licenseCertificate.licenseInfo.intro" issuerName}}

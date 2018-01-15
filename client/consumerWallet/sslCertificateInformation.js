@@ -33,9 +33,24 @@ Template.sslCertificateInformation.onDestroyed(function() {
 
 Template.sslCertificateInformation.helpers({
     certificateValid() {
+        const licenseContract = Template.instance().licenseContract;
         const certificateChain = Template.instance().certificateChain.get();
         try {
-            return certificateChain && certificateChain.verifyCertificateChain();
+            if (!certificateChain) {
+                return false;
+            }
+            if (!certificateChain.verifyCertificateChain()) {
+                return false;
+            }
+            const leafCertificate = certificateChain.getLeafCertificate();
+            const signDate = lob.licenseContracts.getSignDate(licenseContract);
+            if (signDate < leafCertificate.validity.notBefore) {
+                return false;
+            }
+            if (signDate > leafCertificate.validity.notAfter) {
+                return false;
+            }
+            return true;
         } catch (error) {
             return false;
         }

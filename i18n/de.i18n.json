@@ -152,7 +152,7 @@
     }
   },
   "licenseCertificate": {
-    "certificate_signed": "Diese Erklärung wurde mit SSL-Zertifikat mit Public-Key-Fingerprint %s unterzeichnet.",
+    "certificate_signed": "Diese Erklärung wurde am __signDate__ mit SSL-Zertifikat mit Public-Key-Fingerprint __sslFingerprint__ unterzeichnet.",
     "licenseInfo": {
       "intro": "%s hat unter diesem LOB-License-Contract folgende Software-Lizenz bescheinigt:",
       "description": "Lizenztyp",

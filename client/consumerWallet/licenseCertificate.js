@@ -41,6 +41,13 @@ Template.licenseCertificate.onCreated(function() {
     const licenseContractAddress = issuanceLocation.licenseContractAddress;
     this.licenseContract = licenseContractAddress;
 
+    this.signDate = new ReactiveVar("…");
+    const signDateComputation = Tracker.autorun(() => {
+        const signDate = lob.licenseContracts.getSignDate(this.licenseContract);
+        this.signDate.set(signDate);
+    });
+    this.computations.add(signDateComputation);
+
     this.certificateText = new ReactiveVar(TAPi18n.__("generic.loading"));
     const certificateTextComputation = Tracker.autorun(() => {
         const certificateText = lob.licenseContracts.getCertificateText(licenseContractAddress);
@@ -74,6 +81,14 @@ Template.licenseCertificate.helpers({
         const sslCertificate = lob.licenseContracts.getSSLCertificate(Template.instance().licenseContract);
         const certificateChain = new CertificateChain(sslCertificate);
         return certificateChain.getLeafCertificatePublicKeyFingerprint();
+    },
+    signDate() {
+        const signDate = Template.instance().signDate.get();
+        if (signDate) {
+            return formatDate(signDate);
+        } else {
+            return null;
+        }
     },
     issuanceID() {
         return Template.instance().data.issuanceLocation.issuanceID;
