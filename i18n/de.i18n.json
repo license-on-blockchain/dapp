@@ -222,6 +222,7 @@
   },
   "issuanceInfo": {
     "heading": {
+      "warning": "Warnung",
       "details": "Details",
       "balances": "Lizenzen"
     },
@@ -633,14 +634,21 @@
       "updateFirefoxUrl": "https://support.google.com/chrome/answer/95414?hl=de"
     },
     "metamaskNotInstalled": {
-      "title": "Metamask nicht installiert",
+      "title": "MetaMask nicht installiert",
       "message": "Die LOB-Wallet benötigt MetaMask um mit der Ethereum Blockchain zu kommunizieren. Bitte insallieren Sie MetaMask.",
       "installFirefox": "https://addons.mozilla.org/de/firefox/addon/ether-metamask/",
       "installChrome": "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=de"
     },
     "metamaskLocked": {
-      "title": "Metamask gesperrt",
+      "title": "MetaMask gesperrt",
       "message": "Der Zugriff über MetaMask ist gesperrt. Bitte entsperren Sie MetaMask indem Sie oben rechts auf den Fuchs klicken und Ihr MetaMask-Passwort eingeben"
     }
+  },
+  "signatureValidationError": {
+    "certificate_chain_could_not_be_parsed": "Die SSL-Zertifikatskette konnte nicht verarbeitet werden",
+    "certificate_chain_not_valid": "Die SSL-Zertifikatskette ist nicht gültig",
+    "certificate_not_valid_at_sign_date": "Das SSL-Zertifikat ist nur von __notBefore__ bis __notAfter__ gültig, aber der Smart Contract zur Bescheinigung von Lizenzen wurde am __licenseContractSignDate__ signiert",
+    "license_contract_not_signed": "Der Smart Contract zur Bescheinigung von Lizenzen wurde noch nicht unterzeichnet",
+    "generic": "Die Validierung der Zertifikatsunterschrift ist fehlgeschlagen"
   }
 }

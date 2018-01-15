@@ -88,6 +88,9 @@ Template.licenseRow.helpers({
     },
     issuanceID() {
         return this.metadata.issuanceID;
+    },
+    signatureValidationError() {
+        return lob.licenseContracts.getSignatureValidationError(this.issuanceLocation.licenseContractAddress);
     }
 });
 

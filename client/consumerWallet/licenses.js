@@ -1,13 +1,5 @@
 import {lob} from "../../lib/LOB.js";
-import {drawLicenseHistory} from '../../lib/licenseHistory';
-import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
-import {CertificateChain} from "../../lib/CertificateChain";
 import {Accounts} from "../../lib/Accounts";
-import {TransactionType} from "../../lib/lob/Transactions";
-import {IssuanceLocation} from "../../lib/IssuanceLocation";
-import {formatDate} from "../../lib/utils";
-import {IssuanceInfo} from "../shared/issuanceInfo";
-import {TransferTransactionInfo} from "../transactionInfo/transferTransactionInfo";
 import {InitialLoadingStatus} from "../../lib/InitialLoadingStatus";
 
 const defaultTransactionLimit = 3; // Should be odd so that show all row is white

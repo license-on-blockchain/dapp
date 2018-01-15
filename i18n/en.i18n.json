@@ -222,6 +222,7 @@
   },
   "issuanceInfo": {
     "heading": {
+      "warning": "Warning",
       "details": "Details",
       "balances": "Balances"
     },
@@ -642,5 +643,12 @@
       "title": "Metamask locked",
       "message": "MetaMask is locked.<br> Please unlock MetaMask by clicking on the fox in the top right corner and entering you MetaMask password."
     }
+  },
+  "signatureValidationError": {
+    "certificate_chain_could_not_be_parsed": "The SSL certificate chain could not be parsed",
+    "certificate_chain_not_valid": "The SSL certificate chain is not valid",
+    "certificate_not_valid_at_sign_date": "The SSL certificate is only valid from __notBefore__ to __notAfter__ but the license contract was signed at __licenseContractSignDate__",
+    "license_contract_not_signed": "The license contract has not been signed yet",
+    "generic": "The validation of the certificate's signature failed"
   }
 }

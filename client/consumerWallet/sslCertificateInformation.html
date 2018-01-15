@@ -5,13 +5,21 @@
         <tr>
             <td>{{_ "sslCertificateInformation.certificateValid"}}</td>
             <td><strong>
-                {{#if certificateValid}}✔{{else}}❌{{/if}}
+                {{#if certificateValidationError}}
+                    <span data-tooltip="{{certificateValidationError}}" class="simptip-multiline simptip-position-bottom simptip-danger">❌</span>
+                {{else}}
+                    ✔
+                {{/if}}
             </strong></td>
         </tr>
         <tr>
             <td>{{_ "sslCertificateInformation.signatureValid"}}</td>
             <td><strong>
-                {{#if signatureValid}}✔{{else}}❌{{/if}}
+                {{#if signatureValidationError}}
+                    <span data-tooltip="{{signatureValidationError}}" class="simptip-multiline simptip-position-bottom simptip-danger">❌</span>
+                {{else}}
+                    ✔
+                {{/if}}
             </strong></td>
         </tr>
         </tbody>

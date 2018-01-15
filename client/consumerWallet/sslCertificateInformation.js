@@ -32,35 +32,20 @@ Template.sslCertificateInformation.onDestroyed(function() {
 });
 
 Template.sslCertificateInformation.helpers({
-    certificateValid() {
-        const licenseContract = Template.instance().licenseContract;
-        const certificateChain = Template.instance().certificateChain.get();
+    certificateValidationError() {
         try {
-            if (!certificateChain) {
-                return false;
+            if (lob.licenseContracts.isSSLCertificateValid(Template.instance().licenseContract)) {
+                return null;
+            } else {
+                // noinspection ExceptionCaughtLocallyJS
+                throw TAPi18n.__('signatureValidationError.generic');
             }
-            if (!certificateChain.verifyCertificateChain()) {
-                return false;
-            }
-            const leafCertificate = certificateChain.getLeafCertificate();
-            const signDate = lob.licenseContracts.getSignDate(licenseContract);
-            if (signDate < leafCertificate.validity.notBefore) {
-                return false;
-            }
-            if (signDate > leafCertificate.validity.notAfter) {
-                return false;
-            }
-            return true;
         } catch (error) {
-            return false;
+            return error;
         }
     },
-    signatureValid() {
-        const certificateText = lob.licenseContracts.getCertificateText(Template.instance().licenseContract);
-        const signature = lob.licenseContracts.getSignature(Template.instance().licenseContract);
-        const certificateChain = Template.instance().certificateChain.get();
-
-        return certificateChain && certificateChain.verifySignature(certificateText, signature);
+    signatureValidationError() {
+        return lob.licenseContracts.getSignatureValidationError(Template.instance().licenseContract);
     },
     certificates() {
         const certificateChain = Template.instance().certificateChain.get();

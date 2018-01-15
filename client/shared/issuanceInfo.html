@@ -4,6 +4,10 @@
         <h1>{{description}}</h1>
         <h2>{{code}}
         </h2>
+        {{#if certificateValidationError}}
+            <h3>{{_ "issuanceInfo.heading.warning"}}</h3>
+            <p class="lob-error-message">{{certificateValidationError}}</p>
+        {{/if}}
         <h3>{{_ "issuanceInfo.heading.details"}}</h3>
         <table class="dapp-zebra">
             <tbody>

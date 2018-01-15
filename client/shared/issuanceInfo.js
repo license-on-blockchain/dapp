@@ -60,6 +60,9 @@ Template.issuanceInfo.helpers({
     code() {
         return this.issuance.get().code;
     },
+    certificateValidationError() {
+        return lob.licenseContracts.getSignatureValidationError(this.issuanceLocation.licenseContractAddress);
+    },
     originalOwner() {
         return this.issuance.get().originalOwner;
     },

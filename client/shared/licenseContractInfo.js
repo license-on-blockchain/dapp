@@ -19,6 +19,9 @@ Template.licenseContractInfo.helpers({
     address() {
         return this.address;
     },
+    certificateValidationError() {
+        return lob.licenseContracts.getSignatureValidationError(this.address);
+    },
     certificateText() {
         const certificateText = lob.licenseContracts.getCertificateText(this.address);
         if (certificateText) {
