@@ -68,6 +68,9 @@ Template.body.helpers({
     enableIssuerActions() {
         return Settings.enableIssuerActions.get();
     },
+    enableVerificationActions() {
+        return Settings.enableVerificationActions.get();
+    },
     showHeader() {
         let currentRoute;
         if (Router.current() && Router.current().route.getName()) {

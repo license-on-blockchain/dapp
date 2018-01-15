@@ -8,6 +8,12 @@ Template.settings.helpers({
     enableIssuerActionsChecked() {
         return Settings.enableIssuerActions.get() ? "checked" : "";
     },
+    enableVerificationActionsChecked() {
+        return Settings.enableVerificationActions.get() ? "checked" : "";
+    },
+    enableDebugOptionsChecked() {
+        return Settings.enableDebugOptions.get() ? "checked" : "";
+    },
     selectedLanguage(languageCode) {
         return Settings.language.get() === languageCode ? "selected" : "";
     },
@@ -17,6 +23,9 @@ Template.settings.helpers({
     selectedWeb3Latency(latency) {
         return Settings.web3Latency.get() === latency ? "selected" : "";
     },
+    debugOptionsEnabled() {
+        return Settings.enableDebugOptions.get();
+    }
 });
 
 Template.settings.events({
@@ -25,6 +34,12 @@ Template.settings.events({
     },
     'change [name=enableIssuerActions]'(event) {
         Settings.enableIssuerActions.set(event.currentTarget.checked);
+    },
+    'change [name=enableVerificationActions]'(event) {
+        Settings.enableVerificationActions.set(event.currentTarget.checked);
+    },
+    'change [name=enableDebugOptions]'(event) {
+        Settings.enableDebugOptions.set(event.currentTarget.checked);
     },
     'change [name=language]'(event) {
         Settings.language.set(event.currentTarget.value);

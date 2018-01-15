@@ -33,6 +33,7 @@
       "install": "Installieren",
       "reclaim": "Zurückfordern",
       "licenseContracts": "Bescheinigen",
+      "verifyBalance": "Verifizieren",
       "settings": "Einstellungen"
     }
   },
@@ -49,6 +50,14 @@
       "enableIssuerActions": {
         "title": "Aktionen der Bescheinigungsstelle anzeigen",
         "description": "Aktionen zur Bestätigung von Lizenzen mittels LOB freischalten"
+      },
+      "enableVerificationActions": {
+        "title": "Aktionen zur Verifizierung des Lizenzbesitzes",
+        "description": "Aktionen zur Verifizierung der Lizenzen anderer Adressen freischalten"
+      },
+      "enableDebugOptions": {
+        "title": "Debug Optionen",
+        "description": "Aktionen zum Debuggen der LOB-Wallet anzeigen"
       },
       "language": {
         "title": "Sprache",
