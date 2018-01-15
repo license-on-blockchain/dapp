@@ -70,7 +70,13 @@ Template.createLicenseContract.onCreated(function() {
     this.rootContracts = new ReactiveVar([]);
 
     lob.rootContracts.getAddressesAndNames().then((rootContracts) => {
-        this.rootContracts.set(rootContracts);
+        const rootContractsComputation = Tracker.autorun(() => {
+            rootContracts = rootContracts.filter((rootContract) => {
+                return !lob.rootContracts.isDisabled(rootContract.address);
+            });
+            this.rootContracts.set(rootContracts);
+        });
+        this.computations.add(rootContractsComputation);
     });
 
     this.getValues = getValues;
