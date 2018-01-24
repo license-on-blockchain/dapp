@@ -41,6 +41,14 @@
                     {{/if}}
                 </td>
             </tr>
+            {{#if revoked}}
+                <tr>
+                    <td><strong>{{_ "issuanceInfo.field.revocationReason"}}</strong></td>
+                    <td>
+                        {{revocationReason}}
+                    </td>
+                </tr>
+            {{/if}}
             </tbody>
         </table>
 

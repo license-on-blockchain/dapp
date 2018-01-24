@@ -79,6 +79,9 @@ Template.issuanceInfo.helpers({
     revoked() {
         return this.issuance.get().revoked;
     },
+    revocationReason() {
+        return this.issuance.get().revocationReason;
+    },
     balances() {
         return this.balances.get();
     }

@@ -10,19 +10,21 @@ function getValues() {
         licenseContract = null;
     }
     const issuanceNumber = this.find('[name=issuance]').value;
+    const revocationReason = this.find('[name=revocationReason]').value;
+    const confirmUndoable = this.find('[name=confirmUndoable]').checked;
     const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
 
-    return {licenseContract, issuanceNumber, gasPrice};
+    return {licenseContract, issuanceNumber, revocationReason, confirmUndoable, gasPrice};
 }
 
 function onFormUpdate() {
-    const {licenseContract, issuanceNumber} = this.getValues();
+    const {licenseContract, issuanceNumber, revocationReason} = this.getValues();
 
     this.selectedLicenseContract.set(licenseContract);
 
     if (licenseContract) {
         const issuerAddress = lob.licenseContracts.getIssuerAddress(licenseContract);
-        lob.licenseIssuing.estimateGas.revokeIssuance(licenseContract, issuanceNumber, issuerAddress, (error, gasConsumption) => {
+        lob.licenseIssuing.estimateGas.revokeIssuance(licenseContract, issuanceNumber, issuerAddress, revocationReason, (error, gasConsumption) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(gasConsumption);
         });
@@ -34,12 +36,14 @@ function onFormUpdate() {
 function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
-    const {licenseContract, issuanceNumber} = this.getValues();
+    const {licenseContract, issuanceNumber, revocationReason, confirmUndoable} = this.getValues();
 
     let noErrors = true;
 
     noErrors &= validateField('licenseContract', licenseContract, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_licenseContract_selected'), errorMessages);
     noErrors &= validateField('issuance', issuanceNumber, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_issuance_selected'), errorMessages);
+    noErrors &= validateField('revocationReason', revocationReason, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_revocationReason'), errorMessages);
+    noErrors &= validateField('confirmUndoable', confirmUndoable, errorOnEmpty, TAPi18n.__('revokeIssuance.error.confirmUndoable_not_checked'), errorMessages);
     noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
     return noErrors;
@@ -133,10 +137,10 @@ Template.revokeIssuance.events({
             return;
         }
 
-        const {licenseContract, issuanceNumber, gasPrice} = Template.instance().getValues();
+        const {licenseContract, issuanceNumber, gasPrice, revocationReason} = Template.instance().getValues();
         const issuerAddress = lob.licenseContracts.getIssuerAddress(licenseContract);
 
-        lob.licenseIssuing.revokeIssuance(licenseContract, issuanceNumber, issuerAddress, gasPrice, (error) => {
+        lob.licenseIssuing.revokeIssuance(licenseContract, issuanceNumber, issuerAddress, revocationReason, gasPrice, (error) => {
             if (error) {
                 NotificationCenter.showError(error);
                 return;

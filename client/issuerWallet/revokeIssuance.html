@@ -22,6 +22,22 @@
                     <div class="dapp-clear-fix"></div>
                 </div>
                 <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "revokeIssuance.input.revocationReason.title"}}</h4>
+                        <textarea name="revocationReason" title="{{_ "revokeIssuance.input.revocationReason.description"}}"></textarea>
+                        <div class="lob-error-message" data-for="revocationReason"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-12 mobile-full">
+                        <h4>{{_ "revokeIssuance.input.confirmUndoable.title"}}</h4>
+                        <input type="checkbox" name="confirmUndoable" title="{{_ "revokeIssuance.input.confirmUndoable.description"}}">
+                        <div class="lob-error-message" data-for="confirmUndoable"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
                     <div class="col col-4 mobile-full">
                         <h4>{{_ "generic.input.gas.title"}}</h4>
                         {{> dapp_selectGasPrice gas=gasEstimate gasPrice=gasPrice unit="ether"}}

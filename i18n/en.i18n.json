@@ -242,7 +242,8 @@
       "originalSupply": "Original Supply",
       "auditTime": "Audit Date",
       "auditRemark": "Audit Remark",
-      "revoked": "Revoked"
+      "revoked": "Revoked",
+      "revocationReason": "Revocation Reason"
     },
     "button": {
       "showCertificate": "Certificate",
@@ -380,6 +381,14 @@
       "issuance": {
         "title": "Licenses",
         "description": "The licenses to revoke"
+      },
+      "revocationReason": {
+        "title": "Revocation Reason",
+        "description": "Specify a reason why this issuance is being revoked"
+      },
+      "confirmUndoable": {
+        "title": "I understand that I will not be able to undo the revocation of a license",
+        "description": ""
       }
     },
     "button": {
@@ -387,7 +396,9 @@
     },
     "error": {
       "no_licenseContract_selected": "You need to select a license contract under which licenses shall be revoked",
-      "no_issuance_selected": "You need to select a license to revoke"
+      "no_issuance_selected": "You need to select a license to revoke",
+      "no_revocationReason": "You need to specify a reason why you revoke this issuance",
+      "confirmUndoable_not_checked": "You need to acknowledge that you understand that the revocation of licenses is not undoable"
     }
   },
   "disableLicenseContract": {

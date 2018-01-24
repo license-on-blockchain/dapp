@@ -242,7 +242,8 @@
       "originalSupply": "Anzahl",
       "auditTime": "Zeitpunkt der Bescheinigung",
       "auditRemark": "Anmerkung zum Lizenz-Audit",
-      "revoked": "Widerrufen"
+      "revoked": "Widerrufen",
+      "revocationReason": "Grund des Lizenzwiderrufs"
     },
     "button": {
       "showCertificate": "Zertifikat",
@@ -380,6 +381,14 @@
       "issuance": {
         "title": "Lizenzen",
         "description": "Widerrufebare Lizenzbescheinigungen"
+      },
+      "revocationReason": {
+        "title": "Grund des Lizenzwiderrufs",
+        "description": "Geben Sie einen Grund an, warum die Lizenzbescheinigung widerrufen werden soll"
+      },
+      "confirmUndoable": {
+        "title": "Ich weiß, dass der Lizenzwiderruf nicht rückgängig gemacht werden kann",
+        "description": ""
       }
     },
     "button": {
@@ -387,7 +396,9 @@
     },
     "error": {
       "no_licenseContract_selected": "Sie müssen den Smart Contract, unter dem die Lizenzbescheinigung widerrufen werden soll, angeben",
-      "no_issuance_selected": "Sie müssen die Lizenzbescheinigung, die Sie widerrufen möchten, angeben"
+      "no_issuance_selected": "Sie müssen die Lizenzbescheinigung, die Sie widerrufen möchten, angeben",
+      "no_revocationReason": "Sie müssen einen Grund angeben, warum Sie diese Lizenzbescheinigung widerrufen möchten",
+      "confirmUndoable_not_checked": "Sie müssen bestätigen, dass Sie verstanden haben, dass der Lizenzwiderruf nicht rückgängig gemacht werden kann"
     }
   },
   "disableLicenseContract": {
@@ -655,7 +666,7 @@
     "generic": "Die Validierung der Zertifikatsunterschrift ist fehlgeschlagen"
   },
   "issuanceValidationError": {
-    "issuance_revoked": "Die Lizenz wurde vom Lizenzaussteller zurückgerufen",
+    "issuance_revoked": "Die Lizenz wurde vom Lizenzaussteller widerrufen",
     "management_takeover": "Der Verwalter des Root Contracts hat die Kontrolle über den Smart Contract, der diese Lizenz verwaltet, übernommen"
   }
 }
