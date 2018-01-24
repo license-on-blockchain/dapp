@@ -1,6 +1,6 @@
 import { EthAccounts } from 'meteor/ethereum:accounts';
 import { lob } from "../../lib/LOB";
-import { IssuanceLocation } from "../../lib/IssuanceLocation";
+import { IssuanceID } from "../../lib/IssuanceID";
 import { handleUnknownEthereumError } from "../../lib/ErrorHandling";
 import { resetErrors, validateField } from "../../lib/FormHelpers";
 import { NotificationCenter } from "../../lib/NotificationCenter";
@@ -9,7 +9,7 @@ const selectedSenderAccount = new ReactiveVar();
 
 function getValues() {
     const sender = TemplateVar.getFrom(this.find('[name=sender]'), 'value').toLowerCase();
-    const issuanceLocation = IssuanceLocation.fromString(this.find('[name=issuance]').value);
+    const issuanceID = IssuanceID.fromString(this.find('[name=issuance]').value);
     let recipient;
     if (this.data && this.data.destroy) {
         recipient = "0x0000000000000000000000000000000000000000";
@@ -18,20 +18,20 @@ function getValues() {
     }
     const amount = this.find('[name=amount]').value;
     const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
-    return {sender, recipient, amount, gasPrice, issuanceLocation};
+    return {sender, recipient, amount, gasPrice, issuanceID};
 }
 
 function onFormUpdate() {
-    const {sender, recipient, amount, issuanceLocation} = this.getValues();
+    const {sender, recipient, amount, issuanceID} = this.getValues();
 
-    if (issuanceLocation) {
+    if (issuanceID) {
         if (this.data && this.data.allowReclaim) {
-            lob.transfer.estimateGas.transferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, (error, value) => {
+            lob.transfer.estimateGas.transferLicenseAndAllowReclaim(issuanceID, sender, recipient, amount, (error, value) => {
                 if (error) { handleUnknownEthereumError(error); return; }
                 this.estimatedGasConsumption.set(value);
             });
         } else {
-            lob.transfer.estimateGas.transferLicense(issuanceLocation, sender, recipient, amount, (error, value) => {
+            lob.transfer.estimateGas.transferLicense(issuanceID, sender, recipient, amount, (error, value) => {
                 if (error) { handleUnknownEthereumError(error); return; }
                 this.estimatedGasConsumption.set(value);
             });
@@ -42,8 +42,8 @@ function onFormUpdate() {
     selectedSenderAccount.set(sender);
 
     let destroyLink = '/destroy';
-    if (issuanceLocation) {
-        destroyLink += '/from/' + sender + '/licenseContract/' + issuanceLocation.licenseContractAddress + '/issuance/' + issuanceLocation.issuanceID;
+    if (issuanceID) {
+        destroyLink += '/from/' + sender + '/licenseContract/' + issuanceID.licenseContractAddress + '/issuance/' + issuanceID.issuanceNumber;
         if (amount) {
             destroyLink += '/amount/' + amount;
         }
@@ -57,13 +57,13 @@ function onFormUpdate() {
 function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
-    const {sender, issuanceLocation, recipient, amount} = this.getValues();
+    const {sender, issuanceID, recipient, amount} = this.getValues();
     let noErrors = true;
 
     noErrors &= validateField('sender', web3.isAddress(sender), true, null, errorMessages);
     noErrors &= validateField('recipient', web3.isAddress(recipient), errorOnEmpty, TAPi18n.__('transfer.error.recipient_not_valid_address'), errorMessages);
     noErrors &= validateField('recipient', () => recipient.toLowerCase() !== sender.toLowerCase(), recipient && sender, TAPi18n.__('transfer.error.recipient_equal_to_sender'), errorMessages);
-    noErrors &= validateField('issuance', issuanceLocation, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'), errorMessages);
+    noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'), errorMessages);
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'), errorMessages);
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('transfer.error.amount_zero'), errorMessages);
     noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
@@ -81,35 +81,35 @@ Template.transfer.onCreated(function() {
 
     this.estimatedGasConsumption = new ReactiveVar(null);
     this.destroyLink = new ReactiveVar('/destroy');
-    this.issuanceLocations = new ReactiveVar([]);
+    this.issuanceIDs = new ReactiveVar([]);
 
     // Trigger a form update after everything has been created to set `selectedSenderAccount`
     setTimeout(() => this.onFormUpdate(), 0);
 });
 
 Template.transfer.onRendered(function() {
-    const issuanceLocationsComputation = Tracker.autorun(() => {
+    const issuanceIDsComputation = Tracker.autorun(() => {
         let selectedLicenseContract = this.data.licenseContract;
         if (selectedLicenseContract) {
             selectedLicenseContract = selectedLicenseContract.toLowerCase();
         }
-        let selectedIssuanceID = Number(this.data.issuanceID);
+        let selectedIssuanceID = Number(this.data.issuanceNumber);
         
-        const issuanceLocations = lob.balances.getNonZeroBalanceIssuanceLocations(selectedSenderAccount.get())
-            .map((issuanceLocation) => {
+        const issuanceIDs = lob.balances.getNonZeroBalanceIssuanceIDs(selectedSenderAccount.get())
+            .map((issuanceID) => {
                 return {
-                    issuanceLocation,
-                    metadata: lob.issuances.getIssuance(issuanceLocation) || {},
-                    selected: (issuanceLocation.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceLocation.issuanceID === selectedIssuanceID),
+                    issuanceID,
+                    metadata: lob.issuances.getIssuance(issuanceID) || {},
+                    selected: (issuanceID.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceID.issuanceNumber === selectedIssuanceID),
                 }
             })
             .filter((obj) => !obj.metadata.revoked)
-            .filter((obj) => lob.balances.getOwnedBalance(obj.issuanceLocation, selectedSenderAccount.get()) > 0);
-        this.issuanceLocations.set(issuanceLocations);
+            .filter((obj) => lob.balances.getProperBalance(obj.issuanceID, selectedSenderAccount.get()) > 0);
+        this.issuanceIDs.set(issuanceIDs);
 
         setTimeout(() => this.onFormUpdate(), 0);
     });
-    this.computations.add(issuanceLocationsComputation);
+    this.computations.add(issuanceIDsComputation);
 
     const validateGasEstimate = Tracker.autorun(() => {
         // Trigger a form validation when the estimatedGasConsumption changes
@@ -130,7 +130,7 @@ Template.transfer.helpers({
         return EthAccounts.find().fetch();
     },
     issuances() {
-        return Template.instance().issuanceLocations.get();
+        return Template.instance().issuanceIDs.get();
     },
     amount() {
         return this.amount;
@@ -164,10 +164,10 @@ Template.transfer.events({
             return;
         }
 
-        const {sender, issuanceLocation, recipient, amount, gasPrice} = Template.instance().getValues();
+        const {sender, issuanceID, recipient, amount, gasPrice} = Template.instance().getValues();
 
         if (Template.instance().data && Template.instance().data.allowReclaim) {
-            lob.transfer.transferLicenseAndAllowReclaim(issuanceLocation, sender, recipient, amount, gasPrice, (error) => {
+            lob.transfer.transferLicenseAndAllowReclaim(issuanceID, sender, recipient, amount, gasPrice, (error) => {
                 if (error) {
                     NotificationCenter.showError(error);
                     return;
@@ -176,7 +176,7 @@ Template.transfer.events({
                 Router.go('licenses');
             });
         } else {
-            lob.transfer.transferLicense(issuanceLocation, sender, recipient, amount, gasPrice, (error) => {
+            lob.transfer.transferLicense(issuanceID, sender, recipient, amount, gasPrice, (error) => {
                 if (error) {
                     NotificationCenter.showError(error);
                     return;
@@ -189,8 +189,8 @@ Template.transfer.events({
 });
 
 Template.issuanceOption.helpers({
-    issuanceLocation() {
-        return this.issuanceLocation;
+    issuanceID() {
+        return this.issuanceID;
     },
     preselected() {
         return this.selected ? 'selected' : '';
@@ -199,6 +199,6 @@ Template.issuanceOption.helpers({
         return this.metadata.description;
     },
     balance() {
-        return lob.balances.getOwnedBalance(this.issuanceLocation, selectedSenderAccount.get());
+        return lob.balances.getProperBalance(this.issuanceID, selectedSenderAccount.get());
     },
 });

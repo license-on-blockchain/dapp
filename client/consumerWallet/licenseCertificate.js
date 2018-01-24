@@ -4,7 +4,7 @@ import {CertificateChain} from "../../lib/CertificateChain";
 import {formatDate} from "../../lib/utils";
 import {Accounts} from "../../lib/Accounts";
 
-function transferDescription(transfers, issuanceLocation) {
+function transferDescription(transfers, issuanceID) {
     switch (transfers.length) {
         case 1:
             return TAPi18n.__('licenseCertificate.transferDescription.licenses_not_transferred');
@@ -18,7 +18,7 @@ function transferDescription(transfers, issuanceLocation) {
         default:
             let snapshots;
             try {
-                snapshots = lob.computeBalanceSnapshots(transfers, issuanceLocation);
+                snapshots = lob.computeBalanceSnapshots(transfers, issuanceID);
             } catch (error) {
                 return '';
             }
@@ -42,8 +42,8 @@ function transferDescription(transfers, issuanceLocation) {
 Template.licenseCertificate.onCreated(function() {
     this.computations = new Set();
 
-    const issuanceLocation = this.data.issuanceLocation;
-    const licenseContractAddress = issuanceLocation.licenseContractAddress;
+    const issuanceID = this.data.issuanceID;
+    const licenseContractAddress = issuanceID.licenseContractAddress;
     this.licenseContract = licenseContractAddress;
 
     this.signDate = new ReactiveVar("…");
@@ -62,12 +62,12 @@ Template.licenseCertificate.onCreated(function() {
     });
     this.computations.add(certificateTextComputation);
 
-    this.issuance = lob.issuances.getIssuance(issuanceLocation);
+    this.issuance = lob.issuances.getIssuance(issuanceID);
 
     this.transferDescription = new ReactiveVar("…");
-    lob.balances.getLicenseTransfers(issuanceLocation, (error, transfers) => {
+    lob.balances.getLicenseTransfers(issuanceID, (error, transfers) => {
         if (error) { handleUnknownEthereumError(error); return; }
-        this.transferDescription.set(transferDescription(transfers, issuanceLocation));
+        this.transferDescription.set(transferDescription(transfers, issuanceID));
     });
 });
 
@@ -95,14 +95,14 @@ Template.licenseCertificate.helpers({
             return null;
         }
     },
-    issuanceID() {
-        return Template.instance().data.issuanceLocation.issuanceID;
+    issuanceNumber() {
+        return Template.instance().data.issuanceID.issuanceNumber;
     },
     issuerName() {
         return lob.licenseContracts.getIssuerName(Template.instance().licenseContract);
     },
-    originalOwner() {
-        return Template.instance().issuance.originalOwner;
+    initialOwnerName() {
+        return Template.instance().issuance.initialOwnerName;
     },
     auditTime() {
         return formatDate(new Date(Template.instance().issuance.auditTime * 1000));

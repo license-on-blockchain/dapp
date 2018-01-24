@@ -1,5 +1,5 @@
 import {lob} from "../../lib/LOB";
-import {IssuanceLocation} from "../../lib/IssuanceLocation";
+import {IssuanceID} from "../../lib/IssuanceID";
 import {IssuanceInfo} from "./issuanceInfo";
 import {AccountInfo} from "./accountInfo";
 
@@ -40,8 +40,8 @@ Template.licenseContractInfo.events({
         EthElements.Modal.hide();
     },
     'click a.showIssuanceInfo'() {
-        const issuanceLocation = IssuanceLocation.fromComponents(this.licenseContract, this.issuanceID);
-        IssuanceInfo.show(issuanceLocation);
+        const issuanceID = IssuanceID.fromComponents(this.licenseContract, this.issuanceNumber);
+        IssuanceInfo.show(issuanceID);
     }
 });
 
@@ -58,8 +58,8 @@ Template.licenseContractDetails.helpers({
     signed() {
         return lob.licenseContracts.isSigned(this.address);
     },
-    fee() {
-        return web3.fromWei(lob.licenseContracts.getFee(this.address));
+    issuanceFee() {
+        return web3.fromWei(lob.licenseContracts.getIssuanceFee(this.address));
     },
     rootContract() {
         return lob.licenseContracts.getRootContract(this.address);

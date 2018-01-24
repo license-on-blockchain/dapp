@@ -8,18 +8,18 @@ Template.licenseHistory.onCreated(function() {
 
 Template.licenseHistory.onRendered(function() {
     this.autorun(() => {
-        const issuanceLocation = this.data.issuanceLocation;
+        const issuanceID = this.data.issuanceID;
         const canvas = Template.instance().find('#graphCanvas');
 
-        const issuance = lob.issuances.getIssuance(issuanceLocation);
-        const issuerName = lob.licenseContracts.getIssuerName(issuanceLocation.licenseContractAddress);
+        const issuance = lob.issuances.getIssuance(issuanceID);
+        const issuerName = lob.licenseContracts.getIssuerName(issuanceID.licenseContractAddress);
 
-        lob.balances.getLicenseTransfers(issuanceLocation, (error, transfers) => {
+        lob.balances.getLicenseTransfers(issuanceID, (error, transfers) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.autorun(() => {
                 try {
                     this.error.set(false);
-                    drawLicenseHistory(canvas, transfers, issuanceLocation, issuerName, issuance.originalOwner);
+                    drawLicenseHistory(canvas, transfers, issuanceID, issuerName, issuance.initialOwnerName);
                 } catch (error) {
                     this.error.set(true);
                     console.log(error);

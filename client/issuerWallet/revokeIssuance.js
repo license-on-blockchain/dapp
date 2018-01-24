@@ -9,20 +9,20 @@ function getValues() {
     if (licenseContract === '') {
         licenseContract = null;
     }
-    const issuanceID = this.find('[name=issuance]').value;
+    const issuanceNumber = this.find('[name=issuance]').value;
     const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
 
-    return {licenseContract, issuanceID, gasPrice};
+    return {licenseContract, issuanceNumber, gasPrice};
 }
 
 function onFormUpdate() {
-    const {licenseContract, issuanceID} = this.getValues();
+    const {licenseContract, issuanceNumber} = this.getValues();
 
     this.selectedLicenseContract.set(licenseContract);
 
     if (licenseContract) {
         const issuerAddress = lob.licenseContracts.getIssuerAddress(licenseContract);
-        lob.licenseIssuing.estimateGas.revokeIssuance(licenseContract, issuanceID, issuerAddress, (error, gasConsumption) => {
+        lob.licenseIssuing.estimateGas.revokeIssuance(licenseContract, issuanceNumber, issuerAddress, (error, gasConsumption) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(gasConsumption);
         });
@@ -34,12 +34,12 @@ function onFormUpdate() {
 function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
-    const {licenseContract, issuanceID} = this.getValues();
+    const {licenseContract, issuanceNumber} = this.getValues();
 
     let noErrors = true;
 
     noErrors &= validateField('licenseContract', licenseContract, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_licenseContract_selected'), errorMessages);
-    noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_issuanceID_selected'), errorMessages);
+    noErrors &= validateField('issuance', issuanceNumber, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_issuance_selected'), errorMessages);
     noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
     return noErrors;
@@ -93,7 +93,7 @@ Template.revokeIssuance.helpers({
 
     issuances() {
         const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
-        const preselectedIssuanceID = Template.instance().data.issuanceID;
+        const preselectedIssuanceID = Template.instance().data.issuanceNumber;
         if (selectedLicenseContract === null) {
             return [];
         }
@@ -101,9 +101,9 @@ Template.revokeIssuance.helpers({
             .map((issuance) => {
                 return {
                     licenseContract: issuance.licenseContract,
-                    issuanceID: issuance.issuanceID,
+                    issuanceNumber: issuance.issuanceNumber,
                     description: issuance.description,
-                    selected: issuance.issuanceID === Number(preselectedIssuanceID),
+                    selected: issuance.issuanceNumber === Number(preselectedIssuanceID),
                 }
             })
     },
@@ -133,10 +133,10 @@ Template.revokeIssuance.events({
             return;
         }
 
-        const {licenseContract, issuanceID, gasPrice} = Template.instance().getValues();
+        const {licenseContract, issuanceNumber, gasPrice} = Template.instance().getValues();
         const issuerAddress = lob.licenseContracts.getIssuerAddress(licenseContract);
 
-        lob.licenseIssuing.revokeIssuance(licenseContract, issuanceID, issuerAddress, gasPrice, (error) => {
+        lob.licenseIssuing.revokeIssuance(licenseContract, issuanceNumber, issuerAddress, gasPrice, (error) => {
             if (error) {
                 NotificationCenter.showError(error);
                 return;

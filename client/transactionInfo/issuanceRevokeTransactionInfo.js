@@ -1,6 +1,6 @@
 import {lob} from "../../lib/LOB";
 import {TransactionType} from "../../lib/lob/Transactions";
-import {IssuanceLocation} from "../../lib/IssuanceLocation";
+import {IssuanceID} from "../../lib/IssuanceID";
 import {formatDate} from "../../lib/utils";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
@@ -23,9 +23,9 @@ Template.issuanceRevokeTransactionInfo.helpers({
     issuanceDescription() {
         const transaction = lob.transactions.getTransaction(this.transactionHash);
         const licenseContract = transaction.licenseContract;
-        const issuanceID = transaction.issuanceID;
-        const issuanceLocation = IssuanceLocation.fromComponents(licenseContract, issuanceID);
-        const issuance = lob.issuances.getIssuance(issuanceLocation);
+        const issuanceNumber = transaction.issuanceNumber;
+        const issuanceID = IssuanceID.fromComponents(licenseContract, issuanceNumber);
+        const issuance = lob.issuances.getIssuance(issuanceID);
         if (issuance) {
             return issuance.description;
         } else {
@@ -46,8 +46,8 @@ Template.issuanceRevokeTransactionInfo.helpers({
 Template.issuanceRevokeTransactionInfo.events({
     'click a.showIssuanceInfo'() {
         const transaction = lob.transactions.getTransaction(this.transactionHash);
-        const issuanceLocation = IssuanceLocation.fromComponents(transaction.licenseContract, transaction.issuanceID);
-        IssuanceInfo.show(issuanceLocation);
+        const issuanceID = IssuanceID.fromComponents(transaction.licenseContract, transaction.issuanceNumber);
+        IssuanceInfo.show(issuanceID);
     },
     'click button.hideModal'() {
         EthElements.Modal.hide();

@@ -91,7 +91,7 @@
     },
     "hover": {
       "ownedBalance": "Licenses owned by you",
-      "borrowedBalance": "Licenses given to you that may be reclaimed by the original owner",
+      "temporaryBalance": "Licenses given to you that may be reclaimed by the original owner",
       "reclaimableBalance": "Licenses you have transferred to someone else but have the right to reclaim them"
     },
     "button": {
@@ -168,8 +168,8 @@
       "code": "License code",
       "amount": "Amount",
       "auditTime": "Audit time",
-      "originalOwner": "Original owner",
-      "issuanceID": "Issuance ID"
+      "initialOwnerName": "Original owner",
+      "issuanceNumber": "Issuance Number"
     },
     "auditRemarkIntro": "Audit remark:",
     "transferDescription": {
@@ -224,7 +224,7 @@
       "issuerName": "Issuer Name",
       "issuerAddress": "Issuer Address",
       "signed": "Signed",
-      "fee": "Issuing Fee",
+      "issuanceFee": "Issuing Fee",
       "rootContract": "LOB Root Contract",
       "disabled": "Disabled"
     }
@@ -238,8 +238,8 @@
     "field": {
       "code": "Code",
       "licenseContractAddress": "License Contract",
-      "issuanceID": "Issuance ID",
-      "originalOwner": "Original Owner",
+      "issuanceNumber": "Issuance Number",
+      "initialOwnerName": "Original Owner",
       "originalSupply": "Original Supply",
       "auditTime": "Audit Date",
       "auditRemark": "Audit Remark",
@@ -298,7 +298,7 @@
   "transfer": {
     "title": {
       "destroy": "<strong>Destroy</strong> licenses",
-      "transferAndAllowReclaim": "<strong>Transfer</strong> licenses and allow <strong>reclaim</strong>",
+      "transferTemporarily": "<strong>Transfer</strong> licenses and allow <strong>reclaim</strong>",
       "transfer": "<strong>Transfer</strong> licenses"
     },
     "input": {
@@ -322,7 +322,7 @@
     "button": {
       "destroy": "Destroy",
       "transfer": "Transfer",
-      "transferAndAllowReclaim": "Transfer and allow reclaim"
+      "transferTemporarily": "Transfer and allow reclaim"
     },
     "destroyLink": "If you wish to destroy a license click <a href='%s'>here</a>.",
     "error": {
@@ -387,7 +387,7 @@
     },
     "error": {
       "no_licenseContract_selected": "You need to select a license contract under which licenses shall be revoked",
-      "no_issuanceID_selected": "You need to select a license to revoke"
+      "no_issuance_selected": "You need to select a license to revoke"
     }
   },
   "disableLicenseContract": {
@@ -600,7 +600,7 @@
         "title": "Initial owner name",
         "description": "The name of the initial owner of the licenses"
       },
-      "fee": {
+      "issuanceFee": {
         "title": "Issuance fee",
         "description": "The fee that will be paid to LOB for issuing the license"
       }
@@ -618,7 +618,7 @@
       "auditTime_in_future": "The audit cannot be in the future since it has to already been performed",
       "initialOwnerAddress_not_valid": "This is not a valid Ethereum address",
       "initialOwnerName_empty": "Please specify the name of the person or organisation that will initally receive the licenses",
-      "fee_not_fetched": "The issuance fee has not been fetched from the blockchain yet. Please wait a moment for the value to update and try again"
+      "issuanceFee_not_fetched": "The issuance fee has not been fetched from the blockchain yet. Please wait a moment for the value to update and try again"
     }
   },
   "browsercheck": {

@@ -5,10 +5,10 @@ import {LicenseContractInfo} from "./licenseContractInfo";
 import {AccountInfo} from "./accountInfo";
 
 export const IssuanceInfo = {
-    show(issuanceLocation) {
+    show(issuanceID) {
         EthElements.Modal.show({
             template: 'issuanceInfo',
-            data: {issuanceLocation},
+            data: {issuanceID},
             class: 'mediumModal'
         });
     }
@@ -17,19 +17,19 @@ export const IssuanceInfo = {
 Template.issuanceInfo.onCreated(function() {
     this.computations = new Set();
 
-    const issuanceLocation = this.data.issuanceLocation;
+    const issuanceID = this.data.issuanceID;
     this.data.issuance = {
         get() {
-            return lob.issuances.getIssuance(issuanceLocation);
+            return lob.issuances.getIssuance(issuanceID);
         }
     };
 
     this.data.balances = new ReactiveVar([]);
     const balancesComputation = Tracker.autorun(() => {
-        lob.balances.getLicenseTransfers(this.data.issuanceLocation, (error, transfers) => {
+        lob.balances.getLicenseTransfers(this.data.issuanceID, (error, transfers) => {
             if (error) { handleUnknownEthereumError(error); return; }
             try {
-                const snapshots = lob.computeBalanceSnapshots(transfers, issuanceLocation);
+                const snapshots = lob.computeBalanceSnapshots(transfers, issuanceID);
                 const lastSnapshot = snapshots[snapshots.length - 1].balances;
                 const balances = Object.entries(lastSnapshot)
                     .map(([address, balance]) => {
@@ -55,8 +55,8 @@ Template.issuanceInfo.helpers({
     licenseContract() {
         return this.issuance.get().licenseContract;
     },
-    issuanceID() {
-        return this.issuance.get().issuanceID;
+    issuanceNumber() {
+        return this.issuance.get().issuanceNumber;
     },
     description() {
         return this.issuance.get().description;
@@ -65,10 +65,10 @@ Template.issuanceInfo.helpers({
         return this.issuance.get().code;
     },
     certificateValidationError() {
-        return lob.licenseContracts.getSignatureValidationError(this.issuanceLocation.licenseContractAddress);
+        return lob.licenseContracts.getSignatureValidationError(this.issuanceID.licenseContractAddress);
     },
-    originalOwner() {
-        return this.issuance.get().originalOwner;
+    initialOwnerName() {
+        return this.issuance.get().initialOwnerName;
     },
     originalSupply() {
         return this.issuance.get().originalSupply;
@@ -92,13 +92,13 @@ Template.issuanceInfo.events({
         EthElements.Modal.hide();
     },
     'click a.showLicenseContractInfo'() {
-        LicenseContractInfo.show(Template.instance().data.issuanceLocation.licenseContractAddress)
+        LicenseContractInfo.show(Template.instance().data.issuanceID.licenseContractAddress)
     },
     'click button.showCertificate'() {
         EthElements.Modal.show({
             template: 'licenseCertificate',
             data: {
-                issuanceLocation: Template.instance().data.issuanceLocation,
+                issuanceID: Template.instance().data.issuanceID,
             },
             class: 'wideModal'
         });
@@ -107,7 +107,7 @@ Template.issuanceInfo.events({
         EthElements.Modal.show({
             template: 'licenseHistory',
             data: {
-                issuanceLocation: Template.instance().data.issuanceLocation,
+                issuanceID: Template.instance().data.issuanceID,
             },
             class: 'wideModal'
         });

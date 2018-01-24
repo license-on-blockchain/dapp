@@ -1,6 +1,6 @@
 import {lob} from "../../lib/LOB";
 import {TransactionType} from "../../lib/lob/Transactions";
-import {IssuanceLocation} from "../../lib/IssuanceLocation";
+import {IssuanceID} from "../../lib/IssuanceID";
 import {formatDate} from "../../lib/utils";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
@@ -31,9 +31,9 @@ Template.transferTransactionInfo.helpers({
     issuanceDescription() {
         const transaction = lob.transactions.getTransaction(this.transactionHash);
         const licenseContract = transaction.licenseContract;
-        const issuanceID = transaction.issuanceID;
-        const issuanceLocation = IssuanceLocation.fromComponents(licenseContract, issuanceID);
-        return lob.issuances.getIssuance(issuanceLocation).description;
+        const issuanceNumber = transaction.issuanceNumber;
+        const issuanceID = IssuanceID.fromComponents(licenseContract, issuanceNumber);
+        return lob.issuances.getIssuance(issuanceID).description;
     },
     from() {
         return lob.transactions.getTransaction(this.transactionHash).from;
@@ -55,8 +55,8 @@ Template.transferTransactionInfo.helpers({
 Template.transferTransactionInfo.events({
     'click a.showIssuanceInfo'() {
         const transaction = lob.transactions.getTransaction(this.transactionHash);
-        const issuanceLocation = IssuanceLocation.fromComponents(transaction.licenseContract, transaction.issuanceID);
-        IssuanceInfo.show(issuanceLocation);
+        const issuanceID = IssuanceID.fromComponents(transaction.licenseContract, transaction.issuanceNumber);
+        IssuanceInfo.show(issuanceID);
     },
     'click a.showFromAccountInfo'() {
         const from = lob.transactions.getTransaction(this.transactionHash).from;

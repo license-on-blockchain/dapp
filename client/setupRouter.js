@@ -33,7 +33,7 @@ Router.route('/transfer/from/:from/licenseContract/:licenseContract/issuance/:is
     this.render('transfer', {
         data: {
             licenseContract: this.params.licenseContract,
-            issuanceID: this.params.issuance,
+            issuanceNumber: this.params.issuance,
             from: this.params.from,
         }
     });
@@ -42,7 +42,7 @@ Router.route('/transfer/from/:from/licenseContract/:licenseContract/issuance/:is
     this.render('transfer', {
         data: {
             licenseContract: this.params.licenseContract,
-            issuanceID: this.params.issuance,
+            issuanceNumber: this.params.issuance,
             from: this.params.from,
             amount: this.params.amount,
         }
@@ -61,7 +61,7 @@ Router.route('/destroy/from/:from/licenseContract/:licenseContract/issuance/:iss
     this.render('transfer', {
         data: {
             licenseContract: this.params.licenseContract,
-            issuanceID: this.params.issuance,
+            issuanceNumber: this.params.issuance,
             from: this.params.from,
             destroy: true
         }
@@ -71,7 +71,7 @@ Router.route('/destroy/from/:from/licenseContract/:licenseContract/issuance/:iss
     this.render('transfer', {
         data: {
             licenseContract: this.params.licenseContract,
-            issuanceID: this.params.issuance,
+            issuanceNumber: this.params.issuance,
             from: this.params.from,
             amount: this.params.amount,
             destroy: true
@@ -91,7 +91,7 @@ Router.route('/transferreclaim/from/:from/licenseContract/:licenseContract/issua
     this.render('transfer', {
         data: {
             licenseContract: this.params.licenseContract,
-            issuanceID: this.params.issuance,
+            issuanceNumber: this.params.issuance,
             from: this.params.from,
             allowReclaim: true
         }
@@ -101,7 +101,7 @@ Router.route('/transferreclaim/from/:from/licenseContract/:licenseContract/issua
     this.render('transfer', {
         data: {
             licenseContract: this.params.licenseContract,
-            issuanceID: this.params.issuance,
+            issuanceNumber: this.params.issuance,
             from: this.params.from,
             amount: this.params.amount,
             allowReclaim: true,
@@ -120,7 +120,7 @@ Router.route('/reclaim/reclaimer/:reclaimer/licenseContract/:licenseContract/iss
     this.render('reclaim', {
         data: {
             licenseContract: this.params.licenseContract,
-            issuanceID: this.params.issuance,
+            issuanceNumber: this.params.issuance,
             reclaimer: this.params.reclaimer
         }
     });
@@ -179,11 +179,11 @@ Router.route('/licensecontracts/issue/:licenseContractAddress', function() {
     name: 'licensecontracts.issue.withAddress'
 });
 
-Router.route('/licensecontracts/revoke/:licenseContractAddress/:issuanceID', function() {
+Router.route('/licensecontracts/revoke/:licenseContractAddress/:issuanceNumber', function() {
     this.render('revokeIssuance', {
         data: {
             licenseContract: this.params.licenseContractAddress,
-            issuanceID: this.params.issuanceID,
+            issuanceNumber: this.params.issuanceNumber,
         }
     })
 });

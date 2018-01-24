@@ -1,6 +1,6 @@
 import {lob} from "../../lib/LOB";
 import {TransactionType} from "../../lib/lob/Transactions";
-import {IssuanceLocation} from "../../lib/IssuanceLocation";
+import {IssuanceID} from "../../lib/IssuanceID";
 import {formatDate} from "../../lib/utils";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";

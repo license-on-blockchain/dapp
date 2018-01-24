@@ -1,5 +1,5 @@
 import {lob} from "../../lib/LOB";
-import {IssuanceLocation} from "../../lib/IssuanceLocation";
+import {IssuanceID} from "../../lib/IssuanceID";
 import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {Accounts} from "../../lib/Accounts";
 import {NotificationCenter} from "../../lib/NotificationCenter";
@@ -7,19 +7,19 @@ import {NotificationCenter} from "../../lib/NotificationCenter";
 function getValues() {
     const reclaimer = TemplateVar.getFrom(this.find('[name=reclaimer]'), 'value').toLowerCase();
     const from = TemplateVar.getFrom(this.find('.from'), 'value').toLowerCase();
-    const issuanceLocation = IssuanceLocation.fromString(this.find('[name=issuance]').value);
+    const issuanceID = IssuanceID.fromString(this.find('[name=issuance]').value);
     const amount = this.find('[name=amount]').value;
     const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
-    return {reclaimer, from, issuanceLocation, amount, gasPrice};
+    return {reclaimer, from, issuanceID, amount, gasPrice};
 }
 
 function onFormUpdate() {
-    const {issuanceLocation, reclaimer, from, amount} = this.getValues();
+    const {issuanceID, reclaimer, from, amount} = this.getValues();
     this.selectedReclaimer.set(reclaimer);
-    this.selectedIssuanceLocation.set(issuanceLocation);
+    this.selectedIssuanceID.set(issuanceID);
 
-    if (issuanceLocation) {
-        lob.transfer.estimateGas.reclaim(issuanceLocation, reclaimer, from, amount, (error, gasEstimate) => {
+    if (issuanceID) {
+        lob.transfer.estimateGas.reclaim(issuanceID, reclaimer, from, amount, (error, gasEstimate) => {
             this.estimatedGasConsumption.set(gasEstimate);
         });
     }
@@ -31,15 +31,15 @@ function onFormUpdate() {
 function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
-    const {reclaimer, issuanceLocation, from, amount} = this.getValues();
+    const {reclaimer, issuanceID, from, amount} = this.getValues();
     let noErrors = true;
 
     noErrors &= validateField('reclaimer', web3.isAddress(reclaimer), true, null, errorMessages);
-    noErrors &= validateField('issuance', issuanceLocation, errorOnEmpty, TAPi18n.__('reclaim.error.no_license_selected'), errorMessages);
+    noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('reclaim.error.no_license_selected'), errorMessages);
     noErrors &= validateField('from', web3.isAddress(from), errorOnEmpty && from, TAPi18n.__("reclaim.error.from_not_valid"), errorMessages);
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__("reclaim.error.amount_not_specified"), errorMessages);
-    if (issuanceLocation) {
-        const reclaimableBalance = lob.balances.getReclaimableBalanceFrom(issuanceLocation, reclaimer, from);
+    if (issuanceID) {
+        const reclaimableBalance = lob.balances.getReclaimableBalanceFrom(issuanceID, reclaimer, from);
         noErrors &= validateField('amount', amount <= reclaimableBalance, amount, TAPi18n.__("reclaim.error.amount_less_than_balance", reclaimableBalance), errorMessages);
     }
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__("reclaim.error.amount_zero"), errorMessages);
@@ -55,9 +55,9 @@ Template.reclaim.onCreated(function() {
 
     this.reclaimOrigins = new ReactiveVar([]);
     this.selectedReclaimer = new ReactiveVar(undefined);
-    this.selectedIssuanceLocation = new ReactiveVar(undefined, (oldValue, newValue) => oldValue === newValue);
+    this.selectedIssuanceID = new ReactiveVar(undefined, (oldValue, newValue) => oldValue === newValue);
     this.estimatedGasConsumption = new ReactiveVar(0);
-    this.issuanceLocations = new ReactiveVar([]);
+    this.issuanceIDs = new ReactiveVar([]);
     this.computations = new Set();
 
     // Trigger a form update after everything has been created to set `selectedReclaimer`
@@ -67,15 +67,15 @@ Template.reclaim.onCreated(function() {
 Template.reclaim.onRendered(function() {
     const reclaimOriginsCompuation = Tracker.autorun(() => {
         const selectedReclaimer = this.selectedReclaimer.get();
-        const selectedIssuanceLocation = this.selectedIssuanceLocation.get();
+        const selectedIssuanceID = this.selectedIssuanceID.get();
 
         let newReclaimOrigins;
-        if (!selectedReclaimer || !selectedIssuanceLocation) {
+        if (!selectedReclaimer || !selectedIssuanceID) {
             newReclaimOrigins = [];
         } else {
-            newReclaimOrigins = lob.balances.getReclaimOrigins(selectedIssuanceLocation, selectedReclaimer)
+            newReclaimOrigins = lob.balances.getReclaimOrigins(selectedIssuanceID, selectedReclaimer)
                 .map((address) => {
-                    const reclaimableBalance = lob.balances.getReclaimableBalanceFrom(selectedIssuanceLocation, selectedReclaimer, address);
+                    const reclaimableBalance = lob.balances.getReclaimableBalanceFrom(selectedIssuanceID, selectedReclaimer, address);
                     return {
                         address: address,
                         name: address + ' – ' + reclaimableBalance + " " + TAPi18n.__("generic.license", {count: reclaimableBalance}),
@@ -93,23 +93,23 @@ Template.reclaim.onRendered(function() {
     });
     this.computations.add(reclaimOriginsCompuation);
 
-    const issuanceLocationsComputation = Tracker.autorun(() => {
+    const issuanceIDsComputation = Tracker.autorun(() => {
         let selectedLicenseContract = this.data.licenseContract;
         if (selectedLicenseContract) {
             selectedLicenseContract = selectedLicenseContract.toLowerCase();
         }
-        let selectedIssuanceID = Number(this.data.issuanceID);
+        let selectedIssuanceID = Number(this.data.issuanceNumber);
 
-        const issuanceLocations = lob.balances.getReclaimableIssuanceLocations(Accounts.get())
-            .map((issuanceLocation) => {
+        const issuanceIDs = lob.balances.getReclaimableIssuanceIDs(Accounts.get())
+            .map((issuanceID) => {
                 return {
-                    issuanceLocation,
-                    metadata: lob.issuances.getIssuance(issuanceLocation) || {},
-                    selected: (issuanceLocation.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceLocation.issuanceID === selectedIssuanceID),
+                    issuanceID,
+                    metadata: lob.issuances.getIssuance(issuanceID) || {},
+                    selected: (issuanceID.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceID.issuanceNumber === selectedIssuanceID),
                 }
             })
             .filter((obj) => {
-                return lob.balances.getReclaimableBalance(obj.issuanceLocation, this.selectedReclaimer.get()) > 0;
+                return lob.balances.getReclaimableBalance(obj.issuanceID, this.selectedReclaimer.get()) > 0;
             })
             .sort((lhs, rhs) => {
                 if (lhs.metadata.description && rhs.metadata.description) {
@@ -118,11 +118,11 @@ Template.reclaim.onRendered(function() {
                     return 0;
                 }
             });
-        this.issuanceLocations.set(issuanceLocations);
+        this.issuanceIDs.set(issuanceIDs);
 
         setTimeout(() => this.onFormUpdate(), 0);
     });
-    this.computations.add(issuanceLocationsComputation);
+    this.computations.add(issuanceIDsComputation);
 });
 
 Template.reclaim.onDestroyed(function() {
@@ -136,7 +136,7 @@ Template.reclaim.helpers({
         return EthAccounts.find().fetch();
     },
     issuances() {
-        return Template.instance().issuanceLocations.get();
+        return Template.instance().issuanceIDs.get();
     },
     reclaimOrigins() {
         return Template.instance().reclaimOrigins.get();
@@ -166,9 +166,9 @@ Template.reclaim.events({
             return;
         }
 
-        const {reclaimer, from, issuanceLocation, amount, gasPrice} = Template.instance().getValues();
+        const {reclaimer, from, issuanceID, amount, gasPrice} = Template.instance().getValues();
 
-        lob.transfer.reclaim(issuanceLocation, reclaimer, from, amount, gasPrice, (error) => {
+        lob.transfer.reclaim(issuanceID, reclaimer, from, amount, gasPrice, (error) => {
             if (error) {
                 NotificationCenter.showError(error);
                 return;
@@ -180,8 +180,8 @@ Template.reclaim.events({
 });
 
 Template.reclaimIssuanceOption.helpers({
-    issuanceLocation() {
-        return this.issuanceLocation;
+    issuanceID() {
+        return this.issuanceID;
     },
     preselected() {
         return this.selected ? 'selected' : '';
@@ -192,7 +192,7 @@ Template.reclaimIssuanceOption.helpers({
     balance() {
         let balance = 0;
         for (const account of Accounts.get()) {
-            balance += lob.balances.getReclaimableBalance(this.issuanceLocation, account);
+            balance += lob.balances.getReclaimableBalance(this.issuanceID, account);
         }
         return balance;
     },
@@ -200,7 +200,7 @@ Template.reclaimIssuanceOption.helpers({
 
 Template.reclaimOriginOption.helpers({
     reclaimableBalance() {
-        return lob.balances.getReclaimableBalanceFrom(this.issuanceLocation, this.reclaimer, this.currentOwner);
+        return lob.balances.getReclaimableBalanceFrom(this.issuanceID, this.reclaimer, this.currentOwner);
     },
     address() {
         return this.currentOwner;

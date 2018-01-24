@@ -32,7 +32,7 @@
         <td class="buttonColumn">
             {{#if extendedBalanceInfo}}
                 <span class="simptip-position-bottom" data-tooltip="{{_ "accountBalance.hover.ownedBalance"}}">{{balance}}</span>
-                / <span class="simptip-position-bottom" data-tooltip="{{_ "accountBalance.hover.borrowedBalance"}}">{{borrowedBalance}}</span>
+                / <span class="simptip-position-bottom" data-tooltip="{{_ "accountBalance.hover.temporaryBalance"}}">{{temporaryBalance}}</span>
                 / <span class="simptip-position-bottom" data-tooltip="{{_ "accountBalance.hover.reclaimableBalance"}}">{{reclaimableBalance}}</span>
             {{else}}
                 {{balance}}
@@ -41,14 +41,14 @@
         {{#if actionsEnabled}}
             {{#if transferPossible}}
                 <td class="buttonColumn">
-                    <a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}" class="tableRowButton"><i class="icon-arrow-up"></i> {{_ "accountBalance.button.transfer"}}</a>
+                    <a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceNumber}}" class="tableRowButton"><i class="icon-arrow-up"></i> {{_ "accountBalance.button.transfer"}}</a>
                 </td>
             {{else}}
                 <td class="collapsed"></td>
             {{/if}}
             {{#if reclaimPossible}}
                 <td class="buttonColumn">
-                    <a href="/reclaim/reclaimer/{{maxReclaimableBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceID}}" class="tableRowButton"><i class="icon-arrow-down"></i> {{_ "accountBalance.button.reclaim"}}</a>
+                    <a href="/reclaim/reclaimer/{{maxReclaimableBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceNumber}}" class="tableRowButton"><i class="icon-arrow-down"></i> {{_ "accountBalance.button.reclaim"}}</a>
                 </td>
             {{else}}
                 <td class="collapsed"></td>

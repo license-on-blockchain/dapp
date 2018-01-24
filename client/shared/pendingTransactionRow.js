@@ -1,5 +1,5 @@
 import {formatDate} from "../../lib/utils";
-import {IssuanceLocation} from "../../lib/IssuanceLocation";
+import {IssuanceID} from "../../lib/IssuanceID";
 import {TransactionType} from "../../lib/lob/Transactions";
 import {TransferTransactionInfo} from "../transactionInfo/transferTransactionInfo";
 import {LicenseContractCreationTransactionInfo} from "../transactionInfo/licenseContractCreationTransactionInfo";
@@ -37,9 +37,9 @@ Template.pendingTransactionRow.helpers({
                         transactionType = TAPi18n.__('pendingTransactionRow.transactionType.reclaim');
                         break;
                 }
-                const issuanceLocation = IssuanceLocation.fromComponents(this.licenseContract, this.issuanceID);
+                const issuanceID = IssuanceID.fromComponents(this.licenseContract, this.issuanceNumber);
                 let issuanceDescription = "…";
-                const issuance = lob.issuances.getIssuance(issuanceLocation);
+                const issuance = lob.issuances.getIssuance(issuanceID);
                 if (issuance) {
                     issuanceDescription = issuance.description;
                 }

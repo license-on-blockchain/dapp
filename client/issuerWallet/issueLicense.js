@@ -35,8 +35,8 @@ function onFormUpdate() {
     if (licenseContractAddress) {
         const auditTimestamp = (auditTime || new Date()).getTime() / 1000;
         const from = lob.licenseContracts.getIssuerAddress(licenseContractAddress);
-        const fee = lob.licenseContracts.getFee(licenseContractAddress);
-        lob.licenseIssuing.estimateGas.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, fee, (error, value) => {
+        const issuanceFee = lob.licenseContracts.getIssuanceFee(licenseContractAddress);
+        lob.licenseIssuing.estimateGas.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, issuanceFee, (error, value) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(value);
         });
@@ -62,7 +62,7 @@ function validate(errorOnEmpty = false, errorMessages = []) {
     noErrors &= validateField('auditTime', auditTime <= new Date(), auditTime, TAPi18n.__('issueLicense.error.auditTime_in_future'), errorMessages);
     noErrors &= validateField('initialOwnerAddress', web3.isAddress(initialOwnerAddress), errorOnEmpty, TAPi18n.__('issueLicense.error.initialOwnerAddress_not_valid'), errorMessages);
     noErrors &= validateField('initialOwnerName', initialOwnerName, errorOnEmpty, TAPi18n.__('issueLicense.error.initialOwnerName_empty'), errorMessages);
-    noErrors &= validateField('fee', this.selectedLicenseContract.get() && lob.licenseContracts.getFee(this.selectedLicenseContract.get()) !== null, errorOnEmpty, TAPi18n.__('issueLicense.error.fee_not_fetched'), errorMessages);
+    noErrors &= validateField('issuanceFee', this.selectedLicenseContract.get() && lob.licenseContracts.getIssuanceFee(this.selectedLicenseContract.get()) !== null, errorOnEmpty, TAPi18n.__('issueLicense.error.issuanceFee_not_fetched'), errorMessages);
     noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
     return noErrors;
@@ -154,10 +154,10 @@ Template.issueLicense.helpers({
     codeAndDescriptionReadonly() {
         return Template.instance().selectedTemplateCode.get() ? "readonly" : "";
     },
-    fee() {
+    issuanceFee() {
         const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
         if (selectedLicenseContract) {
-            return web3.fromWei(lob.licenseContracts.getFee(selectedLicenseContract));
+            return web3.fromWei(lob.licenseContracts.getIssuanceFee(selectedLicenseContract));
         } else {
             return "…";
         }
@@ -192,9 +192,9 @@ Template.issueLicense.events({
 
         const auditTimestamp = (auditTime || new Date()).getTime() / 1000;
         const from = lob.licenseContracts.getIssuerAddress(licenseContractAddress);
-        const fee = lob.licenseContracts.getFee(licenseContractAddress);
+        const issuanceFee = lob.licenseContracts.getIssuanceFee(licenseContractAddress);
 
-        lob.licenseIssuing.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, fee, gasPrice, (error) => {
+        lob.licenseIssuing.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, issuanceFee, gasPrice, (error) => {
             if (error) {
                 NotificationCenter.showError(error);
                 return;

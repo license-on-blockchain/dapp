@@ -91,7 +91,7 @@
     },
     "hover": {
       "ownedBalance": "Ihre Lizenzen",
-      "borrowedBalance": "Fremde Lizenzen, die Ihnen übertragen wurden aber von dem Eigentümer zurückgefordert werden können",
+      "temporaryBalance": "Fremde Lizenzen, die Ihnen übertragen wurden aber von dem Eigentümer zurückgefordert werden können",
       "reclaimableBalance": "Lizenzen, die Sie an eine andere Adresse übertragen haben, aber zurückfordern können"
     },
     "button": {
@@ -168,8 +168,8 @@
       "code": "Lizenzcode",
       "amount": "Anzahl",
       "auditTime": "Zeitpunkt der Bescheinigung",
-      "originalOwner": "Empfänger der Bescheinigung",
-      "issuanceID": "Bescheinigungs-ID"
+      "initialOwnerName": "Empfänger der Bescheinigung",
+      "issuanceNumber": "Bescheinigungsnummer"
     },
     "auditRemarkIntro": "Vermerk aus dem Lizenzaudit:",
     "transferDescription": {
@@ -224,7 +224,7 @@
       "issuerName": "Name der Bescheinigungsstelle",
       "issuerAddress": "Adresse der Bescheinigungsstelle",
       "signed": "Signiert",
-      "fee": "Ausstellungsgebühr",
+      "issuanceFee": "Ausstellungsgebühr",
       "rootContract": "LOB Root Contract",
       "disabled": "Deaktiviert"
     }
@@ -238,8 +238,8 @@
     "field": {
       "code": "Lizenzcode",
       "licenseContractAddress": "Smart Contract zur Bescheinigung der Lizenzen",
-      "issuanceID": "Bescheinigungs-ID",
-      "originalOwner": "Erster Lizenzbesitzer",
+      "issuanceNumber": "Bescheinigungsnummer",
+      "initialOwnerName": "Erster Lizenzbesitzer",
       "originalSupply": "Anzahl",
       "auditTime": "Zeitpunkt der Bescheinigung",
       "auditRemark": "Anmerkung zum Lizenz-Audit",
@@ -298,7 +298,7 @@
   "transfer": {
     "title": {
       "destroy": "Lizenzbescheinigungen <strong>zerstören</strong> (invalidieren)",
-      "transferAndAllowReclaim": "Lizenzen <strong>übertragen</strong>, aber <strong>Rückforderbarkeit</strong> ermöglichen",
+      "transferTemporarily": "Lizenzen <strong>übertragen</strong>, aber <strong>Rückforderbarkeit</strong> ermöglichen",
       "transfer": "Lizenz(en) <strong>übertragen</strong>"
     },
     "input": {
@@ -322,7 +322,7 @@
     "button": {
       "destroy": "Zerstören",
       "transfer": "Übertragen",
-      "transferAndAllowReclaim": "rückforderbar übertragen"
+      "transferTemporarily": "Rückforderbar übertragen"
     },
     "destroyLink": "Wenn Sie die Lizenzbescheinigung zerstören (d.h. auf der Ethereum-Blockchain ivalidieren) möchten, <a href='%s'>klicken Sie hier</a>.",
     "error": {
@@ -387,7 +387,7 @@
     },
     "error": {
       "no_licenseContract_selected": "Sie müssen den Smart Contract, unter dem die Lizenzbescheinigung widerrufen werden soll, angeben",
-      "no_issuanceID_selected": "Sie müssen die Lizenzbescheinigung, die Sie widerrufen möchten, angeben"
+      "no_issuance_selected": "Sie müssen die Lizenzbescheinigung, die Sie widerrufen möchten, angeben"
     }
   },
   "disableLicenseContract": {
@@ -600,7 +600,7 @@
         "title": "Lizenz-Inhaber",
         "description": "Name der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen"
       },
-      "fee": {
+      "issuanceFee": {
         "title": "Ausstellungsgebühr",
         "description": "Gebühr, die an LOB gezahlt wird für die Entwicklung und Nutzung des Bescheinigungsverfahrens"
       }
@@ -618,7 +618,7 @@
       "auditTime_in_future": "Das Audit-Datum kann nicht in der Zukunft liegen, da Sie zunächst den Audit vornehmen müssen und erst dann die Lizenzbescheinigung ausstellen können",
       "initialOwnerAddress_not_valid": "Dies ist keine gültige öffentliche Ethereum-Adresse",
       "initialOwnerName_empty": "Sie müssen den Namen der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen, angeben",
-      "fee_not_fetched": "Die Ausstellungsgebühr konnte noch nicht von der Ethereum-Blockchain gelesen werden. Bitte warten Sie einen Moment und versuchen Sie es dann erneut"
+      "issuanceFee_not_fetched": "Die Ausstellungsgebühr konnte noch nicht von der Ethereum-Blockchain gelesen werden. Bitte warten Sie einen Moment und versuchen Sie es dann erneut"
     }
   },
   "browsercheck": {

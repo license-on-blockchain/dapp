@@ -3,14 +3,14 @@ import {IssuanceInfo} from "../shared/issuanceInfo";
 import {lob} from "../../lib/LOB";
 
 function getLicenseRows(accounts, revoked, actionsEnabled) {
-    const issuanceLocations = lob.balances.getNonZeroBalanceIssuanceLocations(accounts)
-        .concat(lob.balances.getReclaimableIssuanceLocations(accounts));
+    const issuanceIDs = lob.balances.getNonZeroBalanceIssuanceIDs(accounts)
+        .concat(lob.balances.getReclaimableIssuanceIDs(accounts));
 
-    return Array.from(new Set(issuanceLocations))
-        .map((issuanceLocation) => {
+    return Array.from(new Set(issuanceIDs))
+        .map((issuanceID) => {
             return {
-                issuanceLocation: issuanceLocation,
-                metadata: lob.issuances.getIssuance(issuanceLocation) || {},
+                issuanceID: issuanceID,
+                metadata: lob.issuances.getIssuance(issuanceID) || {},
                 accounts: accounts,
                 actionsEnabled: actionsEnabled
             };
@@ -41,22 +41,22 @@ Template.licenseRow.helpers({
         return this.revoked;
     },
     balance() {
-        return lob.balances.getOwnedBalance(this.issuanceLocation, this.accounts);
+        return lob.balances.getProperBalance(this.issuanceID, this.accounts);
     },
     extendedBalanceInfo() {
-        return lob.balances.getBorrowedBalance(this.issuanceLocation, this.accounts) > 0 ||
-            lob.balances.getReclaimableBalance(this.issuanceLocation, this.accounts) > 0;
+        return lob.balances.getTemporaryBalance(this.issuanceID, this.accounts) > 0 ||
+            lob.balances.getReclaimableBalance(this.issuanceID, this.accounts) > 0;
     },
-    borrowedBalance() {
-        return lob.balances.getBorrowedBalance(this.issuanceLocation, this.accounts);
+    temporaryBalance() {
+        return lob.balances.getTemporaryBalance(this.issuanceID, this.accounts);
     },
     reclaimableBalance() {
-        return lob.balances.getReclaimableBalance(this.issuanceLocation, this.accounts);
+        return lob.balances.getReclaimableBalance(this.issuanceID, this.accounts);
     },
     maxBalanceAddress() {
         return Accounts.get()
             .map((account) => {
-                return [account, lob.balances.getOwnedBalance(this.issuanceLocation, account)];
+                return [account, lob.balances.getProperBalance(this.issuanceID, account)];
             })
             .reduce(([lhsAddress, lhsBalance], [rhsAddress, rhsBalance]) => {
                 return lhsBalance > rhsBalance ? [lhsAddress, lhsBalance] : [rhsAddress, rhsBalance];
@@ -65,7 +65,7 @@ Template.licenseRow.helpers({
     maxReclaimableBalanceAddress() {
         return Accounts.get()
             .map((account) => {
-                return [account, lob.balances.getReclaimableBalance(this.issuanceLocation, account)];
+                return [account, lob.balances.getReclaimableBalance(this.issuanceID, account)];
             })
             .reduce(([lhsAddress, lhsBalance], [rhsAddress, rhsBalance]) => {
                 return lhsBalance > rhsBalance ? [lhsAddress, lhsBalance] : [rhsAddress, rhsBalance];
@@ -78,19 +78,19 @@ Template.licenseRow.helpers({
         return this.actionsEnabled;
     },
     transferPossible() {
-        return !this.metadata.revoked && lob.balances.getOwnedBalance(this.issuanceLocation, this.accounts) > 0;
+        return !this.metadata.revoked && lob.balances.getProperBalance(this.issuanceID, this.accounts) > 0;
     },
     reclaimPossible() {
-        return !this.metadata.revoked && lob.balances.getReclaimableBalance(this.issuanceLocation, this.accounts) > 0;
+        return !this.metadata.revoked && lob.balances.getReclaimableBalance(this.issuanceID, this.accounts) > 0;
     },
     licenseContract() {
         return this.metadata.licenseContract;
     },
-    issuanceID() {
-        return this.metadata.issuanceID;
+    issuanceNumber() {
+        return this.metadata.issuanceNumber;
     },
     signatureValidationError() {
-        return lob.licenseContracts.getSignatureValidationError(this.issuanceLocation.licenseContractAddress);
+        return lob.licenseContracts.getSignatureValidationError(this.issuanceID.licenseContractAddress);
     }
 });
 
@@ -99,7 +99,7 @@ Template.licenseRow.events({
         EthElements.Modal.show({
             template: 'licenseCertificate',
             data: {
-                issuanceLocation: Template.instance().data.issuanceLocation,
+                issuanceID: Template.instance().data.issuanceID,
             },
             class: 'wideModal'
         });
@@ -108,7 +108,7 @@ Template.licenseRow.events({
         EthElements.Modal.show({
             template: 'licenseHistory',
             data: {
-                issuanceLocation: Template.instance().data.issuanceLocation,
+                issuanceID: Template.instance().data.issuanceID,
             },
             class: 'wideModal'
         });
@@ -118,6 +118,6 @@ Template.licenseRow.events({
             // Don't show issuance info if a button link was clicked
             return;
         }
-        IssuanceInfo.show(Template.instance().data.issuanceLocation);
+        IssuanceInfo.show(Template.instance().data.issuanceID);
     },
 });

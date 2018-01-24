@@ -1,6 +1,6 @@
 import {lob} from "../../lib/LOB";
 import {IssuanceInfo} from "../shared/issuanceInfo";
-import {IssuanceLocation} from "../../lib/IssuanceLocation";
+import {IssuanceID} from "../../lib/IssuanceID";
 import {formatDate} from "../../lib/utils";
 
 const defaultTransactionLimit = 3; // Should be odd so that show all row is white
@@ -33,8 +33,8 @@ Template.manageLicenseContract.events({
         if (event.target.tagName.toLowerCase() === 'a') {
             return;
         }
-        const issuanceLocation = IssuanceLocation.fromComponents(this.licenseContract, this.issuanceID);
-        IssuanceInfo.show(issuanceLocation);
+        const issuanceID = IssuanceID.fromComponents(this.licenseContract, this.issuanceNumber);
+        IssuanceInfo.show(issuanceID);
     },
     'click button.disableLicenseContract'(event) {
         event.preventDefault();

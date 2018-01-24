@@ -16,7 +16,7 @@
             <tbody>
             {{#each issuances}}
                 <tr>
-                    <td><a href="#" class="showIssuanceInfo"><strong>{{issuanceID}}</strong></a></td>
+                    <td><a href="#" class="showIssuanceInfo"><strong>{{issuanceNumber}}</strong></a></td>
                     <td>{{description}}</td>
                 </tr>
             {{else}}
@@ -66,8 +66,8 @@
             </td>
         </tr>
         <tr>
-            <td><strong>{{_ "licenseContractInfo.field.fee"}}</strong></td>
-            <td>{{fee}} Ether</td>
+            <td><strong>{{_ "licenseContractInfo.field.issuanceFee"}}</strong></td>
+            <td>{{issuanceFee}} Ether</td>
         </tr>
         <tr>
             <td><strong>{{_ "licenseContractInfo.field.rootContract"}}</strong></td>
