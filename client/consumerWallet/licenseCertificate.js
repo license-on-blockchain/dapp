@@ -101,9 +101,6 @@ Template.licenseCertificate.helpers({
     issuerName() {
         return lob.licenseContracts.getIssuerName(Template.instance().licenseContract);
     },
-    initialOwnerName() {
-        return Template.instance().issuance.initialOwnerName;
-    },
     auditTime() {
         return formatDate(new Date(Template.instance().issuance.auditTime * 1000));
     },

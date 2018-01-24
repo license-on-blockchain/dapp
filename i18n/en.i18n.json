@@ -168,7 +168,6 @@
       "code": "License code",
       "amount": "Amount",
       "auditTime": "Audit time",
-      "initialOwnerName": "Original owner",
       "issuanceNumber": "Issuance Number"
     },
     "auditRemarkIntro": "Audit remark:",
@@ -239,7 +238,6 @@
       "code": "Code",
       "licenseContractAddress": "License Contract",
       "issuanceNumber": "Issuance Number",
-      "initialOwnerName": "Original Owner",
       "originalSupply": "Original Supply",
       "auditTime": "Audit Date",
       "auditRemark": "Audit Remark",
@@ -490,7 +488,6 @@
       "code": "Code",
       "amount": "Amount",
       "initialOwnerAddress": "Initial Owner Address",
-      "initialOwnerName": "Initial Owner Name",
       "auditRemark": "Audit Remark",
       "auditTime": "Audit Date"
     }
@@ -596,10 +593,6 @@
         "title": "Initial owner address",
         "description": "The Ethereum address of the initial owner of the licenses"
       },
-      "initialOwnerName": {
-        "title": "Initial owner name",
-        "description": "The name of the initial owner of the licenses"
-      },
       "issuanceFee": {
         "title": "Issuance fee",
         "description": "The fee that will be paid to LOB for issuing the license"
@@ -617,7 +610,6 @@
       "auditTime_empty": "You need to specify when you performed the audit",
       "auditTime_in_future": "The audit cannot be in the future since it has to already been performed",
       "initialOwnerAddress_not_valid": "This is not a valid Ethereum address",
-      "initialOwnerName_empty": "Please specify the name of the person or organisation that will initally receive the licenses",
       "issuanceFee_not_fetched": "The issuance fee has not been fetched from the blockchain yet. Please wait a moment for the value to update and try again"
     }
   },

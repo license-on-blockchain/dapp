@@ -168,7 +168,6 @@
       "code": "Lizenzcode",
       "amount": "Anzahl",
       "auditTime": "Zeitpunkt der Bescheinigung",
-      "initialOwnerName": "Empfänger der Bescheinigung",
       "issuanceNumber": "Bescheinigungsnummer"
     },
     "auditRemarkIntro": "Vermerk aus dem Lizenzaudit:",
@@ -239,7 +238,6 @@
       "code": "Lizenzcode",
       "licenseContractAddress": "Smart Contract zur Bescheinigung der Lizenzen",
       "issuanceNumber": "Bescheinigungsnummer",
-      "initialOwnerName": "Erster Lizenzbesitzer",
       "originalSupply": "Anzahl",
       "auditTime": "Zeitpunkt der Bescheinigung",
       "auditRemark": "Anmerkung zum Lizenz-Audit",
@@ -490,7 +488,6 @@
       "code": "Code",
       "amount": "Anzahl",
       "initialOwnerAddress": "Öffentliche Ethereum-Adresse des ersten Lizenz-Inhabers",
-      "initialOwnerName": "Erster Lizenz-Inhaber",
       "auditRemark": "Anmerkung zum Lizenz-Audit",
       "auditTime": "Datum des Lizenz-Audits"
     }
@@ -596,10 +593,6 @@
         "title": "Öffentliche Ethereum-Adresse des Lizenz-Inhabers",
         "description": "öffentliche Ethereum-Adresse der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen"
       },
-      "initialOwnerName": {
-        "title": "Lizenz-Inhaber",
-        "description": "Name der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen"
-      },
       "issuanceFee": {
         "title": "Ausstellungsgebühr",
         "description": "Gebühr, die an LOB gezahlt wird für die Entwicklung und Nutzung des Bescheinigungsverfahrens"
@@ -617,7 +610,6 @@
       "auditTime_empty": "Sie müssen angeben, an welchem Datum Sie Ihren Lizenz-Audit vorgenommen haben",
       "auditTime_in_future": "Das Audit-Datum kann nicht in der Zukunft liegen, da Sie zunächst den Audit vornehmen müssen und erst dann die Lizenzbescheinigung ausstellen können",
       "initialOwnerAddress_not_valid": "Dies ist keine gültige öffentliche Ethereum-Adresse",
-      "initialOwnerName_empty": "Sie müssen den Namen der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen, angeben",
       "issuanceFee_not_fetched": "Die Ausstellungsgebühr konnte noch nicht von der Ethereum-Blockchain gelesen werden. Bitte warten Sie einen Moment und versuchen Sie es dann erneut"
     }
   },

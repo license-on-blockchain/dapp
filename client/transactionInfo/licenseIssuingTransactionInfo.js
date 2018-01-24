@@ -33,9 +33,6 @@ Template.licenseIssuingTransactionInfo.helpers({
     initialOwnerAddress() {
         return lob.transactions.getTransaction(this.transactionHash).initialOwnerAddress;
     },
-    initialOwnerName() {
-        return lob.transactions.getTransaction(this.transactionHash).initialOwnerName;
-    },
     auditRemark() {
         return lob.transactions.getTransaction(this.transactionHash).auditRemark;
     },

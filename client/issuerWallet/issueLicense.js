@@ -17,13 +17,12 @@ function getValues() {
     }
     const auditRemark = this.find('[name=auditRemark]').value;
     const initialOwnerAddress = this.find('[name=initialOwnerAddress]').value.toLowerCase();
-    const initialOwnerName = this.find('[name=initialOwnerName]').value;
     const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
-    return {licenseContractAddress, licenseTemplateCode, code, description, amount, auditTime, auditRemark, initialOwnerAddress, initialOwnerName, gasPrice};
+    return {licenseContractAddress, licenseTemplateCode, code, description, amount, auditTime, auditRemark, initialOwnerAddress, gasPrice};
 }
 
 function onFormUpdate() {
-    let {licenseContractAddress, licenseTemplateCode, code, description, amount, auditTime, auditRemark, initialOwnerAddress, initialOwnerName} = this.getValues();
+    let {licenseContractAddress, licenseTemplateCode, code, description, amount, auditTime, auditRemark, initialOwnerAddress} = this.getValues();
 
     if (licenseTemplateCode === "") {
         licenseTemplateCode = null;
@@ -36,7 +35,7 @@ function onFormUpdate() {
         const auditTimestamp = (auditTime || new Date()).getTime() / 1000;
         const from = lob.licenseContracts.getIssuerAddress(licenseContractAddress);
         const issuanceFee = lob.licenseContracts.getIssuanceFee(licenseContractAddress);
-        lob.licenseIssuing.estimateGas.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, issuanceFee, (error, value) => {
+        lob.licenseIssuing.estimateGas.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, auditRemark, auditTimestamp, from, issuanceFee, (error, value) => {
             if (error) { handleUnknownEthereumError(error); return; }
             this.estimatedGasConsumption.set(value);
         });
@@ -50,7 +49,7 @@ function validate(errorOnEmpty = false, errorMessages = []) {
 
     let noErrors = true;
 
-    let {licenseContractAddress, code, description, amount, auditTime, auditRemark, initialOwnerAddress, initialOwnerName} = this.getValues();
+    let {licenseContractAddress, code, description, amount, auditTime, auditRemark, initialOwnerAddress} = this.getValues();
 
 
     noErrors &= validateField('licenseContract', web3.isAddress(licenseContractAddress), errorOnEmpty, TAPi18n.__('issueLicense.error.licenseContract_not_valid'), errorMessages);
@@ -61,7 +60,6 @@ function validate(errorOnEmpty = false, errorMessages = []) {
     noErrors &= validateField('auditTime', auditTime, errorOnEmpty, TAPi18n.__('issueLicense.error.auditTime_empty'), errorMessages);
     noErrors &= validateField('auditTime', auditTime <= new Date(), auditTime, TAPi18n.__('issueLicense.error.auditTime_in_future'), errorMessages);
     noErrors &= validateField('initialOwnerAddress', web3.isAddress(initialOwnerAddress), errorOnEmpty, TAPi18n.__('issueLicense.error.initialOwnerAddress_not_valid'), errorMessages);
-    noErrors &= validateField('initialOwnerName', initialOwnerName, errorOnEmpty, TAPi18n.__('issueLicense.error.initialOwnerName_empty'), errorMessages);
     noErrors &= validateField('issuanceFee', this.selectedLicenseContract.get() && lob.licenseContracts.getIssuanceFee(this.selectedLicenseContract.get()) !== null, errorOnEmpty, TAPi18n.__('issueLicense.error.issuanceFee_not_fetched'), errorMessages);
     noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
@@ -188,13 +186,13 @@ Template.issueLicense.events({
             return;
         }
 
-        const {licenseContractAddress, code, description, amount, auditTime, auditRemark, initialOwnerAddress, initialOwnerName, gasPrice} = Template.instance().getValues();
+        const {licenseContractAddress, code, description, amount, auditTime, auditRemark, initialOwnerAddress, gasPrice} = Template.instance().getValues();
 
         const auditTimestamp = (auditTime || new Date()).getTime() / 1000;
         const from = lob.licenseContracts.getIssuerAddress(licenseContractAddress);
         const issuanceFee = lob.licenseContracts.getIssuanceFee(licenseContractAddress);
 
-        lob.licenseIssuing.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, initialOwnerName, auditRemark, auditTimestamp, from, issuanceFee, gasPrice, (error) => {
+        lob.licenseIssuing.issueLicense(licenseContractAddress, description, code, amount, initialOwnerAddress, auditRemark, auditTimestamp, from, issuanceFee, gasPrice, (error) => {
             if (error) {
                 NotificationCenter.showError(error);
                 return;

@@ -53,7 +53,7 @@ Template.pendingTransactionRow.helpers({
                 return TAPi18n.__('pendingTransactionRow.transactionType.licenseContractDisabling');
             case TransactionType.LicenseIssuing: {
                 const transactionType = TAPi18n.__('pendingTransactionRow.transactionType.licenseIssuing');
-                return transactionType + " (" + this.description + ", " + this.initialOwnerName + ")";
+                return transactionType + " (" + this.description + ")";
             }
             case TransactionType.IssuanceRevoke:
                 return TAPi18n.__('pendingTransactionRow.transactionType.issuanceRevoke');

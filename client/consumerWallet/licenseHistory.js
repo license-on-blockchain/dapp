@@ -19,7 +19,7 @@ Template.licenseHistory.onRendered(function() {
             this.autorun(() => {
                 try {
                     this.error.set(false);
-                    drawLicenseHistory(canvas, transfers, issuanceID, issuerName, issuance.initialOwnerName);
+                    drawLicenseHistory(canvas, transfers, issuanceID, issuerName);
                 } catch (error) {
                     this.error.set(true);
                     console.log(error);

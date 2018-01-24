@@ -67,9 +67,6 @@ Template.issuanceInfo.helpers({
     certificateValidationError() {
         return lob.licenseContracts.getSignatureValidationError(this.issuanceID.licenseContractAddress);
     },
-    initialOwnerName() {
-        return this.issuance.get().initialOwnerName;
-    },
     originalSupply() {
         return this.issuance.get().originalSupply;
     },
