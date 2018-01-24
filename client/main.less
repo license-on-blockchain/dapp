@@ -241,3 +241,39 @@ a.tableRowButton {
     background-color: lighten(@colorLink, 10%);
   }
 }
+
+@media print {
+  // Don't print user interaction elements
+  .dapp-header, .global-notification, .dapp-modal-buttons, button, span[contenteditable=true] {
+    display: none !important;
+  }
+
+  // Print identicons
+  .dapp-identicon {
+    -webkit-print-color-adjust: exact;
+  }
+
+  // Show table borders instead of alternating colours
+  table.dapp-zebra {
+    tr {
+      border-top: solid #555555 0.5px;
+      border-bottom: solid #555555 0.5px;
+    }
+  }
+
+  // A modal popover is show. Scale it up to the whole page
+  body.disable-scroll.blur {
+    .dapp-flex-content {
+      display: none;
+    }
+    .dapp-modal-container {
+      width: 100%;
+      margin: 0;
+      box-shadow: none;
+    }
+  }
+
+  .graphContainer {
+    overflow: visible;
+  }
+}
