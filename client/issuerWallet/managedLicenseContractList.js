@@ -55,6 +55,9 @@ Template.licenseContractRow.helpers({
     },
     disabled() {
         return lob.licenseContracts.isDisabled(this.address);
+    },
+    controlTakeover() {
+        return lob.licenseContracts.getManagerAddress(this.address);
     }
 });
 

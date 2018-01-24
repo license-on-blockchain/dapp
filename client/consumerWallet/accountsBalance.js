@@ -2,31 +2,51 @@ import {Accounts} from "../../lib/Accounts";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {lob} from "../../lib/LOB";
 
-function getLicenseRows(accounts, revoked, actionsEnabled) {
-    const issuanceIDs = lob.balances.getNonZeroBalanceIssuanceIDs(accounts)
-        .concat(lob.balances.getReclaimableIssuanceIDs(accounts));
+Template.accountsBalance.onCreated(function() {
+    this.computations = new Set();
 
-    return Array.from(new Set(issuanceIDs))
-        .map((issuanceID) => {
-            return {
-                issuanceID: issuanceID,
-                metadata: lob.issuances.getIssuance(issuanceID) || {},
-                accounts: accounts,
-                actionsEnabled: actionsEnabled
-            };
-        })
-        .filter((obj) => obj.metadata.revoked === revoked)
-        .sort((lhs, rhs) => {
-            return lhs.metadata.description.localeCompare(rhs.metadata.description);
-        });
-}
+    this.licenses = new ReactiveVar([]);
+    const licensesComputation = Tracker.autorun(() => {
+        const accounts = this.data.accounts;
+        const actionsEnabled = this.data.actionsEnabled;
+
+        const issuanceIDs = lob.balances.getNonZeroBalanceIssuanceIDs(accounts)
+            .concat(lob.balances.getReclaimableIssuanceIDs(accounts));
+
+        const licenses = Array.from(new Set(issuanceIDs))
+            .map((issuanceID) => {
+                return {
+                    issuanceID: issuanceID,
+                    metadata: lob.issuances.getIssuance(issuanceID) || {},
+                    accounts: accounts,
+                    actionsEnabled: actionsEnabled,
+                    validationError: lob.issuances.getValidationError(issuanceID)
+                };
+            })
+            .sort((lhs, rhs) => {
+                if (lhs.metadata.description) {
+                    return lhs.metadata.description.localeCompare(rhs.metadata.description);
+                } else {
+                    return -1;
+                }
+            });
+        this.licenses.set(licenses);
+    });
+    this.computations.add(licensesComputation);
+});
+
+Template.accountsBalance.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
+});
 
 Template.accountsBalance.helpers({
     licenses() {
-        return getLicenseRows(this.accounts, /*revoked*/false, this.actionsEnabled);
+        return Template.instance().licenses.get().filter((license) => !license.validationError);
     },
-    revokedLicenses() {
-        return getLicenseRows(this.accounts, /*revoked*/true, this.actionsEnabled);
+    licensesWithFailedValidation() {
+        return Template.instance().licenses.get().filter((license) => license.validationError);
     },
     ownedAccounts() {
         return this.ownedAccounts;
@@ -90,7 +110,7 @@ Template.licenseRow.helpers({
         return this.metadata.issuanceNumber;
     },
     signatureValidationError() {
-        return lob.licenseContracts.getSignatureValidationError(this.issuanceID.licenseContractAddress);
+        return this.validationError;
     }
 });
 

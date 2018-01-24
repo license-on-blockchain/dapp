@@ -14,11 +14,11 @@
         {{/each}}
         </tbody>
     </table>
-    {{#if revokedLicenses}}
-        <h2>{{_ "accountBalance.heading.revokedLicenses"}}</h2>
+    {{#if licensesWithFailedValidation}}
+        <h2>{{_ "accountBalance.heading.licensesWithWarnings"}}</h2>
         <table class="dapp-zebra licensesTable">
             <tbody>
-            {{#each revokedLicenses}}
+            {{#each licensesWithFailedValidation}}
                 {{> licenseRow}}
             {{/each}}
             </tbody>
@@ -58,7 +58,7 @@
         <td class="buttonColumn"><a class="showHistory tableRowButton" href="#"><i class="icon-graph"></i> {{_ "accountBalance.button.history"}}</a></td>
         {{#if signatureValidationError}}
             <td>
-                <span class="lob-error-message simptip-position-bottom simptip-multiline simptip-danger" data-tooltip="{{signatureValidationError}}"><i class="icon-bell"></i></span>
+                <span class="lob-error-message simptip-position-bottom simptip-multiline simptip-danger" data-tooltip="{{signatureValidationError}}"><strong>!⃝</strong></span>
             </td>
         {{else}}
             <td class="collapsed"></td>

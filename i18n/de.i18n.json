@@ -87,7 +87,7 @@
   },
   "accountBalance": {
     "heading": {
-      "revokedLicenses": "Widerrufene Lizenzbescheinigungen"
+      "licensesWithWarnings": "Lizenzbescheinigungen, die ungültig sein könnten"
     },
     "hover": {
       "ownedBalance": "Ihre Lizenzen",
@@ -225,7 +225,8 @@
       "signed": "Signiert",
       "issuanceFee": "Ausstellungsgebühr",
       "rootContract": "LOB Root Contract",
-      "disabled": "Deaktiviert"
+      "disabled": "Deaktiviert",
+      "managerAddress": "Manager Adresse"
     }
   },
   "issuanceInfo": {
@@ -349,7 +350,8 @@
     },
     "signature_pending": "Signatur wird verarbeitet",
     "licenseContractDisabled": "Deaktiviert",
-    "disablingPending": "Deaktivierung wird verarbeitet"
+    "disablingPending": "Deaktivierung wird verarbeitet",
+    "controlTakeover": "Kontrolle von LOB übernommen"
   },
   "manageLicenseContract": {
     "title": "Smart Contracts zur Bescheinigung von Lizenzen <strong>verwalten</strong>",
@@ -651,5 +653,9 @@
     "certificate_not_valid_at_sign_date": "Das SSL-Zertifikat ist nur von __notBefore__ bis __notAfter__ gültig, aber der Smart Contract zur Bescheinigung von Lizenzen wurde am __licenseContractSignDate__ signiert",
     "license_contract_not_signed": "Der Smart Contract zur Bescheinigung von Lizenzen wurde noch nicht unterzeichnet",
     "generic": "Die Validierung der Zertifikatsunterschrift ist fehlgeschlagen"
+  },
+  "issuanceValidationError": {
+    "issuance_revoked": "Die Lizenz wurde vom Lizenzaussteller zurückgerufen",
+    "management_takeover": "Der Verwalter des Root Contracts hat die Kontrolle über den Smart Contract, der diese Lizenz verwaltet, übernommen"
   }
 }

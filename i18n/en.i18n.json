@@ -87,7 +87,7 @@
   },
   "accountBalance": {
     "heading": {
-      "revokedLicenses": "Revoked licenses"
+      "licensesWithWarnings": "Licenses that may not be genuine"
     },
     "hover": {
       "ownedBalance": "Licenses owned by you",
@@ -225,7 +225,8 @@
       "signed": "Signed",
       "issuanceFee": "Issuing Fee",
       "rootContract": "LOB Root Contract",
-      "disabled": "Disabled"
+      "disabled": "Disabled",
+      "managerAddress": "Manager Address"
     }
   },
   "issuanceInfo": {
@@ -349,7 +350,8 @@
     },
     "signature_pending": "Signature Pending",
     "licenseContractDisabled": "Disabled",
-    "disablingPending": "Disabling Pending"
+    "disablingPending": "Disabling Pending",
+    "controlTakeover": "Control taken over by LOB"
   },
   "manageLicenseContract": {
     "title": "<strong>Manage</strong> license contract",
@@ -651,5 +653,9 @@
     "certificate_not_valid_at_sign_date": "The SSL certificate is only valid from __notBefore__ to __notAfter__ but the license contract was signed at __licenseContractSignDate__",
     "license_contract_not_signed": "The license contract has not been signed yet",
     "generic": "The validation of the certificate's signature failed"
+  },
+  "issuanceValidationError": {
+    "issuance_revoked": "The issuance has been revoked by the issuer",
+    "management_takeover": "The owner of the root contract has taken over control for the license contract that manages this license."
   }
 }

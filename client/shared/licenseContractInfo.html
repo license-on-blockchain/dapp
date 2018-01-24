@@ -83,6 +83,16 @@
                 {{/if}}
             </td>
         </tr>
+        <tr>
+            <td><strong>{{_ "licenseContractInfo.field.managerAddress"}}</strong></td>
+            <td>
+                {{#if managerAddress}}
+                    {{> dapp_address address=managerAddress}}
+                {{else}}
+                    –
+                {{/if}}
+            </td>
+        </tr>
         </tbody>
     </table>
 </template>

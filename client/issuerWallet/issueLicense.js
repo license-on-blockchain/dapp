@@ -85,7 +85,9 @@ Template.issueLicense.onRendered(function() {
         let licenseContracts = lob.licenseContracts.getManagedLicenseContracts(Accounts.get());
         // Don't show license contracts that are not signed yet
         licenseContracts = licenseContracts.filter((licenseContract) => {
-            return lob.licenseContracts.isSigned(licenseContract) && !lob.licenseContracts.isDisabled(licenseContract);
+            return lob.licenseContracts.isSigned(licenseContract) &&
+                !lob.licenseContracts.isDisabled(licenseContract) &&
+                !lob.licenseContracts.getManagerAddress(licenseContract);
         });
         this.licenseContracts.set(licenseContracts);
         // Give selectAddress time to set its value

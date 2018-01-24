@@ -66,6 +66,9 @@ Template.licenseContractDetails.helpers({
     },
     disabled() {
         return lob.licenseContracts.isDisabled(this.address);
+    },
+    managerAddress() {
+        return lob.licenseContracts.getManagerAddress(this.address);
     }
 });
 
