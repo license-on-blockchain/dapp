@@ -68,11 +68,10 @@
                 <i>{{_ "managedLicenseContractList.signature_pending"}}</i>
             </td>
         {{else}}
-            <td class="buttonColumn">
-                <a href="/licensecontracts/sign/{{address}}" class="tableRowButton"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.sign"}}</a>
+            <td class="collapsed">
             </td>
             <td class="buttonColumn">
-                <a href="/licensecontracts/manage/{{address}}" class="tableRowButton"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.manage"}}</a>
+                <a href="/licensecontracts/sign/{{address}}" class="tableRowButton"><i class="icon-pencil"></i> {{_ "managedLicenseContractList.button.sign"}}</a>
             </td>
         {{/if}}
     </tr>
