@@ -35,11 +35,11 @@
                             </div>
                             {{#if manualSignature}}
                                 <h4>{{_ "signLicenseContract.input.manualSignature.title"}}</h4>
-                                <textarea name="manualSignature" title="{{_ "signLicenseContract.input.manualSignature.description"}}"></textarea>
+                                <textarea name="manualSignature" title="{{_ "signLicenseContract.input.manualSignature.description"}}" class="monospaced"></textarea>
                                 <div class="lob-error-message" data-for="manualSignature"></div>
                             {{else}}
                                 <h4>{{_ "signLicenseContract.input.privateKey.title"}}</h4>
-                                <textarea name="privateKey" title="{{_ "signLicenseContract.input.privateKey.description"}}">{{cachedPrivateKey}}</textarea>
+                                <textarea name="privateKey" title="{{_ "signLicenseContract.input.privateKey.description"}}" class="monospaced">{{cachedPrivateKey}}</textarea>
                                 <div class="lob-error-message" data-for="privateKey"></div>
                             {{/if}}
                         </div>
