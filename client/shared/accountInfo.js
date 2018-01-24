@@ -15,15 +15,28 @@ export const AccountInfo = {
 };
 
 Template.accountInfo.onCreated(function() {
+    this.computations = new Set();
     lob.watchAccountBalance(this.data.address);
+});
+
+Template.accountInfo.onRendered(function() {
+    const internalNameUpdate = Tracker.autorun(() => {
+        console.log(this.data.address);
+        console.log(Accounts.getInternalName(this.data.address));
+        this.$('.internalName').html(Accounts.getInternalName(this.data.address));
+    });
+    this.computations.add(internalNameUpdate);
+});
+
+Template.accountInfo.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
 });
 
 Template.accountInfo.helpers({
     address() {
         return this.address;
-    },
-    internalName() {
-        return Accounts.getInternalName(this.address);
     },
     accounts() {
         return [this.address];
@@ -36,8 +49,11 @@ Template.accountInfo.events({
     },
     'blur .internalName'(event) {
         const name = event.target.innerText.trim();
-        setTimeout(() => {
-            Accounts.setInternalName(this.address, name);
-        }, 100);
-    }
+        Accounts.setInternalName(this.address, name);
+    },
+    'keypress .internalName'(event) {
+        if (event.keyCode === 13) { // Enter
+            event.target.blur();
+        }
+    },
 });

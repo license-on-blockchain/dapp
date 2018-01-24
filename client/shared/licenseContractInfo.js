@@ -15,6 +15,23 @@ export const LicenseContractInfo = {
     }
 };
 
+Template.licenseContractInfo.onCreated(function() {
+    this.computations = new Set();
+});
+
+Template.licenseContractInfo.onRendered(function() {
+    const internalNameUpdate = Tracker.autorun(() => {
+        this.$('.internalName').html(lob.licenseContracts.getInternalName(this.data.address));
+    });
+    this.computations.add(internalNameUpdate);
+});
+
+Template.licenseContractInfo.onDestroyed(function() {
+    for (const computation of this.computations) {
+        computation.stop();
+    }
+});
+
 Template.licenseContractInfo.helpers({
     address() {
         return this.address;
@@ -46,9 +63,6 @@ Template.licenseContractInfo.events({
 });
 
 Template.licenseContractDetails.helpers({
-    internalName() {
-        return lob.licenseContracts.getInternalName(this.address);
-    },
     issuerName() {
         return lob.licenseContracts.getIssuerName(this.address);
     },
@@ -75,10 +89,12 @@ Template.licenseContractDetails.helpers({
 Template.licenseContractDetails.events({
     'blur .internalName'(event) {
         const name = event.target.innerText.trim();
-        // Allow some time for the focus to leave the field. Otherwise the text sometimes duplicates
-        setTimeout(() => {
-            lob.licenseContracts.setInternalName(this.address, name);
-        }, 100);
+        lob.licenseContracts.setInternalName(this.address, name);
+    },
+    'keypress .internalName'(event) {
+        if (event.keyCode === 13) { // Enter
+            event.target.blur();
+        }
     },
     'click .showIssuerAccountInfo'() {
         const issuerAddress = lob.licenseContracts.getIssuerAddress(this.address);

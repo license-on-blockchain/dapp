@@ -63,7 +63,7 @@ Template.transferTransactionInfo.events({
         AccountInfo.show(from);
     },
     'click a.showToAccountInfo'() {
-        const from = lob.transactions.getTransaction(this.transactionHash).from;
+        const from = lob.transactions.getTransaction(this.transactionHash).to;
         AccountInfo.show(from);
     },
     'click button.hideModal'() {
