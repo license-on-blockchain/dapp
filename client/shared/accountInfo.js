@@ -21,8 +21,6 @@ Template.accountInfo.onCreated(function() {
 
 Template.accountInfo.onRendered(function() {
     const internalNameUpdate = Tracker.autorun(() => {
-        console.log(this.data.address);
-        console.log(Accounts.getInternalName(this.data.address));
         this.$('.internalName').html(Accounts.getInternalName(this.data.address));
     });
     this.computations.add(internalNameUpdate);
@@ -36,7 +34,7 @@ Template.accountInfo.onDestroyed(function() {
 
 Template.accountInfo.helpers({
     address() {
-        return this.address;
+        return web3.toChecksumAddress(this.address);
     },
     accounts() {
         return [this.address];

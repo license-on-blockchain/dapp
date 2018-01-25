@@ -34,7 +34,7 @@ Template.licenseContractInfo.onDestroyed(function() {
 
 Template.licenseContractInfo.helpers({
     address() {
-        return this.address;
+        return web3.toChecksumAddress(this.address);
     },
     certificateValidationError() {
         return lob.licenseContracts.getSignatureValidationError(this.address);
