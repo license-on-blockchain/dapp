@@ -66,6 +66,7 @@ function validate(errorOnEmpty = false, errorMessages = []) {
     noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'), errorMessages);
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'), errorMessages);
     noErrors &= validateField('amount', amount > 0, amount, TAPi18n.__('transfer.error.amount_zero'), errorMessages);
+    noErrors &= validateField('amount', () => amount <= lob.balances.getProperBalance(issuanceID, sender), issuanceID && amount, TAPi18n.__('transfer.error.amount_less_than_balance'));
     noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 
     return noErrors;
