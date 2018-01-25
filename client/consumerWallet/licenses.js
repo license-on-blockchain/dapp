@@ -13,7 +13,7 @@ Template.licenses.helpers({
         return !InitialLoadingStatus.hasFinishedLoading();
     },
     accounts() {
-        return Accounts.get()
+        return Accounts.get();
     },
     hasPendingTransfers() {
         const limit = Template.instance().showAllTransactions.get() ? 0 : defaultTransactionLimit;

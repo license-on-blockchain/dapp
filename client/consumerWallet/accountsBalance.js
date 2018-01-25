@@ -6,9 +6,13 @@ Template.accountsBalance.onCreated(function() {
     this.computations = new Set();
 
     this.licenses = new ReactiveVar([]);
+});
+
+Template.accountsBalance.onRendered(function() {
     const licensesComputation = Tracker.autorun(() => {
-        const accounts = this.data.accounts;
-        const actionsEnabled = this.data.actionsEnabled;
+        const data = Blaze.getData(this.view);
+        const accounts = data.accounts;
+        const actionsEnabled = data.actionsEnabled;
 
         const issuanceIDs = lob.balances.getNonZeroBalanceIssuanceIDs(accounts)
             .concat(lob.balances.getReclaimableIssuanceIDs(accounts));
