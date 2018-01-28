@@ -28,11 +28,7 @@
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "transfer.input.issuance.title"}}</h4>
-                        <select name="issuance" title="{{_ "transfer.input.issuance.description"}}">
-                            {{#each issuances}}
-                                {{> issuanceOption}}
-                            {{/each}}
-                        </select>
+                        {{> selectIssuance issuances=issuances title=(_ "transfer.input.issuance.description")}}
                         <div class="lob-error-message" data-for="issuance"></div>
                     </div>
                     <div class="col col-6 mobile-full">
@@ -66,8 +62,4 @@
             </form>
         </main>
     </div>
-</template>
-
-<template name="issuanceOption">
-    <option value="{{issuanceID}}" {{preselected}}>{{description}} – {{balance}} {{_ "generic.license" count=balance}}</option>
 </template>

@@ -9,7 +9,7 @@ const selectedSenderAccount = new ReactiveVar();
 
 function getValues() {
     const sender = TemplateVar.getFrom(this.find('[name=sender]'), 'value').toLowerCase();
-    const issuanceID = IssuanceID.fromString(this.find('[name=issuance]').value);
+    const issuanceID = TemplateVar.getFrom(this.find('.selectIssuance'), 'value');
     let recipient;
     if (this.data && this.data.destroy) {
         recipient = "0x0000000000000000000000000000000000000000";
@@ -102,10 +102,18 @@ Template.transfer.onRendered(function() {
                     issuanceID,
                     metadata: lob.issuances.getIssuance(issuanceID) || {},
                     selected: (issuanceID.licenseContractAddress.toLowerCase() === selectedLicenseContract && issuanceID.issuanceNumber === selectedIssuanceID),
+                    balance: lob.balances.getProperBalance(issuanceID, selectedSenderAccount.get())
                 }
             })
             .filter((obj) => !obj.metadata.revoked)
-            .filter((obj) => lob.balances.getProperBalance(obj.issuanceID, selectedSenderAccount.get()) > 0);
+            .filter((obj) => lob.balances.getProperBalance(obj.issuanceID, selectedSenderAccount.get()) > 0)
+            .sort((lhs, rhs) => {
+                if (lhs.metadata.description) {
+                    return lhs.metadata.description.localeCompare(rhs.metadata.description);
+                } else {
+                    return -1;
+                }
+            });
         this.issuanceIDs.set(issuanceIDs);
 
         setTimeout(() => this.onFormUpdate(), 0);
@@ -187,19 +195,4 @@ Template.transfer.events({
             });
         }
     }
-});
-
-Template.issuanceOption.helpers({
-    issuanceID() {
-        return this.issuanceID;
-    },
-    preselected() {
-        return this.selected ? 'selected' : '';
-    },
-    description() {
-        return this.metadata.description;
-    },
-    balance() {
-        return lob.balances.getProperBalance(this.issuanceID, selectedSenderAccount.get());
-    },
 });

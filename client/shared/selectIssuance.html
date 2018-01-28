@@ -1,0 +1,17 @@
+<template name="selectIssuance">
+    <div class="selectIssuance">
+        <select name="issuance" title="{{title}}">
+            {{#each issuances}}
+                {{> issuanceOption}}
+            {{/each}}
+        </select>
+        <a href="#" class="issuanceInfoButton"><i class="icon-info"></i></a>
+    </div>
+</template>
+
+
+<template name="issuanceOption">
+    <option value="{{issuanceID}}" {{preselected}}>
+        {{description}} – {{balance}} {{_ "generic.license" count=balance}}
+    </option>
+</template>
