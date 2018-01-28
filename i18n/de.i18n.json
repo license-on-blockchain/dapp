@@ -329,7 +329,7 @@
       "transfer": "Übertragen",
       "transferTemporarily": "Rückforderbar übertragen"
     },
-    "destroyLink": "Wenn Sie die Lizenzbescheinigung zerstören (d.h. auf der Ethereum-Blockchain ivalidieren) möchten, <a href='%s'>klicken Sie hier</a>.",
+    "destroyLink": "Wenn Sie die Lizenzbescheinigung zerstören (d.h. auf der Ethereum-Blockchain invalidieren) möchten, <a href='%s'>klicken Sie hier</a>.",
     "error": {
       "recipient_not_valid_address": "Die Empfänger-Adresse ist keine gültige öffentliche Ethereum-Adresse",
       "recipient_equal_to_sender": "Die Empfänger-Adresse muss von der Absender-Adresse verschieden sein",
