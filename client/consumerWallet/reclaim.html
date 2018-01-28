@@ -9,11 +9,13 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "reclaim.input.to.title"}}</h4>
                         {{> dapp_selectAccount accounts=myAccounts class="reclaimer" name="reclaimer" value=reclaimer}}
+                        <label class="inputDescription" for="reclaimer">{{_ "reclaim.input.to.description"}}</label>
                         <div class="lob-error-message" data-for="reclaimer"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "reclaim.input.from.title"}}</h4>
                         {{> selectAddress addresses=reclaimOrigins class="from"}}
+                        <label class="inputDescription" for="from">{{_ "reclaim.input.from.description"}}</label>
                         <div class="lob-error-message" data-for="from"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
@@ -26,11 +28,13 @@
                                 {{> reclaimIssuanceOption}}
                             {{/each}}
                         </select>
+                        <label class="inputDescription" for="issuance">{{_ "reclaim.input.issuance.description"}}</label>
                         <div class="lob-error-message" data-for="issuance"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "reclaim.input.amount.title"}}</h4>
                         <input name="amount" type="number" title="{{_ "reclaim.input.amount.description"}}">
+                        <label class="inputDescription" for="amount">{{_ "reclaim.input.amount.description"}}</label>
                         <div class="lob-error-message" data-for="amount"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>

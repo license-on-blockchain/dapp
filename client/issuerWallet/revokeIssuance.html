@@ -6,13 +6,14 @@
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "revokeIssuance.input.licenseContract.title"}}</h4>
-
                         {{> selectAddress addresses=licenseContracts class="licenseContract"}}
+                        <label class="inputDescription" for="licenseContract">{{_ "revokeIssuance.input.licenseContract.description"}}</label>
                         <div class="lob-error-message" data-for="licenseContract"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "revokeIssuance.input.issuance.title"}}</h4>
                         {{> selectIssuance issuances=issuances title=(_ "revokeIssuance.input.issuance.description")}}
+                        <label class="inputDescription" for="issuance">{{_ "revokeIssuance.input.issuance.description"}}</label>
                         <div class="lob-error-message" data-for="issuance"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
@@ -20,7 +21,8 @@
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "revokeIssuance.input.revocationReason.title"}}</h4>
-                        <textarea name="revocationReason" title="{{_ "revokeIssuance.input.revocationReason.description"}}"></textarea>
+                        <textarea id="revocationReason" name="revocationReason" title="{{_ "revokeIssuance.input.revocationReason.description"}}"></textarea>
+                        <label class="inputDescription" for="revocationReason">{{_ "revokeIssuance.input.revocationReason.description"}}</label>
                         <div class="lob-error-message" data-for="revocationReason"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>

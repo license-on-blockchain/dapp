@@ -6,6 +6,7 @@ import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
 import {privateKeyCache} from "../../lib/PrivateKeyCache";
 import {Accounts} from "../../lib/Accounts";
+import {base64EncodeUnicode} from "../../lib/utils";
 
 /**
  * Depending on the chosen signing method, either compute the signature or use the passed manual signature. Should the
@@ -188,7 +189,7 @@ Template.signLicenseContract.onRendered(function() {
             return !lob.licenseContracts.isSigned(licenseContract) && !lob.licenseContracts.isDisabled(licenseContract);
         });
         this.licenseContracts.set(licenseContracts);
-        setTimeout(() => this.onFormUpdate(), 0);
+        setTimeout(() => this.onFormUpdate(), 100);
     });
     this.computations.add(licenseContractsComputation);
 
@@ -255,6 +256,15 @@ Template.signLicenseContract.helpers({
     },
     cachedPrivateKey() {
         return privateKeyCache.getPrivateKeyForContractAddress(Template.instance().data.licenseContractAddress);
+    },
+    downloadLicenseTextLink() {
+        const selectedLicenseContract = Template.instance().selectedLicenseContract.get();
+        if (selectedLicenseContract) {
+            const certificateText = lob.licenseContracts.getCertificateText(selectedLicenseContract);
+            return "data:text/plain;base64," + base64EncodeUnicode(certificateText);
+        } else {
+            return '';
+        }
     },
     gasPrice() {
         return EthBlocks.latest.gasPrice;

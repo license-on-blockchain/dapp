@@ -39,8 +39,10 @@
     }
   },
   "settings": {
-    "title": "<strong>Settings</strong>",
+    "title": "<strong>Einstellungen</strong>",
     "heading": {
+      "enableActions": "Funktionen aktivieren",
+      "language": "Sprache",
       "debugSettings": "Debug Einstellungen"
     },
     "input": {
@@ -53,11 +55,11 @@
         "description": "Aktionen zur Bestätigung von Lizenzen mittels LOB freischalten"
       },
       "enableVerificationActions": {
-        "title": "Aktionen zur Verifizierung des Lizenzbesitzes",
+        "title": "Aktionen zur Verifizierung des Lizenzbesitzes anzeigen",
         "description": "Aktionen zur Verifizierung der Lizenzen anderer Adressen freischalten"
       },
       "enableDebugOptions": {
-        "title": "Debug Optionen",
+        "title": "Debug-Einstellungen anzeigen",
         "description": "Aktionen zum Debuggen der LOB-Wallet anzeigen"
       },
       "language": {
@@ -274,19 +276,19 @@
     "input": {
       "to": {
         "title": "An",
-        "description": ""
+        "description": "Ihre Adresse, die Lizenzen zurückfordern soll"
       },
       "from": {
         "title": "Von",
-        "description": "Öffentliche Ethereum-Adresse, an die die Lizenz übertragen wurde"
+        "description": "Adresse, von der Lizenzen zurückgefordert werden sollen"
       },
       "issuance": {
         "title": "Lizenz",
-        "description": "Zurückforderbare Lizenz"
+        "description": "Lizenz, die zurückgefordert werden soll"
       },
       "amount": {
         "title": "Menge",
-        "description": "Anzahl der rückforderbaren Lizenzen"
+        "description": "Anzahl an Lizenzen, die zurückgefordert werden sollen"
       }
     },
     "button": {
@@ -309,11 +311,11 @@
     "input": {
       "from": {
         "title": "Von",
-        "description": ""
+        "description": "Die Adresse, von der Sie die Lizenzen übertragen möchten"
       },
       "to": {
         "title": "An",
-        "description": ""
+        "description": "Die Adresse, an die die Lizenzen übertragen werden sollen"
       },
       "issuance": {
         "title": "Lizenz",
@@ -385,14 +387,14 @@
       },
       "issuance": {
         "title": "Lizenzen",
-        "description": "Widerrufebare Lizenzbescheinigungen"
+        "description": "Lizenzbescheinigungen, die widerrufen werden soll"
       },
       "revocationReason": {
         "title": "Grund des Lizenzwiderrufs",
         "description": "Geben Sie einen Grund an, warum die Lizenzbescheinigung widerrufen werden soll"
       },
       "confirmUndoable": {
-        "title": "Ich weiß, dass der Lizenzwiderruf nicht rückgängig gemacht werden kann",
+        "title": "Ich habe verstanden, dass der Lizenzwiderruf nicht rückgängig gemacht werden kann",
         "description": ""
       }
     },
@@ -434,11 +436,11 @@
       },
       "issuerAddress": {
         "title": "Ihre Ethereum-Adresse",
-        "description": "öffentliche Ethereum-Adresse, unter der Sie Software-Lizenzbescheinigungen ausstellen möchten"
+        "description": "Öffentliche Ethereum-Adresse, unter der Sie Software-Lizenzbescheinigungen ausstellen möchten"
       },
       "issuerName": {
         "title": "Name Ihrer Bescheinigungsstelle",
-        "description": "Name der Person oder der Organisation, die Lizenzbescheinigungen unter dem neuen Smart Contract ausstellen wird. Diese Angabe sollte mit dem 'common name' in Ihrem SSL-Zertifikat übereinstimmen"
+        "description": "Name der Person oder der Organisation, die Lizenzbescheinigungen unter dem neuen Smart Contract ausstellen wird. Diese Angabe sollte mit dem \"Common Name\" in Ihrem SSL-Zertifikat möglichst übereinstimmen"
       },
       "liability": {
         "title": "Haftung",
@@ -446,15 +448,15 @@
       },
       "safekeepingPeriod": {
         "title": "Aufbewahrungsfrist (Jahre)",
-        "description": "Angabe des Zeitraums, innerhalb dessen Sie alle Unterlagen, die Sie im Rahmen Ihres Lizenzbescheinigungsprozesses eingesehen und geprüft haben, vorhalten werden"
+        "description": "Zeitraums, innerhalb dessen Sie alle Unterlagen, die Sie im Rahmen Ihres Lizenzbescheinigungsprozesses eingesehen und geprüft haben, vorhalten werden"
       },
       "sslCertificate": {
-        "title": "SSL-Zertifikat, das Ihre Identität bestätigt (PKCS#12 codiert als Hex, verschlüsselt mit einem leeren Passwort oder PEM-codierte Zertifikatskette)",
-        "description": "TODO: Proper description when SSL format has been decided on"
+        "title": "SSL-Zertifikat, das Ihre Identität bestätigt (PEM-kodierte Zertifikatskette)",
+        "description": "Ihr SSL-Zertifikat, kodiert im PEM Format. Sollten intermediäre Zertifikate nötig sein um Ihr Zertifikat auf Ihre Certificate Authority zurückzuführen, fügen Sie die Zertifikatskette untereinander ein, wobei Sie mit Ihrem Zertifikat starten."
       },
       "sslPrivateKey": {
-        "title": "Privater Schlüssel zu Ihrem SSL-Zertifikat (optional)",
-        "description": "TODO: Proper description when SSL format has been decided on"
+        "title": "Privater Schlüssel zu Ihrem SSL-Zertifikat (optional, PEM-kodiert)",
+        "description": "Der private Schlüssel zu Ihrem SSL-Zertifikat um zu überprüfen, dass Sie in der Lage sein werden, den Smart Contract zur Bescheinigung von Lizenzen zu signieren. Dieser wird niemals von Ihrem Rechner übertragen. Wenn Sie Ihn nicht angeben möchten, können Sie die Signatur im nächsten Schritt selbst mit OpenSSL generieren."
       }
     },
     "button": {
@@ -547,11 +549,11 @@
       },
       "manualSignature": {
         "title": "Elektronische Signatur",
-        "description": "Ihre elektronische Signatur, mit der Sie den Bestätigungstext, mit dem Sie Ihre Lizenzbescheinigungen ausstatten werden und der damit die rechtliche Verbindlichkeit Ihrer Lizenzbescheinigungen definiert, unterzeichnen (unter Nutzung des privaten Schlüssels Ihres SSL-Zertifikats)"
+        "description": "Sie können die elektronische Signatur mit OpenSSL auch lokal generieren. Laden Sie sich den Lizenztext dazu <a download='CertificateText.txt' href='__downloadLicenseTextLink__'>hier</a> herunter, speichern diesen und führen den folgenden Befehl auf der Kommandozeile aus: <code>openssl dgst -sha256 -sign privateKey.key -hex CertificateText.txt</code>. Hierzu müssen Sie <a target='_blank' href='https://www.openssl.org/'>OpenSSL</a> installiert haben und Zugriff auf den privaten Schlüssel zu Ihrem SSL-Zertifikat <code>privateKey.key</code> im PEM-Format haben. Kopieren Sie anschließend die Hex-Signatur in dieses Textfeld. Sie bestätigen damit, dass Sie den Zertifikatstext gelesen haben und diesem zustimmen."
       },
       "privateKey": {
         "title": "Privater Schlüssel Ihres SSL-Zertifikats",
-        "description": "Eingabe des privaten Schlüssels des SSL-Zertifikats, das Sie bei der Generierung Ihres Smart Contract zur Bescheinigung von Lizenzen angegeben haben (der Schlüssel wird niemals irgendwohin übertragen, sondern nur lokal genutzt, um die Elektronische Signatur zu generieren, alternativ können Sie den Bestätigungstext in einer anderen Anwendung unterzeichnen und die elektronische Signatur direkt eingeben)"
+        "description": "Eingabe des privaten Schlüssels des SSL-Zertifikats, das Sie bei der Generierung Ihres Smart Contract zur Bescheinigung von Lizenzen angegeben haben (der Schlüssel wird niemals irgendwohin übertragen, sondern nur lokal genutzt, um die elektronische Signatur zu generieren). Alternativ können Sie den Bestätigungstext mit OpenSSL unterzeichnen und die elektronische Signatur direkt eingeben."
       },
       "confirmCertificateText": {
         "title": "Ich bestätige hiermit, dass ich den oben abgedruckten Zertifikatstext gelesen und verstanden habe und diesen mit meinem privaten Schlüssel legal bindend unterzeichnen möchte",
@@ -593,7 +595,7 @@
       },
       "description": {
         "title": "Lizenzbeschreibung",
-        "description": "Text, der die Lizenz, die Sie bescheinigen, für Menschen verständlich und eindeutig beschreibt"
+        "description": "Text, der die Lizenz, die Sie bescheinigen für Menschen verständlich und eindeutig beschreibt"
       },
       "amount": {
         "title": "Anzahl",
@@ -608,8 +610,8 @@
         "description": "Text, der Ihre Prüfhandlungen und spezifische Ergebnisse Ihres Lizenzaudits näher spezifiziert (bspw. Angabe der Unterlagen, die Ihnen vorliegen)"
       },
       "initialOwnerAddress": {
-        "title": "Öffentliche Ethereum-Adresse des Lizenz-Inhabers",
-        "description": "öffentliche Ethereum-Adresse der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen"
+        "title": "Ethereum-Adresse des Lizenzinhabers",
+        "description": "Ethereum-Adresse der Person oder der Institution, gegenüber der Sie die Lizenz(en) bescheinigen"
       },
       "issuanceFee": {
         "title": "Ausstellungsgebühr",

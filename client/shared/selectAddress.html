@@ -1,7 +1,7 @@
 <template name="selectAddress">
     <div class="selectAddress {{class}}">
         {{> dapp_identicon identity=selectedAddress class="dapp-tiny"}}
-        <select name="licenseContract" title="{{_ "revokeIssuance.input.licenseContract.description"}}">
+        <select title="{{selectedAddress}}">
             {{#each addresses}}
                 {{> selectAddressOption}}
             {{/each}}

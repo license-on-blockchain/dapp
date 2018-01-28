@@ -7,6 +7,8 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "signLicenseContract.input.licenseContract.title"}}</h4>
                         {{> selectAddress addresses=licenseContracts class="licenseContract"}}
+                        <label class="inputDescription" for="licenseContract">{{_ "signLicenseContract.input.licenseContract.description"}}</label>
+                        <div class="lob-error-message" data-for="licenseContract"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>
@@ -15,31 +17,35 @@
                 {{else}}
                     <div class="row clear">
                         <div class="col col-12 mobile-full">
+                            <hr>
                             <h4>{{_ "signLicenseContract.heading.certificateText"}}</h4>
                             <p>
                             {{#each certificateText}}
                                 {{this}}<br>
                             {{/each}}
                             </p>
+                            <hr>
                         </div>
                         <div class="dapp-clear-fix"></div>
                     </div>
                     <div class="row clear">
                         <div class="col col-12 mobile-full">
                             <div class="dapp-segmented-control dapp-small">
-                                <input type="radio" value="privateKey" id="privateKey" name="signMethod" checked>
-                                <label for="privateKey">{{_ "signLicenseContract.signMethod.privateKey"}}</label>
+                                <input type="radio" value="privateKey" id="signUsingPrivateKey" name="signMethod" checked>
+                                <label for="signUsingPrivateKey">{{_ "signLicenseContract.signMethod.privateKey"}}</label>
 
                                 <input type="radio" value="manual" id="manual" name="signMethod">
                                 <label for="manual">{{_ "signLicenseContract.signMethod.manual"}}</label>
                             </div>
                             {{#if manualSignature}}
                                 <h4>{{_ "signLicenseContract.input.manualSignature.title"}}</h4>
-                                <textarea name="manualSignature" title="{{_ "signLicenseContract.input.manualSignature.description"}}" class="monospaced"></textarea>
+                                <textarea id="manualSignature" name="manualSignature" title="{{_ "signLicenseContract.input.manualSignature.description"}}" class="monospaced"></textarea>
+                                <label class="inputDescription" for="manualSignature">{{{_ "signLicenseContract.input.manualSignature.description" downloadLicenseTextLink=downloadLicenseTextLink}}}</label>
                                 <div class="lob-error-message" data-for="manualSignature"></div>
                             {{else}}
                                 <h4>{{_ "signLicenseContract.input.privateKey.title"}}</h4>
-                                <textarea name="privateKey" title="{{_ "signLicenseContract.input.privateKey.description"}}" class="monospaced">{{cachedPrivateKey}}</textarea>
+                                <textarea id="privateKey" name="privateKey" title="{{_ "signLicenseContract.input.privateKey.description"}}" class="monospaced">{{cachedPrivateKey}}</textarea>
+                                <label class="inputDescription" for="privateKey">{{_ "signLicenseContract.input.privateKey.description"}}</label>
                                 <div class="lob-error-message" data-for="privateKey"></div>
                             {{/if}}
                         </div>

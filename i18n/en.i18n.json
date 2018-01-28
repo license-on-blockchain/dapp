@@ -41,24 +41,26 @@
   "settings": {
     "title": "<strong>Settings</strong>",
     "heading": {
+      "enableActions": "Enable Actions",
+      "language": "Language",
       "debugSettings": "Debug Settings"
     },
     "input": {
       "enableInstallation": {
-        "title": "Show installation actions",
+        "title": "Show Installation Actions",
         "description": "Enable actions needed to activate software installations using LOB licenses"
       },
       "enableIssuerActions": {
-        "title": "Issuer Actions",
+        "title": "Show Issuer Actions",
         "description": "Enable actions to issue new licenses using LOB"
       },
       "enableVerificationActions": {
-        "title": "Balance Verifications Actions",
+        "title": "Show Balance Verifications Actions",
         "description": "Enable actions to verify another address's balance"
       },
       "enableDebugOptions": {
-        "title": "Debug Options",
-        "description": "Show options to debug the LOB wallet"
+        "title": "Show Debug Settings",
+        "description": "Show settings to debug the LOB wallet"
       },
       "language": {
         "title": "Language",
@@ -274,7 +276,7 @@
     "input": {
       "to": {
         "title": "To",
-        "description": ""
+        "description": "The address that shall reclaim licenses"
       },
       "from": {
         "title": "From",
@@ -282,7 +284,7 @@
       },
       "issuance": {
         "title": "License",
-        "description": "License to reclaim"
+        "description": "The license that shall be reclaimed"
       },
       "amount": {
         "title": "Amount",
@@ -309,11 +311,11 @@
     "input": {
       "from": {
         "title": "From",
-        "description": ""
+        "description": "The address from which you want to transfer licenses"
       },
       "to": {
         "title": "To",
-        "description": ""
+        "description": "The address you want to transfer the licenses to"
       },
       "issuance": {
         "title": "License",
@@ -438,7 +440,7 @@
       },
       "issuerName": {
         "title": "Issuer Name",
-        "description": "The name of the person or organisation issuing licenses under the license contract. This should correspond to the common name in the SSL certificate"
+        "description": "The name of the person or organisation issuing licenses under the license contract. This should correspond to the common name in the SSL certificate in the best possible way."
       },
       "liability": {
         "title": "Liability",
@@ -449,12 +451,12 @@
         "description": "The number of years you will keep all documents you inspected as part of the license issuing"
       },
       "sslCertificate": {
-        "title": "SSL-Certificate (PKCS#12 encoded as Hex encrypted with an empty password or PEM-encoded certificate chain)",
-        "description": "TODO: Proper description when SSL format has been decided on"
+        "title": "SSL-Certificate (PEM encoded certificate chain)",
+        "description": "Your PEM encoded SSL certificate. Should intermediate certificates be necessary to trace this certificate back to its certificate authority, add the certificates of the chain underneath each other, starting with your certificate."
       },
       "sslPrivateKey": {
-        "title": "SSL private key (optional)",
-        "description": "TODO: Proper description when SSL format has been decided on"
+        "title": "SSL private key (optional, PEM encoded)",
+        "description": "The private key that corresponds to your SSL certificate to check that you will be able to sign the license contract. It will never be transmitted from you computer. If you do not want to enter your private key, you can also generate the signature yourself using OpenSSL in the next step."
       }
     },
     "button": {
@@ -547,7 +549,7 @@
       },
       "manualSignature": {
         "title": "Signature",
-        "description": "The digital signature of the certificate text created using the private key of the SSL certificate you provided when creating the license contract"
+        "description": "You can also generate the signature locally using OpenSSL. For this, install <a target='_blank' href='https://www.openssl.org/'>OpenSSL</a>, download the license certificate <a download='CertificateText.txt' href='__downloadLicenseTextLink__'>here</a>, save it and run the following command on the command line: <code>openssl dgst -sha256 -sign privateKey.key -hex CertificateText.txt</code>. For this you need to have access to the private key of your SSL certificate <code>privateKey.key</code> encoded as PEM. Afterwards copy the hex signature into this text field. By signing the license certificate, you agree that you have read it and agree to its contents."
       },
       "privateKey": {
         "title": "Private SSL key",

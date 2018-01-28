@@ -6,11 +6,13 @@
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "createLicenseContract.input.rootContract.title"}}</h4>
-                        <select name="rootContract" title="{{_ "createLicenseContract.input.rootContract.description"}}">
+                        <select id="rootContract" name="rootContract" title="{{_ "createLicenseContract.input.rootContract.description"}}">
                             {{#each rootContracts}}
                                 {{> rootContractOption}}
                             {{/each}}
                         </select>
+                        <label class="inputDescription" for="rootContract">{{_ "createLicenseContract.input.rootContract.description"}}</label>
+                        <div class="lob-error-message" data-for="rootContract"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>
@@ -18,11 +20,13 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "createLicenseContract.input.issuerAddress.title"}}</h4>
                         {{> dapp_selectAccount accounts=myAccounts class="issuerAddress" name="issuerAddress"}} <!-- TODO: title -->
+                        <label class="inputDescription" for="issuerAddress">{{_ "createLicenseContract.input.issuerAddress.description"}}</label>
                         <div class="lob-error-message" data-for="issuerAddress"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "createLicenseContract.input.issuerName.title"}}</h4>
-                        <input type="text" name="issuerName" title="{{_ "createLicenseContract.input.issuerName.description"}}">
+                        <input type="text" id="issuerName" name="issuerName" title="{{_ "createLicenseContract.input.issuerName.description"}}">
+                        <label class="inputDescription" for="issuerName">{{_ "createLicenseContract.input.issuerName.description"}}</label>
                         <div class="lob-error-message" data-for="issuerName"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
@@ -30,12 +34,14 @@
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "createLicenseContract.input.liability.title"}}</h4>
-                        <textarea name="liability" title="{{_ "createLicenseContract.input.liability.description"}}"></textarea>
+                        <textarea id="liability" name="liability" title="{{_ "createLicenseContract.input.liability.description"}}"></textarea>
+                        <label class="inputDescription" for="liability">{{_ "createLicenseContract.input.liability.description"}}</label>
                         <div class="lob-error-message" data-for="liability"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "createLicenseContract.input.safekeepingPeriod.title"}}</h4>
-                        <input type="number" name="safekeepingPeriod" title="{{_ "createLicenseContract.input.safekeepingPeriod.description"}}">
+                        <input type="number" id="safekeepingPeriod" name="safekeepingPeriod" title="{{_ "createLicenseContract.input.safekeepingPeriod.description"}}">
+                        <label class="inputDescription" for="safekeepingPeriod">{{_ "createLicenseContract.input.safekeepingPeriod.description"}}</label>
                         <div class="lob-error-message" data-for="safekeepingPeriod"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
@@ -43,7 +49,8 @@
                 <div class="row clear">
                     <div class="col col-12 mobile-full">
                         <h4>{{_ "createLicenseContract.input.sslCertificate.title"}}</h4>
-                        <textarea name="sslCertificate" title="{{_ "createLicenseContract.input.sslCertificate.description"}}" class="monospaced"></textarea>
+                        <textarea id="sslCertificate" name="sslCertificate" title="{{_ "createLicenseContract.input.sslCertificate.description"}}" class="monospaced"></textarea>
+                        <label class="inputDescription" for="sslCertificate">{{_ "createLicenseContract.input.sslCertificate.description"}}</label>
                         <div class="lob-error-message" data-for="sslCertificate"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
@@ -51,7 +58,8 @@
                 <div class="row clear">
                     <div class="col col-12 mobile-full">
                         <h4>{{_ "createLicenseContract.input.sslPrivateKey.title"}}</h4>
-                        <textarea name="sslPrivateKey" title="{{_ "createLicenseContract.input.sslPrivateKey.description"}}" class="monospaced"></textarea>
+                        <textarea id="sslPrivateKey" name="sslPrivateKey" title="{{_ "createLicenseContract.input.sslPrivateKey.description"}}" class="monospaced"></textarea>
+                        <label class="inputDescription" for="sslPrivateKey">{{_ "createLicenseContract.input.sslPrivateKey.description"}}</label>
                         <div class="lob-error-message" data-for="sslPrivateKey"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>

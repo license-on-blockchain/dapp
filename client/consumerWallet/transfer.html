@@ -15,11 +15,14 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "transfer.input.from.title"}}</h4>
                         {{> dapp_selectAccount accounts=myAccounts class="sender" name="sender" value=from}}
+                        <label class="inputDescription" for="sender">{{_ "transfer.input.from.description"}}</label>
+                        <div class="lob-error-message" data-for="from"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         {{#unless destroy}}
                             <h4>{{_ "transfer.input.to.title"}}</h4>
                             {{> dapp_addressInput placeholder="0x000000.." name="recipient"}}
+                            <label class="inputDescription" for="recipient">{{_ "transfer.input.to.description"}}</label>
                             <div class="lob-error-message" data-for="recipient"></div>
                         {{/unless}}
                     </div>
@@ -29,11 +32,13 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "transfer.input.issuance.title"}}</h4>
                         {{> selectIssuance issuances=issuances title=(_ "transfer.input.issuance.description")}}
+                        <label class="inputDescription" for="issuance">{{_ "transfer.input.issuance.description"}}</label>
                         <div class="lob-error-message" data-for="issuance"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "transfer.input.amount.title"}}</h4>
-                        <input name="amount" type="number" title="{{_ "transfer.input.amount.description"}}" value="{{amount}}">
+                        <input id="amount" name="amount" type="number" title="{{_ "transfer.input.amount.description"}}" value="{{amount}}">
+                        <label class="inputDescription amount" for="amount">{{_ "transfer.input.amount.description"}}</label>
                         <div class="lob-error-message" data-for="amount"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>

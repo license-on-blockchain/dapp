@@ -7,6 +7,8 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "issueLicense.input.licenseContract.title"}}</h4>
                         {{>selectAddress addresses=licenseContracts class="licenseContract"}}
+                        <label class="inputDescription" for="licenseContract">{{_ "issueLicense.input.licenseContract.description"}}</label>
+                        <div class="lob-error-message" data-for="licenseContract"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "issueLicense.input.licenseTemplate.title"}}</h4>
@@ -20,6 +22,8 @@
                                 </optgroup>
                             {{/each}}
                         </select>
+                        <label class="inputDescription" for="licenseTemplate">{{_ "issueLicense.input.licenseTemplate.description"}}</label>
+                        <div class="lob-error-message" data-for="licenseTemplate"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>
@@ -27,11 +31,13 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "issueLicense.input.code.title"}}</h4>
                         <input type="text" name="code" value="{{templateLicenseCode}}" {{codeAndDescriptionReadonly}} title="{{_ "issueLicense.input.code.description"}}">
+                        <label class="inputDescription" for="code">{{_ "issueLicense.input.code.description"}}</label>
                         <div class="lob-error-message" data-for="code"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "issueLicense.input.description.title"}}</h4>
                         <input type="text" name="description" value="{{templateLicenseDescription}}" {{codeAndDescriptionReadonly}} title="{{_ "issueLicense.input.description.description"}}">
+                        <label class="inputDescription" for="description">{{_ "issueLicense.input.description.description"}}</label>
                         <div class="lob-error-message" data-for="description"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
@@ -40,6 +46,7 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "issueLicense.input.amount.title"}}</h4>
                         <input type="number" name="amount" title="{{_ "issueLicense.input.amount.description"}}">
+                        <label class="inputDescription" for="amount">{{_ "issueLicense.input.amount.description"}}</label>
                         <div class="lob-error-message" data-for="amount"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
@@ -48,11 +55,13 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "issueLicense.input.auditTime.title"}}</h4>
                         <input type="datetime-local" name="auditTime" title="{{_ "issueLicense.input.auditTime.description"}}" placeholder="YYYY-MM-DD HH:MM">
+                        <label class="inputDescription" for="auditTime">{{_ "issueLicense.input.auditTime.description"}}</label>
                         <div class="lob-error-message" data-for="auditTime"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "issueLicense.input.auditRemark.title"}}</h4>
                         <textarea name="auditRemark" title="{{_ "issueLicense.input.auditRemark.description"}}"></textarea>
+                        <label class="inputDescription" for="auditRemark">{{_ "issueLicense.input.auditRemark.description"}}</label>
                         <div class="lob-error-message" data-for="auditRemark"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
@@ -61,6 +70,7 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "issueLicense.input.initialOwnerAddress.title"}}</h4>
                         {{> dapp_addressInput placeholder="0x000000.." name="initialOwnerAddress"}}
+                        <label class="inputDescription" for="initialOwnerAddress">{{_ "issueLicense.input.initialOwnerAddress.description"}}</label>
                         <div class="lob-error-message" data-for="initialOwnerAddress"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
