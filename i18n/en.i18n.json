@@ -80,6 +80,10 @@
       "web3Latency": {
         "title": "Web3 Latency",
         "description": "Artifical latency introduced to every web3 call"
+      },
+      "trackerRunDebugging": {
+        "title": "Tracker Run Debugging",
+        "description": "Warn when Tracker.autorun is run to often"
       }
     },
     "confirmation": {

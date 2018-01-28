@@ -25,7 +25,10 @@ Template.settings.helpers({
     },
     debugOptionsEnabled() {
         return Settings.enableDebugOptions.get();
-    }
+    },
+    trackerRunDebuggingChecked() {
+        return Settings.trackerRunDebugging.get() ? "checked" : "";
+    },
 });
 
 Template.settings.events({
@@ -50,6 +53,10 @@ Template.settings.events({
     },
     'change [name=web3Latency]'(event) {
         Settings.web3Latency.set(Number(event.currentTarget.value));
+        location.reload();
+    },
+    'change [name=trackerRunDebugging]'(event) {
+        Settings.trackerRunDebugging.set(event.currentTarget.checked);
         location.reload();
     },
     'click button.clearCaches'(event) {

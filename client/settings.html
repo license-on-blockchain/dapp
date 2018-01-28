@@ -57,6 +57,16 @@
                                 <option value="1000" {{selectedWeb3Latency 1000}}>1 s</option>
                             </select>
                         </div>
+                        <div class="dapp-clear-fix"></div>
+                    </div>
+                    <div class="row clear">
+                        <div class="col col-6 mobile-full">
+                            <h4>{{_ "settings.input.trackerRunDebugging.title"}}</h4>
+                            <input type="checkbox" name="trackerRunDebugging" title="{{_ "settings.input.trackerRunDebugging.description"}}" {{trackerRunDebuggingChecked}}>
+                        </div>
+                        <div class="dapp-clear-fix"></div>
+                    </div>
+                    <div class="row clear">
                         <div class="col col-6 mobile-full">
                             <h4>{{_ "settings.input.clearCaches.title"}}</h4>
                             <button class="dapp-block-button clearCaches">{{_ "settings.input.clearCaches.buttonTitle"}}</button>

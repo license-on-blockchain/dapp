@@ -79,7 +79,11 @@
       },
       "web3Latency": {
         "title": "Web3 Latency",
-        "description": "Artifical latency introduced to every web3 call"
+        "description": "Künstliche Latenz für jeden web3-Aufruf"
+      },
+      "trackerRunDebugging": {
+        "title": "Tracker run debugging",
+        "description": "Warnungen, wenn Tracker.autorun zu häufig ausgeführt wird"
       }
     },
     "confirmation": {
