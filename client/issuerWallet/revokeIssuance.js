@@ -3,13 +3,15 @@ import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {NotificationCenter} from "../../lib/NotificationCenter";
 import {Accounts} from "../../lib/Accounts";
+import {IssuanceID} from "../../lib/IssuanceID";
 
 function getValues() {
     let licenseContract = TemplateVar.getFrom(this.find('.licenseContract'), 'value').toLowerCase();
     if (licenseContract === '') {
         licenseContract = null;
     }
-    const issuanceNumber = this.find('[name=issuance]').value;
+    const issuanceID = TemplateVar.getFrom(this.find('.selectIssuance'), 'value');
+    const issuanceNumber = issuanceID ? issuanceID.issuanceNumber : null;
     const revocationReason = this.find('[name=revocationReason]').value;
     const confirmUndoable = this.find('[name=confirmUndoable]').checked;
     const gasPrice = TemplateVar.getFrom(this.find('.dapp-select-gas-price'), 'gasPrice');
@@ -65,7 +67,7 @@ Template.revokeIssuance.onCreated(function() {
 Template.revokeIssuance.onRendered(function() {
     const licenseContractsComputation = Tracker.autorun(() => {
         this.licenseContracts.set(lob.licenseContracts.getManagedLicenseContracts(Accounts.get()));
-        setTimeout(() => this.onFormUpdate(), 0);
+        setTimeout(() => this.onFormUpdate(), 100);
     });
     this.computations.add(licenseContractsComputation);
 
@@ -104,12 +106,12 @@ Template.revokeIssuance.helpers({
         return lob.issuances.getIssuancesOfLicenseContract(selectedLicenseContract, /*onlyNonRevoked*/true)
             .map((issuance) => {
                 return {
-                    licenseContract: issuance.licenseContract,
-                    issuanceNumber: issuance.issuanceNumber,
-                    description: issuance.description,
+                    issuanceID: IssuanceID.fromComponents(issuance.licenseContract, issuance.issuanceNumber),
+                    metadata: issuance,
+                    balance: issuance.originalSupply,
                     selected: issuance.issuanceNumber === Number(preselectedIssuanceID),
                 }
-            })
+            });
     },
     gasPrice() {
         return EthBlocks.latest.gasPrice;

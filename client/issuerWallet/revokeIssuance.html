@@ -12,11 +12,7 @@
                     </div>
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "revokeIssuance.input.issuance.title"}}</h4>
-                        <select name="issuance" title="{{_ "revokeIssuance.input.issuance.description"}}">
-                            {{#each issuances}}
-                                {{> issuanceRevokeOption}}
-                            {{/each}}
-                        </select>
+                        {{> selectIssuance issuances=issuances title=(_ "revokeIssuance.input.issuance.description")}}
                         <div class="lob-error-message" data-for="issuance"></div>
                     </div>
                     <div class="dapp-clear-fix"></div>
