@@ -6,6 +6,10 @@ import {Etherscan} from "../../lib/Etherscan";
 Template.waitForContractCreationMining.onCreated(function() {
     this.computations = new Set();
 
+    this.web3Transaction = new ReactiveVar({});
+});
+
+Template.waitForContractCreationMining.onRendered(function() {
     const waitForCreationComputation = Tracker.autorun(() => {
         const transaction = lob.transactions.getTransaction(this.data.transactionHash);
         if (transaction && transaction.licenseContract) {
@@ -15,7 +19,6 @@ Template.waitForContractCreationMining.onCreated(function() {
     });
     this.computations.add(waitForCreationComputation);
 
-    this.web3Transaction = new ReactiveVar({});
     web3.eth.getTransaction(this.data.transactionHash, (error, transaction) => {
         if (error) { handleUnknownEthereumError(error); return; }
         this.web3Transaction.set(transaction);
