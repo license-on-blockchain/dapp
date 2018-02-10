@@ -250,6 +250,7 @@
     "field": {
       "code": "Code",
       "licenseContractAddress": "License Contract",
+      "issuerName": "Issuer Name",
       "issuanceNumber": "Issuance Number",
       "originalSupply": "Original Supply",
       "auditTime": "Audit Date",

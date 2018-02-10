@@ -55,6 +55,10 @@ Template.issuanceInfo.helpers({
     licenseContract() {
         return this.issuance.get().licenseContract;
     },
+    issuerName() {
+        const licenseContractAddress = this.issuance.get().licenseContract;
+        return lob.licenseContracts.getIssuerName(licenseContractAddress);
+    },
     issuanceNumber() {
         return this.issuance.get().issuanceNumber;
     },

@@ -250,6 +250,7 @@
     "field": {
       "code": "Lizenzcode",
       "licenseContractAddress": "Smart Contract zur Bescheinigung der Lizenzen",
+      "issuerName": "Name der Bescheinigungsstelle",
       "issuanceNumber": "Bescheinigungsnummer",
       "originalSupply": "Anzahl",
       "auditTime": "Zeitpunkt der Bescheinigung",
