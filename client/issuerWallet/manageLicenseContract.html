@@ -47,16 +47,24 @@
 </template>
 
 <template name="issuanceRow">
-    <tr class="clickable issuancesRow">
-        <td><strong>{{issuanceNumber}}</strong></td>
+    <tr class="issuancesRow {{clickable}}">
+        <td>
+            {{#unless isPending}}
+                <strong>{{issuanceNumber}}</strong>
+            {{/unless}}
+        </td>
         <td><strong>{{description}}</strong></td>
         <td>{{originalSupply}}</td>
         <td>{{auditTime}}</td>
         <td class="wideButtonColumn">
-            {{#if revoked}}
-                <i>{{_ "manageLicenseContract.revoked"}}</i>
+            {{#if isPending}}
+                <i>{{_ "generic.transactionStatus.pending"}}</i>
             {{else}}
-                <a href="/licensecontracts/revoke/{{licenseContract}}/{{issuanceNumber}}" class="tableRowButton"><i class="icon-ban"></i> {{_ "manageLicenseContract.button.revokeIssuance"}}</a>
+                {{#if revoked}}
+                    <i>{{_ "manageLicenseContract.revoked"}}</i>
+                {{else}}
+                    <a href="/licensecontracts/revoke/{{licenseContract}}/{{issuanceNumber}}" class="tableRowButton"><i class="icon-ban"></i> {{_ "manageLicenseContract.button.revokeIssuance"}}</a>
+                {{/if}}
             {{/if}}
         </td>
     </tr>

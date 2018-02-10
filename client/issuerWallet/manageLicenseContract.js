@@ -11,7 +11,9 @@ Template.manageLicenseContract.onCreated(function() {
 
 Template.manageLicenseContract.helpers({
     issuances() {
-        return lob.issuances.getIssuancesOfLicenseContract(this.address).fetch().reverse();
+        const pendingIssuances = lob.transactions.getPendingIssuances(this.address).fetch();
+        const issuances = lob.issuances.getIssuancesOfLicenseContract(this.address).fetch().reverse();
+        return pendingIssuances.concat(issuances);
     },
     disabled() {
         return lob.licenseContracts.isDisabled(this.address);
@@ -33,6 +35,9 @@ Template.manageLicenseContract.events({
         if (event.target.tagName.toLowerCase() === 'a') {
             return;
         }
+        if (typeof this.issuanceNumber === 'undefined') {
+            return;
+        }
         const issuanceID = IssuanceID.fromComponents(this.licenseContract, this.issuanceNumber);
         IssuanceInfo.show(issuanceID);
     },
@@ -50,11 +55,21 @@ Template.manageLicenseContract.events({
 });
 
 Template.issuanceRow.helpers({
+    isPending() {
+        return typeof this.issuanceNumber === 'undefined';
+    },
+    clickable() {
+        if (typeof this.issuanceNumber === 'undefined') {
+            return '';
+        } else {
+            return 'clickable';
+        }
+    },
     auditTime() {
         if (this.auditTime) {
             return formatDate(new Date(this.auditTime * 1000));
         } else {
             return this.auditTime;
         }
-    }
+    },
 });
