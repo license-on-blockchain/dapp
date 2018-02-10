@@ -66,9 +66,9 @@
         "title": "Language",
         "description": "Choose the language the LOB wallet shall be in"
       },
-      "clearCaches": {
-        "title": "Clear Caches",
-        "buttonTitle": "Clear Caches"
+      "deleteLocalData": {
+        "title": "Delete Local Data",
+        "buttonTitle": "Delete local data"
       },
       "web3LoggingLevel": {
         "title": "Web3 Logging Level",
@@ -89,7 +89,7 @@
       }
     },
     "confirmation": {
-      "clearCaches": "Are you sure you want to delete all locally stored data? This action will not affect any data stored on the blockchain."
+      "deleteLocalData": "Are you sure you want to delete all locally stored data? This action will not affect any data stored on the blockchain."
     }
   },
   "accountBalance": {

@@ -59,9 +59,9 @@ Template.settings.events({
         Settings.trackerRunDebugging.set(event.currentTarget.checked);
         location.reload();
     },
-    'click button.clearCaches'(event) {
+    'click button.deleteLocalData'(event) {
         event.preventDefault();
-        if (confirm(TAPi18n.__('settings.confirmation.clearCaches'))) {
+        if (confirm(TAPi18n.__('settings.confirmation.deleteLocalData'))) {
             PersistentCollections.clearAll();
             location.reload();
         }
