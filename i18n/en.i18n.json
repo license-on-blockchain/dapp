@@ -94,7 +94,7 @@
   },
   "accountBalance": {
     "heading": {
-      "licensesWithWarnings": "Licenses that may not be genuine"
+      "licensesWithWarnings": "Licenses that may not be valid"
     },
     "hover": {
       "ownedBalance": "Licenses owned by you",
@@ -105,7 +105,7 @@
       "transfer": "Transfer",
       "reclaim": "Reclaim",
       "certificate": "Certificate",
-      "history": "History"
+      "history": "Transfer chain"
     },
     "error": {
       "noLicenses": {
@@ -261,7 +261,7 @@
     },
     "button": {
       "showCertificate": "Certificate",
-      "showTransferHistory": "Transfer History"
+      "showTransferHistory": "Transfer chain"
     }
   },
   "transferTransactionInfo": {

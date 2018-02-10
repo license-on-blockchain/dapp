@@ -94,7 +94,7 @@
   },
   "accountBalance": {
     "heading": {
-      "licensesWithWarnings": "Lizenzbescheinigungen, die ungültig sein könnten"
+      "licensesWithWarnings": "Nicht valide Lizenzbescheinigungen (Gültigkeit unklar)"
     },
     "hover": {
       "ownedBalance": "Ihre Lizenzen",
@@ -105,7 +105,7 @@
       "transfer": "Übertragen",
       "reclaim": "Zurückfordern",
       "certificate": "Zertifikat",
-      "history": "Historie"
+      "history": "Übertragungskette"
     },
     "error": {
       "noLicenses": {
@@ -261,7 +261,7 @@
     },
     "button": {
       "showCertificate": "Zertifikat",
-      "showTransferHistory": "Transaktionshistorie"
+      "showTransferHistory": "Übertragungskette"
     }
   },
   "transferTransactionInfo": {
