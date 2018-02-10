@@ -43,7 +43,7 @@ function validate(errorOnEmpty = false, errorMessages = []) {
     let noErrors = true;
 
     noErrors &= validateField('licenseContract', licenseContract, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_licenseContract_selected'), errorMessages);
-    noErrors &= validateField('issuance', issuanceNumber, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_issuance_selected'), errorMessages);
+    noErrors &= validateField('issuance', issuanceNumber !== null, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_issuance_selected'), errorMessages);
     noErrors &= validateField('revocationReason', revocationReason, errorOnEmpty, TAPi18n.__('revokeIssuance.error.no_revocationReason'), errorMessages);
     noErrors &= validateField('confirmUndoable', confirmUndoable, errorOnEmpty, TAPi18n.__('revokeIssuance.error.confirmUndoable_not_checked'), errorMessages);
     noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
