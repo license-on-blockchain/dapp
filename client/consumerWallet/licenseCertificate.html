@@ -1,9 +1,7 @@
 <template name="licenseCertificate">
     <div  class="certificateText">
         <p>
-            {{#each certificateText}}
-                {{this}}<br>
-            {{/each}}
+            {{{certificateText}}}
         </p>
 
         <p><i>{{_ "licenseCertificate.certificate_signed" signDate=signDate sslFingerprint=sslCertificate}}</i></p>
@@ -39,9 +37,9 @@
             <p><i>{{_ "licenseCertificate.auditRemarkIntro"}}</i> {{auditRemark}}</p>
         {{/if}}
         <hr>
-        {{> sslCertificateInformation licenseContract=licenseContract}}
-        <hr>
         <p>{{transferDescription}}</p>
+        <hr>
+        {{> sslCertificateInformation licenseContract=licenseContract}}
     </div>
     <div class="dapp-modal-buttons">
         <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>

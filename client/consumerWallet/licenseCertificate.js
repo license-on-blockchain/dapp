@@ -80,7 +80,7 @@ Template.licenseCertificate.onDestroyed(function() {
 Template.licenseCertificate.helpers({
     certificateText() {
         // Split text on newlines to insert <br> for newlines in the template an retain safe substrings
-        return Template.instance().certificateText.get().split('\n');
+        return Template.instance().certificateText.get().replace(/\n/g, '<br>');
     },
     revoked() {
         const issuance = lob.issuances.getIssuance(Template.instance().data.issuanceID);
