@@ -57,7 +57,7 @@
         <td class="buttonColumn"><a class="showCertificate tableRowButton" href="#"><i class="icon-doc"></i> {{_ "accountBalance.button.certificate"}}</a></td>
         <td class="buttonColumn"><a class="showHistory tableRowButton" href="#"><i class="icon-graph"></i> {{_ "accountBalance.button.history"}}</a></td>
         {{#if signatureValidationError}}
-            <td>
+            <td class="smallColumn">
                 <span class="lob-error-message simptip-position-bottom simptip-multiline simptip-danger" data-tooltip="{{signatureValidationError}}"><strong>!⃝</strong></span>
             </td>
         {{else}}
