@@ -82,6 +82,30 @@ Template.licenseCertificate.helpers({
         // Split text on newlines to insert <br> for newlines in the template an retain safe substrings
         return Template.instance().certificateText.get().split('\n');
     },
+    revoked() {
+        const issuance = lob.issuances.getIssuance(Template.instance().data.issuanceID);
+        if (issuance) {
+            return issuance.revoked;
+        } else {
+            return false;
+        }
+    },
+    revokeDate() {
+        const date = lob.issuances.getRevokeDate(Template.instance().data.issuanceID);
+        if (date) {
+            return formatDate(date);
+        } else {
+            return null;
+        }
+    },
+    revocationReason() {
+        const issuance = lob.issuances.getIssuance(Template.instance().data.issuanceID);
+        if (issuance) {
+            return issuance.revocationReason;
+        } else {
+            return null;
+        }
+    },
     sslCertificate() {
         const sslCertificate = lob.licenseContracts.getSSLCertificate(Template.instance().licenseContract);
         const certificateChain = new CertificateChain(sslCertificate);

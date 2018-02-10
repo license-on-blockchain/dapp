@@ -169,6 +169,7 @@
   },
   "licenseCertificate": {
     "certificate_signed": "Diese Erklärung wurde am __signDate__ mit SSL-Zertifikat mit Public-Key-Fingerprint __sslFingerprint__ unterzeichnet.",
+    "revoked_error": "Diese Lizenzbestätigung wurde am __revokeDate__ vom Lizenzaussteller mit folgendem Grund widerrufen: __revocationReason__",
     "licenseInfo": {
       "intro": "%s hat unter diesem LOB-License-Contract folgende Software-Lizenz bescheinigt:",
       "description": "Lizenztyp",

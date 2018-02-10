@@ -7,10 +7,14 @@
         </p>
 
         <p><i>{{_ "licenseCertificate.certificate_signed" signDate=signDate sslFingerprint=sslCertificate}}</i></p>
+
         <hr>
         <p>
             {{_ "licenseCertificate.licenseInfo.intro" issuerName}}
         </p>
+        {{#if revoked}}
+            <p class="lob-error-message">{{_ "licenseCertificate.revoked_error" revokeDate=revokeDate revocationReason=revocationReason}}</p>
+        {{/if}}
         <table class="dapp-zebra">
             <tbody>
             <tr>

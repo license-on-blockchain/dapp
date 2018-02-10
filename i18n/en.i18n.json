@@ -169,6 +169,7 @@
   },
   "licenseCertificate": {
     "certificate_signed": "This certificate has been signed on __signDate__ using the SSL certificate with public key fingerprint __sslFingerprint__.",
+    "revoked_error": "This issuance has been revoked by the issuer on __revokeDate__ with the following reason: __revocationReason__",
     "licenseInfo": {
       "intro": "%s has issued the following license under this LOB license contract:",
       "description": "License type",
