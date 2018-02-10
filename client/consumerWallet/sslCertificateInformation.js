@@ -1,6 +1,8 @@
 import {lob} from "../../lib/LOB";
 import {CertificateChain} from "../../lib/CertificateChain";
 import {formatDate} from "../../lib/utils";
+import {SSLCertificateRevokeCheck} from "./sslCertificateRevokeCheck";
+import forge from 'node-forge';
 
 Template.sslCertificateInformation.onCreated(function() {
     this.computations = new Set();
@@ -133,5 +135,11 @@ Template.detailedCertificateInfo.helpers({
     keyLength() {
         const publicKey = this.certificate.publicKey.n.toString(16);
         return publicKey.length * 4;
+    }
+});
+
+Template.detailedCertificateInfo.events({
+    'click .showCheckRevocationGuide'() {
+        SSLCertificateRevokeCheck.show(forge.pki.certificateToPem(this.certificate));
     }
 });

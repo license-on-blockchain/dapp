@@ -195,6 +195,7 @@
     },
     "certificateValid": "Zertifikat gültig",
     "signatureValid": "Signatur gültig",
+    "revocationWarning": "Die LOB Wallet überprüft nicht, ob das SSL-Zertifikat widerrufen wurde. Klicken Sie <a href='#' class='%s'>hier</a> um zu überprüfen ob dies geschehen ist.",
     "field": {
       "commonName": "Gebräuchlicher Name",
       "organization": "Organisation",
@@ -212,6 +213,10 @@
       "exponent": "Exponent",
       "keyLength": "Schlüssellänge"
     }
+  },
+  "sslCertificateRevokeCheck": {
+    "title": "<strong>Widerruf-Status</strong> eines SSL-Zertifikats <strong>überprüfen</strong>",
+    "instructions": "Um zu validieren, dass dieses SSL-Zertifikat nicht widerrufen wurde, überprüfen Sie den Revoke-Status über OCSP, z.B. über <a href='https://decoder.link/ocsp' target='_blank'>https://decoder.link/ocsp</a>. Kopieren Sie dazu die PEM-Repräsentatation des SSL-Zertifikats unten, fügen Ihn in das Textfeld auf der Webseite ein und klicken auf \"Check\"."
   },
   "licenseHistory": {
     "license_contract": "Smart Contract der Bescheinigungsstelle",

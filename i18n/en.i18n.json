@@ -195,6 +195,7 @@
     },
     "certificateValid": "Certificate valid",
     "signatureValid": "Signature valid",
+    "revocationWarning": "The LOB wallet does not check if this SSL certificate has been revoked. For instructions on how to check the revocation status click <a href='#' class='%s'>here</a>.",
     "field": {
       "commonName": "Common Name",
       "organization": "Organization",
@@ -212,6 +213,10 @@
       "exponent": "Exponent",
       "keyLength": "Key Length"
     }
+  },
+  "sslCertificateRevokeCheck": {
+    "title": "<strong>Check</strong> SSL certificate <strong>revocation status</strong>",
+    "instructions": "To validate that this SSL certificate has not been revoked, check its revocation status using OCSP, for example by using the webservice provided at <a href='https://decoder.link/ocsp' target='_blank'>https://decoder.link/ocsp</a>. For this copy the PEM-encoding of the certificate presented below, paste it into the text area on the linked web page and click \"Check\"."
   },
   "licenseHistory": {
     "license_contract": "License contract",
