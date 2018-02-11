@@ -5,8 +5,14 @@ Template.settings.helpers({
     enableInstallationChecked() {
         return Settings.enableInstallation.get() ? "checked" : "";
     },
+    showEnableInstallation() {
+        return this.advanced || Settings.enableInstallation.get();
+    },
     enableIssuerActionsChecked() {
         return Settings.enableIssuerActions.get() ? "checked" : "";
+    },
+    showEnableIssuerActions() {
+        return this.advanced || Settings.enableIssuerActions.get();
     },
     enableVerificationActionsChecked() {
         return Settings.enableVerificationActions.get() ? "checked" : "";
@@ -29,6 +35,9 @@ Template.settings.helpers({
     trackerRunDebuggingChecked() {
         return Settings.trackerRunDebugging.get() ? "checked" : "";
     },
+    showEnableDebugOptions() {
+        return this.advanced || Settings.enableDebugOptions.get();
+    }
 });
 
 Template.settings.events({

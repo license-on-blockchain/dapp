@@ -127,7 +127,21 @@ Router.route('/reclaim/reclaimer/:reclaimer/licenseContract/:licenseContract/iss
 });
 
 // Settings
-Router.route('/settings');
+Router.route('/settings', function() {
+    this.render('settings', {
+        data: {
+            advanced: false
+        }
+    })
+});
+
+Router.route('/settings/advanced', function() {
+    this.render('settings', {
+        data: {
+            advanced: true
+        }
+    })
+});
 
 Router.route('/licensecontracts', function() {
     this.render('managedLicenseContractList');

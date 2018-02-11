@@ -5,14 +5,18 @@
                 <h1>{{{_ "settings.title"}}}</h1>
                 <h2>{{_ "settings.heading.enableActions"}}</h2>
                 <div class="row clear">
-                    <div class="col col-6 mobile-full">
-                        <h4>{{_ "settings.input.enableInstallation.title"}}</h4>
-                        <input type="checkbox" name="enableInstallation" title="{{_ "settings.input.enableInstallation.description"}}" {{enableInstallationChecked}}>
-                    </div>
-                    <div class="col col-6 mobile-full">
-                        <h4>{{_ "settings.input.enableIssuerActions.title"}}</h4>
-                        <input type="checkbox" name="enableIssuerActions" title="{{_ "settings.input.enableIssuerActions.description"}}" {{enableIssuerActionsChecked}}>
-                    </div>
+                    {{#if showEnableInstallation}}
+                        <div class="col col-6 mobile-full">
+                            <h4>{{_ "settings.input.enableInstallation.title"}}</h4>
+                            <input type="checkbox" name="enableInstallation" title="{{_ "settings.input.enableInstallation.description"}}" {{enableInstallationChecked}}>
+                        </div>
+                    {{/if}}
+                    {{#if showEnableIssuerActions}}
+                        <div class="col col-6 mobile-full">
+                            <h4>{{_ "settings.input.enableIssuerActions.title"}}</h4>
+                            <input type="checkbox" name="enableIssuerActions" title="{{_ "settings.input.enableIssuerActions.description"}}" {{enableIssuerActionsChecked}}>
+                        </div>
+                    {{/if}}
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "settings.input.enableVerificationActions.title"}}</h4>
                         <input type="checkbox" name="enableVerificationActions" title="{{_ "settings.input.enableVerificationActions.description"}}" {{enableVerificationActionsChecked}}>
@@ -30,51 +34,53 @@
                     </div>
                     <div class="dapp-clear-fix"></div>
                 </div>
-                <h2>{{_ "settings.heading.debugSettings"}}</h2>
-                <div class="row clear">
-                    <div class="col col-6 mobile-full">
-                        <h4>{{_ "settings.input.enableDebugOptions.title"}}</h4>
-                        <input type="checkbox" name="enableDebugOptions" title="{{_ "settings.input.enableDebugOptions.description"}}" {{enableDebugOptionsChecked}}>
-                    </div>
-                    <div class="dapp-clear-fix"></div>
-                </div>
-                {{#if debugOptionsEnabled}}
+                {{#if showEnableDebugOptions}}
+                    <h2>{{_ "settings.heading.debugSettings"}}</h2>
                     <div class="row clear">
                         <div class="col col-6 mobile-full">
-                            <h4>{{_ "settings.input.web3LoggingLevel.title"}}</h4>
-                            <select name="web3LoggingLevel" title="{{_ "settings.input.web3LoggingLevel.description"}}">
-                                <option value="0" {{selectedWeb3LoggingLevel 0}}>{{_ "settings.input.web3LoggingLevel.option.none"}}</option>
-                                <option value="1" {{selectedWeb3LoggingLevel 1}}>{{_ "settings.input.web3LoggingLevel.option.duplicate"}}</option>
-                                <option value="2" {{selectedWeb3LoggingLevel 2}}>{{_ "settings.input.web3LoggingLevel.option.all"}}</option>
-                            </select>
-                        </div>
-                        <div class="col col-6 mobile-full">
-                            <h4>{{_ "settings.input.web3Latency.title"}}</h4>
-                            <select name="web3Latency" title="{{_ "settings.input.web3Latency.description"}}">
-                                <option value="0" {{selectedWeb3Latency 0}}>0 ms</option>
-                                <option value="50" {{selectedWeb3Latency 50}}>50 ms</option>
-                                <option value="100" {{selectedWeb3Latency 100}}>100 ms</option>
-                                <option value="200" {{selectedWeb3Latency 200}}>200 ms</option>
-                                <option value="500" {{selectedWeb3Latency 500}}>500 ms</option>
-                                <option value="1000" {{selectedWeb3Latency 1000}}>1 s</option>
-                            </select>
+                            <h4>{{_ "settings.input.enableDebugOptions.title"}}</h4>
+                            <input type="checkbox" name="enableDebugOptions" title="{{_ "settings.input.enableDebugOptions.description"}}" {{enableDebugOptionsChecked}}>
                         </div>
                         <div class="dapp-clear-fix"></div>
                     </div>
-                    <div class="row clear">
-                        <div class="col col-6 mobile-full">
-                            <h4>{{_ "settings.input.trackerRunDebugging.title"}}</h4>
-                            <input type="checkbox" name="trackerRunDebugging" title="{{_ "settings.input.trackerRunDebugging.description"}}" {{trackerRunDebuggingChecked}}>
+                    {{#if debugOptionsEnabled}}
+                        <div class="row clear">
+                            <div class="col col-6 mobile-full">
+                                <h4>{{_ "settings.input.web3LoggingLevel.title"}}</h4>
+                                <select name="web3LoggingLevel" title="{{_ "settings.input.web3LoggingLevel.description"}}">
+                                    <option value="0" {{selectedWeb3LoggingLevel 0}}>{{_ "settings.input.web3LoggingLevel.option.none"}}</option>
+                                    <option value="1" {{selectedWeb3LoggingLevel 1}}>{{_ "settings.input.web3LoggingLevel.option.duplicate"}}</option>
+                                    <option value="2" {{selectedWeb3LoggingLevel 2}}>{{_ "settings.input.web3LoggingLevel.option.all"}}</option>
+                                </select>
+                            </div>
+                            <div class="col col-6 mobile-full">
+                                <h4>{{_ "settings.input.web3Latency.title"}}</h4>
+                                <select name="web3Latency" title="{{_ "settings.input.web3Latency.description"}}">
+                                    <option value="0" {{selectedWeb3Latency 0}}>0 ms</option>
+                                    <option value="50" {{selectedWeb3Latency 50}}>50 ms</option>
+                                    <option value="100" {{selectedWeb3Latency 100}}>100 ms</option>
+                                    <option value="200" {{selectedWeb3Latency 200}}>200 ms</option>
+                                    <option value="500" {{selectedWeb3Latency 500}}>500 ms</option>
+                                    <option value="1000" {{selectedWeb3Latency 1000}}>1 s</option>
+                                </select>
+                            </div>
+                            <div class="dapp-clear-fix"></div>
                         </div>
-                        <div class="dapp-clear-fix"></div>
-                    </div>
-                    <div class="row clear">
-                        <div class="col col-6 mobile-full">
-                            <h4>{{_ "settings.input.deleteLocalData.title"}}</h4>
-                            <button class="dapp-block-button deleteLocalData">{{_ "settings.input.deleteLocalData.buttonTitle"}}</button>
+                        <div class="row clear">
+                            <div class="col col-6 mobile-full">
+                                <h4>{{_ "settings.input.trackerRunDebugging.title"}}</h4>
+                                <input type="checkbox" name="trackerRunDebugging" title="{{_ "settings.input.trackerRunDebugging.description"}}" {{trackerRunDebuggingChecked}}>
+                            </div>
+                            <div class="dapp-clear-fix"></div>
                         </div>
-                        <div class="dapp-clear-fix"></div>
-                    </div>
+                        <div class="row clear">
+                            <div class="col col-6 mobile-full">
+                                <h4>{{_ "settings.input.deleteLocalData.title"}}</h4>
+                                <button class="dapp-block-button deleteLocalData">{{_ "settings.input.deleteLocalData.buttonTitle"}}</button>
+                            </div>
+                            <div class="dapp-clear-fix"></div>
+                        </div>
+                    {{/if}}
                 {{/if}}
             </form>
         </main>
