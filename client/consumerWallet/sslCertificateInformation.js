@@ -139,7 +139,8 @@ Template.detailedCertificateInfo.helpers({
 });
 
 Template.detailedCertificateInfo.events({
-    'click .showCheckRevocationGuide'() {
+    'click .showCheckRevocationGuide'(event) {
+        event.preventDefault();
         SSLCertificateRevokeCheck.show(forge.pki.certificateToPem(this.certificate));
     }
 });

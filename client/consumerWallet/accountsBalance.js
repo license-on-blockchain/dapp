@@ -119,7 +119,8 @@ Template.licenseRow.helpers({
 });
 
 Template.licenseRow.events({
-    'click a.showCertificate'() {
+    'click a.showCertificate'(event) {
+        event.preventDefault();
         EthElements.Modal.show({
             template: 'licenseCertificate',
             data: {
@@ -128,7 +129,8 @@ Template.licenseRow.events({
             class: 'wideModal'
         });
     },
-    'click a.showHistory'() {
+    'click a.showHistory'(event) {
+        event.preventDefault();
         EthElements.Modal.show({
             template: 'licenseHistory',
             data: {

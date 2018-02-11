@@ -36,7 +36,8 @@ Template.disableLicenseContractTransactionInfo.events({
     'click button.hideModal'() {
         EthElements.Modal.hide();
     },
-    'click .showLicenseContractInfo'() {
+    'click .showLicenseContractInfo'(event) {
+        event.preventDefault();
         LicenseContractInfo.show(lob.transactions.getTransaction(this.transactionHash).licenseContract);
     }
 });

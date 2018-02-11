@@ -95,7 +95,8 @@ Template.issuanceInfo.events({
     'click button.hideModal'() {
         EthElements.Modal.hide();
     },
-    'click a.showLicenseContractInfo'() {
+    'click a.showLicenseContractInfo'(event) {
+        event.preventDefault();
         LicenseContractInfo.show(Template.instance().data.issuanceID.licenseContractAddress)
     },
     'click button.showCertificate'() {

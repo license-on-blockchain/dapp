@@ -53,16 +53,19 @@ Template.transferTransactionInfo.helpers({
 });
 
 Template.transferTransactionInfo.events({
-    'click a.showIssuanceInfo'() {
+    'click a.showIssuanceInfo'(event) {
+        event.preventDefault();
         const transaction = lob.transactions.getTransaction(this.transactionHash);
         const issuanceID = IssuanceID.fromComponents(transaction.licenseContract, transaction.issuanceNumber);
         IssuanceInfo.show(issuanceID);
     },
-    'click a.showFromAccountInfo'() {
+    'click a.showFromAccountInfo'(event) {
+        event.preventDefault();
         const from = lob.transactions.getTransaction(this.transactionHash).from;
         AccountInfo.show(from);
     },
-    'click a.showToAccountInfo'() {
+    'click a.showToAccountInfo'(event) {
+        event.preventDefault();
         const from = lob.transactions.getTransaction(this.transactionHash).to;
         AccountInfo.show(from);
     },

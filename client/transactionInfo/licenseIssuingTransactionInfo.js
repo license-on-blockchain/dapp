@@ -51,14 +51,17 @@ Template.licenseIssuingTransactionInfo.events({
     'click button.hideModal'() {
         EthElements.Modal.hide();
     },
-    'click .showLicenseContractInfo'() {
+    'click .showLicenseContractInfo'(event) {
+        event.preventDefault();
         LicenseContractInfo.show(lob.transactions.getTransaction(this.transactionHash).licenseContract);
     },
-    'click .showIssuerAccountInfo'() {
+    'click .showIssuerAccountInfo'(event) {
+        event.preventDefault();
         const issuerAddress = lob.transactions.getTransaction(this.transactionHash).from;
         AccountInfo.show(issuerAddress);
     },
-    'click .showInitialOwnerAccountInfo'() {
+    'click .showInitialOwnerAccountInfo'(event) {
+        event.preventDefault();
         const initialOwnerAddress = lob.transactions.getTransaction(this.transactionHash).initialOwnerAddress;
         AccountInfo.show(initialOwnerAddress);
     }

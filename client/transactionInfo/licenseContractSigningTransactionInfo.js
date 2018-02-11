@@ -32,10 +32,12 @@ Template.licenseContractSigningTransactionInfo.events({
     'click button.hideModal'() {
         EthElements.Modal.hide();
     },
-    'click .showLicenseContractInfo'() {
+    'click .showLicenseContractInfo'(event) {
+        event.preventDefault();
         LicenseContractInfo.show(lob.transactions.getTransaction(this.transactionHash).licenseContract);
     },
-    'click .showFromAccountInfo'() {
+    'click .showFromAccountInfo'(event) {
+        event.preventDefault();
         const fromAddress = lob.transactions.getTransaction(this.transactionHash).from;
         AccountInfo.show(fromAddress);
     }

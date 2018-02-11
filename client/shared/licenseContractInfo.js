@@ -56,7 +56,8 @@ Template.licenseContractInfo.events({
     'click button.hideModal'() {
         EthElements.Modal.hide();
     },
-    'click a.showIssuanceInfo'() {
+    'click a.showIssuanceInfo'(event) {
+        event.preventDefault();
         const issuanceID = IssuanceID.fromComponents(this.licenseContract, this.issuanceNumber);
         IssuanceInfo.show(issuanceID);
     }
@@ -96,7 +97,8 @@ Template.licenseContractDetails.events({
             event.target.blur();
         }
     },
-    'click .showIssuerAccountInfo'() {
+    'click .showIssuerAccountInfo'(event) {
+        event.preventDefault();
         const issuerAddress = lob.licenseContracts.getIssuerAddress(this.address);
         AccountInfo.show(issuerAddress);
     }

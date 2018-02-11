@@ -49,11 +49,13 @@ Template.licenseContractCreationTransactionInfo.events({
     'click button.hideModal'() {
         EthElements.Modal.hide();
     },
-    'click .showLicenseContractInfo'() {
+    'click .showLicenseContractInfo'(event) {
+        event.preventDefault();
         const licenseContract = lob.transactions.getTransaction(this.transactionHash).licenseContract;
         LicenseContractInfo.show(licenseContract);
     },
-    'click .showIssuerAccountInfo'() {
+    'click .showIssuerAccountInfo'(event) {
+        event.preventDefault();
         const issuerAddress = lob.transactions.getTransaction(this.transactionHash).issuerAddress;
         AccountInfo.show(issuerAddress);
     }

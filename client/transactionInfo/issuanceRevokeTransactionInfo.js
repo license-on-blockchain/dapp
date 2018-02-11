@@ -44,7 +44,8 @@ Template.issuanceRevokeTransactionInfo.helpers({
 });
 
 Template.issuanceRevokeTransactionInfo.events({
-    'click a.showIssuanceInfo'() {
+    'click a.showIssuanceInfo'(event) {
+        event.preventDefault();
         const transaction = lob.transactions.getTransaction(this.transactionHash);
         const issuanceID = IssuanceID.fromComponents(transaction.licenseContract, transaction.issuanceNumber);
         IssuanceInfo.show(issuanceID);
