@@ -45,6 +45,15 @@ Template.issuanceInfo.onCreated(function() {
     this.computations.add(balancesComputation);
 });
 
+Template.issuanceInfo.onRendered(function() {
+    const internalNameUpdate = Tracker.autorun(() => {
+        const issuance = lob.issuances.getIssuance(this.data.issuanceID);
+        const internalComment = issuance ? issuance.internalComment : "";
+        this.$('.internalComment').html(internalComment);
+    });
+    this.computations.add(internalNameUpdate);
+});
+
 Template.issuanceInfo.onDestroyed(function() {
     for (const computation of this.computations) {
         computation.stop();
@@ -92,6 +101,15 @@ Template.issuanceInfo.helpers({
 });
 
 Template.issuanceInfo.events({
+    'blur .internalComment'(event) {
+        const comment = event.target.innerText.trim();
+        lob.issuances.setInternalComment(Template.instance().data.issuanceID, comment)
+    },
+    'keypress .internalComment'(event) {
+        if (event.keyCode === 13) { // Enter
+            event.target.blur();
+        }
+    },
     'click button.hideModal'() {
         EthElements.Modal.hide();
     },

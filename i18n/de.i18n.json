@@ -249,6 +249,7 @@
       "balances": "Lizenzen"
     },
     "field": {
+      "internalComment": "Interner Vermerk",
       "code": "Lizenzcode",
       "licenseContractAddress": "Smart Contract zur Bescheinigung der Lizenzen",
       "issuerName": "Name der Bescheinigungsstelle",

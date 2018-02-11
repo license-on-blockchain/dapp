@@ -98,6 +98,9 @@ Template.licenseRow.helpers({
     description() {
         return this.metadata.description;
     },
+    internalComment() {
+        return this.metadata.internalComment;
+    },
     actionsEnabled() {
         return this.actionsEnabled;
     },

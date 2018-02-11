@@ -29,6 +29,11 @@
 <template name="licenseRow">
     <tr class="clickable">
         <td><strong>{{description}}</strong></td>
+        {{#if internalComment}}
+            <td><i>{{internalComment}}</i></td>
+        {{else}}
+            <td class="collapsed"></td>
+        {{/if}}
         <td class="buttonColumn">
             {{#if extendedBalanceInfo}}
                 <span class="simptip-position-bottom" data-tooltip="{{_ "accountBalance.hover.ownedBalance"}}">{{balance}}</span>

@@ -249,6 +249,7 @@
       "balances": "Balances"
     },
     "field": {
+      "internalComment": "Internal Comment",
       "code": "Code",
       "licenseContractAddress": "License Contract",
       "issuerName": "Issuer Name",
