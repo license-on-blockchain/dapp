@@ -1,5 +1,5 @@
 <template name="licenseCertificate">
-    <div class="certificateText">
+    <div class="licenseCertificate">
         <h1>{{{_ "licenseCertificate.title"}}}</h1>
 
         <h3>{{{_ "licenseCertificate.heading.issuedLicenses"}}}</h3>
@@ -35,7 +35,7 @@
         <hr>
         <h3>{{{_ "licenseCertificate.heading.certificateText"}}}</h3>
 
-        <p>{{{certificateText}}}</p>
+        <p class="certificateText">{{certificateText}}</p>
 
         <p><i>{{_ "licenseCertificate.certificate_signed" signDate=signDate sslFingerprint=sslCertificate}}</i><br></p>
 
