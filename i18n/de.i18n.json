@@ -26,7 +26,7 @@
       "failed": "Fehlgeschlagen",
       "pending": "Wird verarbeitet"
     },
-    "footer": "© <a href='__lobLink__'>LOB – License on Blockchain</a> | <a href='#' class='__termsOfUsageClass__'>Nutzungsbedingungen</a>"
+    "footer": "© <a href='__lobLink__'>LOB – License on Blockchain</a> | <a href='#' class='__termsOfUsageClass__'>Nutzungsbedingungen</a> | <a href='#' class='__acknowledgementsClass__'>Verwendete Packages</a>"
   },
   "tab": {
     "title": {
@@ -42,6 +42,10 @@
   "termsOfUsage": {
     "title": "Nutzungsbedingungen",
     "text": "Dieses Programm ist freie Software.<br>Sie können es unter den Bedingungen der GNU General Public License Version 3, wie von der Free Software Foundation veröffentlicht, nutzen.<br>Die Veröffentlichung dieses Programms erfolgt in der Hoffnung, daß es Ihnen von Nutzen sein wird, aber ohne irgendeine Haftung oder Garantie, sogar ohne die implizite Garantie der Marktreife oder der Verwendbarkeit für einen bestimmten Zweck.<br>Details finden Sie in der GNU General Public License, siehe <a href='http://www.gnu.org/licenses/'>http://www.gnu.org/licenses/</a>."
+  },
+  "acknowledgements": {
+    "title": "Verwendete Packages",
+    "text": "Die LOB-Wallet verwendet folgende Packages, die öffentlich bereitgestellt werden:"
   },
   "settings": {
     "title": "<strong>Einstellungen</strong>",

@@ -10,6 +10,7 @@ import {Accounts} from "../lib/Accounts";
 import {handleUnknownEthereumError} from "../lib/ErrorHandling";
 import {InitialLoadingStatus} from "../lib/InitialLoadingStatus";
 import {TermsOfUsage} from "./consumerWallet/termsOfUsage";
+import {Acknowledgements} from "./consumerWallet/acknowledgements";
 
 let __lastAccounts = null;
 function onAccountsChange(callback) {
@@ -89,6 +90,9 @@ Template.body.helpers({
 Template.body.events({
     'click .termsOfUsageLink'() {
         TermsOfUsage.show();
+    },
+    'click .acknowledgementsLink'() {
+        Acknowledgements.show();
     }
 });
 

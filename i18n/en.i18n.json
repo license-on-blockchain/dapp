@@ -26,7 +26,7 @@
       "failed": "Failed",
       "pending": "Pending"
     },
-    "footer": "© <a href='__lobLink__'>LOB – License on Blockchain</a> | <a href='#' class='__termsOfUsageClass__'>Terms of usage</a>"
+    "footer": "© <a href='__lobLink__'>LOB – License on Blockchain</a> | <a href='#' class='__termsOfUsageClass__'>Terms of usage</a> | <a href='#' class='__acknowledgementsClass__'>Acknowledgements</a>"
   },
   "tab": {
     "title": {
@@ -42,6 +42,10 @@
   "termsOfUsage": {
     "title": "Terms of usage",
     "text": "This program is free software; you can use it under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.<br>This program is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose.<br>See the GNU General Public License for more details, see <http://www.gnu.org/licenses/>."
+  },
+  "acknowledgements": {
+    "title": "<strong>Acknowledgements</strong>",
+    "text": "The LOB wallet uses the following open source packages:"
   },
   "settings": {
     "title": "<strong>Settings</strong>",
