@@ -462,7 +462,7 @@
       },
       "safekeepingPeriod": {
         "title": "Aufbewahrungsfrist (Jahre)",
-        "description": "Zeitraums, innerhalb dessen Sie alle Unterlagen, die Sie im Rahmen Ihres Lizenzbescheinigungsprozesses eingesehen und geprüft haben, vorhalten werden"
+        "description": "Zeitraum, innerhalb dessen Sie alle Unterlagen, die Sie im Rahmen Ihres Lizenzbescheinigungsprozesses eingesehen und geprüft haben, vorhalten werden"
       },
       "sslCertificate": {
         "title": "SSL-Zertifikat, das Ihre Identität bestätigt (PEM-kodierte Zertifikatskette)",
@@ -676,7 +676,7 @@
     },
     "metamaskLocked": {
       "title": "MetaMask gesperrt",
-      "message": "Der Zugriff über MetaMask ist gesperrt. Bitte entsperren Sie MetaMask indem Sie oben rechts auf den Fuchs klicken und Ihr MetaMask-Passwort eingeben"
+      "message": "Der Zugriff über MetaMask ist gesperrt. Bitte entsperren Sie MetaMask indem Sie oben rechts auf das MetaMask-Log klicken und Ihr MetaMask-Passwort eingeben"
     }
   },
   "signatureValidationError": {
