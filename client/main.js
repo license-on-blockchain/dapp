@@ -9,6 +9,7 @@ import {arraysEqual} from "../lib/utils";
 import {Accounts} from "../lib/Accounts";
 import {handleUnknownEthereumError} from "../lib/ErrorHandling";
 import {InitialLoadingStatus} from "../lib/InitialLoadingStatus";
+import {TermsOfUsage} from "./consumerWallet/termsOfUsage";
 
 let __lastAccounts = null;
 function onAccountsChange(callback) {
@@ -85,6 +86,12 @@ Template.body.helpers({
     }
 });
 
+Template.body.events({
+    'click .termsOfUsageLink'() {
+        TermsOfUsage.show();
+    }
+});
+
 Meteor.startup(function() {
     if (Meteor.isClient) {
         Tracker.autorun(() => {
@@ -122,5 +129,11 @@ Meteor.startup(function() {
                 });
             }
         });
+
+        setTimeout(() => {
+            if (!Settings.termsOfUsageShown.get()) {
+                TermsOfUsage.show();
+            }
+        }, 1000);
     }
 });
