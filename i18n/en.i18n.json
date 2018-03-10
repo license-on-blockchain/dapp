@@ -168,10 +168,18 @@
     }
   },
   "licenseCertificate": {
+    "title": "License <strong>certificate</strong>",
+    "heading": {
+      "issuedLicenses": "Issued licenses",
+      "certificateText": "Certificate text",
+      "certificateCheck": "Certificate information"
+    },
+    "certificateValid": "Certificate valid",
+    "signatureValid": "Signature valid",
     "certificate_signed": "This certificate has been signed on __signDate__ using the SSL certificate with public key fingerprint __sslFingerprint__.",
+    "sslCertificateInfoLink": "To view extended information on the SSL certificate used to sign this license contract and verify that those have not been revoked, click <a class='%s' href='#'>here</a>.",
     "revoked_error": "This issuance has been revoked by the issuer on __revokeDate__ with the following reason: __revocationReason__",
     "licenseInfo": {
-      "intro": "%s has issued the following license under this LOB license contract:",
       "description": "License type",
       "code": "License code",
       "amount": "Amount",
@@ -189,13 +197,11 @@
     }
   },
   "sslCertificateInformation": {
+    "title": "<strong>SSL Certificate</strong> Information",
     "heading": {
-      "certificateCheck": "Certificate information",
       "certificateChain": "SSL Certificate Chain",
       "detailedCertificateInformation": "Detailed Certificate Information"
     },
-    "certificateValid": "Certificate valid",
-    "signatureValid": "Signature valid",
     "revocationWarning": "The LOB wallet does not check if this SSL certificate has been revoked. For instructions on how to check the revocation status click <a href='#' class='%s'>here</a>.",
     "field": {
       "commonName": "Common Name",

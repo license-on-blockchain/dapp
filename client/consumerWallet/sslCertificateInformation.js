@@ -4,6 +4,18 @@ import {formatDate} from "../../lib/utils";
 import {SSLCertificateRevokeCheck} from "./sslCertificateRevokeCheck";
 import forge from 'node-forge';
 
+export const SSLCertificateInfo = {
+    show(licenseContract) {
+        EthElements.Modal.show({
+            template: 'sslCertificateInformation',
+            data: {
+                licenseContract: licenseContract,
+            },
+            class: 'wideModal'
+        });
+    }
+};
+
 Template.sslCertificateInformation.onCreated(function() {
     this.computations = new Set();
 
@@ -34,21 +46,6 @@ Template.sslCertificateInformation.onDestroyed(function() {
 });
 
 Template.sslCertificateInformation.helpers({
-    certificateValidationError() {
-        try {
-            if (lob.licenseContracts.isSSLCertificateValid(Template.instance().licenseContract)) {
-                return null;
-            } else {
-                // noinspection ExceptionCaughtLocallyJS
-                throw TAPi18n.__('signatureValidationError.generic');
-            }
-        } catch (error) {
-            return error;
-        }
-    },
-    signatureValidationError() {
-        return lob.licenseContracts.getSignatureValidationError(Template.instance().licenseContract);
-    },
     certificates() {
         const certificateChain = Template.instance().certificateChain.get();
         const selectedIndex = Template.instance().selectedCertificateIndex.get();
@@ -79,6 +76,9 @@ Template.sslCertificateInformation.helpers({
 Template.sslCertificateInformation.events({
     'click .certificateRow'() {
         Template.instance().selectedCertificateIndex.set(this.index);
+    },
+    'click button.hideModal'() {
+        EthElements.Modal.hide();
     }
 });
 

@@ -1,43 +1,24 @@
 <template name="sslCertificateInformation">
-    <h4>{{_ "sslCertificateInformation.heading.certificateCheck"}}</h4>
-    <table class="dapp-zebra">
-        <tbody>
-        <tr>
-            <td>{{_ "sslCertificateInformation.certificateValid"}}</td>
-            <td><strong>
-                {{#if certificateValidationError}}
-                    <span data-tooltip="{{certificateValidationError}}" class="simptip-multiline simptip-position-bottom simptip-danger">❌</span>
-                {{else}}
-                    ✔
-                {{/if}}
-            </strong></td>
-        </tr>
-        <tr>
-            <td>{{_ "sslCertificateInformation.signatureValid"}}</td>
-            <td><strong>
-                {{#if signatureValidationError}}
-                    <span data-tooltip="{{signatureValidationError}}" class="simptip-multiline simptip-position-bottom simptip-danger">❌</span>
-                {{else}}
-                    ✔
-                {{/if}}
-            </strong></td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="sslCertificateInformation">
+        <h1>{{{_ "sslCertificateInformation.title"}}}</h1>
 
-    <h4>{{_ "sslCertificateInformation.heading.certificateChain"}}</h4>
-    <table class="dapp-zebra">
-        <tbody>
-        {{#each certificates}}
-            {{> certificateRow}}
-        {{/each}}
-        </tbody>
-    </table>
+        <h4>{{_ "sslCertificateInformation.heading.certificateChain"}}</h4>
+        <table class="dapp-zebra">
+            <tbody>
+            {{#each certificates}}
+                {{> certificateRow}}
+            {{/each}}
+            </tbody>
+        </table>
 
-    <h4>{{_ "sslCertificateInformation.heading.detailedCertificateInformation"}}</h4>
-    {{#if selectedCertificate}}
-        {{> detailedCertificateInfo certificate=selectedCertificate}}
-    {{/if}}
+        <h4>{{_ "sslCertificateInformation.heading.detailedCertificateInformation"}}</h4>
+        {{#if selectedCertificate}}
+            {{> detailedCertificateInfo certificate=selectedCertificate}}
+        {{/if}}
+    </div>
+    <div class="dapp-modal-buttons">
+        <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
+    </div>
 </template>
 
 <template name="certificateRow">
@@ -132,5 +113,7 @@
         </tr>
         </tbody>
     </table>
-    {{{_ "sslCertificateInformation.revocationWarning" 'showCheckRevocationGuide'}}}
+    <p>
+        {{{_ "sslCertificateInformation.revocationWarning" 'showCheckRevocationGuide'}}}
+    </p>
 </template>

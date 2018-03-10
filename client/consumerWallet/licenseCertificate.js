@@ -3,6 +3,7 @@ import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {CertificateChain} from "../../lib/CertificateChain";
 import {formatDate} from "../../lib/utils";
 import {Accounts} from "../../lib/Accounts";
+import {SSLCertificateInfo} from "./sslCertificateInformation";
 
 function transferDescription(transfers, issuanceID) {
     switch (transfers.length) {
@@ -145,10 +146,29 @@ Template.licenseCertificate.helpers({
     },
     licenseContract() {
         return Template.instance().licenseContract;
-    }
+    },
+    certificateValidationError() {
+        try {
+            if (lob.licenseContracts.isSSLCertificateValid(Template.instance().licenseContract)) {
+                return null;
+            } else {
+                // noinspection ExceptionCaughtLocallyJS
+                throw TAPi18n.__('signatureValidationError.generic');
+            }
+        } catch (error) {
+            return error;
+        }
+    },
+    signatureValidationError() {
+        return lob.licenseContracts.getSignatureValidationError(Template.instance().licenseContract);
+    },
 });
 
 Template.licenseCertificate.events({
+    'click .showSSLCertificateInformation'(event) {
+        event.preventDefault();
+        SSLCertificateInfo.show(Template.instance().licenseContract);
+    },
     'click button.hideModal'() {
         EthElements.Modal.hide();
     }

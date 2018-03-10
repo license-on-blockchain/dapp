@@ -1,15 +1,8 @@
 <template name="licenseCertificate">
-    <div  class="certificateText">
-        <p>
-            {{{certificateText}}}
-        </p>
+    <div class="certificateText">
+        <h1>{{{_ "licenseCertificate.title"}}}</h1>
 
-        <p><i>{{_ "licenseCertificate.certificate_signed" signDate=signDate sslFingerprint=sslCertificate}}</i></p>
-
-        <hr>
-        <p>
-            {{_ "licenseCertificate.licenseInfo.intro" issuerName}}
-        </p>
+        <h3>{{{_ "licenseCertificate.heading.issuedLicenses"}}}</h3>
         {{#if revoked}}
             <p class="lob-error-message">{{_ "licenseCertificate.revoked_error" revokeDate=revokeDate revocationReason=revocationReason}}</p>
         {{/if}}
@@ -36,10 +29,46 @@
         {{#if auditRemark}}
             <p><i>{{_ "licenseCertificate.auditRemarkIntro"}}</i> {{auditRemark}}</p>
         {{/if}}
-        <hr>
+
         <p>{{transferDescription}}</p>
+
         <hr>
-        {{> sslCertificateInformation licenseContract=licenseContract}}
+        <h3>{{{_ "licenseCertificate.heading.certificateText"}}}</h3>
+
+        <p>{{{certificateText}}}</p>
+
+        <p><i>{{_ "licenseCertificate.certificate_signed" signDate=signDate sslFingerprint=sslCertificate}}</i><br></p>
+
+        <hr>
+        <h3>{{_ "licenseCertificate.heading.certificateCheck"}}</h3>
+
+        <table class="dapp-zebra">
+            <tbody>
+            <tr>
+                <td>{{_ "licenseCertificate.certificateValid"}}</td>
+                <td><strong>
+                    {{#if certificateValidationError}}
+                        <span data-tooltip="{{certificateValidationError}}" class="simptip-multiline simptip-position-bottom simptip-danger">❌</span>
+                    {{else}}
+                        ✔
+                    {{/if}}
+                </strong></td>
+            </tr>
+            <tr>
+                <td>{{_ "licenseCertificate.signatureValid"}}</td>
+                <td><strong>
+                    {{#if signatureValidationError}}
+                        <span data-tooltip="{{signatureValidationError}}" class="simptip-multiline simptip-position-bottom simptip-danger">❌</span>
+                    {{else}}
+                        ✔
+                    {{/if}}
+                </strong></td>
+            </tr>
+            </tbody>
+        </table>
+        <p>
+            <i>{{{_ "licenseCertificate.sslCertificateInfoLink" 'showSSLCertificateInformation'}}}</i>
+        </p>
     </div>
     <div class="dapp-modal-buttons">
         <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>

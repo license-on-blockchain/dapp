@@ -168,10 +168,18 @@
     }
   },
   "licenseCertificate": {
+    "title": "<strong>Lizenzzertifikat</strong>",
+    "heading": {
+      "issuedLicenses": "Bescheinigte Lizenzen",
+      "certificateText": "Zertifikatstext",
+      "certificateCheck": "SSL-Zertifikatsinformationen"
+    },
+    "certificateValid": "SSL-Zertifikat gültig",
+    "signatureValid": "SSL-Signatur gültig",
     "certificate_signed": "Diese Erklärung wurde am __signDate__ mit SSL-Zertifikat mit Public-Key-Fingerprint __sslFingerprint__ unterzeichnet.",
+    "sslCertificateInfoLink": "Klicken Sie <a class='%s' href='#'>hier</a> um erweiterte Informationen über das SSL-Zertifikat, welches zur Unterzeichnung des Smart Contracts genutzt wurde, anzuzeigen und zu überprüfen, dass dieses nicht widerrufen wurde.",
     "revoked_error": "Diese Lizenzbestätigung wurde am __revokeDate__ vom Lizenzaussteller mit folgendem Grund widerrufen: __revocationReason__",
     "licenseInfo": {
-      "intro": "%s hat unter diesem LOB-License-Contract folgende Software-Lizenz bescheinigt:",
       "description": "Lizenztyp",
       "code": "Lizenzcode",
       "amount": "Anzahl",
@@ -189,13 +197,11 @@
     }
   },
   "sslCertificateInformation": {
+    "title": "<strong>SSL</strong>-Zertifikatsinformationen",
     "heading": {
-      "certificateCheck": "SSL Zertifikatsinformationen",
-      "certificateChain": "SSL Zertifikatskette",
+      "certificateChain": "SSL-Zertifikatskette",
       "detailedCertificateInformation": "Detaillierte Zertifikatsinformationen"
     },
-    "certificateValid": "Zertifikat gültig",
-    "signatureValid": "Signatur gültig",
     "revocationWarning": "Die LOB Wallet überprüft nicht, ob das SSL-Zertifikat widerrufen wurde. Klicken Sie <a href='#' class='%s'>hier</a> um zu überprüfen ob dies geschehen ist.",
     "field": {
       "commonName": "Gebräuchlicher Name",
