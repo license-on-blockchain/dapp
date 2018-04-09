@@ -7,25 +7,34 @@ import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
 import {privateKeyCache} from "../../lib/PrivateKeyCache";
 
+function parseCertificate(certificate) {
+    if (certificate.startsWith("-----BEGIN CERTIFICATE-----")) {
+        return CertificateChain.convertPemCertificateToPKCS12Bytes(certificate);
+    } else {
+        return hexToBytes(certificate);
+    }
+}
+
 function getValues() {
     const rootContractAddress = this.find('[name=rootContract]').value.toLowerCase();
     const issuerAddress = TemplateVar.getFrom(this.find('[name=issuerAddress]'), 'value').toLowerCase();
     const issuerName = this.find('[name=issuerName]').value;
     const liability = this.find('[name=liability]').value;
     const safekeepingPeriod = this.find('[name=safekeepingPeriod]').value;
-    let certificate = this.find('[name=sslCertificate]').value;
-    if (certificate.startsWith("-----BEGIN CERTIFICATE-----")) {
-        certificate = CertificateChain.convertPemCertificateToPKCS12Bytes(certificate);
-    } else {
-        certificate = hexToBytes(certificate);
-    }
+    const rawCertificate = this.find('[name=sslCertificate]').value;
     const privateKey = this.find('[name=sslPrivateKey]').value;
 
-    return {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, privateKey};
+    return {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, rawCertificate, privateKey};
 }
 
 function onFormUpdate() {
-    const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate} = Template.instance().getValues();
+    const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, rawCertificate} = Template.instance().getValues();
+    let certificate;
+    try {
+        certificate = parseCertificate(rawCertificate);
+    } catch (error) {
+        certificate = null;
+    }
 
     lob.licenseIssuing.estimateGas.createLicenseContract(rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, (error, gasConsumption) => {
         if (error) { handleUnknownEthereumError(error); return; }
@@ -39,8 +48,17 @@ function onFormUpdate() {
 function validate(errorOnEmpty = false, errorMessages = []) {
     this.resetErrors();
 
-    const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, privateKey} = this.getValues();
     let noErrors = true;
+
+    const {rootContractAddress, issuerAddress, issuerName, safekeepingPeriod, rawCertificate, privateKey} = this.getValues();
+    let certificate;
+    try {
+        certificate = parseCertificate(rawCertificate);
+    } catch (error) {
+        validateField('sslCertificate', certificate, true, error, errorMessages);
+        certificate = null;
+    }
+
 
     noErrors &= validateField('rootContract', rootContractAddress, errorOnEmpty, TAPi18n.__('createLicenseContract.error.no_root_contract_selected'), errorMessages);
     noErrors &= validateField('issuerAddress', web3.isAddress(issuerAddress), true, TAPi18n.__('createLicenseContract.error.no_issuer_address_selected'), errorMessages);
@@ -143,7 +161,8 @@ Template.createLicenseContract.events({
             return;
         }
 
-        const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, gasPrice, certificate, privateKey} = Template.instance().getValues();
+        const {rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, gasPrice, rawCertificate, privateKey} = Template.instance().getValues();
+        const certificate = parseCertificate(rawCertificate);
 
         lob.licenseIssuing.createLicenseContract(rootContractAddress, issuerAddress, issuerName, liability, safekeepingPeriod, certificate, gasPrice, (error, transactionHash) => {
             if (error) {
