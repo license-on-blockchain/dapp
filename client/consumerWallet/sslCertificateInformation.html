@@ -27,7 +27,11 @@
             {{#unless isRoot}}
                 <span style="margin-left: {{indentation}}em">↳</span>
             {{/unless}}
-            {{commonName}}
+            {{#if organization}}
+                {{organization}} ({{commonName}})
+            {{else}}
+                {{commonName}}
+            {{/if}}
         </strong></td>
     </tr>
 </template>

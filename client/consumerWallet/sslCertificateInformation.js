@@ -83,6 +83,9 @@ Template.sslCertificateInformation.events({
 });
 
 Template.certificateRow.helpers({
+    organization() {
+        return this.certificate.subject.getField("O").value;
+    },
     commonName() {
         return this.certificate.subject.getField("CN").value;
     },
