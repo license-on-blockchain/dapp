@@ -36,3 +36,6 @@ Afterwards start a local development web server using the following command and 
 meteor
 ```
 
+## Build for distribution
+
+To build the Dapp for distribution, install [meteor-build-client](https://github.com/frozeman/meteor-build-client) and run `build.sh`.
