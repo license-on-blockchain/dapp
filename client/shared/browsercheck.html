@@ -29,6 +29,13 @@
                     ">
                     <img class="installMetamask" src="download-metamask-dark.png">
                     </a>
+                {{else if pendingEthereumAccessPopup}}
+                    <h1>{{_ "browsercheck.pendingEthereumAccessPopup.title"}}</h1>
+                    <p>{{_ "browsercheck.pendingEthereumAccessPopup.message"}}</p>
+                {{else if ethereumAccessNotAuthorized}}
+                    <h1>{{_ "browsercheck.ethereumAccessNotAuthorized.title"}}</h1>
+                    <p>{{_ "browsercheck.ethereumAccessNotAuthorized.message"}}</p>
+                    <button id="requestEthereumAccess" class="dapp-block-button">{{_ "browsercheck.ethereumAccessNotAuthorized.requestAccessButton"}}</button>
                 {{else if metamaskLocked}}
                     <h1>{{_ "browsercheck.metamaskLocked.title"}}</h1>
                     <p>{{{_ "browsercheck.metamaskLocked.message"}}}</p>

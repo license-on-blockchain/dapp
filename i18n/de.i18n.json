@@ -683,6 +683,15 @@
       "installFirefox": "https://addons.mozilla.org/de/firefox/addon/ether-metamask/",
       "installChrome": "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=de"
     },
+    "pendingEthereumAccessPopup": {
+      "title": "Ausstehender Ethereum-Zugriff",
+      "message": "Erlauben Sie der LOB Wallet in MetaMask, sich mit Ihrem Ethereum-Account zu verbinden."
+    },
+    "ethereumAccessNotAuthorized": {
+      "title": "Ethereum-Zugriff abgelehnt",
+      "message": "Die LOB-Wallet benötigt Zugriff auf Ihren Ethereum-Account um Ihre Lizenzen anzuzeigen.",
+      "requestAccessButton": "Zugriff erlauben"
+    },
     "metamaskLocked": {
       "title": "MetaMask gesperrt",
       "message": "Der Zugriff über MetaMask ist gesperrt. Bitte entsperren Sie MetaMask indem Sie oben rechts auf das MetaMask-Log klicken und Ihr MetaMask-Passwort eingeben"

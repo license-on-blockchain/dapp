@@ -683,6 +683,15 @@
       "installFirefox": "https://addons.mozilla.org/en/firefox/addon/ether-metamask/",
       "installChrome": "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
     },
+    "pendingEthereumAccessPopup": {
+      "title": "Pending Etherum access",
+      "message": "Allow the LOB Wallet to connect with you Ethereum account through MetaMask."
+    },
+    "ethereumAccessNotAuthorized": {
+      "title": "Ethereum access denied",
+      "message": "The LOB Wallet requires access to you Ethereum account to show your licenses.",
+      "requestAccessButton": "Allow access"
+    },
     "metamaskLocked": {
       "title": "Metamask locked",
       "message": "MetaMask is locked.<br> Please unlock MetaMask by clicking on the MetaMask logo in the top right corner and entering you MetaMask password."

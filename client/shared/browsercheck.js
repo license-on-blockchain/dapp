@@ -1,5 +1,10 @@
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 
+// The user has not granted access to connect with his Ethereum account via ethereum.enable()
+const ethereumAccessNotAuthorized = new ReactiveVar(false);
+// The user is currently being asked to connect with his Ethereum account via ethereum.enable()
+const pendingEthereumAccessPopup = new ReactiveVar(false);
+
 const Browser = {
     Other: 0,
     Firefox: 1,
@@ -37,18 +42,44 @@ export function checkBrowserSetup(callback) {
     });
 }
 
+let pollBrowserCheckTimeout = null;
+
 function pollBrowserCheck() {
+    if (pollBrowserCheckTimeout) {
+        clearTimeout(pollBrowserCheckTimeout);
+        pollBrowserCheckTimeout = null;
+    }
     checkBrowserSetup((success) => {
         if (success) {
             window.location = '/';
         } else {
-            setTimeout(pollBrowserCheck, 1000);
+            pollBrowserCheckTimeout = setTimeout(pollBrowserCheck, 1000);
         }
     });
 }
 
+function requestEthereumAccess() {
+    pendingEthereumAccessPopup.set(true);
+    window.ethereum.enable().then(() => {
+        ethereumAccessNotAuthorized.set(false);
+    }, (error) => {
+        ethereumAccessNotAuthorized.set(true);
+    }).finally(() => {
+        console.log("FOO");
+        pendingEthereumAccessPopup.set(false);
+        pollBrowserCheck();
+    });
+}
+
 Template.browsercheck.onRendered(function() {
-    pollBrowserCheck();
+    if (window.ethereum) {
+        // ethereum.enable is available. Ask the user for permission to connect with his
+        // Ethereum account.
+        requestEthereumAccess();
+    } else {
+        // Legacy fallback. Directly access web3.
+        pollBrowserCheck();
+    }
 });
 
 Template.browsercheck.helpers({
@@ -78,7 +109,19 @@ Template.browsercheck.helpers({
     metamaskNotInstalled() {
         return typeof web3 === 'undefined';
     },
+    pendingEthereumAccessPopup() {
+        return pendingEthereumAccessPopup.get();
+    },
+    ethereumAccessNotAuthorized() {
+        return ethereumAccessNotAuthorized.get();
+    },
     metamaskLocked() {
         return metamaskLocked();
+    },
+});
+
+Template.browsercheck.events({
+    'click button#requestEthereumAccess'() {
+        requestEthereumAccess();
     }
 });
