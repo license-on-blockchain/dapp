@@ -18,13 +18,19 @@
   padding-right: 80px;
 }
 
-form#form-transfer, form#form-createLicenseContract, form#form-signLicenseContract, form#form-issueLicense, form#form-revokeIssuance, form#form-disableLicenseContract, form#balance-address-selection, form#form-settings {
-  input[type=text], input[type=number], input[type=date], input[type=datetime-local], select, .dapp-address-input, .dapp-select-gas-price, textarea {
+form#form-transfer, form#form-createLicenseContract, form#form-signLicenseContract, form#form-issueLicense, form#form-revokeIssuance, form#form-disableLicenseContract, form#balance-address-selection, form#form-settings, form#form-offerForSale {
+  input[type=text], input[type=email], input[type=number], input[type=date], input[type=datetime-local], select, .dapp-address-input, .dapp-select-gas-price, textarea {
     width: 100%;
     height: @gridHeight*2;
   }
+  input[type=checkbox] {
+    display: block;
+  }
   input[readonly] {
     color: @colorGrayDark;
+    &:focus {
+      border-bottom: solid 2px #ccc6c6;
+    }
   }
   textarea {
     height: @gridHeight*4;

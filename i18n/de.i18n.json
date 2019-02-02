@@ -115,6 +115,7 @@
       "reclaimableBalance": "Lizenzen, die Sie an eine andere Adresse übertragen haben, aber zurückfordern können"
     },
     "button": {
+      "sell": "Verkaufen",
       "transfer": "Übertragen",
       "reclaim": "Zurückfordern",
       "certificate": "Zertifikat",
@@ -700,6 +701,52 @@
     "metamaskLocked": {
       "title": "MetaMask gesperrt",
       "message": "Der Zugriff über MetaMask ist gesperrt. Bitte entsperren Sie MetaMask indem Sie oben rechts auf das MetaMask-Log klicken und Ihr MetaMask-Passwort eingeben"
+    }
+  },
+  "offerForSale": {
+    "title": "Lizenz zum <strong>Verkauf</strong> anbieten",
+    "input": {
+      "seller": {
+        "title": "Verkäufer",
+        "description": "Die Adresse von der die Lizenzen zum Verkauf angeboten werden sollen"
+      },
+      "issuance": {
+        "title": "Lizenz",
+        "description": "Die Lizenz, die zum Verkauf angeboten werden soll"
+      },
+      "email": {
+        "title": "E-Mail",
+        "description": "Die E-Mail-Adresse unter der Sie über Kaufanfragen kontaktiert werden möchten"
+      },
+      "amount": {
+        "title": "Anzahl",
+        "description": "Die Anzahl an Lizenzen, die Sie verkaufen möchten"
+      },
+      "price": {
+        "title": "Preis",
+        "description": "Der Preis den Sie <strong>pro Lizenz</strong> verlangen"
+      },
+      "negotiable": {
+        "title": "Verhandlungsbasis",
+        "description": "Ob der angegebene Preis eine Verhandlungsbasis ist"
+      },
+      "soldSeparately": {
+        "title": "Einzeln veräußerbar",
+        "description": "Ob Sie bereit sind, die Lizenzen einzeln oder nur als Paket zu verkaufen"
+      }
+    },
+    "button": {
+      "submit": "Abschicken"
+    },
+    "error": {
+      "no_issuance_selected": "Sie müssen angeben, welche Lizenzen Sie zum Verkauf anbieten möchten",
+      "no_amount_specified": "Sie müssen angeben, wie viele Lizenzen Sie zum Verkauf anbieten möchten",
+      "amount_zero": "Sie müssen wenigstens eine Lizenz zum Verkauf anbieten",
+      "amount_less_than_balance": "Sie können nicht mehr Lizenzen zum Verkauf anbieten, als Sie besitzen",
+      "price_negative": "Der Preis darf nicht negativ sein"
+    },
+    "notification": {
+      "offer_submitted": "Das Angebot wurde erfolgreich an den Marktplatz übertragen"
     }
   },
   "signatureValidationError": {

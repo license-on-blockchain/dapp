@@ -1,0 +1,63 @@
+<template name="offerForSale">
+    <div class="dapp-flex-content">
+        <main class="dapp-content">
+            <form id="form-offerForSale">
+                <h1>{{{_ "offerForSale.title" }}}</h1>
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "offerForSale.input.seller.title"}}</h4>
+                        {{> dapp_selectAccount accounts=myAccounts class="seller" name="seller"}}
+                        <label class="inputDescription" for="seller">{{_ "offerForSale.input.seller.description"}}</label>
+                        <div class="lob-error-message" data-for="seller"></div>
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "offerForSale.input.issuance.title"}}</h4>
+                        {{> selectIssuance issuances=issuances title=(_ "offerForSale.input.issuance.description")}}
+                        <label class="inputDescription" for="issuance">{{_ "offerForSale.input.issuance.description"}}</label>
+                        <div class="lob-error-message" data-for="issuance"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "offerForSale.input.email.title"}}</h4>
+                        <input id="email" name="email" type="email" readonly value="{{ email }}">
+                        <label class="inputDescription" for="email">{{_ "offerForSale.input.email.description"}}</label>
+                        <div class="lob-error-message" data-for="email"></div>
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "offerForSale.input.amount.title"}}</h4>
+                        <input id="amount" name="amount" type="number">
+                        <label class="inputDescription" for="amount">{{_ "offerForSale.input.amount.description"}}</label>
+                        <div class="lob-error-message" data-for="amount"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-4 mobile-full">
+                        <h4>{{_ "offerForSale.input.price.title"}}</h4>
+                        <input id="price" name="price" type="number" step="0.01">
+                        <label class="inputDescription" for="price">{{{_ "offerForSale.input.price.description"}}}</label>
+                        <div class="lob-error-message" data-for="price"></div>
+                    </div>
+                    <div class="col col-2 mobile-full">
+                        <h4>{{_ "offerForSale.input.negotiable.title"}}</h4>
+                        <input id="negotiable" name="negotiable" type="checkbox" title="{{_ "offerForSale.input.negotiable.description"}}">
+                        <div class="lob-error-message" data-for="negotiable"></div>
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "offerForSale.input.soldSeparately.title"}}</h4>
+                        <input id="soldSeparately" name="soldSeparately" type="checkbox" checked>
+                        <label class="inputDescription" for="soldSeparately">{{_ "offerForSale.input.soldSeparately.description"}}</label>
+                        <div class="lob-error-message" data-for="soldSeparately"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <hr>
+                <button class="dapp-block-button" id="submit">
+                    {{_ "offerForSale.button.submit"}}
+                </button>
+            </form>
+        </main>
+    </div>
+</template>

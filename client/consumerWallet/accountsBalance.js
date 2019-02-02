@@ -1,6 +1,7 @@
 import {Accounts} from "../../lib/Accounts";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 import {lob} from "../../lib/LOB";
+import {Settings} from "../../lib/Settings";
 
 Template.accountsBalance.onCreated(function() {
     this.computations = new Set();
@@ -103,6 +104,9 @@ Template.licenseRow.helpers({
     },
     actionsEnabled() {
         return this.actionsEnabled;
+    },
+    marketplaceEnabled() {
+        return Settings.enableMarketplace.get();
     },
     transferPossible() {
         return !this.metadata.revoked && lob.balances.getProperBalance(this.issuanceID, this.accounts) > 0;

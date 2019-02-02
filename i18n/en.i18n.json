@@ -115,6 +115,7 @@
       "reclaimableBalance": "Licenses you have transferred to someone else but have the right to reclaim them"
     },
     "button": {
+      "sell": "Sell",
       "transfer": "Transfer",
       "reclaim": "Reclaim",
       "certificate": "Certificate",
@@ -700,6 +701,52 @@
     "metamaskLocked": {
       "title": "Metamask locked",
       "message": "MetaMask is locked.<br> Please unlock MetaMask by clicking on the MetaMask logo in the top right corner and entering you MetaMask password."
+    }
+  },
+  "offerForSale": {
+    "title": "<strong>Offer</strong> License for <strong>Sale</strong>",
+    "input": {
+      "seller": {
+        "title": "Seller",
+        "description": "The address from which you want to offer the license for sale"
+      },
+      "issuance": {
+        "title": "License",
+        "description": "The license that shall be offered for sale"
+      },
+      "email": {
+        "title": "Email",
+        "description": "The email address under which you wish to be contacted by buyers"
+      },
+      "amount": {
+        "title": "Amount",
+        "description": "The number of licenses you want to offer for sale"
+      },
+      "price": {
+        "title": "Price",
+        "description": "The price you charge <strong>per license</strong>"
+      },
+      "negotiable": {
+        "title": "Negotiable",
+        "description": "If the denoted price is negotiable"
+      },
+      "soldSeparately": {
+        "title": "Sold separately",
+        "description": "If you are willing to sell the licenses separately or only in bunch"
+      }
+    },
+    "button": {
+      "submit": "Submit"
+    },
+    "error": {
+      "no_issuance_selected": "You must select an issuance to offer for sale",
+      "no_amount_specified": "You must specify how many licenses you want to offer for sale",
+      "amount_zero": "You need to offer at least one license for sale",
+      "amount_less_than_balance": "You cannot offer more licenses for sale than you own",
+      "price_negative": "Der Preis darf nicht negativ sein"
+    },
+    "notification": {
+      "offer_submitted": "The offer has been successfully transmitted to the LOB marketplace"
     }
   },
   "signatureValidationError": {

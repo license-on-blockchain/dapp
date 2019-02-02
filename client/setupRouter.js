@@ -227,3 +227,14 @@ Router.route('/browsercheck', function() {
 }, {
     name: 'browsercheck'
 });
+
+// Marketplace
+
+Router.route('/marketplace/offer/:licenseContractAddress/:issuanceNumber', function() {
+    this.render('offerForSale', {
+        data: {
+            licenseContract: this.params.licenseContractAddress,
+            issuanceNumber: this.params.issuanceNumber,
+        }
+    })
+});

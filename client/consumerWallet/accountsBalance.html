@@ -44,6 +44,11 @@
             {{/if}}
         </td>
         {{#if actionsEnabled}}
+            {{#if marketplaceEnabled}}
+                <td class="buttonColumn">
+                    <a href="/marketplace/offer/{{licenseContract}}/{{issuanceNumber}}"><i class="icon-envelope"></i> {{_ "accountBalance.button.sell"}}</a>
+                </td>
+            {{/if}}
             {{#if transferPossible}}
                 <td class="buttonColumn">
                     <a href="/transfer/from/{{maxBalanceAddress}}/licenseContract/{{licenseContract}}/issuance/{{issuanceNumber}}" class="tableRowButton"><i class="icon-arrow-up"></i> {{_ "accountBalance.button.transfer"}}</a>
