@@ -16,7 +16,7 @@
                         <h4>{{_ "transfer.input.from.title"}}</h4>
                         {{> dapp_selectAccount accounts=myAccounts class="sender" name="sender" value=from}}
                         <label class="inputDescription" for="sender">{{_ "transfer.input.from.description"}}</label>
-                        <div class="lob-error-message" data-for="from"></div>
+                        <div class="lob-error-message" data-for="sender"></div>
                     </div>
                     <div class="col col-6 mobile-full">
                         {{#unless destroy}}
