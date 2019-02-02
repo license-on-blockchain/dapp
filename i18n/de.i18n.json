@@ -610,7 +610,8 @@
       },
       "licenseTemplate": {
         "title": "Lizenz",
-        "description": "Wenn Sie eine der Lizenzen aus dieser Liste bescheinigen möchten, wählen Sie die vorgegebenen Daten für Lizenzcode und Lizenzbeschreibung aus"
+        "description": "Wenn Sie eine der Lizenzen aus dieser Liste bescheinigen möchten, wählen Sie die vorgegebenen Daten für Lizenzcode und Lizenzbeschreibung aus",
+        "custom": "Andere"
       },
       "code": {
         "title": "Lizenzcode",

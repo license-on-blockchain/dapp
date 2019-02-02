@@ -610,7 +610,8 @@
       },
       "licenseTemplate": {
         "title": "Template",
-        "description": "If you are issuing one of the licenses in this list, use the pre-defined code and description"
+        "description": "If you are issuing one of the licenses in this list, use the pre-defined code and description",
+        "custom": "Custom"
       },
       "code": {
         "title": "Code",

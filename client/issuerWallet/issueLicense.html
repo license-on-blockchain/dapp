@@ -13,7 +13,7 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "issueLicense.input.licenseTemplate.title"}}</h4>
                         <select name="licenseTemplate" title="{{_ "issueLicense.input.licenseTemplate.description"}}">
-                            <option value="">Custom</option>
+                            <option value="">{{_ "issueLicense.input.licenseTemplate.custom"}}</option>
                             {{#each licenseTemplates}}
                                 <optgroup label="{{name}}">
                                     {{#each templates}}
