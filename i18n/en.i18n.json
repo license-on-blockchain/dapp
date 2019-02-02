@@ -67,6 +67,10 @@
         "title": "Show Balance Verifications Actions",
         "description": "Enable actions to verify another address's balance"
       },
+      "enableMarketplace": {
+        "title": "Enable LOB Marketplace",
+        "description": "Enable the LOB Marketplace to offer licenses for sale"
+      },
       "enableDebugOptions": {
         "title": "Show Debug Settings",
         "description": "Show settings to debug the LOB wallet"

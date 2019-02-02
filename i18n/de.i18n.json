@@ -67,6 +67,10 @@
         "title": "Aktionen zur Verifizierung des Lizenzbesitzes anzeigen",
         "description": "Aktionen zur Verifizierung der Lizenzen anderer Adressen freischalten"
       },
+      "enableMarketplace": {
+        "title": "LOB Marktplatz aktivieren",
+        "description": "LOB Marktplatz zum verkaufen von Lizenzen aktivieren"
+      },
       "enableDebugOptions": {
         "title": "Debug-Einstellungen anzeigen",
         "description": "Aktionen zum Debuggen der LOB-Wallet anzeigen"

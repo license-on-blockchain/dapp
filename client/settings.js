@@ -17,6 +17,9 @@ Template.settings.helpers({
     enableVerificationActionsChecked() {
         return Settings.enableVerificationActions.get() ? "checked" : "";
     },
+    enableMarketplaceChecked() {
+        return Settings.enableMarketplace.get() ? "checked" : "";
+    },
     enableDebugOptionsChecked() {
         return Settings.enableDebugOptions.get() ? "checked" : "";
     },
@@ -49,6 +52,9 @@ Template.settings.events({
     },
     'change [name=enableVerificationActions]'(event) {
         Settings.enableVerificationActions.set(event.currentTarget.checked);
+    },
+    'change [name=enableMarketplace]'(event) {
+        Settings.enableMarketplace.set(event.currentTarget.checked);
     },
     'change [name=enableDebugOptions]'(event) {
         Settings.enableDebugOptions.set(event.currentTarget.checked);
