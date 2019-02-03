@@ -135,6 +135,7 @@ Template.offerForSale.events({
             NotificationCenter.showError(error);
         }, () => {
             NotificationCenter.showSuccess(TAPi18n.__('offerForSale.notification.offer_submitted'));
+            Router.go('marketplace.offers');
         });
     },
 });

@@ -1,0 +1,35 @@
+<template name="marketplaceOffers">
+    <div class="dapp-flex-content">
+        <main class="dapp-content">
+            <h1>{{{_ "marketplaceOffers.title" }}}</h1>
+            <table class="dapp-zebra">
+                <tbody>
+                {{#each offers}}
+                    {{> marketplaceOffer}}
+                {{/each}}
+                </tbody>
+            </table>
+        </main>
+    </div>
+</template>
+
+<template name="marketplaceOffer">
+    <tr>
+        <td><strong>{{description}}</strong></td>
+        <td>
+            {{amount}}
+            {{#if soldSeparately}}
+            {{else}}
+                {{_ "marketplaceOffers.onlyAsBatch"}}
+            {{/if}}
+        </td>
+        <td>
+            <strong>
+                {{price}} €
+                {{#if negotiable}}
+                    {{_ "marketplaceOffers.negotiable"}}
+                {{/if}}
+            </strong>
+        </td>
+    </tr>
+</template>

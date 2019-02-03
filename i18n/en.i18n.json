@@ -35,6 +35,7 @@
       "install": "Install",
       "reclaim": "Reclaim",
       "licenseContracts": "Issue",
+      "marketplace": "Marketplace",
       "verifyBalance": "Verify Balance",
       "settings": "Settings"
     }
@@ -748,6 +749,11 @@
     "notification": {
       "offer_submitted": "The offer has been successfully transmitted to the LOB marketplace"
     }
+  },
+  "marketplaceOffers": {
+    "title": "LOB <strong>Marketplace</strong>",
+    "negotiable": "o.n.o.",
+    "onlyAsBatch": "(only in bunch)"
   },
   "signatureValidationError": {
     "certificate_chain_could_not_be_parsed": "The SSL certificate chain could not be parsed",

@@ -238,3 +238,9 @@ Router.route('/marketplace/offer/:licenseContractAddress/:issuanceNumber', funct
         }
     })
 });
+
+Router.route('/marketplace/offers', function() {
+    this.render('marketplaceOffers');
+}, {
+    name: 'marketplace.offers'
+});

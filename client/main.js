@@ -1,7 +1,6 @@
 import {Template} from 'meteor/templating';
 import {lob} from "../lib/LOB";
 import {Settings} from "../lib/Settings";
-import {RootContracts} from "../lib/RootContracts";
 import './main.html';
 import {PersistentCollections} from "../lib/PersistentCollections";
 import {checkBrowserSetup} from "./shared/browsercheck";
@@ -72,6 +71,9 @@ Template.body.helpers({
     },
     enableVerificationActions() {
         return Settings.enableVerificationActions.get();
+    },
+    enableMarketplace() {
+        return Settings.enableMarketplace.get();
     },
     showHeader() {
         let currentRoute;

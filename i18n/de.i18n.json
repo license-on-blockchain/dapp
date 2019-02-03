@@ -35,6 +35,7 @@
       "install": "Installieren",
       "reclaim": "Zurückfordern",
       "licenseContracts": "Bescheinigen",
+      "marketplace": "Marktplatz",
       "verifyBalance": "Verifizieren",
       "settings": "Einstellungen"
     }
@@ -748,6 +749,11 @@
     "notification": {
       "offer_submitted": "Das Angebot wurde erfolgreich an den Marktplatz übertragen"
     }
+  },
+  "marketplaceOffers": {
+    "title": "LOB <strong>Marktplatz</strong>",
+    "negotiable": "V.B.",
+    "onlyAsBatch": "(nur als Paket)"
   },
   "signatureValidationError": {
     "certificate_chain_could_not_be_parsed": "Die SSL-Zertifikatskette konnte nicht verarbeitet werden",
