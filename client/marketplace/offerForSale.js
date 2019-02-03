@@ -5,6 +5,7 @@ import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
 
 const selectedSellerAccount = new ReactiveVar('');
+const selectedIssuanceID = new ReactiveVar(null);
 
 function getValues() {
     const seller = TemplateVar.getFrom(this.find('[name=seller]'), 'value').toLowerCase();
@@ -35,9 +36,10 @@ function validate(errorOnEmpty = false, errorMessages = []) {
 }
 
 function onFormUpdate() {
-    const {seller} = this.getValues();
+    const {seller, issuanceID} = this.getValues();
 
     selectedSellerAccount.set(seller);
+    selectedIssuanceID.set(issuanceID);
 
     setTimeout(() => this.validate(), 0);
 }
@@ -51,6 +53,10 @@ Template.offerForSale.onCreated(function() {
     this.validate = validate;
 
     this.issuances = new ReactiveVar([]);
+
+    this.getSelectedOffer = function() {
+        return Marketplace.getOffer(selectedIssuanceID.get(), selectedSellerAccount.get());
+    };
 
     setTimeout(() => this.onFormUpdate(), 0);
 });
@@ -109,6 +115,30 @@ Template.offerForSale.helpers({
     issuances() {
         return Template.instance().issuances.get();
     },
+    amount() {
+        const offer = Template.instance().getSelectedOffer();
+        return offer ? offer.amount : '';
+    },
+    price() {
+        const offer = Template.instance().getSelectedOffer();
+        return offer ? offer.price : '';
+    },
+    negotiableChecked() {
+        const offer = Template.instance().getSelectedOffer();
+        if (offer) {
+            return offer.soldSeparately ? 'checked' : '';
+        } else {
+            return ''; // Not checked by default
+        }
+    },
+    soldSeparatelyChecked() {
+        const offer = Template.instance().getSelectedOffer();
+        if (offer) {
+            return offer.negotiable ? 'checked' : '';
+        } else {
+            return 'checked'; // Checked by default
+        }
+    }
 });
 
 Template.offerForSale.events({
