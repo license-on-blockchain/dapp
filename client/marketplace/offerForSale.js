@@ -51,26 +51,11 @@ Template.offerForSale.onCreated(function() {
     this.validate = validate;
 
     this.issuances = new ReactiveVar([]);
-    this.email = new ReactiveVar('…');
 
     setTimeout(() => this.onFormUpdate(), 0);
 });
 
 Template.offerForSale.onRendered(function() {
-    const emailComputation = Tracker.autorun(() => {
-        const account = selectedSellerAccount.get();
-        if (account) {
-            Marketplace.getEmailAddress(account, (error) => {
-                let errorMessage = error.message ? error.message : error;
-                this.email.set(errorMessage);
-                NotificationCenter.showError(errorMessage);
-            }, (email) => {
-                this.email.set(email);
-            });
-        }
-    });
-    this.computations.add(emailComputation);
-
     const issuanceIDsComputation = Tracker.autorun(() => {
         let selectedLicenseContract = this.data.licenseContract;
         if (selectedLicenseContract) {
@@ -114,7 +99,12 @@ Template.offerForSale.helpers({
         return EthAccounts.find().fetch();
     },
     email() {
-        return Template.instance().email.get();
+        const account = selectedSellerAccount.get();
+        if (account) {
+            return Marketplace.getEmailAddress(account);
+        } else {
+            return '…';
+        }
     },
     issuances() {
         return Template.instance().issuances.get();
@@ -142,11 +132,7 @@ Template.offerForSale.events({
         const {seller, issuanceID, amount, price, negotiable, soldSeparately} = Template.instance().getValues();
 
         Marketplace.submitOffer(seller, issuanceID, price, amount, soldSeparately, negotiable, (error) => {
-            if (typeof error.message !== 'undefined') {
-                NotificationCenter.showError(error.message);
-            } else {
-                NotificationCenter.showError(error);
-            }
+            NotificationCenter.showError(error);
         }, () => {
             NotificationCenter.showSuccess(TAPi18n.__('offerForSale.notification.offer_submitted'));
         });
