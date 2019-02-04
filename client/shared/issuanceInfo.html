@@ -1,12 +1,16 @@
 <template name="issuanceInfo">
-
     <div class="issuanceInfo">
         <h1>{{description}}</h1>
-        <h2>{{code}}
-        </h2>
+        <h2>{{code}}</h2>
         {{#if certificateValidationError}}
             <h3>{{_ "issuanceInfo.heading.warning"}}</h3>
             <p class="lob-error-message">{{certificateValidationError}}</p>
+        {{/if}}
+        {{#if offers}}
+            <h3>{{_ "issuanceInfo.heading.forSale"}}</h3>
+            {{#each offers}}
+                {{> forSaleOffer}}
+            {{/each}}
         {{/if}}
         <h3>{{_ "issuanceInfo.heading.details"}}</h3>
         <table class="dapp-zebra">
@@ -80,4 +84,36 @@
         <button class="showTransferHistory">{{_ "issuanceInfo.button.showTransferHistory"}}</button>
         <button class="dapp-primary-button hideModal">{{_ "generic.OK"}}</button>
     </div>
+</template>
+
+<template name="forSaleOffer">
+    <table class="dapp-zebra">
+        <tbody>
+        <tr>
+            <td><strong>{{_ "issuanceInfo.forSale.field.seller"}}</strong></td>
+            <td>
+                <a href="#" class="showSeller">{{> dapp_address address=seller}}</a>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>{{_ "issuanceInfo.forSale.field.price"}}</strong></td>
+            <td>
+                {{amount}}
+                {{#if soldSeparately}}
+                {{else}}
+                    {{_ "issuanceInfo.forSale.onlyAsBatch"}}
+                {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>{{_ "issuanceInfo.forSale.field.amount"}}</strong></td>
+            <td>
+                {{price}} €
+                {{#if negotiable}}
+                    {{_ "issuanceInfo.forSale.negotiable"}}
+                {{/if}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </template>

@@ -1,5 +1,6 @@
 import {Marketplace} from "../../lib/Marketplace";
 import {Settings} from "../../lib/Settings";
+import {IssuanceInfo} from "../shared/issuanceInfo";
 
 Template.marketplaceOffers.helpers({
     offers() {
@@ -18,5 +19,11 @@ Template.marketplaceOffer.helpers({
     },
     price() {
         return this.price.toLocaleString(Settings.language.get(), {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+});
+
+Template.marketplaceOffers.events({
+    'click .offerRow'() {
+        IssuanceInfo.show(this.issuanceID);
     }
 });

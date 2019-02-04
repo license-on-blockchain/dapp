@@ -266,6 +266,7 @@
   "issuanceInfo": {
     "heading": {
       "warning": "Warning",
+      "forSale": "For Sale",
       "details": "Details",
       "balances": "Balances"
     },
@@ -284,6 +285,15 @@
     "button": {
       "showCertificate": "Certificate",
       "showTransferHistory": "Transfer chain"
+    },
+    "forSale": {
+      "field": {
+        "seller": "Seller",
+        "price": "Price",
+        "amount": "Amount"
+      },
+      "negotiable": "o.n.o.",
+      "onlyAsBatch": "(only in bunch)"
     }
   },
   "transferTransactionInfo": {

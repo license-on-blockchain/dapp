@@ -266,6 +266,7 @@
   "issuanceInfo": {
     "heading": {
       "warning": "Warnung",
+      "forSale": "Zu verkaufen",
       "details": "Details",
       "balances": "Lizenzen"
     },
@@ -284,6 +285,15 @@
     "button": {
       "showCertificate": "Zertifikat",
       "showTransferHistory": "Übertragungskette"
+    },
+    "forSale": {
+      "field": {
+        "seller": "Verkäufer",
+        "price": "Preis",
+        "amount": "Menge"
+      },
+      "negotiable": "V.B.",
+      "onlyAsBatch": "(nur als Paket)"
     }
   },
   "transferTransactionInfo": {

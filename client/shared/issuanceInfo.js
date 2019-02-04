@@ -3,6 +3,8 @@ import {formatDate} from "../../lib/utils";
 import {handleUnknownEthereumError} from "../../lib/ErrorHandling";
 import {LicenseContractInfo} from "./licenseContractInfo";
 import {AccountInfo} from "./accountInfo";
+import {Settings} from "../../lib/Settings";
+import {Marketplace} from "../../lib/Marketplace";
 
 export const IssuanceInfo = {
     show(issuanceID) {
@@ -97,6 +99,12 @@ Template.issuanceInfo.helpers({
     },
     balances() {
         return this.balances.get();
+    },
+    offers() {
+        if (!Settings.enableMarketplace.get()) {
+            return null;
+        }
+        return Marketplace.getOffers({issuanceID: this.issuanceID});
     }
 });
 
@@ -137,5 +145,11 @@ Template.issuanceInfo.events({
     },
     'click tr.balanceRow'() {
         AccountInfo.show(this.address);
+    }
+});
+
+Template.forSaleOffer.events({
+    'click .showSeller'() {
+        AccountInfo.show(this.seller);
     }
 });
