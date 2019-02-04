@@ -55,7 +55,15 @@ Template.offerForSale.onCreated(function() {
     this.issuances = new ReactiveVar([]);
 
     this.getSelectedOffer = function() {
-        return Marketplace.getOffer(selectedIssuanceID.get(), selectedSellerAccount.get());
+        const offers = Marketplace.getOffers({
+            issuanceID: selectedIssuanceID.get(),
+            seller: selectedSellerAccount.get()
+        });
+        if (offers.length > 0) {
+            return offers[0];
+        } else {
+            return null;
+        }
     };
 
     setTimeout(() => this.onFormUpdate(), 0);
