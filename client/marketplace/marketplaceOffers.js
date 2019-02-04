@@ -24,6 +24,19 @@ Template.marketplaceOffer.helpers({
 
 Template.marketplaceOffers.events({
     'click .offerRow'() {
+        if (event.target.tagName.toLowerCase() === 'a') {
+            // Don't show issuance info if a button link was clicked
+            return;
+        }
         IssuanceInfo.show(this.issuanceID);
+    }
+});
+
+Template.marketplaceOffer.helpers({
+    licenseContract() {
+        return this.issuanceID.licenseContractAddress;
+    },
+    issuanceNumber() {
+        return this.issuanceID.issuanceNumber;
     }
 });

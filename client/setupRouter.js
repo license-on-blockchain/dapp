@@ -244,3 +244,13 @@ Router.route('/marketplace/offers', function() {
 }, {
     name: 'marketplace.offers'
 });
+
+Router.route('/marketplace/contact/:seller/issuance/:licenseContractAddress/:issuanceNumber', function() {
+    this.render('contactSeller', {
+        data: {
+            seller: this.params.seller,
+            licenseContract: this.params.licenseContractAddress,
+            issuanceNumber: this.params.issuanceNumber,
+        }
+    })
+});

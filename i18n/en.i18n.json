@@ -293,7 +293,8 @@
         "amount": "Amount"
       },
       "negotiable": "o.n.o.",
-      "onlyAsBatch": "(only in bunch)"
+      "onlyAsBatch": "(only in bunch)",
+      "contactSeller": "Contact seller"
     }
   },
   "transferTransactionInfo": {
@@ -759,7 +760,42 @@
   "marketplaceOffers": {
     "title": "LOB <strong>Marketplace</strong>",
     "negotiable": "o.n.o.",
-    "onlyAsBatch": "(only in bunch)"
+    "onlyAsBatch": "(only in bunch)",
+    "contactSeller": "Contact"
+  },
+  "contactSeller": {
+    "title": "<strong>Contact/strong> seller",
+    "intro": "Contact the seller of the LOB license below. He will receive an email with the content you specified and reach out to you.",
+    "negotiable": "o.n.o.",
+    "onlyAsBatch": "(only in bunch)",
+    "field": {
+      "licenseDescription": "Description",
+      "price": "Price",
+      "amount": "Amount"
+    },
+    "input": {
+      "sender": {
+        "title": "Sender account",
+        "description": "The Ethereum account from which you want to send the message."
+      },
+      "senderName": {
+        "title": "Sender address",
+        "description": "The email address that will be used as the the sender of the message"
+      },
+      "content": {
+        "title": "Your message",
+        "description": "Your message to the seller of this license"
+      }
+    },
+    "button": {
+      "send": "Send"
+    },
+    "error": {
+      "no_content": "You need to enter a message"
+    },
+    "notification": {
+      "messageSent": "Message successfully sent"
+    }
   },
   "registerAtMarketplace": {
     "title": "<strong>Register</strong> for the LOB Marketplace",

@@ -293,7 +293,8 @@
         "amount": "Menge"
       },
       "negotiable": "V.B.",
-      "onlyAsBatch": "(nur als Paket)"
+      "onlyAsBatch": "(nur als Paket)",
+      "contactSeller": "Anbieter kontaktieren"
     }
   },
   "transferTransactionInfo": {
@@ -759,7 +760,42 @@
   "marketplaceOffers": {
     "title": "LOB <strong>Marktplatz</strong>",
     "negotiable": "V.B.",
-    "onlyAsBatch": "(nur als Paket)"
+    "onlyAsBatch": "(nur als Paket)",
+    "contactSeller": "Kontaktieren"
+  },
+  "contactSeller": {
+    "title": "Anbieter <strong>kontaktieren</strong>",
+    "intro": "Kontaktieren Sie den Anbieter des folgenden Verkaufangebots. Er wird eine E-Mail mit der von Ihnen angegebenen Nachricht erhalten und sich bei Ihnen melden.",
+    "negotiable": "V.B.",
+    "onlyAsBatch": "(nur als Paket)",
+    "field": {
+      "licenseDescription": "Beschreibung",
+      "price": "Preis",
+      "amount": "Anzahl"
+    },
+    "input": {
+      "sender": {
+        "title": "Absender-Account",
+        "description": "Der Ethereum-Account von dem die Nachricht gesendet werden soll"
+      },
+      "senderName": {
+        "title": "Absender-Adresse",
+        "description": "Die E-Mail-Adresse, die als Absender der Nachricht verwendet wird"
+      },
+      "content": {
+        "title": "Ihre Nachricht",
+        "description": "Ihre Nachricht an den Anbieter dieser Lizenz"
+      }
+    },
+    "button": {
+      "send": "Senden"
+    },
+    "error": {
+      "no_content": "Sie müssen eine Nachricht an den Anbieter schreiben"
+    },
+    "notification": {
+      "messageSent": "Nachricht erfolgreich versendet"
+    }
   },
   "registerAtMarketplace": {
     "title": "LOB Marktplatz <strong>Registierung</strong>",

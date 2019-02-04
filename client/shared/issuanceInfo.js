@@ -148,8 +148,20 @@ Template.issuanceInfo.events({
     }
 });
 
+Template.forSaleOffer.helpers({
+    licenseContract() {
+        return this.issuanceID.licenseContractAddress;
+    },
+    issuanceNumber() {
+        return this.issuanceID.issuanceNumber;
+    }
+});
+
 Template.forSaleOffer.events({
     'click .showSeller'() {
         AccountInfo.show(this.seller);
+    },
+    'click .contactSeller'() {
+        EthElements.Modal.hide();
     }
 });

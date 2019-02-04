@@ -1,0 +1,65 @@
+<template name="contactSeller">
+    <div class="dapp-flex-content">
+        <main class="dapp-content">
+            <h1>{{{_ "contactSeller.title"}}}</h1>
+            <p>
+                {{_ "contactSeller.intro"}}
+            </p>
+            <table class="dapp-zebra">
+                <tbody>
+                <tr>
+                    <td><strong>{{_ "contactSeller.field.licenseDescription"}}</strong></td>
+                    <td>{{licenseDescription}}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{_ "contactSeller.field.amount"}}</strong></td>
+                    <td>
+                        {{amount}}
+                        {{#if soldSeparately}}
+                        {{else}}
+                            {{_ "contactSeller.onlyAsBatch"}}
+                        {{/if}}
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>{{_ "contactSeller.field.price"}}</strong></td>
+                    <td>
+                        {{price}} €
+                        {{#if negotiable}}
+                            {{_ "contactSeller.negotiable"}}
+                        {{/if}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <form class="dapp-form">
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "contactSeller.input.sender.title"}}</h4>
+                        {{> dapp_selectAccount accounts=myAccounts class="sender" name="sender" value=from}}
+                        <label class="inputDescription" for="sender">{{_ "contactSeller.input.sender.description"}}</label>
+                        <div class="lob-error-message" data-for="sender"></div>
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "contactSeller.input.senderName.title"}}</h4>
+                        <input name="senderName" id="senderName" type="text" readonly value="{{senderName}} ({{senderEmail}})">
+                        <label class="inputDescription" for="senderName">{{_ "contactSeller.input.senderName.description"}}</label>
+                        <div class="lob-error-message" data-for="senderName"></div>
+                    </div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-12 mobile-full">
+                        <h4>{{_ "contactSeller.input.content.title"}}</h4>
+                        <textarea id="content" name="content" title="{{_ "contactSeller.input.content.description"}}"></textarea>
+                        <div class="lob-error-message" data-for="content"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <hr>
+                <button class="dapp-block-button" id="send">
+                    {{_ "contactSeller.button.send"}}
+                </button>
+            </form>
+        </main>
+    </div>
+</template>
