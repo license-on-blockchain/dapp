@@ -1,0 +1,29 @@
+<template name="registerAtMarketplace">
+    <div class="dapp-modal">
+        <h1>{{{_ "registerAtMarketplace.title"}}}</h1>
+        <p>{{_ "registerAtMarketplace.intro"}}</p>
+        <form class="dapp-form">
+            <div class="row clear">
+                <div class="col col-6 mobile-full">
+                    <h4>{{_ "registerAtMarketplace.input.name.title"}}</h4>
+                    <input id="register-name" name="register-name" type="text">
+                    <label class="inputDescription" for="register-name">{{_ "registerAtMarketplace.input.name.description"}}</label>
+                    <div class="lob-error-message" data-for="register-name"></div>
+                </div>
+                <div class="col col-6 mobile-full">
+                    <h4>{{_ "registerAtMarketplace.input.email.title"}}</h4>
+                    <input id="register-email" name="register-email" type="email">
+                    <label class="inputDescription" for="register-email">{{_ "registerAtMarketplace.input.email.description"}}</label>
+                    <div class="lob-error-message" data-for="register-email"></div>
+                </div>
+                <div class="dapp-clear-fix"></div>
+            </div>
+            <div class="row clear">
+                <button class="dapp-block-button" id="register">{{_ "registerAtMarketplace.button.register"}}</button>
+            </div>
+            <div class="row clear">
+                <a href="#" id="cancel">{{_ "registerAtMarketplace.button.cancel"}}</a>
+            </div>
+        </form>
+    </div>
+</template>

@@ -3,6 +3,7 @@ import {lob} from "../../lib/LOB";
 import {EthAccounts} from "meteor/ethereum:accounts";
 import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
+import {RegisterAtMarketplace} from "./registerAtMarketplace";
 
 const selectedSellerAccount = new ReactiveVar('');
 const selectedIssuanceID = new ReactiveVar(null);
@@ -100,6 +101,16 @@ Template.offerForSale.onRendered(function() {
         setTimeout(() => this.onFormUpdate(), 0);
     });
     this.computations.add(issuanceIDsComputation);
+
+    const showRegisterPopoverComputation = Tracker.autorun(() => {
+        const account = selectedSellerAccount.get();
+        if (account) {
+            if (!Marketplace.isAccountRegistered(account)) {
+                RegisterAtMarketplace.show(account);
+            }
+        }
+    });
+    this.computations.add(showRegisterPopoverComputation);
 });
 
 Template.offerForSale.onDestroyed(function() {
@@ -111,14 +122,6 @@ Template.offerForSale.onDestroyed(function() {
 Template.offerForSale.helpers({
     myAccounts() {
         return EthAccounts.find().fetch();
-    },
-    email() {
-        const account = selectedSellerAccount.get();
-        if (account) {
-            return Marketplace.getEmailAddress(account);
-        } else {
-            return '…';
-        }
     },
     issuances() {
         return Template.instance().issuances.get();

@@ -725,10 +725,6 @@
         "title": "License",
         "description": "The license that shall be offered for sale"
       },
-      "email": {
-        "title": "Email",
-        "description": "The email address under which you wish to be contacted by buyers"
-      },
       "amount": {
         "title": "Amount",
         "description": "The number of licenses you want to offer for sale"
@@ -764,6 +760,28 @@
     "title": "LOB <strong>Marketplace</strong>",
     "negotiable": "o.n.o.",
     "onlyAsBatch": "(only in bunch)"
+  },
+  "registerAtMarketplace": {
+    "title": "<strong>Register</strong> for the LOB Marketplace",
+    "intro": "To interact with the LOB Marketplace, you need to enter your contact details.",
+    "input": {
+      "name": {
+        "title": "Name",
+        "description": "Your Name"
+      },
+      "email": {
+        "title": "Email",
+        "description": "Your email address"
+      }
+    },
+    "button": {
+      "register": "Register",
+      "cancel": "Cancel"
+    },
+    "error": {
+      "no_name": "You need to enter your name",
+      "no_email": "You need to enter your email address"
+    }
   },
   "signatureValidationError": {
     "certificate_chain_could_not_be_parsed": "The SSL certificate chain could not be parsed",

@@ -725,10 +725,6 @@
         "title": "Lizenz",
         "description": "Die Lizenz, die zum Verkauf angeboten werden soll"
       },
-      "email": {
-        "title": "E-Mail",
-        "description": "Die E-Mail-Adresse unter der Sie über Kaufanfragen kontaktiert werden möchten"
-      },
       "amount": {
         "title": "Anzahl",
         "description": "Die Anzahl an Lizenzen, die Sie verkaufen möchten"
@@ -764,6 +760,28 @@
     "title": "LOB <strong>Marktplatz</strong>",
     "negotiable": "V.B.",
     "onlyAsBatch": "(nur als Paket)"
+  },
+  "registerAtMarketplace": {
+    "title": "LOB Marktplatz <strong>Registierung</strong>",
+    "intro": "Um mit dem LOB Marktplatz interagieren zu können, müssen Sie Ihre Kontaktdaten hinterlegen.",
+    "input": {
+      "name": {
+        "title": "Name",
+        "description": "Ihr Name"
+      },
+      "email": {
+        "title": "E-Mail",
+        "description": "Ihre E-Mail-Adresse"
+      }
+    },
+    "button": {
+      "register": "Registrieren",
+      "cancel": "Abbrechen"
+    },
+    "error": {
+      "no_name": "Sie müssen Ihren Namen angeben",
+      "no_email": "Sie müssen Ihre E-Mail-Adresse angeben"
+    }
   },
   "signatureValidationError": {
     "certificate_chain_could_not_be_parsed": "Die SSL-Zertifikatskette konnte nicht verarbeitet werden",
