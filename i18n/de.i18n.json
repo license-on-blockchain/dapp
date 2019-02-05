@@ -780,7 +780,7 @@
       },
       "senderName": {
         "title": "Absender-Adresse",
-        "description": "Die E-Mail-Adresse, die als Absender der Nachricht verwendet wird"
+        "description": "Die E-Mail-Adresse, die als Absender der Nachricht verwendet wird. Klicken Sie <a href='__editAccountLink__'>hier</a> um die mit Ihrem Account verknüpfte E-Mail-Adresse zu ändern."
       },
       "content": {
         "title": "Ihre Nachricht",
@@ -813,6 +813,33 @@
     "button": {
       "register": "Registrieren",
       "cancel": "Abbrechen"
+    },
+    "error": {
+      "no_name": "Sie müssen Ihren Namen angeben",
+      "no_email": "Sie müssen Ihre E-Mail-Adresse angeben"
+    }
+  },
+  "editAccountDetails": {
+    "title": "<strong>LOB Marktplatz Account</strong> bearbeiten",
+    "input": {
+      "account": {
+        "title": "Account",
+        "description": "Der Account für den Sie die im LOB Marktplatz hinterlegten Daten bearbeiten möchten"
+      },
+      "name": {
+        "title": "Name",
+        "description": "Ihr Name"
+      },
+      "email": {
+        "title": "E-Mail",
+        "description": "Ihre E-Mail-Adresse"
+      }
+    },
+    "button": {
+      "submit": "Ändern"
+    },
+    "notification": {
+      "account_changed": "Die Änderungen wurden erfolgreich an den LOB Marktplatz übertragen."
     },
     "error": {
       "no_name": "Sie müssen Ihren Namen angeben",

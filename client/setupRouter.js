@@ -252,5 +252,14 @@ Router.route('/marketplace/contact/:seller/issuance/:licenseContractAddress/:iss
             licenseContract: this.params.licenseContractAddress,
             issuanceNumber: this.params.issuanceNumber,
         }
-    })
+    });
+});
+
+Router.route('/marketplace/account/:account', function() {
+    this.render('editAccountDetails', {
+        data: {
+            account: this.params.account,
+            origin: this.params.query.origin,
+        }
+    });
 });

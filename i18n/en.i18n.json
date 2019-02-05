@@ -780,7 +780,7 @@
       },
       "senderName": {
         "title": "Sender address",
-        "description": "The email address that will be used as the the sender of the message"
+        "description": "The email address that will be used as the the sender of the message. To change the email address associated with you account click <a href='__editAccountLink__'>here</a>"
       },
       "content": {
         "title": "Your message",
@@ -813,6 +813,33 @@
     "button": {
       "register": "Register",
       "cancel": "Cancel"
+    },
+    "error": {
+      "no_name": "You need to enter your name",
+      "no_email": "You need to enter your email address"
+    }
+  },
+  "editAtMarketplace": {
+    "title": "Edit <strong>LOB Marketplace Account</strong>",
+    "input": {
+      "account": {
+        "title": "Account",
+        "description": "The account for which you would like to change the details stored on the LOB Marketplace"
+      },
+      "name": {
+        "title": "Name",
+        "description": "Your Name"
+      },
+      "email": {
+        "title": "Email",
+        "description": "Your email address"
+      }
+    },
+    "button": {
+      "submit": "Submit"
+    },
+    "notification": {
+      "account_changed": "The changes have been successfully transmitted to the LOB Marketplace."
     },
     "error": {
       "no_name": "You need to enter your name",

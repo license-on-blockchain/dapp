@@ -132,6 +132,9 @@ Template.contactSeller.helpers({
         } else {
             return '';
         }
+    },
+    editAccountLink() {
+        return '/marketplace/account/' + selectedSenderAccount.get() + '?origin=' + encodeURI(Iron.Location.get().path);
     }
 });
 

@@ -43,7 +43,7 @@
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "contactSeller.input.senderName.title"}}</h4>
                         <input name="senderName" id="senderName" type="text" readonly value="{{senderName}} ({{senderEmail}})">
-                        <label class="inputDescription" for="senderName">{{_ "contactSeller.input.senderName.description"}}</label>
+                        <label class="inputDescription" for="senderName">{{{_ "contactSeller.input.senderName.description" editAccountLink=editAccountLink}}}</label>
                         <div class="lob-error-message" data-for="senderName"></div>
                     </div>
                 </div>

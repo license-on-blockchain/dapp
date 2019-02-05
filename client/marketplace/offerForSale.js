@@ -5,7 +5,7 @@ import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
 import {RegisterAtMarketplace} from "./registerAtMarketplace";
 
-const selectedSellerAccount = new ReactiveVar('');
+const selectedSellerAccount = new ReactiveVar(null);
 const selectedIssuanceID = new ReactiveVar(null);
 
 function getValues() {

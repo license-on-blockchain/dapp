@@ -1,0 +1,36 @@
+<template name="editAccountDetails">
+    <div class="dapp-flex-content">
+        <main class="dapp-content">
+            <h1>{{{_ "editAccountDetails.title"}}}</h1>
+            <form class="dapp-form">
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "editAccountDetails.input.account.title"}}</h4>
+                        {{> dapp_selectAccount accounts=myAccounts class="account" name="account" value=account}}
+                        <label class="inputDescription" for="account">{{_ "editAccountDetails.input.account.description"}}</label>
+                        <div class="lob-error-message" data-for="account"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "editAccountDetails.input.name.title"}}</h4>
+                        <input id="name" name="name" type="text" value="{{name}}">
+                        <label class="inputDescription" for="name">{{_ "editAccountDetails.input.name.description"}}</label>
+                        <div class="lob-error-message" data-for="name"></div>
+                    </div>
+                    <div class="col col-6 mobile-full">
+                        <h4>{{_ "editAccountDetails.input.email.title"}}</h4>
+                        <input id="email" name="email" type="email" value="{{email}}">
+                        <label class="inputDescription" for="email">{{_ "editAccountDetails.input.email.description"}}</label>
+                        <div class="lob-error-message" data-for="email"></div>
+                    </div>
+                    <div class="dapp-clear-fix"></div>
+                </div>
+                <div class="row clear">
+                    <button class="dapp-block-button" id="submit">{{_ "editAccountDetails.button.submit"}}</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</template>
