@@ -4,7 +4,9 @@ import {IssuanceInfo} from "../shared/issuanceInfo";
 
 Template.marketplaceOffers.helpers({
     offers() {
-        return Marketplace.getOffers();
+        return Marketplace.getOffers().filter((offer) => {
+            return lob.balances.getProperBalance(offer.issuanceID, offer.seller) >= offer.amount;
+        });
     }
 });
 
