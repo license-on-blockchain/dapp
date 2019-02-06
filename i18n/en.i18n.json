@@ -14,6 +14,7 @@
     "loading": "Loading…",
     "transaction_successfully_submitted": "Transaction successfully submitted",
     "transaction_rejected_through_metamask": "You have rejected the transaction via MetaMask.",
+    "signature_rejected_through_metamask": "You have rejected to sign the authentication message via MetaMask.",
     "confirmation": "__count__ confirmation",
     "confirmation_plural": "__count__ confirmations",
     "unconfirmed": "Unconfirmed",

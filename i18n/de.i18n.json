@@ -14,6 +14,7 @@
     "loading": "Loading…",
     "transaction_successfully_submitted": "Transaktion wurde erfolgreich auf die Ethereum-Blockchain übertragen",
     "transaction_rejected_through_metamask": "Sie haben die Transaktion über MetaMask abgebrochen.",
+    "signature_rejected_through_metamask": "Sie haben die Nachricht nicht in MetaMask signiert.",
     "confirmation": "__count__ Bestätigung", 
     "confirmation_plural": "__count__ Bestätigungen",
     "unconfirmed": "Unbestätigt",
