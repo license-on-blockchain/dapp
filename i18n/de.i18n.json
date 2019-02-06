@@ -836,6 +836,9 @@
     "error": {
       "no_name": "Sie müssen Ihren Namen angeben",
       "no_email": "Sie müssen Ihre E-Mail-Adresse angeben"
+    },
+    "notification": {
+      "successfully_registered": "Sie haben sich erfolgreich im LOB Marktplatz registriert."
     }
   },
   "editAccountDetails": {

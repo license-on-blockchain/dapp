@@ -836,6 +836,9 @@
     "error": {
       "no_name": "You need to enter your name",
       "no_email": "You need to enter your email address"
+    },
+    "notification": {
+      "successfully_registered": "You have successfully registered for the LOB Marketplace."
     }
   },
   "editAccountDetails": {

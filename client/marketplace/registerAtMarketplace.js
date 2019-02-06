@@ -60,6 +60,7 @@ Template.registerAtMarketplace.events({
         const {name, email} = Template.instance().getValues();
 
         Marketplace.updateAccount(this.account, name, email, NotificationCenter.showError, () => {
+            NotificationCenter.showSuccess(TAPi18n.__('registerAtMarketplace.notification.successfully_registered'));
             setTimeout(() => { EthElements.Modal.hide() }, 0);
         });
     },
