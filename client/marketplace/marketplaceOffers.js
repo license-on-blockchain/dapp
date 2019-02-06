@@ -5,7 +5,9 @@ import {IssuanceInfo} from "../shared/issuanceInfo";
 Template.marketplaceOffers.helpers({
     offers() {
         return Marketplace.getOffers().filter((offer) => {
-            return lob.balances.getProperBalance(offer.issuanceID, offer.seller) >= offer.amount;
+            lob.watchAccountBalanceForIssuance(offer.seller, offer.issuanceID);
+            const balance = lob.balances.getProperBalance(offer.issuanceID, offer.seller);
+            return balance >= offer.amount;
         });
     }
 });
