@@ -38,9 +38,12 @@ Template.settings.helpers({
     trackerRunDebuggingChecked() {
         return Settings.trackerRunDebugging.get() ? "checked" : "";
     },
+    marketplaceEnabled() {
+        return Settings.enableMarketplace.get();
+    },
     showEnableDebugOptions() {
         return this.advanced || Settings.enableDebugOptions.get();
-    }
+    },
 });
 
 Template.settings.events({
@@ -55,6 +58,10 @@ Template.settings.events({
     },
     'change [name=enableMarketplace]'(event) {
         Settings.enableMarketplace.set(event.currentTarget.checked);
+    },
+    'click button.editMarketplaceAccount'(event) {
+        event.preventDefault();
+        Router.go('marketplace.account');
     },
     'change [name=enableDebugOptions]'(event) {
         Settings.enableDebugOptions.set(event.currentTarget.checked);

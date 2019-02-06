@@ -255,6 +255,16 @@ Router.route('/marketplace/contact/:seller/issuance/:licenseContractAddress/:iss
     });
 });
 
+Router.route('/marketplace/account', function() {
+    this.render('editAccountDetails', {
+        data: {
+            origin: this.params.query.origin,
+        }
+    });
+}, {
+    name: 'marketplace.account'
+});
+
 Router.route('/marketplace/account/:account', function() {
     this.render('editAccountDetails', {
         data: {

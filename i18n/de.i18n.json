@@ -52,6 +52,7 @@
     "title": "<strong>Einstellungen</strong>",
     "heading": {
       "enableActions": "Funktionen aktivieren",
+      "marketplace": "LOB Marktplatz",
       "language": "Sprache",
       "debugSettings": "Debug Einstellungen"
     },
@@ -71,6 +72,10 @@
       "enableMarketplace": {
         "title": "LOB Marktplatz aktivieren",
         "description": "LOB Marktplatz zum verkaufen von Lizenzen aktivieren"
+      },
+      "editMarketplaceAccount": {
+        "title": "LOB Marktplatz Account bearbeiten",
+        "buttonTitle": "Account bearbeiten"
       },
       "enableDebugOptions": {
         "title": "Debug-Einstellungen anzeigen",

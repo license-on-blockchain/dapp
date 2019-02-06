@@ -52,6 +52,7 @@
     "title": "<strong>Settings</strong>",
     "heading": {
       "enableActions": "Enable Actions",
+      "marketplace": "LOB Marketplace",
       "language": "Language",
       "debugSettings": "Debug Settings"
     },
@@ -71,6 +72,10 @@
       "enableMarketplace": {
         "title": "Enable LOB Marketplace",
         "description": "Enable the LOB Marketplace to offer licenses for sale"
+      },
+      "editMarketplaceAccount": {
+        "title": "Edit LOB Marketplace Account",
+        "buttonTitle": "Edit Account"
       },
       "enableDebugOptions": {
         "title": "Show Debug Settings",
@@ -827,7 +832,7 @@
       "no_email": "You need to enter your email address"
     }
   },
-  "editAtMarketplace": {
+  "editAccountDetails": {
     "title": "Edit <strong>LOB Marketplace Account</strong>",
     "input": {
       "account": {
