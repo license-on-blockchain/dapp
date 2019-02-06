@@ -239,6 +239,16 @@ Router.route('/marketplace/offer/:licenseContractAddress/:issuanceNumber', funct
     })
 });
 
+Router.route('/marketplace/offer/:licenseContractAddress/:issuanceNumber/seller/:seller', function() {
+    this.render('offerForSale', {
+        data: {
+            licenseContract: this.params.licenseContractAddress,
+            issuanceNumber: this.params.issuanceNumber,
+            seller: this.params.seller,
+        }
+    })
+});
+
 Router.route('/marketplace/offers', function() {
     this.render('marketplaceOffers');
 }, {

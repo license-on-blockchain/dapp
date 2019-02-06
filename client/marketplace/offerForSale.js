@@ -179,4 +179,17 @@ Template.offerForSale.events({
             Router.go('marketplace.offers');
         });
     },
+    'click #deleteOffer'(event) {
+        event.preventDefault();
+
+        if (!confirm(TAPi18n.__('offerForSale.confirmation.deleteOffer'))) {
+            return;
+        }
+
+        const {seller, issuanceID} = Template.instance().getValues();
+
+        Marketplace.deleteOffer(seller, issuanceID, NotificationCenter.showError, () => {
+            Router.go('marketplace.offers');
+        });
+    }
 });

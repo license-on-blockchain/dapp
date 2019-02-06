@@ -6,7 +6,7 @@
                 <div class="row clear">
                     <div class="col col-6 mobile-full">
                         <h4>{{_ "offerForSale.input.seller.title"}}</h4>
-                        {{> dapp_selectAccount accounts=myAccounts class="seller" name="seller"}}
+                        {{> dapp_selectAccount accounts=myAccounts class="seller" name="seller" value=seller}}
                         <label class="inputDescription" for="seller">{{_ "offerForSale.input.seller.description"}}</label>
                         <div class="lob-error-message" data-for="seller"></div>
                     </div>
@@ -52,6 +52,9 @@
                 <button class="dapp-block-button" id="submit">
                     {{_ "offerForSale.button.submit"}}
                 </button>
+                <p>
+                    <a href="#" id="deleteOffer">{{_ "offerForSale.button.delete"}}</a>
+                </p>
             </form>
         </main>
     </div>

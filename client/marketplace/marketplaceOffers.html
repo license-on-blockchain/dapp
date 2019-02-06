@@ -40,8 +40,14 @@
                 {{/if}}
             </strong>
         </td>
-        <td>
-            <a href="/marketplace/contact/{{seller}}/issuance/{{licenseContract}}/{{issuanceNumber}}" class="contactSeller"><i class="icon-envelope"></i> {{_ "marketplaceOffers.contactSeller"}}</a>
-        </td>
+        {{#if offeredByCurrentUser}}
+            <td>
+                <a href="/marketplace/offer/{{licenseContract}}/{{issuanceNumber}}/seller/{{seller}}" class="editOffer"><i class="icon-pencil"></i> {{_ "marketplaceOffers.editOffer"}}</a>
+            </td>
+        {{else}}
+            <td>
+                <a href="/marketplace/contact/{{seller}}/issuance/{{licenseContract}}/{{issuanceNumber}}" class="contactSeller"><i class="icon-envelope"></i> {{_ "marketplaceOffers.contactSeller"}}</a>
+            </td>
+        {{/if}}
     </tr>
 </template>

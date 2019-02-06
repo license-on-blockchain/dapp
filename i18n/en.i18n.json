@@ -749,7 +749,11 @@
       }
     },
     "button": {
-      "submit": "Submit"
+      "submit": "Submit",
+      "delete": "Delete offer"
+    },
+    "confirmation": {
+      "deleteOffer": "Do you want to delete the offer for this license?"
     },
     "error": {
       "no_issuance_selected": "You must select an issuance to offer for sale",
@@ -767,6 +771,7 @@
     "negotiable": "o.n.o.",
     "onlyAsBatch": "(only in bunch)",
     "contactSeller": "Contact",
+    "editOffer": "Edit",
     "noOffers": "No licenses are currently offered for sale on the LOB Marketplace.",
     "noOffersMatchingSearch": "No offers were found matching the search “__search__”.",
     "input": {

@@ -749,7 +749,11 @@
       }
     },
     "button": {
-      "submit": "Abschicken"
+      "submit": "Speichern",
+      "delete": "Angebot löschen"
+    },
+    "confirmation": {
+      "deleteOffer": "Möchten Sie das Verkaufsangebot für diese Lizenz löschen?"
     },
     "error": {
       "no_issuance_selected": "Sie müssen angeben, welche Lizenzen Sie zum Verkauf anbieten möchten",
@@ -767,6 +771,7 @@
     "negotiable": "V.B.",
     "onlyAsBatch": "(nur als Paket)",
     "contactSeller": "Kontaktieren",
+    "editOffer": "Bearbeiten",
     "noOffers": "Aktuell werden keine Lizenzen auf dem LOB Marktplatz angeboten",
     "noOffersMatchingSearch": "Keine Verkaufsangeboten zur Suche „__search__“ gefunden.",
     "input": {

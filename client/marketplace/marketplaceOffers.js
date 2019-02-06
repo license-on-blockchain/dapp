@@ -1,6 +1,7 @@
 import {Marketplace} from "../../lib/Marketplace";
 import {Settings} from "../../lib/Settings";
 import {IssuanceInfo} from "../shared/issuanceInfo";
+import {Accounts} from "../../lib/Accounts";
 
 const search = new ReactiveVar(null);
 
@@ -48,6 +49,10 @@ Template.marketplaceOffer.helpers({
     },
     price() {
         return this.price.toLocaleString(Settings.language.get(), {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    },
+    offeredByCurrentUser() {
+        const myAccounts = Accounts.get();
+        return myAccounts.includes(this.seller);
     }
 });
 
