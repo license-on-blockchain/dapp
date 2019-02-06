@@ -8,9 +8,10 @@ const search = new ReactiveVar(null);
 Template.marketplaceOffers.helpers({
     offers() {
         return Marketplace.getOffers().filter((offer) => {
-            let serachStr = search.get();
-            if (serachStr !== null) {
-                serachStr = serachStr.toLowerCase().trim();
+            let searchStr = search.get();
+            if (searchStr !== null) {
+                searchStr = searchStr.toLowerCase().trim();
+                const searchTerms = searchStr.split('|');
                 const issuance = lob.issuances.getIssuance(offer.issuanceID);
                 if (issuance) {
                     const searchFields = [
@@ -19,8 +20,10 @@ Template.marketplaceOffers.helpers({
                         offer.seller
                     ];
                     for (const field of searchFields) {
-                        if (field.toLowerCase().includes(serachStr)) {
-                            return true;
+                        for (const searchTerm of searchTerms) {
+                            if (field.toLowerCase().includes(searchTerm)) {
+                                return true;
+                            }
                         }
                     }
                     return false;
@@ -68,6 +71,18 @@ Template.marketplaceOffers.events({
     'submit form'(event) {
         event.preventDefault();
         Template.instance().find('#search').blur();
+    },
+    'click #showMyOffers'(event) {
+        event.preventDefault();
+
+        const searchField = Template.instance().find('#search');
+
+        Accounts.fetch((accounts) => {
+            const searchString = accounts.join('|');
+
+            searchField.value = searchString;
+            search.set(searchString);
+        });
     },
     'click .offerRow'(event) {
         if (event.target.tagName.toLowerCase() === 'a') {

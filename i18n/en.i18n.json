@@ -780,6 +780,9 @@
         "title": "Search",
         "description": "Search for the name of a license, a license code or the address of a seller"
       }
+    },
+    "button": {
+      "showMyOffers": "Show only my offers"
     }
   },
   "contactSeller": {
