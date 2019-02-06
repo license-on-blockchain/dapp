@@ -25,7 +25,7 @@ Template.marketplaceOffer.helpers({
 });
 
 Template.marketplaceOffers.events({
-    'click .offerRow'() {
+    'click .offerRow'(event) {
         if (event.target.tagName.toLowerCase() === 'a') {
             // Don't show issuance info if a button link was clicked
             return;
