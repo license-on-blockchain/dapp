@@ -2,13 +2,38 @@ import {Marketplace} from "../../lib/Marketplace";
 import {Settings} from "../../lib/Settings";
 import {IssuanceInfo} from "../shared/issuanceInfo";
 
+const search = new ReactiveVar(null);
+
 Template.marketplaceOffers.helpers({
     offers() {
         return Marketplace.getOffers().filter((offer) => {
+            let serachStr = search.get();
+            if (serachStr !== null) {
+                serachStr = serachStr.toLowerCase().trim();
+                const issuance = lob.issuances.getIssuance(offer.issuanceID);
+                if (issuance) {
+                    const searchFields = [
+                        issuance.description,
+                        issuance.code,
+                        offer.seller
+                    ];
+                    for (const field of searchFields) {
+                        if (field.toLowerCase().includes(serachStr)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+            return true;
+        }).filter((offer) => {
             lob.watchAccountBalanceForIssuance(offer.seller, offer.issuanceID);
             const balance = lob.balances.getProperBalance(offer.issuanceID, offer.seller);
             return balance >= offer.amount;
         });
+    },
+    search() {
+        return search.get();
     }
 });
 
@@ -27,6 +52,18 @@ Template.marketplaceOffer.helpers({
 });
 
 Template.marketplaceOffers.events({
+    'keyup, change input#search'(event) {
+        const value = Template.instance().find('#search').value;
+        if (value) {
+            search.set(value);
+        } else {
+            search.set(null);
+        }
+    },
+    'submit form'(event) {
+        event.preventDefault();
+        Template.instance().find('#search').blur();
+    },
     'click .offerRow'(event) {
         if (event.target.tagName.toLowerCase() === 'a') {
             // Don't show issuance info if a button link was clicked

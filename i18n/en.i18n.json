@@ -761,7 +761,15 @@
     "title": "LOB <strong>Marketplace</strong>",
     "negotiable": "o.n.o.",
     "onlyAsBatch": "(only in bunch)",
-    "contactSeller": "Contact"
+    "contactSeller": "Contact",
+    "noOffers": "No licenses are currently offered for sale on the LOB Marketplace.",
+    "noOffersMatchingSearch": "No offers were found matching the search “__search__”.",
+    "input": {
+      "search": {
+        "title": "Search",
+        "description": "Search for the name of a license, a license code or the address of a seller"
+      }
+    }
   },
   "contactSeller": {
     "title": "<strong>Contact/strong> seller",

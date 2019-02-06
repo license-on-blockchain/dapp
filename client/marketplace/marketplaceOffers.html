@@ -1,11 +1,20 @@
 <template name="marketplaceOffers">
-    <div class="dapp-flex-content">
+    <div class="dapp-flex-content" id="marketplaceOffers">
         <main class="dapp-content">
             <h1>{{{_ "marketplaceOffers.title" }}}</h1>
+            <form>
+                <input name="search" id="search" type="text" title="{{_ "marketplaceOffers.input.search.description"}}" placeholder="{{_ "marketplaceOffers.input.search.title"}}">
+            </form>
             <table class="dapp-zebra">
                 <tbody>
                 {{#each offers}}
                     {{> marketplaceOffer}}
+                {{else}}
+                    {{#if search}}
+                        <tr><td><strong>{{_ "marketplaceOffers.noOffersMatchingSearch" search=search}}</strong></td></tr>
+                    {{else}}
+                        <tr><td><strong>{{_ "marketplaceOffers.noOffers"}}</strong></td></tr>
+                    {{/if}}
                 {{/each}}
                 </tbody>
             </table>

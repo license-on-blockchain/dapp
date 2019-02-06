@@ -761,7 +761,15 @@
     "title": "LOB <strong>Marktplatz</strong>",
     "negotiable": "V.B.",
     "onlyAsBatch": "(nur als Paket)",
-    "contactSeller": "Kontaktieren"
+    "contactSeller": "Kontaktieren",
+    "noOffers": "Aktuell werden keine Lizenzen auf dem LOB Marktplatz angeboten",
+    "noOffersMatchingSearch": "Keine Verkaufsangeboten zur Suche „__search__“ gefunden.",
+    "input": {
+      "search": {
+        "title": "Suche",
+        "description": "Suchen Sie nach dem Namen einer Lizenz, einem Lizenzcode oder der Adresse eines Verkäufers"
+      }
+    }
   },
   "contactSeller": {
     "title": "Anbieter <strong>kontaktieren</strong>",
