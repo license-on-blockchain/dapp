@@ -2,6 +2,7 @@ import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
 import {Marketplace} from "../../lib/Marketplace";
 import {EthAccounts} from "meteor/ethereum:accounts";
+import {EthNotificationCenter} from "../../lib/lob/EthNotificationCenter";
 
 const selectedSellerAccount = new ReactiveVar(null);
 
@@ -86,6 +87,29 @@ Template.editAccountDetails.events({
             } else {
                 Router.go('marketplace.offers');
             }
+        });
+    },
+    'click #deleteAccount'(event) {
+        event.preventDefault();
+
+        const {account} = Template.instance().getValues();
+
+        const offersByAccount = Marketplace.getOffers({seller: account});
+        console.log(offersByAccount);
+
+        let confirmationMessage;
+        if (offersByAccount.length === 0) {
+            confirmationMessage = TAPi18n.__('editAccountDetails.confirmation.deleteAccount_noOffers');
+        } else {
+            confirmationMessage = TAPi18n.__('editAccountDetails.confirmation.deleteAccount', {count: offersByAccount.length});
+        }
+        if (!confirm(confirmationMessage)) {
+            return;
+        }
+
+        Marketplace.deleteAccount(account, NotificationCenter.showError, () => {
+            NotificationCenter.showSuccess(TAPi18n.__('editAccountDetails.notification.account_deleted'));
+            Router.go('licenses');
         });
     }
 });

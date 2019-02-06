@@ -855,10 +855,17 @@
       }
     },
     "button": {
-      "submit": "Submit"
+      "submit": "Submit",
+      "deleteAccount": "Delete Account"
+    },
+    "confirmation": {
+      "deleteAccount_noOffers": "Are you sure, you want to delete your LOB Marketplace account?",
+      "deleteAccount": "Are you sure, you want to delete your LOB Marketplace account? You still have a sale offer registered at the marketplace. This will be deleted as well.",
+      "deleteAccount_plural": "Are you sure, you want to delete your LOB Marketplace account? You still have __count__ sale offesr registered at the marketplace. These will be deleted as well."
     },
     "notification": {
-      "account_changed": "The changes have been successfully transmitted to the LOB Marketplace."
+      "account_changed": "The changes have been successfully transmitted to the LOB Marketplace.",
+      "account_deleted": "Your LOB Marketplace account has been successfully deleted."
     },
     "error": {
       "no_name": "You need to enter your name",

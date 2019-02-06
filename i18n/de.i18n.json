@@ -855,10 +855,17 @@
       }
     },
     "button": {
-      "submit": "Ändern"
+      "submit": "Ändern",
+      "deleteAccount": "Account löschen"
+    },
+    "confirmation": {
+      "deleteAccount_noOffers": "Sind Sie sicher, dass Sie Ihren Account beim LOB Marktplatz löschen möchten?",
+      "deleteAccount": "Sind Sie sicher, dass Sie Ihren Account beim LOB Marktplatz löschen möchten? Sie haben aktuell noch ein Verkaufsangebot auf dem Marktplatz eingestellt. Dieses wird dann auch gelöscht.",
+      "deleteAccount_plural": "Sind Sie sicher, dass Sie Ihren Account beim LOB Marktplatz löschen möchten? Sie haben aktuell noch __count__ Verkaufsangebote auf dem Marktplatz eingestellt. Diese werden dann auch gelöscht."
     },
     "notification": {
-      "account_changed": "Die Änderungen wurden erfolgreich an den LOB Marktplatz übertragen."
+      "account_changed": "Die Änderungen wurden erfolgreich an den LOB Marktplatz übertragen.",
+      "account_deleted": "Ihr Account für den LOB Marktplatz wurde erfolgreich gelöscht."
     },
     "error": {
       "no_name": "Sie müssen Ihren Namen angeben",
