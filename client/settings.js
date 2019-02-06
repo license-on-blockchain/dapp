@@ -1,5 +1,7 @@
 import {Settings} from "../lib/Settings";
 import {PersistentCollections} from "../lib/PersistentCollections";
+import {Marketplace} from "../lib/Marketplace";
+import {Accounts} from "../lib/Accounts";
 
 Template.settings.helpers({
     enableInstallationChecked() {
@@ -85,6 +87,11 @@ Template.settings.events({
         event.preventDefault();
         if (confirm(TAPi18n.__('settings.confirmation.deleteLocalData'))) {
             PersistentCollections.clearAll();
+            Accounts.fetch((accounts) => {
+                for (const account of accounts) {
+                    Marketplace.deleteLoginToken(account);
+                }
+            });
             location.reload();
         }
     }
