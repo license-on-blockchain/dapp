@@ -116,5 +116,9 @@
         </tr>
         </tbody>
     </table>
-    <a href="/marketplace/contact/{{seller}}/issuance/{{licenseContract}}/{{issuanceNumber}}" class="contactSeller"><i class="icon-envelope"></i> {{_ "issuanceInfo.forSale.contactSeller"}}</a>
+    {{#if offeredByCurrentUser}}
+        <a href="/marketplace/offer/{{licenseContract}}/{{issuanceNumber}}/seller/{{seller}}" class="editOffer"><i class="icon-pencil"></i> {{_ "issuanceInfo.forSale.editOffer"}}</a>
+    {{else}}
+        <a href="/marketplace/contact/{{seller}}/issuance/{{licenseContract}}/{{issuanceNumber}}" class="contactSeller"><i class="icon-envelope"></i> {{_ "issuanceInfo.forSale.contactSeller"}}</a>
+    {{/if}}
 </template>

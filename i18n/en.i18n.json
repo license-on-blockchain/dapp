@@ -300,7 +300,8 @@
       },
       "negotiable": "o.n.o.",
       "onlyAsBatch": "(only in bunch)",
-      "contactSeller": "Contact seller"
+      "contactSeller": "Contact seller",
+      "editOffer": "Edit offer"
     }
   },
   "transferTransactionInfo": {

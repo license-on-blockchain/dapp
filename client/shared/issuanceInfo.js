@@ -5,6 +5,7 @@ import {LicenseContractInfo} from "./licenseContractInfo";
 import {AccountInfo} from "./accountInfo";
 import {Settings} from "../../lib/Settings";
 import {Marketplace} from "../../lib/Marketplace";
+import {Accounts} from "../../lib/Accounts";
 
 export const IssuanceInfo = {
     show(issuanceID) {
@@ -154,6 +155,10 @@ Template.forSaleOffer.helpers({
     },
     issuanceNumber() {
         return this.issuanceID.issuanceNumber;
+    },
+    offeredByCurrentUser() {
+        const myAccounts = Accounts.get();
+        return myAccounts.includes(this.seller);
     }
 });
 
@@ -162,6 +167,9 @@ Template.forSaleOffer.events({
         AccountInfo.show(this.seller);
     },
     'click .contactSeller'() {
+        EthElements.Modal.hide();
+    },
+    'click .editOffer'() {
         EthElements.Modal.hide();
     }
 });

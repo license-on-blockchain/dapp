@@ -300,7 +300,8 @@
       },
       "negotiable": "V.B.",
       "onlyAsBatch": "(nur als Paket)",
-      "contactSeller": "Anbieter kontaktieren"
+      "contactSeller": "Anbieter kontaktieren",
+      "editOffer": "Angebot bearbeiten"
     }
   },
   "transferTransactionInfo": {
