@@ -27,7 +27,7 @@
       "failed": "Failed",
       "pending": "Pending"
     },
-    "footer": "© <a href='__lobLink__'>LOB – License on Blockchain</a> | <a href='#' class='__termsOfUsageClass__'>Terms of usage</a> | <a href='#' class='__acknowledgementsClass__'>Acknowledgements</a>"
+    "footer": "© <a href='__lobLink__'>LOB – License on Blockchain</a> | <a href='__privacyNoticeLink__'>Privacy Notice</a> | <a href='#' class='__termsOfUsageClass__'>Terms of usage</a> | <a href='#' class='__acknowledgementsClass__'>Acknowledgements</a>"
   },
   "tab": {
     "title": {

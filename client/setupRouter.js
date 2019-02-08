@@ -143,6 +143,11 @@ Router.route('/settings/advanced', function() {
     })
 });
 
+// Privacy
+Router.route('/privacy', function() {
+    this.render('privacy_de');
+});
+
 Router.route('/licensecontracts', function() {
     this.render('managedLicenseContractList');
 }, {

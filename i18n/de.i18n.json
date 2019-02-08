@@ -27,7 +27,7 @@
       "failed": "Fehlgeschlagen",
       "pending": "Wird verarbeitet"
     },
-    "footer": "© <a href='__lobLink__'>LOB – License on Blockchain</a> | <a href='#' class='__termsOfUsageClass__'>Nutzungsbedingungen</a> | <a href='#' class='__acknowledgementsClass__'>Verwendete Packages</a>"
+    "footer": "© <a href='__lobLink__'>LOB – License on Blockchain</a> | <a href='__privacyNoticeLink__'>Datenschutzerklärung</a> | <a href='#' class='__termsOfUsageClass__'>Nutzungsbedingungen</a> | <a href='#' class='__acknowledgementsClass__'>Verwendete Packages</a>"
   },
   "tab": {
     "title": {

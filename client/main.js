@@ -90,10 +90,12 @@ Template.body.helpers({
 });
 
 Template.body.events({
-    'click .termsOfUsageLink'() {
+    'click .termsOfUsageLink'(event) {
+        event.preventDefault();
         TermsOfUsage.show();
     },
-    'click .acknowledgementsLink'() {
+    'click .acknowledgementsLink'(event) {
+        event.preventDefault();
         Acknowledgements.show();
     }
 });
