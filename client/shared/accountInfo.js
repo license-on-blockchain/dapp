@@ -34,7 +34,7 @@ Template.accountInfo.onDestroyed(function() {
 
 Template.accountInfo.helpers({
     address() {
-        return web3.toChecksumAddress(this.address);
+        return web3.utils.toChecksumAddress(this.address);
     },
     accounts() {
         return [this.address];

@@ -10,11 +10,11 @@ function transferDescription(transfers, issuanceID) {
         case 1:
             return TAPi18n.__('licenseCertificate.transferDescription.licenses_not_transferred');
         case 2:
-            const recipient = transfers[1].args.to + ((Accounts.get().indexOf(transfers[1].args.to) !== -1) ? " (Ihre Adresse)" : "");
-            if (transfers[0].args.amount === transfers[1].args.amount) {
+            const recipient = transfers[1].returnValues.to + ((Accounts.get().indexOf(transfers[1].returnValues.to) !== -1) ? " (Ihre Adresse)" : "");
+            if (transfers[0].returnValues.amount === transfers[1].returnValues.amount) {
                 return TAPi18n.__('licenseCertificate.transferDescription.licenses_completely_transferred', recipient);
             } else {
-                return TAPi18n.__("licenseCertificate.transferDescription.licenses_partially_transferred", {numLicenses: String(transfers[1].args.amount), recipient});
+                return TAPi18n.__("licenseCertificate.transferDescription.licenses_partially_transferred", {numLicenses: String(transfers[1].returnValues.amount), recipient});
             }
         default:
             let snapshots;
@@ -30,7 +30,7 @@ function transferDescription(transfers, issuanceID) {
                     userBalance += latestSnapshot[address];
                 }
             }
-            if (userBalance === transfers[0].args.amount) {
+            if (userBalance === transfers[0].returnValues.amount) {
                 return TAPi18n.__('licenseCertificate.transferDescription.licenses_completely_transferred_indirectly');
             } else if (userBalance === 0) {
                 return TAPi18n.__('licenseCertificate.transferDescription.no_owned_licenses');

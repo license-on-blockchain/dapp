@@ -13,7 +13,7 @@ function getValues() {
 function onFormUpdate() {
     const {address} = this.getValues();
 
-    if (web3.isAddress(address)) {
+    if (web3.utils.isAddress(address)) {
         this.address.set(address);
         this.loading.set(true);
         lob.watchAccountBalance(address).then(() => {

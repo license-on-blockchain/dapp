@@ -34,7 +34,7 @@ Template.licenseContractInfo.onDestroyed(function() {
 
 Template.licenseContractInfo.helpers({
     address() {
-        return web3.toChecksumAddress(this.address);
+        return web3.utils.toChecksumAddress(this.address);
     },
     certificateValidationError() {
         return lob.licenseContracts.getSignatureValidationError(this.address);
@@ -74,7 +74,7 @@ Template.licenseContractDetails.helpers({
         return lob.licenseContracts.isSigned(this.address);
     },
     issuanceFee() {
-        return web3.fromWei(lob.licenseContracts.getIssuanceFee(this.address));
+        return web3.utils.fromWei(lob.licenseContracts.getIssuanceFee(this.address));
     },
     rootContract() {
         return lob.licenseContracts.getRootContract(this.address);

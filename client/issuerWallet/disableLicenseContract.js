@@ -32,7 +32,7 @@ function validate(errorOnEmpty = false, errorMessages = []) {
 
     let noErrors = true;
 
-    noErrors &= validateField('licenseContract', web3.isAddress(licenseContract), true, null, errorMessages);
+    noErrors &= validateField('licenseContract', web3.utils.isAddress(licenseContract), true, null, errorMessages);
     noErrors &= validateField('warning', warningChecked, errorOnEmpty, TAPi18n.__('disableLicenseContract.error.warning_not_checked'), errorMessages);
     noErrors &= validateField('gasEstimate', this.estimatedGasConsumption.get() !== 0, noErrors, TAPi18n.__('generic.transactionWillFail'), errorMessages);
 

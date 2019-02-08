@@ -14,32 +14,30 @@ import {Acknowledgements} from "./consumerWallet/acknowledgements";
 
 let __lastAccounts = null;
 function onAccountsChange(callback) {
-    web3.eth.getAccounts((error, newAccounts) => {
-        if (!error) {
-            if (__lastAccounts !== null) {
-                if (!arraysEqual(__lastAccounts, newAccounts)) {
-                    callback();
-                }
+    web3.eth.getAccounts().then((newAccounts) => {
+        if (__lastAccounts !== null) {
+            if (!arraysEqual(__lastAccounts, newAccounts)) {
+                callback();
             }
-            __lastAccounts = newAccounts;
         }
+        __lastAccounts = newAccounts;
+    }).finally(() => {
         setTimeout(() => onAccountsChange(callback), 1000);
     });
 }
 
 let __lastNetwork = null;
 function onNetworkChange(callback) {
-    web3.version.getNetwork((error, newNetwork) => {
-        if (!error) {
-            if (__lastNetwork !== null) {
-                if (!arraysEqual(__lastNetwork, newNetwork)) {
-                    callback();
-                }
+    web3.eth.net.getId().then((newNetwork) => {
+        if (__lastNetwork !== null) {
+            if (__lastNetwork !== newNetwork) {
+                callback();
             }
-            __lastNetwork = newNetwork;
         }
+        __lastNetwork = newNetwork;
+    }).finally(() => {
         setTimeout(() => onAccountsChange(callback), 1000);
-    });
+    })
 }
 
 Template.body.onCreated(function() {

@@ -14,7 +14,7 @@ function getName(address) {
     if (accountName !== address) {
         return accountName;
     }
-    return web3.toChecksumAddress(address);
+    return web3.utils.toChecksumAddress(address);
 }
 
 Template.dapp_address.helpers({
@@ -23,7 +23,7 @@ Template.dapp_address.helpers({
     },
     address() {
         if (typeof this.address === 'string') {
-            return web3.toChecksumAddress(this.address);
+            return web3.utils.toChecksumAddress(this.address);
         } else {
             return this.address;
         }

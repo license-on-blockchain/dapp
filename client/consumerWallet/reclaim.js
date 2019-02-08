@@ -34,9 +34,9 @@ function validate(errorOnEmpty = false, errorMessages = []) {
     const {reclaimer, issuanceID, from, amount} = this.getValues();
     let noErrors = true;
 
-    noErrors &= validateField('reclaimer', web3.isAddress(reclaimer), true, null, errorMessages);
+    noErrors &= validateField('reclaimer', web3.utils.isAddress(reclaimer), true, null, errorMessages);
     noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('reclaim.error.no_license_selected'), errorMessages);
-    noErrors &= validateField('from', web3.isAddress(from), errorOnEmpty && from, TAPi18n.__("reclaim.error.from_not_valid"), errorMessages);
+    noErrors &= validateField('from', web3.utils.isAddress(from), errorOnEmpty && from, TAPi18n.__("reclaim.error.from_not_valid"), errorMessages);
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__("reclaim.error.amount_not_specified"), errorMessages);
     if (issuanceID) {
         const reclaimableBalance = lob.balances.getReclaimableBalanceFrom(issuanceID, reclaimer, from);

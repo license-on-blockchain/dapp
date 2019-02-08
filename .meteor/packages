@@ -19,17 +19,18 @@ shell-server@0.4.0            # Server-side component of the `meteor shell` comm
 
 autopublish@1.0.7             # Publish all data to the clients (for prototyping)
 insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
-ethereum:web3
-ethereum:dapp-styles
 less@2.8.0
 iron:router
-ethereum:elements
-ethereum:accounts
-ethereum:blocks
 frozeman:global-notifications
 tap:i18n
 tap:i18n-bundler
 frozeman:persistent-minimongo2
 agnito:simptip
-ethereum:tools@0.7.0
 underscore
+ethereum:accounts@1.1.0
+ethereum:blocks@1.1.0
+ethereum:dapp-styles
+ethereum:elements@1.2.0
+ethereum:tools@1.1.0
+ethereum:web3@=1.0.0-beta.34
+session

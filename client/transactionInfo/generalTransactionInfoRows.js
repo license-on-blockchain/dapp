@@ -8,19 +8,17 @@ Template.generalTransactionInfo.onCreated(function() {
 
     this.data.web3Transaction = new ReactiveVar({});
     const web3TransactionComputation = Tracker.autorun(() => {
-        web3.eth.getTransaction(transactionHash, (error, transaction) => {
-            if (error) { handleUnknownEthereumError(error); return; }
+        web3.eth.getTransaction(transactionHash).then((transaction) => {
             this.data.web3Transaction.set(transaction);
-        });
+        }).catch(handleUnknownEthereumError);
     });
     this.computations.add(web3TransactionComputation);
 
     this.data.web3TransactionReceipt = new ReactiveVar({});
     const web3TransactionReceiptComputation = Tracker.autorun(() => {
-        web3.eth.getTransactionReceipt(transactionHash, (error, transaction) => {
-            if (error) { handleUnknownEthereumError(error); return; }
+        web3.eth.getTransactionReceipt(transactionHash).then((transaction) => {
             this.data.web3TransactionReceipt.set(transaction);
-        });
+        }).catch(handleUnknownEthereumError);
     });
     this.computations.add(web3TransactionReceiptComputation);
 });

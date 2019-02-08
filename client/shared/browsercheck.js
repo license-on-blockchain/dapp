@@ -32,14 +32,13 @@ export function checkBrowserSetup(callback) {
         callback(false);
         return;
     }
-    web3.eth.getAccounts((error, accounts) => {
-        if (error) { handleUnknownEthereumError(error); return; }
+    web3.eth.getAccounts().then((accounts) => {
         if (web3.currentProvider.isMetaMask && accounts.length === 0) {
             callback(false);
         } else {
             callback(true);
         }
-    });
+    }).catch(handleUnknownEthereumError);
 }
 
 let pollBrowserCheckTimeout = null;

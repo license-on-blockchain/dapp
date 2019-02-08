@@ -19,10 +19,9 @@ Template.waitForContractCreationMining.onRendered(function() {
     });
     this.computations.add(waitForCreationComputation);
 
-    web3.eth.getTransaction(this.data.transactionHash, (error, transaction) => {
-        if (error) { handleUnknownEthereumError(error); return; }
+    web3.eth.getTransaction(this.data.transactionHash).then((transaction) => {
         this.web3Transaction.set(transaction);
-    });
+    }).catch(handleUnknownEthereumError);
 });
 
 Template.waitForContractCreationMining.onDestroyed(function() {
@@ -39,12 +38,12 @@ Template.waitForContractCreationMining.helpers({
         return Template.instance().web3Transaction.get().to;
     },
     gasPrice() {
-        return web3.fromWei(Template.instance().web3Transaction.get().gasPrice, 'gwei');
+        return web3.utils.fromWei(Template.instance().web3Transaction.get().gasPrice, 'gwei');
     },
     maximumFee() {
         const web3Transaction = Template.instance().web3Transaction.get();
         if (web3Transaction.gasPrice) {
-            return web3.fromWei(web3Transaction.gasPrice.mul(web3Transaction.gas));
+            return web3.utils.fromWei(web3Transaction.gasPrice.mul(web3Transaction.gas));
         } else {
             return 0;
         }

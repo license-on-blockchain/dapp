@@ -38,7 +38,6 @@ function onFormUpdate() {
         }
     }
 
-
     selectedSenderAccount.set(sender);
 
     let destroyLink = '/destroy';
@@ -60,8 +59,8 @@ function validate(errorOnEmpty = false, errorMessages = []) {
     const {sender, issuanceID, recipient, amount} = this.getValues();
     let noErrors = true;
 
-    noErrors &= validateField('sender', web3.isAddress(sender), true, null, errorMessages);
-    noErrors &= validateField('recipient', web3.isAddress(recipient), errorOnEmpty, TAPi18n.__('transfer.error.recipient_not_valid_address'), errorMessages);
+    noErrors &= validateField('sender', web3.utils.isAddress(sender), true, null, errorMessages);
+    noErrors &= validateField('recipient', web3.utils.isAddress(recipient), errorOnEmpty, TAPi18n.__('transfer.error.recipient_not_valid_address'), errorMessages);
     noErrors &= validateField('recipient', () => recipient.toLowerCase() !== sender.toLowerCase(), recipient && sender, TAPi18n.__('transfer.error.recipient_equal_to_sender'), errorMessages);
     noErrors &= validateField('issuance', issuanceID, errorOnEmpty, TAPi18n.__('transfer.error.no_issuance_selected'), errorMessages);
     noErrors &= validateField('amount', amount, errorOnEmpty, TAPi18n.__('transfer.error.no_amount_specified'), errorMessages);
