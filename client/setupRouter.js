@@ -288,3 +288,7 @@ Router.route('/marketplace/account/:account', function() {
         }
     });
 });
+
+Router.route('/admin/export/issuances', function() {
+    this.render('exportIssuances');
+});
