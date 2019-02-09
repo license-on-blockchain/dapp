@@ -71,7 +71,7 @@
         "description": "Aktionen zur Verifizierung der Lizenzen anderer Adressen freischalten"
       },
       "enableMarketplace": {
-        "title": "LOB Marktplatz aktivieren",
+        "title": "LOB Marktplatz aktivieren (Beta)",
         "description": "LOB Marktplatz zum verkaufen von Lizenzen aktivieren"
       },
       "editMarketplaceAccount": {

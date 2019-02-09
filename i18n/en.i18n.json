@@ -71,7 +71,7 @@
         "description": "Enable actions to verify another address's balance"
       },
       "enableMarketplace": {
-        "title": "Enable LOB Marketplace",
+        "title": "Enable LOB Marketplace (Beta)",
         "description": "Enable the LOB Marketplace to offer licenses for sale"
       },
       "editMarketplaceAccount": {
