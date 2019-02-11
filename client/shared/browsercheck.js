@@ -5,6 +5,8 @@ const ethereumAccessNotAuthorized = new ReactiveVar(false);
 // The user is currently being asked to connect with his Ethereum account via ethereum.enable()
 const pendingEthereumAccessPopup = new ReactiveVar(false);
 
+let origin = '/';
+
 const Browser = {
     Other: 0,
     Firefox: 1,
@@ -51,7 +53,7 @@ function pollBrowserCheck() {
     }
     checkBrowserSetup((success) => {
         if (success) {
-            window.location = '/';
+            window.location = origin;
         } else {
             pollBrowserCheckTimeout = setTimeout(pollBrowserCheck, 1000);
         }
@@ -65,13 +67,15 @@ function requestEthereumAccess() {
     }, (error) => {
         ethereumAccessNotAuthorized.set(true);
     }).finally(() => {
-        console.log("FOO");
         pendingEthereumAccessPopup.set(false);
         pollBrowserCheck();
     });
 }
 
 Template.browsercheck.onRendered(function() {
+    if (this.data.origin) {
+        origin = this.data.origin;
+    }
     if (window.ethereum) {
         // ethereum.enable is available. Ask the user for permission to connect with his
         // Ethereum account.

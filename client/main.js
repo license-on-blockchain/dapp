@@ -45,7 +45,7 @@ Template.body.onCreated(function() {
 
     checkBrowserSetup((success) => {
         if (!success) {
-            Router.go('browsercheck');
+            Router.go('/browsercheck?origin=' + encodeURIComponent(Iron.Location.get().path));
         }
     });
 });

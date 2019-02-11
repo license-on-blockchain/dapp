@@ -134,7 +134,7 @@ Template.contactSeller.helpers({
         }
     },
     editAccountLink() {
-        return '/marketplace/account/' + selectedSenderAccount.get() + '?origin=' + encodeURI(Iron.Location.get().path);
+        return '/marketplace/account/' + selectedSenderAccount.get() + '?origin=' + encodeURIComponent(Iron.Location.get().path);
     }
 });
 

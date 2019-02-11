@@ -228,7 +228,11 @@ Router.route('/licensecontracts/disable/:address', function() {
 });
 
 Router.route('/browsercheck', function() {
-    this.render('browsercheck');
+    this.render('browsercheck', {
+        data: {
+            origin: this.params.query.origin
+        },
+    });
 }, {
     name: 'browsercheck'
 });
