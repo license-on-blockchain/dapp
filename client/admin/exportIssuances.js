@@ -1,5 +1,6 @@
 const licenseContracts = new ReactiveVar([]);
 const issuancesJson = new ReactiveVar('');
+const network = new ReactiveVar(null);
 
 Template.exportIssuances.onRendered(function() {
     lob.rootContracts.getAddresses().then((rootContracts) => {
@@ -7,6 +8,11 @@ Template.exportIssuances.onRendered(function() {
     }).then((lc) => {
         licenseContracts.set(lc);
     });
+
+    web3.version.getNetwork((error, value) => {
+        network.set(Number(value));
+    });
+
     Tracker.autorun(() => {
         let allIssuances = [];
         for (const licenseContract of licenseContracts.get()) {
@@ -17,6 +23,7 @@ Template.exportIssuances.onRendered(function() {
                     code: issuance.code,
                     licenseContract: issuance.licenseContract,
                     issuanceNumber: issuance.issuanceNumber,
+                    network: network.get(),
                 }
             }));
         }

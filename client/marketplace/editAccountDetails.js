@@ -95,7 +95,6 @@ Template.editAccountDetails.events({
         const {account} = Template.instance().getValues();
 
         const offersByAccount = Marketplace.getOffers({seller: account});
-        console.log(offersByAccount);
 
         let confirmationMessage;
         if (offersByAccount.length === 0) {
