@@ -879,6 +879,16 @@
       "no_email": "You need to enter your email address"
     }
   },
+  "confirmEmail": {
+    "title": "<strong>Confirm Email address</strong> for the LOB Marketplace",
+    "goToMarketplace": "To the marketplace",
+    "error": {
+      "invalid_url": "The given URL is not valid to verify your email address",
+      "address_not_in_wallet": "To verify the email address for the Ethereum account __address__, you need to select the wallet in which you manage that Ethereum account.",
+      "email_address_already_verified": "The email address for Ethereum account __address__ has already been verified.",
+      "email_address_confirmed": "The email address for Ethereum account __address__  has successfully been verified. You can now use your account for the LOB Marketplace without any restrictions."
+    }
+  },
   "signatureValidationError": {
     "certificate_chain_could_not_be_parsed": "The SSL certificate chain could not be parsed",
     "certificate_chain_not_valid": "The SSL certificate chain is not valid",

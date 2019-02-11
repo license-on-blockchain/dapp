@@ -879,6 +879,16 @@
       "no_email": "Sie müssen Ihre E-Mail-Adresse angeben"
     }
   },
+  "confirmEmail": {
+    "title": "<strong>E-Mail-Adresse</strong> für den LOB-Marktplatz <strong>bestätigen</strong>",
+    "goToMarketplace": "Zum Marktplatz",
+    "error": {
+      "invalid_url": "Die angegebene URL zur Bestätigung Ihrer E-Mail-Adresse ist nicht gültig",
+      "address_not_in_wallet": "Um die E-Mail-Adresse für die Ethereum-account __address__ zu bestätigen, müssen Sie die Wallet verwenden, in der Sie diese Ethereum-Adresse verwalten.",
+      "email_address_already_verified": "Die E-Mail-Adresse für den Ethereum-Account __address__ wurde bereits bestätigt.",
+      "email_address_confirmed": "Die E-Mail-Adresse für den Ethereum-Account __address__ wurde erfolgreich bestätigt. Sie können ihren LOB-Marktplatz-Account jetzt ohne Einschränkungen nutzen."
+    }
+  },
   "signatureValidationError": {
     "certificate_chain_could_not_be_parsed": "Die SSL-Zertifikatskette konnte nicht verarbeitet werden",
     "certificate_chain_not_valid": "Die SSL-Zertifikatskette ist nicht gültig",

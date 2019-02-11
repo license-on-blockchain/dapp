@@ -1,0 +1,12 @@
+<template name="confirmEmail">
+    <div class="dapp-flex-content">
+        <main class="dapp-content">
+            <h1>{{{_ "confirmEmail.title"}}}</h1>
+            <p>{{message}}</p>
+
+            {{#if success}}
+                <p><button class="dapp-block-button" id="goToMarketplace">{{_ "confirmEmail.goToMarketplace"}}</button></p>
+            {{/if}}
+        </main>
+    </div>
+</template>

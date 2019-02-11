@@ -289,6 +289,15 @@ Router.route('/marketplace/account/:account', function() {
     });
 });
 
+Router.route('/marketplace/confirmemail', function() {
+    this.render('confirmEmail', {
+        data: {
+            account: this.params.query.account,
+            challenge: this.params.query.challenge,
+        }
+    });
+});
+
 Router.route('/admin/export/issuances', function() {
     this.render('exportIssuances');
 });
