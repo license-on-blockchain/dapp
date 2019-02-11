@@ -37,7 +37,7 @@ function onNetworkChange(callback) {
             }
             __lastNetwork = newNetwork;
         }
-        setTimeout(() => onAccountsChange(callback), 1000);
+        setTimeout(() => onNetworkChange(callback), 1000);
     });
 }
 
