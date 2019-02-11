@@ -826,7 +826,7 @@
     }
   },
   "registerAtMarketplace": {
-    "title": "LOB-Marktplatz <strong>Registierung</strong>",
+    "title": "LOB-Marktplatz <strong>Registrierung</strong>",
     "intro": "Damit Dritte mit Ihnen über den LOB-Marktplatz interagieren können, müssen Sie Ihre Kontaktdaten hinterlegen.",
     "input": {
       "name": {
