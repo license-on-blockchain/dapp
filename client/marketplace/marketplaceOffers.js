@@ -51,7 +51,11 @@ Template.marketplaceOffer.helpers({
         }
     },
     price() {
-        return this.price.toLocaleString(Settings.language.get(), {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        if (this.price > 0) {
+            return this.price.toLocaleString(Settings.language.get(), {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        } else {
+            return '';
+        }
     },
     offeredByCurrentUser() {
         const myAccounts = Accounts.get();

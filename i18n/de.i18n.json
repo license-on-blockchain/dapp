@@ -738,8 +738,8 @@
         "description": "Die Anzahl an Lizenzen, die Sie verkaufen möchten"
       },
       "price": {
-        "title": "Preis",
-        "description": "Der Preis den Sie <strong>pro Lizenz</strong> verlangen"
+        "title": "Preis (optional)",
+        "description": "Der Preis den Sie <strong>pro Lizenz</strong> verlangen (optional)"
       },
       "negotiable": {
         "title": "Verhandlungsbasis",
@@ -773,11 +773,13 @@
   "marketplaceOffers": {
     "title": "LOB-<strong>Marktplatz</strong>",
     "negotiable": "V.B.",
+    "priceNegotiable": "V.B.",
     "onlyAsBatch": "(nur als Paket)",
     "contactSeller": "Kontaktieren",
     "editOffer": "Bearbeiten",
     "noOffers": "Aktuell werden keine Lizenzen auf dem LOB-Marktplatz angeboten",
     "noOffersMatchingSearch": "Keine Verkaufsangeboten zur Suche „__search__“ gefunden.",
+    "noPriceEntered": "Kein Preis",
     "input": {
       "search": {
         "title": "Suche",

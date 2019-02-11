@@ -4,6 +4,7 @@ import {EthAccounts} from "meteor/ethereum:accounts";
 import {resetErrors, validateField} from "../../lib/FormHelpers";
 import {NotificationCenter} from "../../lib/NotificationCenter";
 import {RegisterAtMarketplace} from "./registerAtMarketplace";
+import {Settings} from "../../lib/Settings";
 
 const selectedSellerAccount = new ReactiveVar(null);
 const selectedIssuanceID = new ReactiveVar(null);
@@ -132,12 +133,16 @@ Template.offerForSale.helpers({
     },
     price() {
         const offer = Template.instance().getSelectedOffer();
-        return offer ? offer.price : '';
+        if (offer && offer.price > 0) {
+            return offer.price;
+        } else {
+            return '';
+        }
     },
     negotiableChecked() {
         const offer = Template.instance().getSelectedOffer();
         if (offer) {
-            return offer.soldSeparately ? 'checked' : '';
+            return offer.negotiable ? 'checked' : '';
         } else {
             return ''; // Not checked by default
         }
@@ -145,7 +150,7 @@ Template.offerForSale.helpers({
     soldSeparatelyChecked() {
         const offer = Template.instance().getSelectedOffer();
         if (offer) {
-            return offer.negotiable ? 'checked' : '';
+            return offer.soldSeparately ? 'checked' : '';
         } else {
             return 'checked'; // Checked by default
         }

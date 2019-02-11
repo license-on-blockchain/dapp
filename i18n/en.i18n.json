@@ -738,8 +738,8 @@
         "description": "The number of licenses you want to offer for sale"
       },
       "price": {
-        "title": "Price",
-        "description": "The price you charge <strong>per license</strong>"
+        "title": "Price (optional)",
+        "description": "The price you charge <strong>per license</strong> (optional)"
       },
       "negotiable": {
         "title": "Negotiable",
@@ -773,11 +773,13 @@
   "marketplaceOffers": {
     "title": "LOB <strong>Marketplace</strong>",
     "negotiable": "o.n.o.",
+    "priceNegotiable": "negotiable",
     "onlyAsBatch": "(only in bunch)",
     "contactSeller": "Contact",
     "editOffer": "Edit",
     "noOffers": "No licenses are currently offered for sale on the LOB Marketplace.",
     "noOffersMatchingSearch": "No offers were found matching the search “__search__”.",
+    "noPriceEntered": "No price",
     "input": {
       "search": {
         "title": "Search",

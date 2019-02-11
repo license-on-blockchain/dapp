@@ -35,9 +35,17 @@
         </td>
         <td>
             <strong>
-                {{price}} €
-                {{#if negotiable}}
-                    {{_ "marketplaceOffers.negotiable"}}
+                {{#if price}}
+                    {{price}} €
+                    {{#if negotiable}}
+                        {{_ "marketplaceOffers.negotiable"}}
+                    {{/if}}
+                {{else}}
+                    {{#if negotiable}}
+                        {{_ "marketplaceOffers.priceNegotiable"}}
+                    {{else}}
+                        <i>{{_ "marketplaceOffers.noPriceEntered"}}</i>
+                    {{/if}}
                 {{/if}}
             </strong>
         </td>
