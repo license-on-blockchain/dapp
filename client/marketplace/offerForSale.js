@@ -174,8 +174,12 @@ Template.offerForSale.events({
 
         Marketplace.submitOffer(seller, issuanceID, price, amount, soldSeparately, negotiable, (error) => {
             NotificationCenter.showError(error);
-        }, () => {
-            NotificationCenter.showSuccess(TAPi18n.__('offerForSale.notification.offer_submitted'));
+        }, (pending) => {
+            if (pending) {
+                NotificationCenter.showWarning(TAPi18n.__('offerForSale.notification.offer_pending'));
+            } else {
+                NotificationCenter.showSuccess(TAPi18n.__('offerForSale.notification.offer_submitted'));
+            }
             Router.go('marketplace.offers');
         });
     },

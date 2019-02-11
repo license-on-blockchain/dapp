@@ -765,7 +765,9 @@
       "price_negative": "Der Preis darf nicht negativ sein"
     },
     "notification": {
-      "offer_submitted": "Das Angebot wurde erfolgreich an den LOB-Marktplatz übertragen"
+      "offer_submitted": "Das Angebot wurde erfolgreich an den LOB-Marktplatz übertragen",
+      "offer_pending": "Das Angebot wurde erfolgreich an den LOB-Marktplatz übertragen. Aus Datenschutzgründen ist erst dann für andere sichtbar, wenn Sie Ihre E-Mail-Adresse bestätigt haben. Bitte überprüfen Sie hierzu Ihr E-Mail-Postfach.",
+      "offer_deleted": "Ihr Angebot wurde erfolgreich vom LOB-Marktplatz entfernt."
     }
   },
   "marketplaceOffers": {
@@ -817,7 +819,8 @@
       "no_content": "Sie müssen eine Nachricht an den Anbieter schreiben"
     },
     "notification": {
-      "messageSent": "Nachricht erfolgreich versendet"
+      "messageSent": "Nachricht erfolgreich versendet",
+      "messageIsPending": "Ihre Nachricht wurde erfolgreich an den LOB-Marktplatz übertragen. Damit sie an den Anbieter versendet wird, müssen Sie noch Ihre E-Mail-Adresse bestätigen. Überprüfen Sie hierzu Ihr E-Mail-Postfach."
     }
   },
   "registerAtMarketplace": {
@@ -842,7 +845,7 @@
       "no_email": "Sie müssen Ihre E-Mail-Adresse angeben"
     },
     "notification": {
-      "successfully_registered": "Sie haben sich erfolgreich im LOB-Marktplatz registriert."
+      "successfully_registered": "Sie haben sich erfolgreich im LOB-Marktplatz registriert. Um den Marktplatz vollständig nutzen zu können, müssen Sie noch ihre E-Mail-Adresse bestätigen. Hierzu erhalten Sie in Kürze eine E-Mail."
     }
   },
   "editAccountDetails": {

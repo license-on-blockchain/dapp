@@ -160,8 +160,12 @@ Template.contactSeller.events({
         const issuanceID = Template.instance().getIssuanceID();
         const seller = this.seller;
 
-        Marketplace.sendMessage(senderAccount, issuanceID, seller, content, NotificationCenter.showError, () => {
-            NotificationCenter.showSuccess(TAPi18n.__('contactSeller.notification.messageSent'));
+        Marketplace.sendMessage(senderAccount, issuanceID, seller, content, NotificationCenter.showError, (pending) => {
+            if (pending) {
+                NotificationCenter.showWarning(TAPi18n.__('contactSeller.notification.messageIsPending'));
+            } else {
+                NotificationCenter.showSuccess(TAPi18n.__('contactSeller.notification.messageSent'));
+            }
             Router.go('marketplace.offers');
         });
     }

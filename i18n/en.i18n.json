@@ -765,7 +765,9 @@
       "price_negative": "Der Preis darf nicht negativ sein"
     },
     "notification": {
-      "offer_submitted": "The offer has been successfully transmitted to the LOB Marketplace"
+      "offer_submitted": "The offer has been successfully transmitted to the LOB Marketplace",
+      "offer_pending": "The offer has been successfully transmitted to the LOB Marketplace. For privacy reasons it will only become visible to others once you have confirmed your email address. Please check your email inbox with instructions on how to do so.",
+      "offer_deleted": "The offer has been successfully removed from the LOB Marketplace"
     }
   },
   "marketplaceOffers": {
@@ -817,7 +819,8 @@
       "no_content": "You need to enter a message"
     },
     "notification": {
-      "messageSent": "Message successfully sent"
+      "messageSent": "Message successfully sent",
+      "messageIsPending": "Your message has been successfully transmitted to the LOB Marketplace. For it to be sent to the seller, you need to verify your email address. Please check your email inbox for that."
     }
   },
   "registerAtMarketplace": {
@@ -842,7 +845,7 @@
       "no_email": "You need to enter your email address"
     },
     "notification": {
-      "successfully_registered": "You have successfully registered for the LOB Marketplace."
+      "successfully_registered": "You have successfully registered for the LOB Marketplace. To fully use the LOB Marketplace, you need to verify your email address. You will receive an email with instructions on how to do so shortly."
     }
   },
   "editAccountDetails": {
