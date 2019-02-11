@@ -53,7 +53,7 @@
     "title": "<strong>Einstellungen</strong>",
     "heading": {
       "enableActions": "Funktionen aktivieren",
-      "marketplace": "LOB Marktplatz",
+      "marketplace": "LOB-Marktplatz",
       "language": "Sprache",
       "debugSettings": "Debug Einstellungen"
     },
@@ -71,11 +71,11 @@
         "description": "Aktionen zur Verifizierung der Lizenzen anderer Adressen freischalten"
       },
       "enableMarketplace": {
-        "title": "LOB Marktplatz aktivieren (Beta)",
-        "description": "LOB Marktplatz zum verkaufen von Lizenzen aktivieren"
+        "title": "LOB-Marktplatz aktivieren (Beta)",
+        "description": "LOB-Marktplatz zum verkaufen von Lizenzen aktivieren"
       },
       "editMarketplaceAccount": {
-        "title": "LOB Marktplatz Account bearbeiten",
+        "title": "LOB-Marktplatz Account bearbeiten",
         "buttonTitle": "Account bearbeiten"
       },
       "enableDebugOptions": {
@@ -122,7 +122,7 @@
       "reclaimableBalance": "Lizenzen, die Sie an eine andere Adresse übertragen haben, aber zurückfordern können"
     },
     "button": {
-      "sell": "Verkaufen",
+      "sell": "Anbieten",
       "transfer": "Übertragen",
       "reclaim": "Zurückfordern",
       "certificate": "Zertifikat",
@@ -765,16 +765,16 @@
       "price_negative": "Der Preis darf nicht negativ sein"
     },
     "notification": {
-      "offer_submitted": "Das Angebot wurde erfolgreich an den Marktplatz übertragen"
+      "offer_submitted": "Das Angebot wurde erfolgreich an den LOB-Marktplatz übertragen"
     }
   },
   "marketplaceOffers": {
-    "title": "LOB <strong>Marktplatz</strong>",
+    "title": "LOB-<strong>Marktplatz</strong>",
     "negotiable": "V.B.",
     "onlyAsBatch": "(nur als Paket)",
     "contactSeller": "Kontaktieren",
     "editOffer": "Bearbeiten",
-    "noOffers": "Aktuell werden keine Lizenzen auf dem LOB Marktplatz angeboten",
+    "noOffers": "Aktuell werden keine Lizenzen auf dem LOB-Marktplatz angeboten",
     "noOffersMatchingSearch": "Keine Verkaufsangeboten zur Suche „__search__“ gefunden.",
     "input": {
       "search": {
@@ -821,8 +821,8 @@
     }
   },
   "registerAtMarketplace": {
-    "title": "LOB Marktplatz <strong>Registierung</strong>",
-    "intro": "Um mit dem LOB Marktplatz interagieren zu können, müssen Sie Ihre Kontaktdaten hinterlegen.",
+    "title": "LOB-Marktplatz <strong>Registierung</strong>",
+    "intro": "Damit Dritte mit Ihnen über den LOB-Marktplatz interagieren können, müssen Sie Ihre Kontaktdaten hinterlegen.",
     "input": {
       "name": {
         "title": "Name",
@@ -842,15 +842,15 @@
       "no_email": "Sie müssen Ihre E-Mail-Adresse angeben"
     },
     "notification": {
-      "successfully_registered": "Sie haben sich erfolgreich im LOB Marktplatz registriert."
+      "successfully_registered": "Sie haben sich erfolgreich im LOB-Marktplatz registriert."
     }
   },
   "editAccountDetails": {
-    "title": "<strong>LOB Marktplatz Account</strong> bearbeiten",
+    "title": "<strong>LOB-Marktplatz Account</strong> bearbeiten",
     "input": {
       "account": {
         "title": "Account",
-        "description": "Der Account für den Sie die im LOB Marktplatz hinterlegten Daten bearbeiten möchten"
+        "description": "Der Account für den Sie die im LOB-Marktplatz hinterlegten Daten bearbeiten möchten"
       },
       "name": {
         "title": "Name",
@@ -866,13 +866,13 @@
       "deleteAccount": "Account löschen"
     },
     "confirmation": {
-      "deleteAccount_noOffers": "Sind Sie sicher, dass Sie Ihren Account beim LOB Marktplatz löschen möchten?",
-      "deleteAccount": "Sind Sie sicher, dass Sie Ihren Account beim LOB Marktplatz löschen möchten? Sie haben aktuell noch ein Verkaufsangebot auf dem Marktplatz eingestellt. Dieses wird dann auch gelöscht.",
-      "deleteAccount_plural": "Sind Sie sicher, dass Sie Ihren Account beim LOB Marktplatz löschen möchten? Sie haben aktuell noch __count__ Verkaufsangebote auf dem Marktplatz eingestellt. Diese werden dann auch gelöscht."
+      "deleteAccount_noOffers": "Sind Sie sicher, dass Sie Ihren Account beim LOB-Marktplatz löschen möchten?",
+      "deleteAccount": "Sind Sie sicher, dass Sie Ihren Account beim LOB-Marktplatz löschen möchten? Sie haben aktuell noch ein Verkaufsangebot auf dem LOB-Marktplatz eingestellt. Dieses wird dann auch gelöscht.",
+      "deleteAccount_plural": "Sind Sie sicher, dass Sie Ihren Account beim LOB-Marktplatz löschen möchten? Sie haben aktuell noch __count__ Verkaufsangebote auf dem LOB-Marktplatz eingestellt. Diese werden dann auch gelöscht."
     },
     "notification": {
-      "account_changed": "Die Änderungen wurden erfolgreich an den LOB Marktplatz übertragen.",
-      "account_deleted": "Ihr Account für den LOB Marktplatz wurde erfolgreich gelöscht."
+      "account_changed": "Die Änderungen wurden erfolgreich an den LOB-Marktplatz übertragen.",
+      "account_deleted": "Ihr Account für den LOB-Marktplatz wurde erfolgreich gelöscht."
     },
     "error": {
       "no_name": "Sie müssen Ihren Namen angeben",

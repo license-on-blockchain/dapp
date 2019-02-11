@@ -122,7 +122,7 @@
       "reclaimableBalance": "Licenses you have transferred to someone else but have the right to reclaim them"
     },
     "button": {
-      "sell": "Sell",
+      "sell": "Offer",
       "transfer": "Transfer",
       "reclaim": "Reclaim",
       "certificate": "Certificate",
@@ -765,7 +765,7 @@
       "price_negative": "Der Preis darf nicht negativ sein"
     },
     "notification": {
-      "offer_submitted": "The offer has been successfully transmitted to the LOB marketplace"
+      "offer_submitted": "The offer has been successfully transmitted to the LOB Marketplace"
     }
   },
   "marketplaceOffers": {
@@ -822,7 +822,7 @@
   },
   "registerAtMarketplace": {
     "title": "<strong>Register</strong> for the LOB Marketplace",
-    "intro": "To interact with the LOB Marketplace, you need to enter your contact details.",
+    "intro": "In order for other to be able to interact with your through the LOB Marketplace, you need to enter your contact details.",
     "input": {
       "name": {
         "title": "Name",
@@ -867,8 +867,8 @@
     },
     "confirmation": {
       "deleteAccount_noOffers": "Are you sure, you want to delete your LOB Marketplace account?",
-      "deleteAccount": "Are you sure, you want to delete your LOB Marketplace account? You still have a sale offer registered at the marketplace. This will be deleted as well.",
-      "deleteAccount_plural": "Are you sure, you want to delete your LOB Marketplace account? You still have __count__ sale offesr registered at the marketplace. These will be deleted as well."
+      "deleteAccount": "Are you sure, you want to delete your LOB Marketplace account? You still have a sale offer registered at the LOB Marketplace. This will be deleted as well.",
+      "deleteAccount_plural": "Are you sure, you want to delete your LOB Marketplace account? You still have __count__ sale offesr registered at the LOB Marketplace. These will be deleted as well."
     },
     "notification": {
       "account_changed": "The changes have been successfully transmitted to the LOB Marketplace.",
